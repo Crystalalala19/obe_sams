@@ -9,4 +9,9 @@ class Site extends CI_Controller {
 		$this->load->view("view_home");
 		$this->load->view("footer");
 	}
+
+	public function create(){
+		echo "test";
+	}
+
 }
