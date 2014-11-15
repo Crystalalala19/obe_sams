@@ -1,579 +1,205 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <!--[if IE]>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <![endif]-->
-    <title>Outcome-based Education</title>
-    <!--  Bootstrap Style -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet" />
-    <!--  Font-Awesome Style -->
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
-    <!--  Animation Style -->
-    <link href="assets/css/animate.css" rel="stylesheet" />
-    <!--  Pretty Photo Style -->
-    <link href="assets/css/prettyPhoto.css" rel="stylesheet" />
-    <!--  Google Font Style -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-    <!--  Custom Style -->
-    <link href="assets/css/style.css" rel="stylesheet" />
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-</head>
-<body>
-    <div id="pre-div">
-        <div id="loader">
-        </div>
-    </div>
-    <!--/. PRELOADER END -->
-    <div class="navbar navbar-default navbar-fixed-top move-me ">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-
-                <a class="navbar-brand" href="#">
-                    <img src="assets/img/logo.png" class="navbar-brand-logo " alt="" />
-
-                </a>
-            </div>
-            <div class="navbar-collapse collapse move-me">
-                <ul class="nav navbar-nav navbar-right">
-
-                    <li >
-                        <a href="#home">HOME 
-
-                        </a>
-
-                    </li>
-                    <li >
-                        <a href="#about">ABOUT
-
-                        </a>
-
-                    </li>
-
-                    <li >
-                        <a href="#port-folio">GALLERY
-                        </a>
-
-                    </li>
-
-                    <li >
-                        <a href="#help">HOW TO HELP ?
-                        </a>
-
-                    </li>
-
-                    <li >
-                        <a href="#contact">CONTACT 
-                        </a>
-
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-    </div>
-    <!--./ NAV BAR END -->
-    <div id="home" >
-        <div class="overlay">
-            <div class="container">
-                <div class="row ">
-                    <div class="col-lg-9 col-md-9 head-text">
-                        <h1 id="divDisp" >WHY WE NEED DONATIONS ?</h1>
-                        <span >
-                            <i class="fa fa-lightbulb-o " ></i>For Planting new plants
-                        </span>
-                        <span>
-                            <i class="fa fa-lightbulb-o" ></i>For Promoting Eco Education in Schools
-                        </span>
-                        
-                        <span >
-                            <i class="fa fa-lightbulb-o" ></i>Encouraging Eco Friendly Methods
-                        </span>
-                        <span >
-                            <i class="fa fa-lightbulb-o" ></i>Recycling Waste and garbage
-                        </span>
-                        <span >
-                            <i class="fa fa-lightbulb-o" ></i>For Maintaing ecological balance
-                        </span>
-                        <span >
-                            <i class="fa fa-lightbulb-o" ></i>To Research new eco friendly techniques
-                        </span>
-                    </div>
-                    <div class="col-lg-3 col-md-3">
-                        <div class="div-trans text-center">
-                            <h3>LOG IN</h3>
-                            <div class="col-lg-12 col-md-12 col-sm-12" >
-                          
-                                <div class="form-group">
-                                    <input type="text" class="form-control" required="required" placeholder="ID Number">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" required="required" placeholder="Password">
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-success btn-block btn-lg">SUBMIT</button>
-                                </div>
-                             </div>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-
-    </div>
-    <!--./ HOME SECTION END -->
-    <div id="about" >
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 sub-head">
-                    <h2  data-wow-delay="0.3s" class="wow rollIn animated" ><strong>ABOUT </strong></h2>
-                    <p class="sub-head">Lorem ipsum dolor sit amet, consectetur adipiscing elit onec molestie non sem vel condimentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                </div>
-            </div>
-            <div class="row ">
-                <div class="col-lg-4 col-md-4">
-                    <div class="media wow rotateIn animated" data-wow-delay="0.2s">
-                        <div class="pull-left">
-                            <i class="fa fa-recycle fa-4x  "></i>
-                        </div>
-                        <div class="media-body">
-                            <h3 class="media-heading">We Promote Recycling</h3>
-                            <p >
-                                Aenean faucibus luctus enim. Duis quis sem risu suspend lacinia elementum nunc. 
-                                Aenean faucibus luctus enim. 
-                            </p>
-
-                        </div>
-                    </div>
-                    <div class="media wow rotateIn animated" data-wow-delay="0.3s">
-                        <div class="pull-left">
-                            <i class="fa fa-history fa-4x  "></i>
-                        </div>
-                        <div class="media-body">
-                            <h3 class="media-heading">Eco-Friendly Techniques</h3>
-                            <p>
-                                Aenean faucibus luctus enim. Duis quis sem risu suspend lacinia elementum nunc. 
-                                Aenean faucibus luctus enim. 
-                            </p>
-
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-lg-4 col-md-4 wow bounceInDown animated" style="padding: 10px;" data-wow-delay="0.6s"   >
-                    <div id="carousel-slider" class="carousel slide" data-ride="carousel">
-
-                        <div class="carousel-inner">
-                            <div class="item">
-
-                                <img src="assets/img/slider/1.jpg" class="img-thumbnail" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="assets/img/slider/2.png" class="img-thumbnail" alt="">
-                            </div>
-                            <div class="item active">
-                                <img src="assets/img/slider/3.jpg" class="img-thumbnail" alt="">
-                            </div>
-                        </div>
-                        <!--INDICATORS-->
-                        <ol class="carousel-indicators">
-                            <li data-target="#carousel-slider" data-slide-to="0" class=""></li>
-                            <li data-target="#carousel-slider" data-slide-to="1" class=""></li>
-                            <li data-target="#carousel-slider" data-slide-to="2" class="active"></li>
-                        </ol>
-
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-4">
-
-                    <div class="media wow rotateIn animated" data-wow-delay="0.4s">
-                        <div class="pull-left">
-                            <i class="fa fa-star-o fa-4x  "></i>
-                        </div>
-                        <div class="media-body">
-                            <h3 class="media-heading">Waste Reduction</h3>
-                            <p>
-                                Aenean faucibus luctus enim. Duis quis sem risu suspend lacinia elementum nunc. 
-                                Aenean faucibus luctus enim. 
-                            </p>
-
-                        </div>
-                    </div>
-                    <div class="media wow rotateIn animated" data-wow-delay="0.5s">
-                        <div class="pull-left">
-                            <i class="fa fa-life-ring fa-4x  "></i>
-                        </div>
-                        <div class="media-body">
-                            <h3 class="media-heading">Resource Utilization</h3>
-                            <p>
-                                Aenean faucibus luctus enim. Duis quis sem risu suspend lacinia elementum nunc. 
-                                Aenean faucibus luctus enim. 
-                            </p>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row pad-top-botm wow flipInX animated" data-wow-delay="0.7s">
-                <div class="col-lg-8 col-md-8 col-sm-8 " >
-
-                    <h3><strong>What is our profile ?</strong></h3>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                         Curabitur nec nisl odio. Mauris vehicula at nunc id posuere.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-                    </p>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                         Curabitur nec nisl odio. Mauris vehicula at nunc id posuere.
-                         Curabitur nec nisl odio. Mauris vehicula at nunc id posuere.
-
-                    </p>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                         Curabitur nec nisl odio. Mauris vehicula at nunc id posuere.
-                         Curabitur nec nisl odio. Mauris vehicula at nunc id posuere.
-
-                    </p>
-                </div>
-
-                <div class="col-lg-4 col-md-4 col-sm-4 text-center" >
-                    <i class="fa fa-lightbulb-o big-icon "></i>
-
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!--./ ABOUT SECTION END -->
-    <div class="donars-section">
-        <div class="overlay">
-            <div class="container">
-                <div class="row ">
-                    <div class="col-lg-12 col-md-12 ">
-                        <div id="testimonials" class="carousel slide" data-ride="carousel">
-
-                            <ol class="carousel-indicators">
-                                <li data-target="#testimonials" data-slide-to="0" class=""></li>
-                                <li data-target="#testimonials" data-slide-to="1" class=""></li>
-                                <li data-target="#testimonials" data-slide-to="2" class="active"></li>
-                            </ol>
-
-                            <div class="carousel-inner">
-                                <div class="item">
-                                    <div class="container center">
-                                        <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 slide-custom">
-
-                                            <h4><i class="fa fa-quote-left"></i>Lorem ipsum dolor sit amet, consectetur adipiscing elit onec molestie non sem vel condimentum. <i class="fa fa-quote-right"></i></h4>
-                                            <div class="user-img pull-right">
-                                                <img src="assets/img/user2.png" alt="" class="img-circle image-responsive">
-                                            </div>
-                                            <h5 class="pull-right"><strong class="c-black">Lorem Dolor</strong></h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="container center">
-                                        <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 slide-custom">
-                                            <h4><i class="fa fa-quote-left"></i>Aenean faucibus luctus enim. Duis quis sem risu suspend lacinia elementum nunc. <i class="fa fa-quote-right"></i></h4>
-                                            <div class="user-img pull-right">
-                                                <img src="assets/img/user.gif" alt="" class="img-circle image-responsive">
-                                            </div>
-                                            <h5 class="pull-right"><strong class="c-black">Faucibus luctus</strong></h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item active">
-                                    <div class="container center">
-                                        <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 slide-custom">
-                                            <h4><i class="fa fa-quote-left"></i>Sed ultricies, libero ut adipiscing fringilla, ante elit luctus lorem, a egestas dui metus a arcu condimentum. <i class="fa fa-quote-right"></i></h4>
-                                            <div class="user-img pull-right">
-                                                <img src="assets/img/user2.png" alt="" class="img-circle image-responsive">
-                                            </div>
-                                            <h5 class="pull-right"><strong class="c-black">Sed ultricies</strong></h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--./ DONARS TESTIMONIALS END -->
-    <div id="port-folio" class="pad-top-botm" >
-        <div class="container">
-            <div class="row text-center ">
-                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-                    <h2 data-wow-delay="0.3s" class="wow rollIn animated"><strong>GALLERY </strong></h2>
-                    <p class="sub-head">Lorem ipsum dolor sit amet, consectetur adipiscing elit onec molestie non sem vel condimentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                    
-                </div>
-            </div>
-            <div class="row ">
-                <div class="col-lg-4 col-md-4 col-sm-4 ">
-
-                    <div class="portfolio-item wow rotateIn animated" data-wow-delay="0.4s">
-
-
-                        <img src="assets/img/portfolio/g.jpg" class="img-responsive " alt="" />
-                        <div class="overlay">
-                            <p>
-                                <span>
-                                Image Orinagal Size: 750x500
-                                </span>
-                               
-                                PROJECT TITLE HERE
-                            </p>
-                            <a class="preview  " title="Image Title Here" href="assets/img/portfolio/g.jpg"><i class="fa fa-search-plus fa-5x"></i></a>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 ">
-
-                    <div class="portfolio-item wow rotateIn animated" data-wow-delay="0.5s">
-
-
-                        <img src="assets/img/portfolio/b.jpg" class="img-responsive " alt="" />
-                        <div class="overlay">
-                            <p>
-                                <span>
-                                Image Orinagal Size: 750x500
-                                </span>
-                               
-                                PROJECT TITLE HERE
-                            </p>
-                            <a class="preview " title="Image Title Here" href="assets/img/portfolio/b.jpg"><i class="fa fa-search-plus fa-5x"></i></a>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 ">
-
-                    <div class="portfolio-item wow rotateIn animated" data-wow-delay="0.6s">
-
-
-                        <img src="assets/img/portfolio/c.png" class="img-responsive " alt="" />
-                        <div class="overlay">
-                          <p>
-                                <span>
-                                Image Orinagal Size: 750x500
-                                </span>
-                               
-                                PROJECT TITLE HERE
-                            </p>
-                            <a class="preview " title="Image Title Here" href="assets/img/portfolio/c.png"><i class="fa fa-search-plus fa-5x"></i></a>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row " style="padding-top: 50px;">
-                <div class="col-lg-4 col-md-4 col-sm-4 ">
-
-                    <div class="portfolio-item wow rotateIn animated" data-wow-delay="0.7s">
-
-
-                        <img src="assets/img/portfolio/d.jpg" class="img-responsive " alt="" />
-                        <div class="overlay">
-                           <p>
-                                <span>
-                                Image Orinagal Size: 750x500
-                                </span>
-                               
-                                PROJECT TITLE HERE
-                            </p>
-                            <a class="preview  " title="Image Title Here" href="assets/img/portfolio/d.jpg"><i class="fa fa-search-plus fa-5x"></i></a>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 ">
-
-                    <div class="portfolio-item wow rotateIn animated" data-wow-delay="0.8s">
-
-
-                        <img src="assets/img/portfolio/e.jpg" class="img-responsive " alt="" />
-                        <div class="overlay">
-                            <p>
-                                <span>
-                                Image Orinagal Size: 750x500
-                                </span>
-                               
-                                PROJECT TITLE HERE
-                            </p>
-                            <a class="preview " title="Image Title Here" href="assets/img/portfolio/e.jpg"><i class="fa fa-search-plus fa-5x"></i></a>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 ">
-
-                    <div class="portfolio-item wow rotateIn animated" data-wow-delay="0.9s">
-
-
-                        <img src="assets/img/portfolio/h.jpg" class="img-responsive " alt="" />
-                        <div class="overlay">
-                          <p>
-                                <span>
-                                Image Orinagal Size: 750x500
-                                </span>
-                               
-                                PROJECT TITLE HERE
-                            </p>
-                            <a class="preview " title="Image Title Here" href="assets/img/portfolio/h.jpg"><i class="fa fa-search-plus fa-5x"></i></a>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-    <!--./ GALLERY/PORTFOLIO SECTION END -->
-    <div id="help" >
-        <div class="overlay">
-            <div class="container">
-                <div class="row text-center">
-                    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-                        <h2 data-wow-delay="0.3s" class="wow rollIn animated"><strong>HOW YOU CAN HELP ?</strong></h2>
-                        <p class="sub-head">Checkout this vedio , which will let you know how you can help us to save the earth and let the earth live long peacefully. </p>
-                    </div>
-                </div>
-                <div class="row ">
-
-                    <div class="col-lg-6 col-lg-offset-1  col-md-6 col-md-offset-1">
-                        <iframe src="http://player.vimeo.com/video/18312392" class="vedio-style wow rotateIn animated" data-wow-delay="0.4s"></iframe>
-                    </div>
-
-                    <div class="col-lg-4 col-md-4" style="padding-top: 50px;">
-
-                        <div class="media wow rotateIn animated" data-wow-delay="0.5s">
-                            <div class="pull-left">
-                                <i class="fa fa-star-o fa-4x  "></i>
-                            </div>
-                            <div class="media-body">
-                                <h3 class="media-heading">Watch This Vedio</h3>
-                                <p>
-                                    Aenean faucibus luctus enim. Duis quis sem risu suspend lacinia elementum nunc. 
-                                Aenean faucibus luctus enim. 
-                                </p>
-
-                            </div>
-                        </div>
-                        <div class="media wow rotateIn animated" data-wow-delay="0.6s">
-                            <div class="pull-left">
-                                <i class="fa fa-history fa-4x  "></i>
-                            </div>
-                            <div class="media-body">
-                                <h3 class="media-heading">Donate Some Money </h3>
-                                <p>
-                                    Aenean faucibus luctus enim. Duis quis sem risu suspend lacinia elementum nunc. 
-                                Aenean faucibus luctus enim. 
-                                </p>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-
-    </div>
-    <!--./ HELP SECTION END -->
-    <div id="contact" >
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-                    <h2 data-wow-delay="0.3s" class="wow rollIn animated"><strong>CONTACT US </strong></h2>
-                    <p class="sub-head">Lorem ipsum dolor sit amet, consectetur adipiscing elit onec molestie non sem vel condimentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-
-                    <p class="sub-head  wow rotateIn animated" data-wow-delay="0.4s"><strong>ADDRESS :</strong> 2234/908, Newyork City , USA - 002309</p>
-                </div>
-            </div>
-            <div class="row  text-center wow rotateIn animated" data-wow-delay="0.4s">
-                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-                    <a href="#">  <img src="assets/img/Social/facebook.png" alt="" /> </a>
-                     <a href="#"> <img src="assets/img/Social/google-plus.png" alt="" /></a>
-                     <a href="#"> <img src="assets/img/Social/twitter.png" alt="" /></a>
-                    </div>
-                </div>
-            <div class="row pad-top-botm">
-                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-                    <form>
-                        <div class="form-group">
-                            <input type="text" class="form-control wow rotateIn animated" data-wow-delay="0.5s" required="required" placeholder="Your Name">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control wow rotateIn animated" required="required" data-wow-delay="0.6s" placeholder="Your Email">
-                        </div>
-                        <div class="form-group">
-                            <textarea name="message"  required="required" data-wow-delay="0.7s" class="wow rotateIn animated form-control" style="min-height: 150px;" placeholder="Message"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-success btn-block btn-lg wow rotateIn animated " data-wow-delay="0.8s">SUBMIT REQUEST</button>
-                        </div>
-
-                    </form>
-                </div>
-
-            </div>
-            
-        </div>
-    </div>
-    <!--./ CONTACT SECTION END -->
-    <div id="footser-end">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12">
-                 &copy; 2014 yourdomian.com | by <a href="http://www.binarytheme.com/" style="color:#fff;" target="_blank" >binarytheme.com</a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <!--./ FOOTER SECTION END -->
-    <!--  Jquery Core Script -->
-    <script src="assets/js/jquery-1.10.2.js"></script>
-    <!--  Core Bootstrap Script -->
-    <script src="assets/js/bootstrap.js"></script>
-     <!--  WOW Script -->
-    <script src="assets/js/wow.min.js"></script>
-    <!--  Scrolling Script -->
-    <script src="assets/js/jquery.easing.min.js"></script>
-    <!--  PrettyPhoto Script -->
-    <script src="assets/js/jquery.prettyPhoto.js"></script>
-    <!--  Custom Scripts -->
-    <script src="assets/js/custom.js"></script>
-   
-</body>
-</html>
+<?php
+
+/*
+ *---------------------------------------------------------------
+ * APPLICATION ENVIRONMENT
+ *---------------------------------------------------------------
+ *
+ * You can load different configurations depending on your
+ * current environment. Setting the environment also influences
+ * things like logging and error reporting.
+ *
+ * This can be set to anything, but default usage is:
+ *
+ *     development
+ *     testing
+ *     production
+ *
+ * NOTE: If you change these, also change the error_reporting() code below
+ *
+ */
+	define('ENVIRONMENT', 'development');
+/*
+ *---------------------------------------------------------------
+ * ERROR REPORTING
+ *---------------------------------------------------------------
+ *
+ * Different environments will require different levels of error reporting.
+ * By default development will show errors but testing and live will hide them.
+ */
+
+if (defined('ENVIRONMENT'))
+{
+	switch (ENVIRONMENT)
+	{
+		case 'development':
+			error_reporting(E_ALL);
+		break;
+	
+		case 'testing':
+		case 'production':
+			error_reporting(0);
+		break;
+
+		default:
+			exit('The application environment is not set correctly.');
+	}
+}
+
+/*
+ *---------------------------------------------------------------
+ * SYSTEM FOLDER NAME
+ *---------------------------------------------------------------
+ *
+ * This variable must contain the name of your "system" folder.
+ * Include the path if the folder is not in the same  directory
+ * as this file.
+ *
+ */
+	$system_path = 'system';
+
+/*
+ *---------------------------------------------------------------
+ * APPLICATION FOLDER NAME
+ *---------------------------------------------------------------
+ *
+ * If you want this front controller to use a different "application"
+ * folder then the default one you can set its name here. The folder
+ * can also be renamed or relocated anywhere on your server.  If
+ * you do, use a full server path. For more info please see the user guide:
+ * http://codeigniter.com/user_guide/general/managing_apps.html
+ *
+ * NO TRAILING SLASH!
+ *
+ */
+	$application_folder = 'application';
+
+/*
+ * --------------------------------------------------------------------
+ * DEFAULT CONTROLLER
+ * --------------------------------------------------------------------
+ *
+ * Normally you will set your default controller in the routes.php file.
+ * You can, however, force a custom routing by hard-coding a
+ * specific controller class/function here.  For most applications, you
+ * WILL NOT set your routing here, but it's an option for those
+ * special instances where you might want to override the standard
+ * routing in a specific front controller that shares a common CI installation.
+ *
+ * IMPORTANT:  If you set the routing here, NO OTHER controller will be
+ * callable. In essence, this preference limits your application to ONE
+ * specific controller.  Leave the function name blank if you need
+ * to call functions dynamically via the URI.
+ *
+ * Un-comment the $routing array below to use this feature
+ *
+ */
+	// The directory name, relative to the "controllers" folder.  Leave blank
+	// if your controller is not in a sub-folder within the "controllers" folder
+	// $routing['directory'] = '';
+
+	// The controller class file name.  Example:  Mycontroller
+	// $routing['controller'] = '';
+
+	// The controller function you wish to be called.
+	// $routing['function']	= '';
+
+
+/*
+ * -------------------------------------------------------------------
+ *  CUSTOM CONFIG VALUES
+ * -------------------------------------------------------------------
+ *
+ * The $assign_to_config array below will be passed dynamically to the
+ * config class when initialized. This allows you to set custom config
+ * items or override any default config values found in the config.php file.
+ * This can be handy as it permits you to share one application between
+ * multiple front controller files, with each file containing different
+ * config values.
+ *
+ * Un-comment the $assign_to_config array below to use this feature
+ *
+ */
+	// $assign_to_config['name_of_config_item'] = 'value of config item';
+
+
+
+// --------------------------------------------------------------------
+// END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
+// --------------------------------------------------------------------
+
+/*
+ * ---------------------------------------------------------------
+ *  Resolve the system path for increased reliability
+ * ---------------------------------------------------------------
+ */
+
+	// Set the current directory correctly for CLI requests
+	if (defined('STDIN'))
+	{
+		chdir(dirname(__FILE__));
+	}
+
+	if (realpath($system_path) !== FALSE)
+	{
+		$system_path = realpath($system_path).'/';
+	}
+
+	// ensure there's a trailing slash
+	$system_path = rtrim($system_path, '/').'/';
+
+	// Is the system path correct?
+	if ( ! is_dir($system_path))
+	{
+		exit("Your system folder path does not appear to be set correctly. Please open the following file and correct this: ".pathinfo(__FILE__, PATHINFO_BASENAME));
+	}
+
+/*
+ * -------------------------------------------------------------------
+ *  Now that we know the path, set the main path constants
+ * -------------------------------------------------------------------
+ */
+	// The name of THIS file
+	define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
+
+	// The PHP file extension
+	// this global constant is deprecated.
+	define('EXT', '.php');
+
+	// Path to the system folder
+	define('BASEPATH', str_replace("\\", "/", $system_path));
+
+	// Path to the front controller (this file)
+	define('FCPATH', str_replace(SELF, '', __FILE__));
+
+	// Name of the "system folder"
+	define('SYSDIR', trim(strrchr(trim(BASEPATH, '/'), '/'), '/'));
+
+
+	// The path to the "application" folder
+	if (is_dir($application_folder))
+	{
+		define('APPPATH', $application_folder.'/');
+	}
+	else
+	{
+		if ( ! is_dir(BASEPATH.$application_folder.'/'))
+		{
+			exit("Your application folder path does not appear to be set correctly. Please open the following file and correct this: ".SELF);
+		}
+
+		define('APPPATH', BASEPATH.$application_folder.'/');
+	}
+
+/*
+ * --------------------------------------------------------------------
+ * LOAD THE BOOTSTRAP FILE
+ * --------------------------------------------------------------------
+ *
+ * And away we go...
+ *
+ */
+require_once BASEPATH.'core/CodeIgniter.php';
+
+/* End of file index.php */
+/* Location: ./index.php */
