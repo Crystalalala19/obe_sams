@@ -8,7 +8,7 @@
     <!--[if IE]>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <![endif]-->
-    <title>ECOSAVE BOOTSTRAP ENVIRONMENT TEMPLATE</title>
+    <title>Outcome-based Education</title>
     <!--  Bootstrap Style -->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <!--  Font-Awesome Style -->
