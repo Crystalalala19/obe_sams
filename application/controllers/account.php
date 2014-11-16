@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Site extends CI_Controller {
+class Account extends CI_Controller {
 
    public function __construct()
    {
@@ -10,10 +10,10 @@ class Site extends CI_Controller {
 
    public function index()
    {
-      $data['title'] = "Outcome-based Education";
+      $data['title'] = "Account";
 
-      $this->load->view("index/header", $data);
-      $this->load->view("index/view_home");
-      $this->load->view("index/footer");
+      $this->load->view("pages/header", $data);
+      $this->load->view("pages/view_account");
+      $this->load->view("pages/footer");
    }
 }

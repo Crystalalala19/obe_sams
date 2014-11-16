@@ -7,8 +7,12 @@
     <meta name="author" content="" />
     <!--[if IE]>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <![endif]-->
+    <![endif]-->
+    
     <title><?php echo $title;?></title>
+
+    <!-- Offline files -->
+    <link rel="icon" href="<?php echo base_url();?>assets/img/logo.jpeg">
     <!--  Bootstrap Style -->
     <link href="<?php echo base_url();?>assets/css/bootstrap.css" rel="stylesheet" />
     <!--  Font-Awesome Style -->
@@ -17,10 +21,23 @@
     <link href="<?php echo base_url();?>assets/css/animate.css" rel="stylesheet" />
     <!--  Pretty Photo Style -->
     <link href="<?php echo base_url();?>assets/css/prettyPhoto.css" rel="stylesheet" />
+    
+    <!-- 
+        If livehost na atoa, uncomment below link rels and remove/comment above link rels. 
+        Otherwise, retain above codes. 
+    -->
+    <!-- 
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//raw.githubusercontent.com/daneden/animate.css/master/animate.css" rel="stylesheet">
+    <link href="//cdn.jsdelivr.net/prettyphoto/3.1.5/css/prettyPhoto.css" rel="stylesheet"> 
+    -->
+
     <!--  Google Font Style -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <!--  Custom Style -->
     <link href="<?php echo base_url();?>assets/css/style.css" rel="stylesheet" />
+
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
