@@ -1,62 +1,4 @@
-﻿    <div id="pre-div">
-        <div id="loader">
-        </div>
-    </div>
-    <!--/. PRELOADER END -->
-    <div class="navbar navbar-default navbar-fixed-top move-me ">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-
-                <a class="navbar-brand" href="#">
-                    <img src="assets/img/logo.png" class="navbar-brand-logo " alt="" />
-
-                </a>
-            </div>
-            <div class="navbar-collapse collapse move-me">
-                <ul class="nav navbar-nav navbar-right">
-
-                    <li >
-                        <a href="#home">HOME 
-
-                        </a>
-
-                    </li>
-                    <li >
-                        <a href="#about">ABOUT
-
-                        </a>
-
-                    </li>
-
-                    <li >
-                        <a href="#port-folio">GALLERY
-                        </a>
-
-                    </li>
-
-                    <li >
-                        <a href="#help">HOW TO HELP ?
-                        </a>
-
-                    </li>
-
-                    <li >
-                        <a href="#contact">CONTACT 
-                        </a>
-
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-    </div>
-    <!--./ NAV BAR END -->
-    <div id="home" >
+﻿    <div id="home" >
         <div class="overlay">
             <div class="container">
                 <div class="row ">
@@ -153,13 +95,13 @@
                         <div class="carousel-inner">
                             <div class="item">
 
-                                <img src="assets/img/slider/1.jpg" class="img-thumbnail" alt="">
+                                <img src="<?php echo base_url();?>assets/img/slider/1.jpg" class="img-thumbnail" alt="">
                             </div>
                             <div class="item">
-                                <img src="assets/img/slider/2.png" class="img-thumbnail" alt="">
+                                <img src="<?php echo base_url();?>assets/img/slider/2.png" class="img-thumbnail" alt="">
                             </div>
                             <div class="item active">
-                                <img src="assets/img/slider/3.jpg" class="img-thumbnail" alt="">
+                                <img src="<?php echo base_url();?>assets/img/slider/3.jpg" class="img-thumbnail" alt="">
                             </div>
                         </div>
                         <!--INDICATORS-->
@@ -257,7 +199,7 @@
 
                                             <h4><i class="fa fa-quote-left"></i>Lorem ipsum dolor sit amet, consectetur adipiscing elit onec molestie non sem vel condimentum. <i class="fa fa-quote-right"></i></h4>
                                             <div class="user-img pull-right">
-                                                <img src="assets/img/user2.png" alt="" class="img-circle image-responsive">
+                                                <img src="<?php echo base_url();?>assets/img/user2.png" alt="" class="img-circle image-responsive">
                                             </div>
                                             <h5 class="pull-right"><strong class="c-black">Lorem Dolor</strong></h5>
                                         </div>
@@ -268,7 +210,7 @@
                                         <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 slide-custom">
                                             <h4><i class="fa fa-quote-left"></i>Aenean faucibus luctus enim. Duis quis sem risu suspend lacinia elementum nunc. <i class="fa fa-quote-right"></i></h4>
                                             <div class="user-img pull-right">
-                                                <img src="assets/img/user.gif" alt="" class="img-circle image-responsive">
+                                                <img src="<?php echo base_url();?>assets/img/user.gif" alt="" class="img-circle image-responsive">
                                             </div>
                                             <h5 class="pull-right"><strong class="c-black">Faucibus luctus</strong></h5>
                                         </div>
@@ -279,7 +221,7 @@
                                         <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 slide-custom">
                                             <h4><i class="fa fa-quote-left"></i>Sed ultricies, libero ut adipiscing fringilla, ante elit luctus lorem, a egestas dui metus a arcu condimentum. <i class="fa fa-quote-right"></i></h4>
                                             <div class="user-img pull-right">
-                                                <img src="assets/img/user2.png" alt="" class="img-circle image-responsive">
+                                                <img src="<?php echo base_url();?>assets/img/user2.png" alt="" class="img-circle image-responsive">
                                             </div>
                                             <h5 class="pull-right"><strong class="c-black">Sed ultricies</strong></h5>
                                         </div>
@@ -308,7 +250,7 @@
                     <div class="portfolio-item wow rotateIn animated" data-wow-delay="0.4s">
 
 
-                        <img src="assets/img/portfolio/g.jpg" class="img-responsive " alt="" />
+                        <img src="<?php echo base_url();?>assets/img/portfolio/g.jpg" class="img-responsive " alt="" />
                         <div class="overlay">
                             <p>
                                 <span>
@@ -327,7 +269,7 @@
                     <div class="portfolio-item wow rotateIn animated" data-wow-delay="0.5s">
 
 
-                        <img src="assets/img/portfolio/b.jpg" class="img-responsive " alt="" />
+                        <img src="<?php echo base_url();?>assets/img/portfolio/b.jpg" class="img-responsive " alt="" />
                         <div class="overlay">
                             <p>
                                 <span>
@@ -346,7 +288,7 @@
                     <div class="portfolio-item wow rotateIn animated" data-wow-delay="0.6s">
 
 
-                        <img src="assets/img/portfolio/c.png" class="img-responsive " alt="" />
+                        <img src="<?php echo base_url();?>assets/img/portfolio/c.png" class="img-responsive " alt="" />
                         <div class="overlay">
                           <p>
                                 <span>
@@ -369,7 +311,7 @@
                     <div class="portfolio-item wow rotateIn animated" data-wow-delay="0.7s">
 
 
-                        <img src="assets/img/portfolio/d.jpg" class="img-responsive " alt="" />
+                        <img src="<?php echo base_url();?>assets/img/portfolio/d.jpg" class="img-responsive " alt="" />
                         <div class="overlay">
                            <p>
                                 <span>
@@ -388,7 +330,7 @@
                     <div class="portfolio-item wow rotateIn animated" data-wow-delay="0.8s">
 
 
-                        <img src="assets/img/portfolio/e.jpg" class="img-responsive " alt="" />
+                        <img src="<?php echo base_url();?>assets/img/portfolio/e.jpg" class="img-responsive " alt="" />
                         <div class="overlay">
                             <p>
                                 <span>
@@ -407,7 +349,7 @@
                     <div class="portfolio-item wow rotateIn animated" data-wow-delay="0.9s">
 
 
-                        <img src="assets/img/portfolio/h.jpg" class="img-responsive " alt="" />
+                        <img src="<?php echo base_url();?>assets/img/portfolio/h.jpg" class="img-responsive " alt="" />
                         <div class="overlay">
                           <p>
                                 <span>
@@ -492,9 +434,9 @@
             </div>
             <div class="row  text-center wow rotateIn animated" data-wow-delay="0.4s">
                 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-                    <a href="#">  <img src="assets/img/Social/facebook.png" alt="" /> </a>
-                     <a href="#"> <img src="assets/img/Social/google-plus.png" alt="" /></a>
-                     <a href="#"> <img src="assets/img/Social/twitter.png" alt="" /></a>
+                    <a href="#">  <img src="<?php echo base_url();?>assets/img/Social/facebook.png" alt="" /> </a>
+                     <a href="#"> <img src="<?php echo base_url();?>assets/img/Social/google-plus.png" alt="" /></a>
+                     <a href="#"> <img src="<?php echo base_url();?>assets/img/Social/twitter.png" alt="" /></a>
                     </div>
                 </div>
             <div class="row pad-top-botm">

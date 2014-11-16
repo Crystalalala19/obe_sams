@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php echo doctype("html5"); ?>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -28,3 +28,61 @@
     <![endif]-->
 </head>
 <body>
+    <div id="pre-div">
+        <div id="loader">
+        </div>
+    </div>
+    <!--/. PRELOADER END -->
+    <div class="navbar navbar-default navbar-fixed-top move-me ">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a class="navbar-brand" href="#">
+                    <img src="<?php echo base_url();?>assets/img/logo.png" class="navbar-brand-logo " alt="" />
+
+                </a>
+            </div>
+            <div class="navbar-collapse collapse move-me">
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li >
+                        <a href="#home">HOME
+
+                        </a>
+
+                    </li>
+                    <li >
+                        <a href="#about">ABOUT
+
+                        </a>
+
+                    </li>
+
+                    <li >
+                        <a href="#port-folio">GALLERY
+                        </a>
+
+                    </li>
+
+                    <li >
+                        <a href="#help">HOW TO HELP ?
+                        </a>
+
+                    </li>
+
+                    <li >
+                        <a href="#contact">CONTACT 
+                        </a>
+
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <!--./ NAV BAR END -->
