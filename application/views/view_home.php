@@ -55,13 +55,13 @@
         <div class="container">
             <div class="row text-center">
                 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 sub-head">
-                    <h2  data-wow-delay="0.3s" class="wow rollIn animated" ><strong>ABOUT </strong></h2>
+                    <h2  data-wow-delay="0.3s" class="wow fadeInUp animated" ><strong>ABOUT </strong></h2>
                     <p class="sub-head">Lorem ipsum dolor sit amet, consectetur adipiscing elit onec molestie non sem vel condimentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
                 </div>
             </div>
             <div class="row ">
                 <div class="col-lg-4 col-md-4">
-                    <div class="media wow rotateIn animated" data-wow-delay="0.2s">
+                    <div class="media wow fadeInUp animated" data-wow-delay="0.2s">
                         <div class="pull-left">
                             <i class="fa fa-recycle fa-4x  "></i>
                         </div>
@@ -74,7 +74,7 @@
 
                         </div>
                     </div>
-                    <div class="media wow rotateIn animated" data-wow-delay="0.3s">
+                    <div class="media wow fadeInUp animated" data-wow-delay="0.3s">
                         <div class="pull-left">
                             <i class="fa fa-history fa-4x  "></i>
                         </div>
@@ -89,7 +89,7 @@
                     </div>
 
                 </div>
-                <div class="col-lg-4 col-md-4 wow bounceInDown animated" style="padding: 10px;" data-wow-delay="0.6s"   >
+                <div class="col-lg-4 col-md-4 wow fadeInUp animated" style="padding: 10px;" data-wow-delay="0.6s"   >
                     <div id="carousel-slider" class="carousel slide" data-ride="carousel">
 
                         <div class="carousel-inner">
@@ -116,7 +116,7 @@
 
                 <div class="col-lg-4 col-md-4">
 
-                    <div class="media wow rotateIn animated" data-wow-delay="0.4s">
+                    <div class="media wow fadeInUp animated" data-wow-delay="0.4s">
                         <div class="pull-left">
                             <i class="fa fa-star-o fa-4x  "></i>
                         </div>
@@ -129,7 +129,7 @@
 
                         </div>
                     </div>
-                    <div class="media wow rotateIn animated" data-wow-delay="0.5s">
+                    <div class="media wow fadeInUp animated" data-wow-delay="0.5s">
                         <div class="pull-left">
                             <i class="fa fa-life-ring fa-4x  "></i>
                         </div>
@@ -145,7 +145,7 @@
                 </div>
             </div>
 
-            <div class="row pad-top-botm wow flipInX animated" data-wow-delay="0.7s">
+            <div class="row pad-top-botm wow fadeInUp animated" data-wow-delay="0.7s">
                 <div class="col-lg-8 col-md-8 col-sm-8 " >
 
                     <h3><strong>What is our profile ?</strong></h3>
@@ -239,7 +239,7 @@
         <div class="container">
             <div class="row text-center ">
                 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-                    <h2 data-wow-delay="0.3s" class="wow rollIn animated"><strong>GALLERY </strong></h2>
+                    <h2 data-wow-delay="0.3s" class="wow fadeInUp animated"><strong>GALLERY </strong></h2>
                     <p class="sub-head">Lorem ipsum dolor sit amet, consectetur adipiscing elit onec molestie non sem vel condimentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
                     
                 </div>
@@ -247,7 +247,7 @@
             <div class="row ">
                 <div class="col-lg-4 col-md-4 col-sm-4 ">
 
-                    <div class="portfolio-item wow rotateIn animated" data-wow-delay="0.4s">
+                    <div class="portfolio-item wow fadeInUp animated" data-wow-delay="0.4s">
 
 
                         <img src="<?php echo base_url();?>assets/img/portfolio/g.jpg" class="img-responsive " alt="" />
@@ -266,7 +266,7 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 ">
 
-                    <div class="portfolio-item wow rotateIn animated" data-wow-delay="0.5s">
+                    <div class="portfolio-item wow fadeInUp animated" data-wow-delay="0.5s">
 
 
                         <img src="<?php echo base_url();?>assets/img/portfolio/b.jpg" class="img-responsive " alt="" />
@@ -285,7 +285,7 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 ">
 
-                    <div class="portfolio-item wow rotateIn animated" data-wow-delay="0.6s">
+                    <div class="portfolio-item wow fadeInUp animated" data-wow-delay="0.6s">
 
 
                         <img src="<?php echo base_url();?>assets/img/portfolio/c.png" class="img-responsive " alt="" />
@@ -308,7 +308,7 @@
             <div class="row " style="padding-top: 50px;">
                 <div class="col-lg-4 col-md-4 col-sm-4 ">
 
-                    <div class="portfolio-item wow rotateIn animated" data-wow-delay="0.7s">
+                    <div class="portfolio-item wow fadeInUp animated" data-wow-delay="0.7s">
 
 
                         <img src="<?php echo base_url();?>assets/img/portfolio/d.jpg" class="img-responsive " alt="" />
@@ -327,7 +327,7 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 ">
 
-                    <div class="portfolio-item wow rotateIn animated" data-wow-delay="0.8s">
+                    <div class="portfolio-item wow fadeInUp animated" data-wow-delay="0.8s">
 
 
                         <img src="<?php echo base_url();?>assets/img/portfolio/e.jpg" class="img-responsive " alt="" />
@@ -346,7 +346,7 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 ">
 
-                    <div class="portfolio-item wow rotateIn animated" data-wow-delay="0.9s">
+                    <div class="portfolio-item wow fadeInUp animated" data-wow-delay="0.9s">
 
 
                         <img src="<?php echo base_url();?>assets/img/portfolio/h.jpg" class="img-responsive " alt="" />
@@ -374,19 +374,19 @@
             <div class="container">
                 <div class="row text-center">
                     <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-                        <h2 data-wow-delay="0.3s" class="wow rollIn animated"><strong>HOW YOU CAN HELP ?</strong></h2>
+                        <h2 data-wow-delay="0.3s" class="wow fadeInUp animated"><strong>HOW YOU CAN HELP ?</strong></h2>
                         <p class="sub-head">Checkout this vedio , which will let you know how you can help us to save the earth and let the earth live long peacefully. </p>
                     </div>
                 </div>
                 <div class="row ">
 
                     <div class="col-lg-6 col-lg-offset-1  col-md-6 col-md-offset-1">
-                        <iframe src="http://player.vimeo.com/video/18312392" class="vedio-style wow rotateIn animated" data-wow-delay="0.4s"></iframe>
+                        <iframe src="http://player.vimeo.com/video/18312392" class="vedio-style wow fadeInUp animated" data-wow-delay="0.4s"></iframe>
                     </div>
 
                     <div class="col-lg-4 col-md-4" style="padding-top: 50px;">
 
-                        <div class="media wow rotateIn animated" data-wow-delay="0.5s">
+                        <div class="media wow fadeInUp animated" data-wow-delay="0.5s">
                             <div class="pull-left">
                                 <i class="fa fa-star-o fa-4x  "></i>
                             </div>
@@ -399,7 +399,7 @@
 
                             </div>
                         </div>
-                        <div class="media wow rotateIn animated" data-wow-delay="0.6s">
+                        <div class="media wow fadeInUp animated" data-wow-delay="0.6s">
                             <div class="pull-left">
                                 <i class="fa fa-history fa-4x  "></i>
                             </div>
@@ -426,13 +426,13 @@
         <div class="container">
             <div class="row text-center">
                 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-                    <h2 data-wow-delay="0.3s" class="wow rollIn animated"><strong>CONTACT US </strong></h2>
+                    <h2 data-wow-delay="0.3s" class="wow fadeInUp animated"><strong>CONTACT US </strong></h2>
                     <p class="sub-head">Lorem ipsum dolor sit amet, consectetur adipiscing elit onec molestie non sem vel condimentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
 
-                    <p class="sub-head  wow rotateIn animated" data-wow-delay="0.4s"><strong>ADDRESS :</strong> 2234/908, Newyork City , USA - 002309</p>
+                    <p class="sub-head  wow fadeInUp animated" data-wow-delay="0.4s"><strong>ADDRESS :</strong> 2234/908, Newyork City , USA - 002309</p>
                 </div>
             </div>
-            <div class="row  text-center wow rotateIn animated" data-wow-delay="0.4s">
+            <div class="row text-center wow fadeInUp animated" data-wow-delay="0.4s">
                 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
                     <a href="#">  <img src="<?php echo base_url();?>assets/img/Social/facebook.png" alt="" /> </a>
                      <a href="#"> <img src="<?php echo base_url();?>assets/img/Social/google-plus.png" alt="" /></a>
@@ -443,16 +443,16 @@
                 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
                     <form>
                         <div class="form-group">
-                            <input type="text" class="form-control wow rotateIn animated" data-wow-delay="0.5s" required="required" placeholder="Your Name">
+                            <input type="text" class="form-control wow fadeInUp animated" data-wow-delay="0.5s" required="required" placeholder="Your Name">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control wow rotateIn animated" required="required" data-wow-delay="0.6s" placeholder="Your Email">
+                            <input type="text" class="form-control wow fadeInUp animated" required="required" data-wow-delay="0.6s" placeholder="Your Email">
                         </div>
                         <div class="form-group">
-                            <textarea name="message"  required="required" data-wow-delay="0.7s" class="wow rotateIn animated form-control" style="min-height: 150px;" placeholder="Message"></textarea>
+                            <textarea name="message"  required="required" data-wow-delay="0.7s" class="wow fadeInUp animated form-control" style="min-height: 150px;" placeholder="Message"></textarea>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-success btn-block btn-lg wow rotateIn animated " data-wow-delay="0.8s">SUBMIT REQUEST</button>
+                            <button type="submit" class="btn btn-success btn-block btn-lg wow fadeInUp animated " data-wow-delay="0.8s">SUBMIT REQUEST</button>
                         </div>
 
                     </form>
