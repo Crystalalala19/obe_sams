@@ -3,7 +3,37 @@
     <div class="jumbotron">
         <h1>Create Curriculum</h1>
         <h3>Sample page rani</h3>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p><a href="./" class="btn btn-primary btn-lg" role="button">Back</a></p>
+        <?php
+        
+        $this->load->helper("form");
+        echo form_open("account/create_map");
+
+        echo validation_errors();
+
+
+        echo form_label("Course Code: ", "courseCode");
+        $data = array(
+            "name" => "courseCode",
+            "id" => "courseCode",
+            "value" => "",
+            "required" => "required"
+        );
+        echo form_input($data).'<br>';
+
+        echo form_label('Course Name: ', 'courseName');
+        $data = array(
+            "name" => "courseName",
+            "id" => "courseName",
+            "value" => "",
+            "required" => "required"
+        );
+        echo form_input($data).'<br>';
+        echo form_submit('submit', 'submit');
+
+        echo form_close();
+        ?>
+
+        <br><br><br><br><br><br><br><br><br><br>
+        <p><a href="<?php echo base_url();?>site" class="btn btn-primary btn-lg" role="button">Back</a></p>
     </div>
 </div>
