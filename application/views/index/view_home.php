@@ -4,7 +4,7 @@
                 <div class="row ">
                     <div class="col-lg-9 col-md-9 head-text">
                         <h1 id="divDisp" >WHY WE NEED DONATIONS ?</h1>
-                        <a class="btn btn-primary btn-lg" href="account" role="button">CLICK ME!</a>
+                        <a class="btn btn-primary btn-lg" href="account.php" role="button">CLICK ME!</a>
                         <span>
                             <i class="fa fa-lightbulb-o " ></i>For Planting new plants
                         </span>

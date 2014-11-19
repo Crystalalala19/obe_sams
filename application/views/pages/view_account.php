@@ -6,7 +6,7 @@
         <?php
         
         $this->load->helper("form");
-        echo form_open("account/create_map");
+        echo form_open("account");
 
         echo validation_errors();
 
