@@ -28,19 +28,22 @@
                     <div class="col-lg-3 col-md-3">
                         <div class="div-trans text-center">
                             <h3>LOG IN</h3>
-                            <div class="col-lg-12 col-md-12 col-sm-12" >
-                          
-                                <div class="form-group">
-                                    <input type="text" class="form-control" required="required" placeholder="ID Number">
+                            <div class="col-lg-12 col-md-12 col-sm-12" >    
+                                <?php echo form_open('site/login_validation'); ?>
+                                <?php echo validation_errors(); ?>
+                                <div class="form-group">    
+                                    <input type="text" class="form-control" name="idnum" value="<?php echo set_value('idnum'); ?>"  />
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" required="required" placeholder="Password">
+                                    <input type="password" class="form-control" name="password" value="<?php echo set_value('password'); ?>" />
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-success btn-block btn-lg">SUBMIT</button>
+                                    <?php echo form_submit('login_submit', 'Login'); ?>
                                 </div>
-                             </div>
+                                 <?php echo form_close(); ?>   
 
+                                 <a href="<?php echo base_url()."site/signup"; ?>">Sign up!</a>
+                             </div>
                         </div>
                     </div>
                 </div>
