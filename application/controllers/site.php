@@ -53,11 +53,10 @@ class Site extends CI_Controller {
          //$this->load->model('model_users');
          $this->load->model('model_role');
          $data = array(
-               'login_id' => $this->input->post('idnum'),
-               'is_logged_in' => 1,
-                 'role' => $this->model_role->scalar('user_account','role')
-
-            );
+            'login_id' => $this->input->post('idnum'),
+            'is_logged_in' => 1,
+            'role' => $this->model_role->scalar('user_account','role')
+         );
 
          $this->session->set_userdata($data);
          redirect('site/members'); 
@@ -68,9 +67,6 @@ class Site extends CI_Controller {
          $this->load->view("index/view_home");
          $this->load->view("index/footer");
       }
-
-      //echo $_POST['email'];
-      //echo $this->input->post('email');
    }
 
    public function validate_credentials($query){
@@ -83,7 +79,6 @@ class Site extends CI_Controller {
          return false;
       }
    }
-
 
    public function signup_validation(){
 
@@ -102,7 +97,6 @@ class Site extends CI_Controller {
 
       $this->form_validation->set_message('is_unique', '%s already exists.');
 
-
       if($this->form_validation->run() == FALSE ){
         $this->load->view('register/signup');
       } else{
@@ -115,5 +109,4 @@ class Site extends CI_Controller {
       $this->session->sess_destroy();
       redirect('site');
    }
-   
 }

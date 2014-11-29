@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Admin Page</title>	
-</head>
-<body>
-
 <div id="container">
 	<h1>Admin Page</h1>
 		<?php
@@ -16,6 +8,3 @@
 
 		<a href="<?php echo base_url()."site/logout" ?>">Logout</a>
 </div>
-
-</body>
-</html>
