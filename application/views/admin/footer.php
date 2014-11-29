@@ -1,3 +1,7 @@
+         </div>
+         <!-- /.container-fluid -->
+      </div>
+      <!-- /#page-wrapper -->
    </div>
     <!-- /#wrapper -->
    <!--  Jquery Core Script -->

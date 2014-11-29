@@ -1,3 +1,13 @@
+<?php
+    function echoActiveClassIfRequestMatches($requestUri)
+    {
+        $current_file_name = basename($_SERVER['REQUEST_URI']);
+
+        if ($current_file_name == $requestUri)
+            echo 'class=active';
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -152,11 +162,12 @@
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li class="<?php echo active_link('admin'); ?>">
-                        <a href="admin"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                    <!-- active_link() works only for controller names, not methods names -->
+                    <li <?=echoActiveClassIfRequestMatches("admin")?>>
+                        <a href="<?php echo base_url();?>admin"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
-                    <li>
-                        <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
+                    <li <?=echoActiveClassIfRequestMatches("create_program")?>>
+                        <a href="<?php echo base_url();?>admin/create_program"><i class="fa fa-fw fa-bar-chart-o"></i> Create Program</a>
                     </li>
                     <li>
                         <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
@@ -192,28 +203,4 @@
         <div id="page-wrapper">
 
             <div class="container-fluid">
-
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Blank Page
-                            <small>Subheading</small>
-                        </h1>
-                        <ol class="breadcrumb">
-                            <li>
-                                <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-file"></i> Blank Page
-                            </li>
-                        </ol>
-                    </div>
-                </div>
-                <!-- /.row -->
-
-            </div>
-            <!-- /.container-fluid -->
-
-        </div>
-        <!-- /#page-wrapper -->
+            
