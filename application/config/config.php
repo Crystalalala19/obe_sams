@@ -15,6 +15,7 @@
 |
 */
 $config['base_url']	= 'http://localhost/obe_sams/';
+$config['encryption_key'] = '1234';
 
 /*
 |--------------------------------------------------------------------------
@@ -57,7 +58,7 @@ $config['uri_protocol']	= 'AUTO';
 | http://codeigniter.com/user_guide/general/urls.html
 */
 
-$config['url_suffix'] = '.php';
+$config['url_suffix'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -224,7 +225,7 @@ $config['cache_path'] = '';
 | MUST set an encryption key.  See the user guide for info.
 |
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = 'up2L6L2dedkk5ir1EFZID4zLrMw1AK4E';
 
 /*
 |--------------------------------------------------------------------------
