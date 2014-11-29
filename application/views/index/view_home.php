@@ -31,10 +31,10 @@
                             <div class="col-lg-12 col-md-12 col-sm-12" >
                           
                                 <div class="form-group">
-                                    <input type="text" class="form-control" required="required" placeholder="ID Number">
+                                    <input type="text" class="login form-control" required="required" placeholder="ID Number">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" required="required" placeholder="Password">
+                                    <input type="text" class="login form-control" required="required" placeholder="Password">
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-success btn-block btn-lg">SUBMIT</button>
