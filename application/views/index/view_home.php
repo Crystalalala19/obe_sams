@@ -27,15 +27,6 @@
                     <div class="col-lg-3 col-md-3">
                         <div class="div-trans text-center">
                             <h3>LOG IN</h3>
-<<<<<<< HEAD
-                            <div class="col-lg-12 col-md-12 col-sm-12" >
-                          
-                                <div class="form-group">
-                                    <input type="text" class="login form-control" required="required" placeholder="ID Number">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="login form-control" required="required" placeholder="Password">
-=======
                             <div class="col-lg-12 col-md-12 col-sm-12" >    
                                 <?php echo form_open('site/login_validation'); ?>
                                 <?php echo validation_errors(); ?>
@@ -44,7 +35,6 @@
                                 </div>
                                 <div class="form-group">
                                     <input type="password" class="form-control" name="password" value="<?php echo set_value('password'); ?>" />
->>>>>>> origin/master
                                 </div>
                                 <div class="form-group">
                                     <?php echo form_submit('login_submit', 'Login'); ?>

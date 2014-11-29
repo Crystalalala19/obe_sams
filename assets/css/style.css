@@ -144,9 +144,9 @@ background-size: cover;
         color:#CAE4F1;
     }
     .div-trans {
-padding-top: 4px;
+padding-top: 5px;
 background-color: rgba(0, 0, 0, 0.5);
-min-height: 350px;
+min-height: 239px;
 margin-top: 150px;
 color: black;
 -webkit-border-radius: 5px;
@@ -167,14 +167,6 @@ margin-bottom: 30px;
         }
 #home .form-control {
     background-color:transparent;
-}
-
-/*=====================================
-   LOGIN SECTION
-    ===================================*/
-.login {
-  color: white;
-  border-color: rgba(255, 255, 255, 1);
 }
 
 /*=====================================
