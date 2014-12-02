@@ -27,8 +27,9 @@ class Admin extends CI_Controller {
         if($_POST){
             $this->load->library("form_validation");
 
-            $this->form_validation->set_rules("course_code[]", "Course Code", "required|trim|xss_clean");
-            $this->form_validation->set_rules("course_name[]", "Course Name", "required|trim|xss_clean");
+            $this->form_validation->set_rules("program", "Program Name", "required|trim");
+            $this->form_validation->set_rules("effective_year", "Effective Year", "required|trim");
+            $this->form_validation->set_rules("po_num", "Program Outcome Number", "required|trim");
       
             if($this->form_validation->run() == FALSE){
                 $this->index_create_program();

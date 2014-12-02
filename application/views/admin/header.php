@@ -170,6 +170,9 @@
                         <a href="<?php echo base_url();?>admin/create_program"><i class="fa fa-fw fa-bar-chart-o"></i> Create Program</a>
                     </li>
                     <li>
+                        <a href="<?php echo base_url();?>admin/manage_po"><i class="fa fa-fw fa-table"></i> Manage PO</a>
+                    </li>
+                    <li>
                         <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
                     </li>
                     <li>
