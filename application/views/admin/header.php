@@ -166,8 +166,23 @@
                     <li <?=echoActiveClassIfRequestMatches("admin")?>>
                         <a href="<?php echo base_url();?>admin"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
+                    <li id="student_dropdown" class="">
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Students <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo" class="collapse">
+                            <li>
+                                <a href="<?php echo base_url();?>admin/upload_students">Upload list</a>
+                            </li>
+                            <li>
+                                <a href="#">View list</a>
+                            </li>
+                        </ul>
+                    </li>
+                
                     <li <?=echoActiveClassIfRequestMatches("create_program")?>>
                         <a href="<?php echo base_url();?>admin/create_program"><i class="fa fa-fw fa-bar-chart-o"></i> Create Program</a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url();?>admin/add_po"><i class="fa fa-fw fa-table"></i> Add PO</a>
                     </li>
                     <li>
                         <a href="<?php echo base_url();?>admin/manage_po"><i class="fa fa-fw fa-table"></i> Manage PO</a>

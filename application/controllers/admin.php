@@ -47,4 +47,71 @@ class Admin extends CI_Controller {
             $this->index_create_program();
         }
     }
+
+    public function index_add_po(){
+        $data['title'] = 'Admin - Add PO';
+        $data['message'] = '';
+
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/add_po', $data);
+        $this->load->view('admin/footer');
+    }
+
+    public function add_po(){
+        if($_POST){
+            $this->load->library('form_validation');
+
+            if($this->form_validation->run() == FALSE){
+                $this->index_add_po();
+            }
+            else{
+                $data['title'] = "Admin - Add PO";
+                $data['message'] = '<div class="alert alert-success" role="alert"><strong>Success!</strong></div>';
+
+                $this->load->view('admin/header', $data);
+                $this->load->view('admin/add_po', $data);
+                $this->load->view('admin/footer');
+            }
+        }
+        else{
+            $this->index_add_po();
+        }
+    }
+
+    public function index_upload_students(){
+        $this->load->model('csv_model');
+        $this->load->library('csvimport');
+        
+        $data['title'] = 'Admin - Upload Student List';
+        $data['message'] = '';
+        $data['programs'] = $this->csv_model->get_program();
+
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/upload_students', $data);
+        $this->load->view('admin/footer');
+    }
+
+    public function upload_students(){
+        if($_POST){
+            $this->load->library('form_validation');
+
+            $this->form_validation->set_rules("program", "Program List", "required|trim");
+            $this->form_validation->set_rules("userfile", "Upload CSV", "required|trim");
+
+            if($this->form_validation->run() == FALSE){
+                $this->index_upload_students();
+            }
+            else{
+                $data['title'] = "Admin - Add PO";
+                $data['message'] = '<div class="alert alert-success" role="alert"><strong>Success!</strong></div>';
+                
+                $this->load->view('admin/header', $data);
+                $this->load->view('admin/upload_students', $data);
+                $this->load->view('admin/footer');
+            }
+        }
+        else{
+            $this->index_upload_students();
+        }
+    }
 }
