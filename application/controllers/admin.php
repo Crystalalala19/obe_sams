@@ -4,6 +4,7 @@ class Admin extends CI_Controller {
 
     public function __construct(){
         parent::__construct();
+        $this->load->model('model_admin');
     }
 
     public function index(){
@@ -15,7 +16,7 @@ class Admin extends CI_Controller {
     }
 
     public function index_create_program(){
-        $data['title'] = "Admin - Create Program";
+        $data['title'] = "Admin - Add new Program";
         $data['message'] = '';
 
         $this->load->view("admin/header", $data);
@@ -29,14 +30,25 @@ class Admin extends CI_Controller {
 
             $this->form_validation->set_rules("program", "Program Name", "required|trim");
             $this->form_validation->set_rules("effective_year", "Effective Year", "required|trim");
-            $this->form_validation->set_rules("po_num", "Program Outcome Number", "required|trim");
       
             if($this->form_validation->run() == FALSE){
                 $this->index_create_program();
             }
             else{
-                $data['title'] = "Admin - Create Program";
-                $data['message'] = '<div class="alert alert-success" role="alert"><strong>Success!</strong></div>';
+                $data = array(
+                    'programName' => $this->input->post('program'),
+                    'effective_year' => $this->input->post('effective_year')
+                );
+
+                $this->model_admin->insert_program($data);
+
+                $data['title'] = "Admin - Add new Program";
+                $data['message'] = '
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+                    <strong>Success!</strong>
+                </div>';
 
                 $this->load->view("admin/header", $data);
                 $this->load->view("admin/create_program", $data);
@@ -46,6 +58,16 @@ class Admin extends CI_Controller {
         else{
             $this->index_create_program();
         }
+    }
+
+    public function view_programs(){
+        $data['title'] = 'Admin - View Programs';
+        $data['message'] = '';
+        $data['program_list'] = $this->model_admin->get_programlist();
+
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/view_programs', $data);
+        $this->load->view('admin/footer');
     }
 
     public function index_add_po(){

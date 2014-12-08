@@ -24,6 +24,7 @@
     <link rel="icon" href="<?php echo base_url();?>assets/img/logo.jpeg">
     <!--  Bootstrap Style -->
     <link href="<?php echo base_url();?>assets/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css">
     <!-- Custom CSS -->
     <link href="<?php echo base_url();?>assets/css/sb-admin.css" rel="stylesheet">
     <!--  Font-Awesome Style -->
@@ -167,20 +168,29 @@
                         <a href="<?php echo base_url();?>admin"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li id="student_dropdown" class="">
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Students <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo" class="collapse">
+                        <a href="javascript:;" data-toggle="collapse" data-target="#student"><i class="fa fa-users"></i> Students <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="student" class="collapse">
                             <li>
-                                <a href="<?php echo base_url();?>admin/upload_students">Upload list</a>
+                                <a href="<?php echo base_url();?>admin/upload_students"><i class="fa fa-plus-square"></i> Upload list</a>
                             </li>
                             <li>
-                                <a href="#">View list</a>
+                                <a href="#"><i class="fa fa-list-alt"></i> View list</a>
                             </li>
                         </ul>
                     </li>
-                
-                    <li <?=echoActiveClassIfRequestMatches("create_program")?>>
-                        <a href="<?php echo base_url();?>admin/create_program"><i class="fa fa-fw fa-bar-chart-o"></i> Create Program</a>
+
+                    <li id="program_dropdown" class="">
+                        <a href="javascript:;" data-toggle="collapse" data-target="#program"><i class="fa fa-briefcase"></i> Programs <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="program" class="collapse">
+                            <li>
+                                <a href="<?php echo base_url();?>admin/create_program"><i class="fa fa-plus-square"></i> Add new</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url();?>admin/view_programs"><i class="fa fa-list-alt"></i> View programs</a>
+                            </li>
+                        </ul>
                     </li>
+            
                     <li>
                         <a href="<?php echo base_url();?>admin/add_po"><i class="fa fa-fw fa-table"></i> Add PO</a>
                     </li>

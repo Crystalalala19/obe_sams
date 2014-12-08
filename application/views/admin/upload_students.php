@@ -9,10 +9,10 @@
                                     <i class="fa fa-dashboard"></i>  <a href="<?php echo base_url(); ?>admin">Dashboard</a>
                                 </li>
                                 <li>
-                                    <i class="fa fa-dashboard"></i>  <a href="<?php echo base_url(); ?>admin">Students</a>
+                                    <i class="fa fa-users"></i>  Students
                                 </li>
                                 <li class="active">
-                                    <i class="fa fa-bar-chart-o"></i>  Upload Lists
+                                    <i class="fa fa-plus-square"></i>  Upload Lists
                                 </li>
                             </ol>
                         </div>
@@ -21,9 +21,12 @@
 <?php
     print_r($this->input->post());
     echo $message;
-    echo validation_errors('<div class="alert alert-danger" role="alert">
+    echo validation_errors('
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        <span class="sr-only">Error:</span>', '</div>');
+        <span class="sr-only">Error:</span>', 
+    '</div>');
     $attributes = array('class' => 'col-md-4');
 
     echo form_open_multipart('admin/upload_students', $attributes);
@@ -31,7 +34,12 @@
     <div class="form-group">
         <label for="lists">Program Lists:</label>
         <?php if ($programs == FALSE): ?>
-            <p>There are no currently programs added.</p>
+            <div class="alert alert-info alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>  
+                <span class="sr-only">Information:</span>
+                There are no currently programs added.
+            </div>
         <?php else: ?>
             <select class="form-control input-sm" name="program" id="lists">
                 <option selected="selected" value="">Please select: </option>
