@@ -87,7 +87,7 @@
                     </li>
 
                     <li >
-                        <a href="#help">HOW TO HELP ?
+                        <a href="#help">FACULTY
                         </a>
 
                     </li>

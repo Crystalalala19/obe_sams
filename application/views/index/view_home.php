@@ -3,26 +3,29 @@
             <div class="container">
                 <div class="row ">
                     <div class="col-lg-9 col-md-9 head-text">
-                        <h1 id="divDisp" >WHY WE NEED DONATIONS ?</h1>
-                        <span>
-                            <i class="fa fa-lightbulb-o " ></i>For Planting new plants
+                        <h1 id="divDisp" >COMPUTER SCIENCE DEPARTMENT</h1>
+                        <span >
+                            <i class="fa fa-laptop" ></i>Be a source of information and computing expertise
+                        </span>
+                        <span >
+                            <i class="fa fa-laptop" ></i>Educate students to become well-rounded individuals 
+                        </span>
+                        <span >
+                            <i class="fa fa-laptop" ></i>Train students to become world-leading computer science specialists 
                         </span>
                         <span>
-                            <i class="fa fa-lightbulb-o" ></i>For Promoting Eco Education in Schools
+                            <i class="fa fa-laptop" ></i>Perform world-class research works in selected areas in the in the 
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;computing sciences
+                        </span>
+                        <span>
+                            <i class="fa fa-laptop" ></i>Provide quality, cutting-edge educational experiences
                         </span>
                         
                         <span >
-                            <i class="fa fa-lightbulb-o" ></i>Encouraging Eco Friendly Methods
+                            <i class="fa fa-laptop" ></i>Provide state-of-the-art education and training in the use of 
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;computers to non-CS/IT majors
                         </span>
-                        <span >
-                            <i class="fa fa-lightbulb-o" ></i>Recycling Waste and garbage
-                        </span>
-                        <span >
-                            <i class="fa fa-lightbulb-o" ></i>For Maintaing ecological balance
-                        </span>
-                        <span >
-                            <i class="fa fa-lightbulb-o" ></i>To Research new eco friendly techniques
-                        </span>
+                        
                     </div>
                     <div class="col-lg-3 col-md-3">
                         <div class="div-trans text-center">
@@ -59,7 +62,11 @@
             <div class="row text-center">
                 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 sub-head">
                     <h2  data-wow-delay="0.3s" class="wow fadeInUp animated" ><strong>ABOUT </strong></h2>
-                    <p class="sub-head">Lorem ipsum dolor sit amet, consectetur adipiscing elit onec molestie non sem vel condimentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                    <p class="sub-head">The system records the update of the student's 
+                        strengths and weaknesses on each specific course. 
+                        Keeping track of the student’s academic performance will 
+                        be easier and convenient for the teachers.
+                    </p>
                 </div>
             </div>
             <div class="row ">
@@ -69,10 +76,9 @@
                             <i class="fa fa-recycle fa-4x  "></i>
                         </div>
                         <div class="media-body">
-                            <h3 class="media-heading">We Promote Recycling</h3>
+                            <h3 class="media-heading">End-in-mind Philosophy</h3>
                             <p >
-                                Aenean faucibus luctus enim. Duis quis sem risu suspend lacinia elementum nunc. 
-                                Aenean faucibus luctus enim. 
+                                Student focused and student capability conscious. 
                             </p>
 
                         </div>
@@ -82,65 +88,62 @@
                             <i class="fa fa-history fa-4x  "></i>
                         </div>
                         <div class="media-body">
-                            <h3 class="media-heading">Eco-Friendly Techniques</h3>
+                            <h3 class="media-heading">Visible Alignment</h3>
                             <p>
-                                Aenean faucibus luctus enim. Duis quis sem risu suspend lacinia elementum nunc. 
-                                Aenean faucibus luctus enim. 
+                                Well-thought of and reflected upon activities. Direct development. Success oriented.
                             </p>
 
                         </div>
                     </div>
 
                 </div>
-                <div class="col-lg-4 col-md-4 wow fadeInUp animated" style="padding: 10px;" data-wow-delay="0.6s"   >
-                    <div id="carousel-slider" class="carousel slide" data-ride="carousel">
-
-                        <div class="carousel-inner">
-                            <div class="item">
-
-                                <img src="<?php echo base_url();?>assets/img/slider/1.jpg" class="img-thumbnail" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="<?php echo base_url();?>assets/img/slider/2.png" class="img-thumbnail" alt="">
-                            </div>
-                            <div class="item active">
-                                <img src="<?php echo base_url();?>assets/img/slider/3.jpg" class="img-thumbnail" alt="">
-                            </div>
+                <div class="col-lg-4 col-md-4 wow fadeInUp animated">
+                        <div class="pull-left">
+                            <i class="fa fa-star-o fa-4x  "></i>
                         </div>
-                        <!--INDICATORS-->
-                        <ol class="carousel-indicators">
-                            <li data-target="#carousel-slider" data-slide-to="0" class=""></li>
-                            <li data-target="#carousel-slider" data-slide-to="1" class=""></li>
-                            <li data-target="#carousel-slider" data-slide-to="2" class="active"></li>
-                        </ol>
+                        <div class="media-body">
+                            <h3 class="media-heading">Stakeholders Involved</h3>
+                            <p>
+                                Stakeholders are involved in all the stages of the educational process.
+                            </p>
 
-                    </div>
+                        </div>
+
+                        <div class="pull-left">
+                            <i class="fa fa-mortar-board fa-4x  "></i>
+                        </div>
+                        <div class="media-body">
+                            <h3 class="media-heading"><br>Constructivist Philosophy</h3>
+                            <p>
+                                Change in educational perspective and mindset. Change in teaching 
+                                and learning perspective.
+                            </p>
+
+                        </div>
                 </div>
 
                 <div class="col-lg-4 col-md-4">
 
                     <div class="media wow fadeInUp animated" data-wow-delay="0.4s">
                         <div class="pull-left">
-                            <i class="fa fa-star-o fa-4x  "></i>
+                            <i class="fa fa-users fa-4x  "></i>
                         </div>
                         <div class="media-body">
-                            <h3 class="media-heading">Waste Reduction</h3>
+                            <h3 class="media-heading">Articulated, Expressed & Owned</h3>
                             <p>
-                                Aenean faucibus luctus enim. Duis quis sem risu suspend lacinia elementum nunc. 
-                                Aenean faucibus luctus enim. 
+                                Subscribed to and owned by administration, faculty and students.
                             </p>
 
                         </div>
                     </div>
                     <div class="media wow fadeInUp animated" data-wow-delay="0.5s">
                         <div class="pull-left">
-                            <i class="fa fa-life-ring fa-4x  "></i>
+                            <i class="fa fa-thumbs-o-up fa-4x  "></i>
                         </div>
                         <div class="media-body">
-                            <h3 class="media-heading">Resource Utilization</h3>
+                            <h3 class="media-heading">Assured andd Assessed</h3>
                             <p>
-                                Aenean faucibus luctus enim. Duis quis sem risu suspend lacinia elementum nunc. 
-                                Aenean faucibus luctus enim. 
+                                Importance of quality assurance and assessment system in place.
                             </p>
 
                         </div>
@@ -151,23 +154,20 @@
             <div class="row pad-top-botm wow fadeInUp animated" data-wow-delay="0.7s">
                 <div class="col-lg-8 col-md-8 col-sm-8 " >
 
-                    <h3><strong>What is our profile ?</strong></h3>
+                    <h3><strong>Our Department Aims</strong></h3>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                         Curabitur nec nisl odio. Mauris vehicula at nunc id posuere.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        To train students to become world-leading computer science 
+                        specialists by considering technologies for efficient “Information” exchange; 
+                        and to configure computer technologies to help human society
 
                     </p>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                         Curabitur nec nisl odio. Mauris vehicula at nunc id posuere.
-                         Curabitur nec nisl odio. Mauris vehicula at nunc id posuere.
+                        To educate students to become well-rounded individuals to 
+                        be able to contribute much more than a narrow technical expertise
 
                     </p>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                         Curabitur nec nisl odio. Mauris vehicula at nunc id posuere.
-                         Curabitur nec nisl odio. Mauris vehicula at nunc id posuere.
+                        To perform world-class research works in selected areas in the in the computing sciences
 
                     </p>
                 </div>
@@ -204,7 +204,7 @@
                                             <div class="user-img pull-right">
                                                 <img src="<?php echo base_url();?>assets/img/user2.png" alt="" class="img-circle image-responsive">
                                             </div>
-                                            <h5 class="pull-right"><strong class="c-black">Lorem Dolor</strong></h5>
+                                            <h5 class="pull-right"><strong class="c-black">Fr. Dionisio Marcelo Miranda</strong></h5>
                                         </div>
                                     </div>
                                 </div>
@@ -215,7 +215,7 @@
                                             <div class="user-img pull-right">
                                                 <img src="<?php echo base_url();?>assets/img/user.gif" alt="" class="img-circle image-responsive">
                                             </div>
-                                            <h5 class="pull-right"><strong class="c-black">Faucibus luctus</strong></h5>
+                                            <h5 class="pull-right"><strong class="c-black">Mary Jane Sabellano</strong></h5>
                                         </div>
                                     </div>
                                 </div>
@@ -226,7 +226,7 @@
                                             <div class="user-img pull-right">
                                                 <img src="<?php echo base_url();?>assets/img/user2.png" alt="" class="img-circle image-responsive">
                                             </div>
-                                            <h5 class="pull-right"><strong class="c-black">Sed ultricies</strong></h5>
+                                            <h5 class="pull-right"><strong class="c-black">Joan Tero</strong></h5>
                                         </div>
                                     </div>
                                 </div>
@@ -253,16 +253,16 @@
                     <div class="portfolio-item wow fadeInUp animated" data-wow-delay="0.4s">
 
 
-                        <img src="<?php echo base_url();?>assets/img/portfolio/g.jpg" class="img-responsive " alt="" />
+                        <img src="<?php echo base_url();?>assets/img/portfolio/laboratory.JPG" class="img-responsive " alt="" />
                         <div class="overlay">
                             <p>
                                 <span>
-                                Image Orinagal Size: 750x500
+                                 Department of Computer Science
                                 </span>
                                
-                                PROJECT TITLE HERE
+                                Laboratory Room
                             </p>
-                            <a class="preview  " title="Image Title Here" href="assets/img/portfolio/g.jpg"><i class="fa fa-search-plus fa-5x"></i></a>
+                            <a class="preview  " title="Laboratory Room" href="assets/img/portfolio/laboratory.JPG"><i class="fa fa-search-plus fa-5x"></i></a>
 
                         </div>
                     </div>
@@ -272,16 +272,16 @@
                     <div class="portfolio-item wow fadeInUp animated" data-wow-delay="0.5s">
 
 
-                        <img src="<?php echo base_url();?>assets/img/portfolio/b.jpg" class="img-responsive " alt="" />
+                        <img src="<?php echo base_url();?>assets/img/portfolio/network.jpg" class="img-responsive " alt="" />
                         <div class="overlay">
                             <p>
                                 <span>
-                                Image Orinagal Size: 750x500
+                                 Department of Computer Science
                                 </span>
                                
-                                PROJECT TITLE HERE
+                                Network Control Room
                             </p>
-                            <a class="preview " title="Image Title Here" href="assets/img/portfolio/b.jpg"><i class="fa fa-search-plus fa-5x"></i></a>
+                            <a class="preview " title="Network Control Room" href="assets/img/portfolio/network.jpg"><i class="fa fa-search-plus fa-5x"></i></a>
 
                         </div>
                     </div>
@@ -291,16 +291,16 @@
                     <div class="portfolio-item wow fadeInUp animated" data-wow-delay="0.6s">
 
 
-                        <img src="<?php echo base_url();?>assets/img/portfolio/c.png" class="img-responsive " alt="" />
+                        <img src="<?php echo base_url();?>assets/img/portfolio/room.JPG" class="img-responsive " alt="" />
                         <div class="overlay">
                           <p>
                                 <span>
-                                Image Orinagal Size: 750x500
+                                 Department of Computer Science
                                 </span>
                                
-                                PROJECT TITLE HERE
+                                Classroom
                             </p>
-                            <a class="preview " title="Image Title Here" href="assets/img/portfolio/c.png"><i class="fa fa-search-plus fa-5x"></i></a>
+                            <a class="preview " title="Classroom" href="assets/img/portfolio/room.JPG"><i class="fa fa-search-plus fa-5x"></i></a>
 
                         </div>
                     </div>
@@ -314,16 +314,16 @@
                     <div class="portfolio-item wow fadeInUp animated" data-wow-delay="0.7s">
 
 
-                        <img src="<?php echo base_url();?>assets/img/portfolio/d.jpg" class="img-responsive " alt="" />
+                        <img src="<?php echo base_url();?>assets/img/portfolio/speech.JPG" class="img-responsive " alt="" />
                         <div class="overlay">
                            <p>
                                 <span>
-                                Image Orinagal Size: 750x500
+                                 Department of Computer Science
                                 </span>
                                
-                                PROJECT TITLE HERE
+                                Speech Laboratory
                             </p>
-                            <a class="preview  " title="Image Title Here" href="assets/img/portfolio/d.jpg"><i class="fa fa-search-plus fa-5x"></i></a>
+                            <a class="preview  " title="Speech Laboratory" href="assets/img/portfolio/speech.JPG"><i class="fa fa-search-plus fa-5x"></i></a>
 
                         </div>
                     </div>
@@ -333,16 +333,16 @@
                     <div class="portfolio-item wow fadeInUp animated" data-wow-delay="0.8s">
 
 
-                        <img src="<?php echo base_url();?>assets/img/portfolio/e.jpg" class="img-responsive " alt="" />
+                        <img src="<?php echo base_url();?>assets/img/portfolio/students.jpg" class="img-responsive " alt="" />
                         <div class="overlay">
                             <p>
                                 <span>
-                                Image Orinagal Size: 750x500
+                                 Department of Computer Science
                                 </span>
                                
-                                PROJECT TITLE HERE
+                                Students
                             </p>
-                            <a class="preview " title="Image Title Here" href="assets/img/portfolio/e.jpg"><i class="fa fa-search-plus fa-5x"></i></a>
+                            <a class="preview " title="Students" href="assets/img/portfolio/students.jpg"><i class="fa fa-search-plus fa-5x"></i></a>
 
                         </div>
                     </div>
@@ -352,16 +352,16 @@
                     <div class="portfolio-item wow fadeInUp animated" data-wow-delay="0.9s">
 
 
-                        <img src="<?php echo base_url();?>assets/img/portfolio/h.jpg" class="img-responsive " alt="" />
+                        <img src="<?php echo base_url();?>assets/img/portfolio/teach.jpg" class="img-responsive " alt="" />
                         <div class="overlay">
                           <p>
                                 <span>
-                                Image Orinagal Size: 750x500
+                                Department of Computer Science
                                 </span>
                                
-                                PROJECT TITLE HERE
+                                Teaching
                             </p>
-                            <a class="preview " title="Image Title Here" href="assets/img/portfolio/h.jpg"><i class="fa fa-search-plus fa-5x"></i></a>
+                            <a class="preview " title="Teaching" href="assets/img/portfolio/teach.jpg"><i class="fa fa-search-plus fa-5x"></i></a>
 
                         </div>
                     </div>
@@ -377,8 +377,8 @@
             <div class="container">
                 <div class="row text-center">
                     <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-                        <h2 data-wow-delay="0.3s" class="wow fadeInUp animated"><strong>HOW YOU CAN HELP ?</strong></h2>
-                        <p class="sub-head">Checkout this vedio , which will let you know how you can help us to save the earth and let the earth live long peacefully. </p>
+                        <h2 data-wow-delay="0.3s" class="wow fadeInUp animated"><strong>FACULTY</strong></h2>
+                        <p class="sub-head">Checkout this video , which will let you know the Head and teachers of the Department. </p>
                     </div>
                 </div>
                 <div class="row ">
@@ -394,7 +394,7 @@
                                 <i class="fa fa-star-o fa-4x  "></i>
                             </div>
                             <div class="media-body">
-                                <h3 class="media-heading">Watch This Vedio</h3>
+                                <h3 class="media-heading">Watch This Video</h3>
                                 <p>
                                     Aenean faucibus luctus enim. Duis quis sem risu suspend lacinia elementum nunc. 
                                 Aenean faucibus luctus enim. 
@@ -407,7 +407,7 @@
                                 <i class="fa fa-history fa-4x  "></i>
                             </div>
                             <div class="media-body">
-                                <h3 class="media-heading">Donate Some Money </h3>
+                                <h3 class="media-heading">Come Visit Our Department</h3>
                                 <p>
                                     Aenean faucibus luctus enim. Duis quis sem risu suspend lacinia elementum nunc. 
                                 Aenean faucibus luctus enim. 
@@ -430,9 +430,12 @@
             <div class="row text-center">
                 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
                     <h2 data-wow-delay="0.3s" class="wow fadeInUp animated"><strong>CONTACT US </strong></h2>
-                    <p class="sub-head">Lorem ipsum dolor sit amet, consectetur adipiscing elit onec molestie non sem vel condimentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                    <p class="sub-head">For more information, please call the Office of the Chair</p>
 
-                    <p class="sub-head  wow fadeInUp animated" data-wow-delay="0.4s"><strong>ADDRESS :</strong> 2234/908, Newyork City , USA - 002309</p>
+                    <p class="sub-head  wow fadeInUp animated" data-wow-delay="0.4s"><strong>ADDRESS :</strong> (+63 32) 344 3801 locals 328 & 329, Department of Computer Science
+                    University of San Carlos – Technological Center
+                    Nasipit Talamban, Cebu City, Philippines
+                    </p>
                 </div>
             </div>
             <div class="row text-center wow fadeInUp animated" data-wow-delay="0.4s">
