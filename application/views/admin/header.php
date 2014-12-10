@@ -23,15 +23,18 @@
     <!-- Offline files -->
     <link rel="icon" href="<?php echo base_url();?>assets/img/logo.jpeg">
     <!--  Bootstrap Style -->
-    <link href="<?php echo base_url();?>assets/css/bootstrap.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css">
+    <link href="<?php echo base_url();?>assets/css/bootstrap.css" rel="stylesheet">
+    <!-- DataTables Style -->
+    <link href="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="<?php echo base_url();?>assets/css/sb-admin.css" rel="stylesheet">
     <!--  Font-Awesome Style -->
-    <link href="<?php echo base_url();?>assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="<?php echo base_url();?>assets/css/font-awesome.min.css" rel="stylesheet">
 
-    <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <!-- 
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> 
+    -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -174,7 +177,7 @@
                                 <a href="<?php echo base_url();?>admin/upload_students"><i class="fa fa-plus-square"></i> Upload list</a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-list-alt"></i> View list</a>
+                                <a href="<?php echo base_url();?>admin/students_list"><i class="fa fa-list-alt"></i> View list</a>
                             </li>
                         </ul>
                     </li>
@@ -193,35 +196,6 @@
             
                     <li>
                         <a href="<?php echo base_url();?>admin/add_po"><i class="fa fa-fw fa-table"></i> Add PO</a>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url();?>admin/manage_po"><i class="fa fa-fw fa-table"></i> Manage PO</a>
-                    </li>
-                    <li>
-                        <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
-                    </li>
-                    <li>
-                        <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
-                    </li>
-                    <li>
-                        <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
-                    </li>
-                    <li>
-                        <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
-                    </li>
-                    <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo" class="collapse">
-                            <li>
-                                <a href="#">Dropdown Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Dropdown Item</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
                     </li>
                 </ul>
             </div>

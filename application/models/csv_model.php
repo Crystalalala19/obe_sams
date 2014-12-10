@@ -6,8 +6,8 @@ class Csv_model extends CI_Model {
         parent::__construct();
     }
      
-    function get_addressbook() {
-        $query = $this->db->get('addressbook');
+    function get_students() {
+        $query = $this->db->get('student');
         if ($query->num_rows() > 0) {
             return $query->result_array();
         } else {
@@ -16,17 +16,7 @@ class Csv_model extends CI_Model {
     }
      
     function insert_csv($data) {
-        $this->db->insert('addressbook', $data);
-    }
-
-    function get_program() {
-        $query = $this->db->get('program');
-        if($query->num_rows() > 0){
-            return $query->result_array();
-        }
-        else{
-            return FALSE;
-        }
+        $this->db->insert('student', $data);
     }
 }
 /*END OF FILE*/

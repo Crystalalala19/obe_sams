@@ -61,9 +61,10 @@ class Admin extends CI_Controller {
     }
 
     public function view_programs(){
+        $table = 'program';
         $data['title'] = 'Admin - View Programs';
         $data['message'] = '';
-        $data['program_list'] = $this->model_admin->get_programlist();
+        $data['program_list'] = $this->model_admin->check_rows($table);
 
         $this->load->view('admin/header', $data);
         $this->load->view('admin/view_programs', $data);
@@ -88,7 +89,12 @@ class Admin extends CI_Controller {
             }
             else{
                 $data['title'] = "Admin - Add PO";
-                $data['message'] = '<div class="alert alert-success" role="alert"><strong>Success!</strong></div>';
+                $data['message'] = '
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+                    <strong>Success!</strong>
+                </div>';
 
                 $this->load->view('admin/header', $data);
                 $this->load->view('admin/add_po', $data);
@@ -101,12 +107,9 @@ class Admin extends CI_Controller {
     }
 
     public function index_upload_students(){
-        $this->load->model('csv_model');
-        $this->load->library('csvimport');
-        
-        $data['title'] = 'Admin - Upload Student List';
+        $data['title'] = 'Admin - Upload Students List';
         $data['message'] = '';
-        $data['programs'] = $this->csv_model->get_program();
+        $data['programs'] = $this->model_admin->get_programlist();
 
         $this->load->view('admin/header', $data);
         $this->load->view('admin/upload_students', $data);
@@ -115,6 +118,8 @@ class Admin extends CI_Controller {
 
     public function upload_students(){
         if($_POST){
+            $this->load->model('csv_model');
+            $this->load->library('csvimport');
             $this->load->library('form_validation');
 
             $this->form_validation->set_rules("program", "Program List", "required|trim");
@@ -124,8 +129,13 @@ class Admin extends CI_Controller {
                 $this->index_upload_students();
             }
             else{
-                $data['title'] = "Admin - Add PO";
-                $data['message'] = '<div class="alert alert-success" role="alert"><strong>Success!</strong></div>';
+                $data['title'] = "Admin - Upload Students List";
+                $data['message'] = '
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+                    <strong>Success!</strong>
+                </div>';
                 
                 $this->load->view('admin/header', $data);
                 $this->load->view('admin/upload_students', $data);
@@ -135,5 +145,16 @@ class Admin extends CI_Controller {
         else{
             $this->index_upload_students();
         }
+    }
+
+    public function students_list(){
+        $table = 'student';
+        $data['title'] = 'Admin - Students List';
+        $data['message'] = '';
+        $data['student_list'] = $this->model_admin->check_rows($table);
+
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/view_list', $data);
+        $this->load->view('admin/footer');
     }
 }
