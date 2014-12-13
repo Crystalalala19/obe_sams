@@ -170,17 +170,6 @@
                     <li <?=echoActiveClassIfRequestMatches("admin")?>>
                         <a href="<?php echo base_url();?>admin"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
-                    <li id="student_dropdown" class="">
-                        <a href="javascript:;" data-toggle="collapse" data-target="#student"><i class="fa fa-users"></i> Students <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="student" class="collapse">
-                            <li>
-                                <a href="<?php echo base_url();?>admin/upload_students"><i class="fa fa-plus-square"></i> Upload list</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo base_url();?>admin/students_list"><i class="fa fa-list-alt"></i> View list</a>
-                            </li>
-                        </ul>
-                    </li>
 
                     <li id="program_dropdown" class="">
                         <a href="javascript:;" data-toggle="collapse" data-target="#program"><i class="fa fa-briefcase"></i> Programs <i class="fa fa-fw fa-caret-down"></i></a>
@@ -193,7 +182,19 @@
                             </li>
                         </ul>
                     </li>
-            
+                    
+                    <li id="student_dropdown" class="">
+                        <a href="javascript:;" data-toggle="collapse" data-target="#student"><i class="fa fa-users"></i> Students <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="student" class="collapse">
+                            <li>
+                                <a href="<?php echo base_url();?>admin/upload_students"><i class="fa fa-plus-square"></i> Upload list</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url();?>admin/students_list"><i class="fa fa-list-alt"></i> View list</a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <li>
                         <a href="<?php echo base_url();?>admin/add_po"><i class="fa fa-fw fa-table"></i> Add PO</a>
                     </li>

@@ -10,6 +10,11 @@ class Model_admin extends CI_Model {
         $this->db->insert('program', $data);
     }
 
+    function insert_po($data){
+        $this->db->get_where('po', array('programID' => $this->db->insert_id()));
+        $this->db->insert_batch('po', $data);
+    }
+
     function check_rows($table) {
         $query = $this->db->get($table);
         if ($query->num_rows() > 0) {
@@ -18,6 +23,10 @@ class Model_admin extends CI_Model {
         else {
             return FALSE;
         }
+    }
+
+    function get_lastId(){
+        return $this->db->insert_id();
     }
 }
 ?>

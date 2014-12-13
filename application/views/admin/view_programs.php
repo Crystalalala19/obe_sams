@@ -46,3 +46,7 @@
         </tbody>
     </table>
 
+<script>
+    var d = document.getElementById("program_dropdown");
+    d.className = d.className + " active";
+</script>

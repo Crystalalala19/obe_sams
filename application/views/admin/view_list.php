@@ -45,3 +45,7 @@
                 <?php endif; ?>
         </tbody>
     </table>
+<script>
+    var d = document.getElementById("student_dropdown");
+    d.className = d.className + " active";
+</script>
