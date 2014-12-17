@@ -16,13 +16,20 @@ class Admin extends CI_Controller {
     }
 
     public function create_program(){
+        $data['title'] = "Admin - Add new Program";
+
         $this->load->library("form_validation");
 
-        // $this->form_validation->set_rules("program", "Program Name", "required|trim");
-        // $this->form_validation->set_rules("effective_year", "Effective Year", "required|trim");
+        $this->form_validation->set_rules("program", "Program Name", "required|trim");
+        $this->form_validation->set_rules("effective_year", "Effective Year", "required|trim");
         // $this->form_validation->set_rules("po_code[]", "PO Code", "required|trim");
-  
-        if($_POST){
+        
+        if($this->form_validation->run() == FALSE){
+            $this->load->view("admin/header", $data);
+            $this->load->view("admin/create_program", $data);
+            $this->load->view("admin/footer");
+        }
+        else{
             $fields = array();
 
             $rows = $this->input->post('po_code');
@@ -34,7 +41,7 @@ class Admin extends CI_Controller {
                 'effective_year' => $this->input->post('effective_year')
             );
 
-            $this->model_admin->insert_program($program);
+            $result = $this->model_admin->insert_program($program);
             $id = $this->model_admin->get_lastId();
 
             foreach($rows as $key => $val){
@@ -48,30 +55,19 @@ class Admin extends CI_Controller {
 
             $this->model_admin->insert_po($fields);
 
-            $data['title'] = "Admin - Add new Program";
-            $data['message'] = '
-            <div class="alert alert-success alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
-                <strong>Success!</strong>
-            </div>';
-            $data['field'] = $fields;
+            if($result['is_success'] == TRUE){
+                $this->session->set_flashdata('message', $result['message']);
 
+                redirect(current_url());
+            }
+            else{
+                $data['message'] = $result['message'];
+            }
+            
             $this->load->view("admin/header", $data);
             $this->load->view("admin/create_program", $data);
             $this->load->view("admin/footer");
-        }
-
-        elseif($this->form_validation->run() == FALSE){
-            $data['title'] = "Admin - Add new Program";
-            $data['message'] = '';
-
-            $this->load->view("admin/header", $data);
-            $this->load->view("admin/create_program", $data);
-            $this->load->view("admin/footer");
-        }
-        
-        
+        }  
     }
 
     public function view_programs(){
