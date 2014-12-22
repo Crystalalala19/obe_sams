@@ -19,8 +19,9 @@
                     </div>
                     <!-- /.row -->
 <?php
-    print_r($this->input->post());
-    echo $message;
+    echo $this->session->flashdata('message');
+    if (!empty($message)) echo $message;
+    
     echo validation_errors('
     <div class="alert alert-danger alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>

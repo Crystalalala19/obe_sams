@@ -37,7 +37,7 @@
         <tbody>
             <tr>            
                 <?php foreach($student_list as $row): ?>
-                <td><?php echo $row['ID'];?></td>
+                <td><?php echo $row['student_id'];?></td>
                 <td><?php echo $row['fname'];?></td>
                 <td><?php echo $row['lname'];?></td>
             </tr>

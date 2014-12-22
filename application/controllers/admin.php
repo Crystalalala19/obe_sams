@@ -57,7 +57,6 @@ class Admin extends CI_Controller {
 
             if($result['is_success'] == TRUE){
                 $this->session->set_flashdata('message', $result['message']);
-
                 redirect(current_url());
             }
             else{
@@ -108,35 +107,75 @@ class Admin extends CI_Controller {
     }
 
     public function upload_students(){
-        $this->load->model('csv_model');
         $this->load->library('csvimport');
         $this->load->library('form_validation');
+       
+        $data['title'] = 'Admin - Upload Students List';
+
+        $table = 'program';
+        
+        $data['programs'] = $this->model_admin->check_rows($table);
+
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = 'csv';
+        $config['max_size'] = '1000';
+        $this->load->library('upload', $config);
 
         $this->form_validation->set_rules("program", "Program List", "required|trim");
-        $this->form_validation->set_rules("userfile", "Upload CSV", "required|trim");
 
-        if($this->form_validation->run() == FALSE){
-            $table = 'program';
-            $data['title'] = 'Admin - Upload Students List';
+        if($this->form_validation->run() == FALSE) {
             $data['message'] = '';
-            $data['programs'] = $this->model_admin->check_rows($table);
+            $this->load->view('admin/header', $data);
+            $this->load->view('admin/upload_students', $data);
+            $this->load->view('admin/footer');
+        }
+        elseif(!$this->upload->do_upload()){
+            $data['message'] = $this->upload->display_errors('
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>',
+            '</div>');;
 
             $this->load->view('admin/header', $data);
             $this->load->view('admin/upload_students', $data);
             $this->load->view('admin/footer');
         }
         else{
-            $data['title'] = "Admin - Upload Students List";
-            $data['message'] = '
-            <div class="alert alert-success alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
-                <strong>Success!</strong>
-            </div>';
+            $file_data = $this->upload->data();
+            $file_path =  './uploads/'.$file_data['file_name'];
             
-            $this->load->view('admin/header', $data);
-            $this->load->view('admin/upload_students', $data);
-            $this->load->view('admin/footer');
+            if ($this->csvimport->get_array($file_path)) {
+                $insert_data = array();
+                $csv_array = $this->csvimport->get_array($file_path);
+
+                foreach ($csv_array as $row) {
+                    if(!$this->model_admin->if_id_exists($row['student_id'])) {
+                        $insert_data = array(
+                            'student_id'=>$row['student_id'],
+                            'lname'=>$row['lname'],
+                            'fname'=>$row['fname'],
+                            'mname'=>$row['mname'],
+                            'programID'=> $this->input->post('program')
+                        );
+                    }
+                    $result = $this->model_admin->insert_csv($insert_data);
+                }
+
+                if($result['is_success'] == TRUE) {
+                    $this->session->set_flashdata('message', $result['message']);
+                    redirect(current_url());
+                }
+                else {
+                    $data['message'] = $result['message'];
+                }
+            }
+            else {
+                $data['message'] = 'Error occured';
+            }            
+                $this->load->view('admin/header', $data);
+                $this->load->view('admin/upload_students', $data);
+                $this->load->view('admin/footer');
         }
     }
 
