@@ -2,7 +2,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 class="page-header">
-                                Add new Program
+                                <?php echo $header;?>
                             </h1>
                             <ol class="breadcrumb">
                                 <li>
@@ -12,7 +12,7 @@
                                     <i class="fa fa-briefcase"></i>  Programs
                                 </li>
                                 <li class="active">
-                                    <i class="fa fa-plus-square"></i>  Add new Program
+                                    <i class="fa fa-plus-square"></i>  <?php echo $header;?>
                                 </li>
                             </ol>
                         </div>
@@ -27,7 +27,7 @@
         <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>', 
     '</div>');
-    echo form_open('admin/create_program');
+    echo form_open('admin/add_program');
 ?>
     <div class="form-group col-md-6">
         <label for="program_inp">Program:</label>
@@ -56,7 +56,7 @@
         ?>
     </div>
 
-    <div class="form-group">
+    <div class="form-group col-md-12">
         <table class="table table-striped table-bordered dataTable no-footer text-center" id="po-table">
             <tbody>
                 <tr>

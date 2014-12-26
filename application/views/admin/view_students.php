@@ -2,7 +2,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 class="page-header">
-                                Students List
+                                <?php echo $header;?>
                             </h1>
                             <ol class="breadcrumb">
                                 <li>
@@ -12,7 +12,7 @@
                                     <i class="fa fa-users"></i>  Students
                                 </li>
                                 <li class="active">
-                                    <i class="fa fa-plus-square"></i>  Students List
+                                    <i class="fa fa-plus-square"></i>  <?php echo $header;?>
                                 </li>
                             </ol>
                         </div>
@@ -26,12 +26,13 @@
         There are no currently students added.
     </div>
     <?php else: ?>
-    <table id="view_students" class="table table-striped table-bordered dataTable no-footer">
+    <table id="view_students" class="table table-striped table-bordered dataTable" cellspacing="0" width="100%">
         <thead>
             <tr>
-                <th>ID #</th>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th width="15%">ID #</th>
+                <th width="30%">First Name</th>
+                <th width="30%">Last Name</th>
+                <th width="10%">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -40,6 +41,7 @@
                 <td><?php echo $row['student_id'];?></td>
                 <td><?php echo $row['fname'];?></td>
                 <td><?php echo $row['lname'];?></td>
+                <td></td>
             </tr>
                 <?php endforeach; ?>        
                 <?php endif; ?>

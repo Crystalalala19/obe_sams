@@ -23,17 +23,26 @@
     <!-- Offline files -->
     <link rel="icon" href="<?php echo base_url();?>assets/img/logo.jpeg">
     <!--  Bootstrap Style -->
-    <link href="<?php echo base_url();?>assets/css/bootstrap.css" rel="stylesheet">
-    <!-- DataTables Style -->
-    <link href="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.css">
     <!-- Custom CSS -->
-    <link href="<?php echo base_url();?>assets/css/sb-admin.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/sb-admin.css">
     <!--  Font-Awesome Style -->
-    <link href="<?php echo base_url();?>assets/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/font-awesome.min.css">
+
+    <?php if(basename(current_url()) == 'view_students' OR basename(current_url()) == 'view_programs'):?>
+    
+    <!-- DataTables Style -->
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css">
+    
+    <style type="text/css">
+        div.DTTT { margin-bottom: 0.5em; float: right; }
+        div.dataTables_wrapper { clear: both; }
+    </style>
+    <?php endif;?>
 
     <!-- 
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> 
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"> 
     -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -57,7 +66,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">SB Admin</a>
+                <a class="navbar-brand" href="<?php echo base_url(); ?>admin">Computer Science Department</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -175,7 +184,7 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#program"><i class="fa fa-briefcase"></i> Programs <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="program" class="collapse">
                             <li>
-                                <a href="<?php echo base_url();?>admin/create_program"><i class="fa fa-plus-square"></i> Add new</a>
+                                <a href="<?php echo base_url();?>admin/add_program"><i class="fa fa-plus-square"></i> Add new Program</a>
                             </li>
                             <li>
                                 <a href="<?php echo base_url();?>admin/view_programs"><i class="fa fa-list-alt"></i> View programs</a>
@@ -187,10 +196,10 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#student"><i class="fa fa-users"></i> Students <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="student" class="collapse">
                             <li>
-                                <a href="<?php echo base_url();?>admin/upload_students"><i class="fa fa-plus-square"></i> Upload list</a>
+                                <a href="<?php echo base_url();?>admin/upload_students"><i class="fa fa-plus-square"></i> Upload Student list</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url();?>admin/students_list"><i class="fa fa-list-alt"></i> View list</a>
+                                <a href="<?php echo base_url();?>admin/view_students"><i class="fa fa-list-alt"></i> View Student list</a>
                             </li>
                         </ul>
                     </li>

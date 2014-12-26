@@ -2,7 +2,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 class="page-header">
-                                Upload Lists
+                                <?php echo $header;?>
                             </h1>
                             <ol class="breadcrumb">
                                 <li>
@@ -12,7 +12,7 @@
                                     <i class="fa fa-users"></i>  Students
                                 </li>
                                 <li class="active">
-                                    <i class="fa fa-plus-square"></i>  Upload Lists
+                                    <i class="fa fa-plus-square"></i>  <?php echo $header;?>
                                 </li>
                             </ol>
                         </div>
@@ -52,7 +52,7 @@
     </div>
 
     <div class="form-group">
-        <label for="userfile">Upload CSV: </label>
+        <label for="userfile">Upload .CSV File: </label>
         <input type="file" name="userfile" id="userfile">
     </div>
 

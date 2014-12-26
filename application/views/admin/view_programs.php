@@ -2,7 +2,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 class="page-header">
-                                View Programs
+                                <?php echo $header;?>
                             </h1>
                             <ol class="breadcrumb">
                                 <li>
@@ -12,7 +12,7 @@
                                     <i class="fa fa-briefcase"></i>  Programs
                                 </li>
                                 <li class="active">
-                                    <i class="fa fa-list-alt"></i>  View Programs
+                                    <i class="fa fa-list-alt"></i>  <?php echo $header;?>
                                 </li>
                             </ol>
                         </div>
@@ -31,7 +31,7 @@
             <tr>
                 <th>Program</th>
                 <th>Year</th>
-                <th>Option</th>
+                <th width="10%">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -39,7 +39,7 @@
                 <?php foreach($program_list as $row): ?>
                 <td><?php echo $row['programName'];?></td>
                 <td><?php echo $row['effective_year'];?></td>
-                <td>Row 1 Data 2</td>
+                <td></td>
             </tr>
                 <?php endforeach; ?>        
                 <?php endif; ?>

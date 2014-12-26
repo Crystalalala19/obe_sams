@@ -8,26 +8,27 @@ class Admin extends CI_Controller {
     }
 
     public function index(){
-        $data['title'] = "Admin - Dashboard";
+        $data['title'] = 'Admin - Dashboard';
 
-        $this->load->view("admin/header", $data);
-        $this->load->view("admin/index");
-        $this->load->view("admin/footer");
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/index');
+        $this->load->view('admin/footer');
     }
 
-    public function create_program(){
-        $data['title'] = "Admin - Add new Program";
+    public function add_program(){
+        $data['title'] = 'Admin - Add new Program';
+        $data['header'] = 'Add new Program';
 
-        $this->load->library("form_validation");
+        $this->load->library('form_validation');
 
-        $this->form_validation->set_rules("program", "Program Name", "required|trim");
-        $this->form_validation->set_rules("effective_year", "Effective Year", "required|trim");
+        $this->form_validation->set_rules('program', 'Program Name', 'required|trim');
+        $this->form_validation->set_rules('effective_year', "Effective Year", 'required|trim');
         // $this->form_validation->set_rules("po_code[]", "PO Code", "required|trim");
         
         if($this->form_validation->run() == FALSE){
-            $this->load->view("admin/header", $data);
-            $this->load->view("admin/create_program", $data);
-            $this->load->view("admin/footer");
+            $this->load->view('admin/header', $data);
+            $this->load->view('admin/add_program', $data);
+            $this->load->view('admin/footer');
         }
         else{
             $fields = array();
@@ -63,15 +64,16 @@ class Admin extends CI_Controller {
                 $data['message'] = $result['message'];
             }
             
-            $this->load->view("admin/header", $data);
-            $this->load->view("admin/create_program", $data);
-            $this->load->view("admin/footer");
+            $this->load->view('admin/header', $data);
+            $this->load->view('admin/add_program', $data);
+            $this->load->view('admin/footer');
         }  
     }
 
     public function view_programs(){
         $table = 'program';
         $data['title'] = 'Admin - View Programs';
+        $data['header'] = 'View Programs';
         $data['message'] = '';
         $data['program_list'] = $this->model_admin->check_rows($table);
 
@@ -92,7 +94,7 @@ class Admin extends CI_Controller {
             $this->load->view('admin/footer');
         }
         else{
-            $data['title'] = "Admin - Add PO";
+            $data['title'] = 'Admin - Add PO';
             $data['message'] = '
             <div class="alert alert-success alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -110,7 +112,8 @@ class Admin extends CI_Controller {
         $this->load->library('csvimport');
         $this->load->library('form_validation');
        
-        $data['title'] = 'Admin - Upload Students List';
+        $data['title'] = 'Admin - Upload Student List';
+        $data['header'] = 'Upload Student List';
 
         $table = 'program';
         
@@ -121,7 +124,7 @@ class Admin extends CI_Controller {
         $config['max_size'] = '1000';
         $this->load->library('upload', $config);
 
-        $this->form_validation->set_rules("program", "Program List", "required|trim");
+        $this->form_validation->set_rules('program', 'Program List', 'required|trim');
 
         if($this->form_validation->run() == FALSE) {
             $data['message'] = '';
@@ -179,14 +182,15 @@ class Admin extends CI_Controller {
         }
     }
 
-    public function students_list(){
+    public function view_students(){
         $table = 'student';
         $data['title'] = 'Admin - Students List';
+        $data['header'] = 'View Student List';
         $data['message'] = '';
         $data['student_list'] = $this->model_admin->check_rows($table);
 
         $this->load->view('admin/header', $data);
-        $this->load->view('admin/view_list', $data);
+        $this->load->view('admin/view_students', $data);
         $this->load->view('admin/footer');
     }
 }
