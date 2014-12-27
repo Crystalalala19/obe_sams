@@ -83,8 +83,21 @@ class Model_admin extends CI_Model {
     function if_id_exists($data){
         $this->db->select('student_id');
         $query = $this->db->get_where('student', array('student_id' => $data));
-        if ($query->num_rows() > 0)
+        if($query->num_rows() > 0) {
             return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    function check_rowID($table, $id){
+        $query = $this->db->get_where($table, array('ID' => $id));
+        if($query->num_rows() > 0)
+            return $query->row_array();
+        else {
+            return false;
+        }
     }
 }
 ?>

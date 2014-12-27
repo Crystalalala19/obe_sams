@@ -82,32 +82,6 @@ class Admin extends CI_Controller {
         $this->load->view('admin/footer');
     }
 
-    public function add_po(){
-        $this->load->library('form_validation');
-
-        if($this->form_validation->run() == FALSE){
-            $data['title'] = 'Admin - Add PO';
-            $data['message'] = '';
-
-            $this->load->view('admin/header', $data);
-            $this->load->view('admin/add_po', $data);
-            $this->load->view('admin/footer');
-        }
-        else{
-            $data['title'] = 'Admin - Add PO';
-            $data['message'] = '
-            <div class="alert alert-success alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
-                <strong>Success!</strong>
-            </div>';
-
-            $this->load->view('admin/header', $data);
-            $this->load->view('admin/add_po', $data);
-            $this->load->view('admin/footer');
-        }
-    }
-
     public function upload_students(){
         $this->load->library('csvimport');
         $this->load->library('form_validation');
@@ -182,15 +156,55 @@ class Admin extends CI_Controller {
         }
     }
 
-    public function view_students(){
+    public function view_students($url = ''){
+        //URL becomes: admin/view_students/(any url name) because of the parameter, can add multiple parameters.
+        if(empty($url)) {
+            $table = 'student';
+            $data['title'] = 'Admin - Students List';
+            $data['header'] = 'View Student List';
+            $data['message'] = '';
+
+            if($this->model_admin->check_rows($table) == TRUE){
+                $data['student_list'] = $this->model_admin->check_rows($table);
+            }
+            else{
+                $data['message'] = 'There are no currently students added.';
+            }
+
+            $this->load->view('admin/header', $data);
+            $this->load->view('admin/view_students', $data);
+            $this->load->view('admin/footer');
+        }
+        //If ni direct url access siya sa admin/view_students/edit/ , i redirect kay useless.
+        //If mo direct access or type any non-existing url, ma retain ra ang theme pero maguba ang DataTables. No idea why.
+        //So mao ako gi ing ani nalang.
+        else {
+            redirect('admin/view_students');
+        }
+    }
+
+    //See config/routes.php, gi route nako for view_students/edit/(number value)
+    public function edit_student(){
         $table = 'student';
-        $data['title'] = 'Admin - Students List';
-        $data['header'] = 'View Student List';
+        $data['title'] = 'Admin - Edit Student Information';
+        $data['header'] = 'Edit Student Information';
         $data['message'] = '';
-        $data['student_list'] = $this->model_admin->check_rows($table);
+
+        $id = $this->uri->segment(4);
+
+        if(!is_numeric($id)) {
+            $data['message'] = 'Enter a valid ID number.';
+        }
+        elseif(!$this->model_admin->check_rowID($table, $id)) {
+            $data['message'] = 'ID number does not exists.';
+        }
+        else {
+            //Student's Information
+            $data['row'] = $this->model_admin->check_rowID($table, $id);
+        }
 
         $this->load->view('admin/header', $data);
-        $this->load->view('admin/view_students', $data);
+        $this->load->view('admin/edit_student', $data);
         $this->load->view('admin/footer');
     }
 }

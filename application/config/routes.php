@@ -38,6 +38,8 @@
 |
 */
 
+$route['admin/view_students/edit/(:num)'] = "admin/edit_student";
+
 $route['default_controller'] = "site";
 $route['404_override'] = '';
 
