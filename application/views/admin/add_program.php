@@ -29,58 +29,58 @@
     '</div>');
     echo form_open('admin/add_program');
 ?>
-    <div class="form-group col-md-6">
-        <label for="program_inp">Program:</label>
-        <select class="form-control input-sm" id="program_inp" name="program">
-            <option selected="selected" value="">Select program: </option>
-            <option value="BSCS">BSCS</option>
-            <option value="BSIT">BSIT</option>
-            <option value="BSICT">BSICT</option>
-        </select>
-    </div>
-    <div class="form-group col-md-6">
-        <label for="effective_year">Effective Year:</label>
-        <?php
-            function yearDropdown($startYear, $endYear, $id="year"){
-                //start the select tag
-                echo "<select class='form-control input-sm' id=".$id." name=".$id.">n";
-                    echo '<option selected="selected" value="">Select year: </option>';  
-                    //echo each year as an option    
-                    for ($i=$startYear;$i<=$endYear;$i++){
-                    echo "<option value=".$i.">".$i."</option>n";    
-                    }
-                //close the select tag
-                echo "</select>";
-            }
-            yearDropdown(2000, 2100, "effective_year");
-        ?>
-    </div>
+        <div class="form-group col-md-6">
+            <label for="program_inp">Program:</label>
+            <select class="form-control input-sm" id="program_inp" name="program">
+                <option selected="selected" value="">Select program: </option>
+                <option value="BSCS">BSCS</option>
+                <option value="BSIT">BSIT</option>
+                <option value="BSICT">BSICT</option>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="effective_year">Effective Year:</label>
+            <?php
+                function yearDropdown($startYear, $endYear, $id="year"){
+                    //start the select tag
+                    echo "<select class='form-control input-sm' id=".$id." name=".$id.">";
+                        echo '<option selected="selected" value="">Select year: </option>';  
+                        //echo each year as an option    
+                        for ($i=$startYear;$i<=$endYear;$i++){
+                        echo "<option value=".$i.">".$i."</option>n";    
+                        }
+                    //close the select tag
+                    echo "</select>";
+                }
+                yearDropdown(2000, 2100, "effective_year");
+            ?>
+        </div>
 
-    <div class="form-group col-md-12">
-        <table class="table table-striped table-bordered dataTable no-footer text-center" id="po-table">
-            <tbody>
-                <tr>
-                    <th width="1%"></th>
-                    <th width="10%">PO Code</th>
-                    <th width="30%">PO Attribute</th>
-                    <th width="59%">PO Description</th>
-                </tr>
-                <tr>
-                    <td><p style="margin:4px 2px;">1.</p></td>
-                    <td><input type="text" class="form-control input-sm" name="po_code[]"></td>
-                    <td><input type="text" class="form-control input-sm" name="po_attrib[]"></td>
-                    <td><textarea class="form-control input-sm" name="po_desc[]" rows="3"></textarea></td>
-                </tr>
-            </tbody>
-        </table>
-        <button type="button" class="btn btn-default btn-xs" onclick="addRow()">Add Row</button>
-        <button type="button" class="btn btn-default btn-xs" onclick="removeRow()">Remove Row</button>
-    </div>
+        <div class="form-group col-md-12">
+            <table class="table table-striped table-bordered dataTable no-footer text-center" id="po-table">
+                <tbody>
+                    <tr>
+                        <th width="1%"></th>
+                        <th width="10%">PO Code</th>
+                        <th width="30%">PO Attribute</th>
+                        <th width="59%">PO Description</th>
+                    </tr>
+                    <tr>
+                        <td><p style="margin:4px 2px;">1.</p></td>
+                        <td><input type="text" class="form-control input-sm" name="po_code[]"></td>
+                        <td><input type="text" class="form-control input-sm" name="po_attrib[]"></td>
+                        <td><textarea class="form-control input-sm" name="po_desc[]" rows="3"></textarea></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-default btn-xs" onclick="addRow()">Add Row</button>
+            <button type="button" class="btn btn-default btn-xs" onclick="removeRow()">Remove Row</button>
+        </div>
 
-    <div class="form-group">
-        <input type="submit" class="btn btn-primary" name="submit" value="Submit">
-    </div>
-</form>
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" name="submit" value="Submit">
+        </div>
+    </form>
 
 <script>
     var d = document.getElementById("program_dropdown");

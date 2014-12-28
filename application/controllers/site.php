@@ -6,7 +6,6 @@ class Site extends CI_Controller {
    {
       parent::__construct();
       $this->load->model('model_users');
-      $this->load->model('model_role');
       // Your own constructor code
    }
 
@@ -51,11 +50,10 @@ class Site extends CI_Controller {
 
       if ($this->form_validation->run()){
          //$this->load->model('model_users');
-         $this->load->model('model_role');
          $data = array(
             'login_id' => $this->input->post('idnum'),
             'is_logged_in' => 1,
-            'role' => $this->model_role->scalar('user_account','role')
+            'role' => $this->model_users->scalar('user_account','role')
          );
 
          $this->session->set_userdata($data);
@@ -107,6 +105,6 @@ class Site extends CI_Controller {
 
    public function logout(){
       $this->session->sess_destroy();
-      redirect('site');
+      redirect(base_url());
    }
 }

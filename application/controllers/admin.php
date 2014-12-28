@@ -70,16 +70,106 @@ class Admin extends CI_Controller {
         }  
     }
 
-    public function view_programs(){
+    //See view_students for explanation
+    public function view_programs($url = '') {
+        if(empty($url)) {
+            $table = 'program';
+            $data['title'] = 'Admin - View Programs';
+            $data['header'] = 'View Programs';
+            $data['message'] = '';
+            $data['program_list'] = $this->model_admin->check_rows($table);
+
+            $this->load->view('admin/header', $data);
+            $this->load->view('admin/view_programs', $data);
+            $this->load->view('admin/footer');
+        }
+        else {
+            redirect('admin/view_programs');
+        }
+    }
+
+    public function edit_program() {
         $table = 'program';
-        $data['title'] = 'Admin - View Programs';
-        $data['header'] = 'View Programs';
+        $data['title'] = 'Admin - Edit Program';
+        $data['header'] = 'Edit Program';
         $data['message'] = '';
-        $data['program_list'] = $this->model_admin->check_rows($table);
+
+        $id = $this->uri->segment(4);
+
+        if(!is_numeric($id)) {
+            $data['message'] = 'Invalid supplied data.';
+        }
+        elseif(!$this->model_admin->check_rowID($table, $id)) {
+            $data['message'] = 'Program does not exists.';
+        }
+        else {
+            //Student's Information
+            $data['row'] = $this->model_admin->check_rowID($table, $id);
+        }
 
         $this->load->view('admin/header', $data);
-        $this->load->view('admin/view_programs', $data);
+        $this->load->view('admin/edit_program', $data);
         $this->load->view('admin/footer');
+    }
+
+    public function add_teacher() {
+        $data['title'] = 'Admin - Add new Teacher';
+        $data['header'] = 'Add new Teacher';
+        
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('teacher_fname', 'First Name', 'required|trim|max_length[20]|alpha');
+        $this->form_validation->set_rules('teacher_mname', 'First Name', 'required|trim|max_length[20]|alpha');
+        $this->form_validation->set_rules('teacher_lname', 'First Name', 'required|trim|max_length[20]|alpha');
+        $this->form_validation->set_rules('login_id', 'ID number', 'required|trim|alpha_numeric|min_length[10]|max_length[15]|is_unique[user_account.login_id]');
+
+        $this->form_validation->set_message('is_unique', '%s already exists.');
+
+        if($this->form_validation->run() == FALSE) {
+            $data['message'] = '';
+            $this->load->view('admin/header', $data);
+            $this->load->view('admin/add_teacher', $data);
+            $this->load->view('admin/footer');
+        }
+        else {
+            $teacher_table = 'teacher';
+            $teacher_data = array(
+                'teacher_id' => $this->input->post('login_id'),
+                'fname' => $this->input->post('teacher_fname'),
+                'mname' => $this->input->post('teacher_mname'),
+                'lname' => $this->input->post('teacher_lname')
+            );
+
+            $account_table = 'user_account';
+            $account_data = array(
+                'login_id' => $this->input->post('login_id'),
+                'role' => 'teacher',
+                'password' => md5($this->input->post('login_id'))
+            );
+
+            $teacher_result = $this->model_admin->insert_teacher($teacher_table, $teacher_data);
+            $account_result = $this->model_admin->insert_teacher($account_table, $account_data);
+
+            if($teacher_result['is_success'] == FALSE) {
+                $data['message'] = $teacher_result['message'];
+            }
+            elseif($account_result['is_success'] == FALSE) {
+                $data['message'] = $account_result['message'];
+            }
+            else {
+                if($teacher_result['is_success'] == TRUE) {
+                    $this->session->set_flashdata('message', $teacher_result['message']);
+                }
+                else {
+                    $this->session->set_flashdata('message', $account_result['message']);
+                }
+                redirect(current_url());
+            }
+
+            $this->load->view('admin/header', $data);
+            $this->load->view('admin/add_teacher', $data);
+            $this->load->view('admin/footer');
+        }
     }
 
     public function upload_students(){

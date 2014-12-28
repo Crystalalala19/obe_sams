@@ -33,8 +33,7 @@
     <link href="//cdn.jsdelivr.net/prettyphoto/3.1.5/css/prettyPhoto.css" rel="stylesheet"> 
     -->
 
-    <!--  Google Font Style -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    
     <!--  Custom Style -->
     <link href="<?php echo base_url();?>assets/css/style.css" rel="stylesheet" />
 
@@ -45,10 +44,10 @@
     <![endif]-->
 </head>
 <body>
-    <div id="pre-div">
+    <!-- <div id="pre-div">
         <div id="loader">
         </div>
-    </div>
+    </div> -->
     <!--/. PRELOADER END -->
     <div class="navbar navbar-default navbar-fixed-top move-me ">
         <div class="container">

@@ -46,17 +46,15 @@ class Model_admin extends CI_Model {
 
     function insert_program($data) {
         $query = $this->db->insert('program', $data);
-        $outcome = $this->check_query($query);
 
-        return $outcome;
+        return $this->check_query($query);
     }
 
     function insert_po($data){
         $this->db->get_where('po', array('programID' => $this->get_lastId));
         $query = $this->db->insert_batch('po', $data);
-        $outcome = $this->check_query($query);
-
-        return $outcome;
+    
+        return $this->check_query($query);
     }
 
     function check_rows($table) {
@@ -75,9 +73,8 @@ class Model_admin extends CI_Model {
 
     function insert_csv($data) {
         $query = $this->db->insert('student', $data);
-        $outcome = $this->check_query($query);
 
-        return $outcome;
+        return $this->check_query($query);
     }
 
     function if_id_exists($data){
@@ -98,6 +95,12 @@ class Model_admin extends CI_Model {
         else {
             return false;
         }
+    }
+
+    function insert_teacher($table, $data) {
+        $query = $this->db->insert($table, $data);
+
+        return $this->check_query($query);
     }
 }
 ?>

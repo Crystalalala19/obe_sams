@@ -12,7 +12,7 @@
                                     <i class="fa fa-users"></i>  Students
                                 </li>
                                 <li class="active">
-                                    <i class="fa fa-plus-square"></i>  <?php echo $header;?>
+                                    <i class="fa fa-list-alt"></i>  <?php echo $header;?>
                                 </li>
                             </ol>
                         </div>
@@ -36,19 +36,19 @@
             </tr>
         </thead>
         <tbody>
-            <tr>            
-                <?php foreach($student_list as $row): ?>
-                <td><?php echo $row['student_id'];?></td>
-                <td><?php echo $row['fname'];?></td>
-                <td><?php echo $row['lname'];?></td>
-                <td>
-                    <div class="btn-group inline pull-left">
-                    <a type="button" class="btn btn-primary btn-sm fa fa-pencil" href="<?php echo base_url();?>admin/view_students/edit/<?php echo $row['ID'];?>"></a>
-                    <a type="button" class="btn btn-danger btn-sm fa fa-trash-o" href="javascript:delpost('2','Cafe Maru')"></a>
-                    </div>
-                </td>
-            </tr>
-                <?php endforeach; ?>        
+            <?php foreach($student_list as $row): ?>
+                <tr>            
+                    <td><?php echo $row['student_id'];?></td>
+                    <td><?php echo $row['fname'];?></td>
+                    <td><?php echo $row['lname'];?></td>
+                    <td>
+                        <div class="btn-group inline pull-left">
+                            <a type="button" class="btn btn-primary btn-sm fa fa-pencil" href="<?php echo base_url();?>admin/view_students/edit/<?php echo $row['ID'];?>"></a>
+                            <a type="button" class="btn btn-danger btn-sm fa fa-trash-o" href="javascript:delpost('2','Cafe Maru')"></a>
+                        </div>
+                    </td>
+                </tr>
+            <?php endforeach; ?>        
         </tbody>
     </table>
     <?php endif; ?>

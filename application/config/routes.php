@@ -38,6 +38,7 @@
 |
 */
 
+$route['admin/view_programs/edit/(:num)'] = "admin/edit_program";
 $route['admin/view_students/edit/(:num)'] = "admin/edit_student";
 
 $route['default_controller'] = "site";

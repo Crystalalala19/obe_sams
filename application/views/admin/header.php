@@ -208,6 +208,18 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li id="teacher_dropdown" class="">
+                        <a href="javascript:;" data-toggle="collapse" data-target="#teacher"><i class="fa fa-university"></i> Teachers <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="teacher" class="collapse">
+                            <li>
+                                <a href="<?php echo base_url();?>admin/add_teacher"><i class="fa fa-plus-square"></i> Add new Teacher</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url();?>admin/view_students"><i class="fa fa-list-alt"></i> View Teacher List</a>
+                            </li>
+                        </ul>
+                    </li>
                     
                     <li id="student_dropdown" class="">
                         <a href="javascript:;" data-toggle="collapse" data-target="#student"><i class="fa fa-users"></i> Students <i class="fa fa-fw fa-caret-down"></i></a>
