@@ -12,6 +12,7 @@ class Admin extends CI_Controller {
 
         $this->load->view('admin/header', $data);
         $this->load->view('admin/index');
+        $this->encrypt->decode('password');
         $this->load->view('admin/footer');
     }
 
@@ -26,9 +27,7 @@ class Admin extends CI_Controller {
         // $this->form_validation->set_rules("po_code[]", "PO Code", "required|trim");
         
         if($this->form_validation->run() == FALSE){
-            $this->load->view('admin/header', $data);
-            $this->load->view('admin/add_program', $data);
-            $this->load->view('admin/footer');
+            $data['message'] = '';
         }
         else{
             $fields = array();
@@ -41,55 +40,80 @@ class Admin extends CI_Controller {
                 'programName' => $this->input->post('program'),
                 'effective_year' => $this->input->post('effective_year')
             );
-
-            $result = $this->model_admin->insert_program($program);
+            $this->db->trans_start();
+            $program_result = $this->model_admin->insert_program($program);
             $id = $this->model_admin->get_lastId();
 
-            foreach($rows as $key => $val){
-                $fields[] = array(
-                    'poCode' => $val,
-                    'attribute' => $attribs[$key],
-                    'description' => $descs[$key],
-                    'programID' => $id
-                );
-            }
+            if($program_result['is_success'] == FALSE) {
+                $message = '<strong>Error: </strong>'.  $program_result['db_error'];
+                $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
 
-            $this->model_admin->insert_po($fields);
+                $data['message'] = $message;
+            }
+            else {
+                foreach($rows as $key => $val){
+                    $fields[] = array(
+                        'poCode' => $val,
+                        'attribute' => $attribs[$key],
+                        'description' => $descs[$key],
+                        'programID' => $id
+                    );
+                }
+                $po_result = $this->model_admin->insert_po($fields);
 
-            if($result['is_success'] == TRUE){
-                $this->session->set_flashdata('message', $result['message']);
-                redirect(current_url());
+                if($po_result['is_success'] == FALSE) {
+                    $message = '<strong>Error: </strong>'.  $po_result['db_error'];
+                    $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
+
+                    $data['message'] = $message;
+                }
+                if($this->db->trans_status() === FALSE) {
+                   $this->db->trans_rollback();
+                }
+                else{
+                    $this->db->trans_complete();
+
+                    $message = '<strong>Success!</strong> Program added.';
+                    $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
+
+                    $this->session->set_flashdata('message', $message);
+                    redirect(current_url());
+                }
             }
-            else{
-                $data['message'] = $result['message'];
-            }
-            
-            $this->load->view('admin/header', $data);
-            $this->load->view('admin/add_program', $data);
-            $this->load->view('admin/footer');
-        }  
+        }
+
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/add_program', $data);
+        $this->load->view('admin/footer'); 
     }
 
     //See view_students for explanation
     public function view_programs($url = '') {
         if(empty($url)) {
-            $table = 'program';
             $data['title'] = 'Admin - View Programs';
             $data['header'] = 'View Programs';
-            $data['message'] = '';
-            $data['program_list'] = $this->model_admin->check_rows($table);
+            $data['program_list'] = $this->model_admin->check_rows('program');
+
+            if($data['program_list'] == FALSE) {
+                $data['message'] = 'No programs found.';
+            }
+            else {
+                $data['message'] = '';
+            }
 
             $this->load->view('admin/header', $data);
             $this->load->view('admin/view_programs', $data);
             $this->load->view('admin/footer');
         }
+        elseif($url == 'edit') {
+            $this->edit_program();
+        }
         else {
-            redirect('admin/view_programs');
+            show_404();
         }
     }
 
     public function edit_program() {
-        $table = 'program';
         $data['title'] = 'Admin - Edit Program';
         $data['header'] = 'Edit Program';
         $data['message'] = '';
@@ -99,12 +123,12 @@ class Admin extends CI_Controller {
         if(!is_numeric($id)) {
             $data['message'] = 'Invalid supplied data.';
         }
-        elseif(!$this->model_admin->check_rowID($table, $id)) {
+        elseif(!$this->model_admin->check_rowID('program', $id)) {
             $data['message'] = 'Program does not exists.';
         }
         else {
-            //Student's Information
-            $data['row'] = $this->model_admin->check_rowID($table, $id);
+            //Program's Information
+            $data['row'] = $this->model_admin->check_rowID('program', $id);
         }
 
         $this->load->view('admin/header', $data);
@@ -112,24 +136,30 @@ class Admin extends CI_Controller {
         $this->load->view('admin/footer');
     }
 
+    function alpha_dash_space($str_in) {
+        if (! preg_match("/^([-a-z-9 ])+$/i", $str_in)) {
+            $this->form_validation->set_message('alpha_dash_space', 'The %s field may only contain alpha characters, spaces, and dashes.');
+            return FALSE;
+        } 
+        else {
+            return TRUE;
+        }
+    } 
+
     public function add_teacher() {
         $data['title'] = 'Admin - Add new Teacher';
         $data['header'] = 'Add new Teacher';
         
+        $this->load->library('encrypt');
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('teacher_fname', 'First Name', 'required|trim|max_length[20]|alpha');
-        $this->form_validation->set_rules('teacher_mname', 'First Name', 'required|trim|max_length[20]|alpha');
-        $this->form_validation->set_rules('teacher_lname', 'First Name', 'required|trim|max_length[20]|alpha');
-        $this->form_validation->set_rules('login_id', 'ID number', 'required|trim|alpha_numeric|min_length[10]|max_length[15]|is_unique[user_account.login_id]');
-
-        $this->form_validation->set_message('is_unique', '%s already exists.');
+        $this->form_validation->set_rules('teacher_fname', 'First Name', 'required|trim|max_length[20]|callback_alpha_dash_space');
+        $this->form_validation->set_rules('teacher_mname', 'Middle Name', 'required|trim|max_length[20]|callback_alpha_dash_space');
+        $this->form_validation->set_rules('teacher_lname', 'Last Name', 'required|trim|max_length[20]|callback_alpha_dash_space');
+        $this->form_validation->set_rules('login_id', 'ID login', 'required|trim|alpha_numeric|min_length[10]|max_length[15]|is_unique[teacher.teacher_id]');
 
         if($this->form_validation->run() == FALSE) {
             $data['message'] = '';
-            $this->load->view('admin/header', $data);
-            $this->load->view('admin/add_teacher', $data);
-            $this->load->view('admin/footer');
         }
         else {
             $teacher_table = 'teacher';
@@ -137,39 +167,99 @@ class Admin extends CI_Controller {
                 'teacher_id' => $this->input->post('login_id'),
                 'fname' => $this->input->post('teacher_fname'),
                 'mname' => $this->input->post('teacher_mname'),
-                'lname' => $this->input->post('teacher_lname')
-            );
-
-            $account_table = 'user_account';
-            $account_data = array(
-                'login_id' => $this->input->post('login_id'),
+                'lname' => $this->input->post('teacher_lname'),
                 'role' => 'teacher',
-                'password' => md5($this->input->post('login_id'))
+                'password' => $this->encrypt->encode($this->input->post('teacher_id'))
             );
 
             $teacher_result = $this->model_admin->insert_teacher($teacher_table, $teacher_data);
-            $account_result = $this->model_admin->insert_teacher($account_table, $account_data);
 
             if($teacher_result['is_success'] == FALSE) {
-                $data['message'] = $teacher_result['message'];
-            }
-            elseif($account_result['is_success'] == FALSE) {
-                $data['message'] = $account_result['message'];
+                $message = '<strong>Error: </strong>'.  $teacher_result['db_error'];
+                $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
+
+                $data['message'] = $message; 
             }
             else {
-                if($teacher_result['is_success'] == TRUE) {
-                    $this->session->set_flashdata('message', $teacher_result['message']);
-                }
-                else {
-                    $this->session->set_flashdata('message', $account_result['message']);
-                }
+                $message = '<strong>Success!</strong> Teacher added.';
+                $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
+
+                $this->session->set_flashdata('message', $message);
                 redirect(current_url());
             }
-
-            $this->load->view('admin/header', $data);
-            $this->load->view('admin/add_teacher', $data);
-            $this->load->view('admin/footer');
         }
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/add_teacher', $data);
+        $this->load->view('admin/footer');
+    }
+
+    public function view_teachers($url = 'edit') {
+        $data['title'] = 'Admin - View Teacher List';
+        $data['header'] = 'View Teacher List';
+        $data['teacher_list'] = $this->model_admin->get_teachers();
+        
+        if($data['teacher_list'] == FALSE) {
+            $data['message'] = 'No teachers found in record.';
+        } else {
+            $data['message'] = '';
+        }
+
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/view_teachers', $data);
+        $this->load->view('admin/footer');
+    }
+
+    public function edit_teacher(){
+        $data['title'] = 'Admin - Edit Teacher Information';
+        $data['header'] = 'Edit Teacher Information';
+        $data['message'] = '';
+
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('teacher_id', 'Teacher ID', 'required|trim|max_length[11]|alpha_numeric');
+        $this->form_validation->set_rules('id', 'id', 'required|trim|numeric');
+        $this->form_validation->set_rules('fname', 'First Name', 'required|trim|max_length[20]|callback_alpha_dash_space');
+        $this->form_validation->set_rules('mname', 'Middle Name', 'required|trim|max_length[20]|callback_alpha_dash_space');
+        $this->form_validation->set_rules('lname', 'Last Name', 'required|trim|max_length[20]|callback_alpha_dash_space');
+
+        if($this->form_validation->run() == FALSE) {
+            $id = $this->uri->segment(4);
+            if(!$this->model_admin->check_rowID('teacher', $id)) {
+                $message = 'ID number does not exists.';
+                $data['message'] = $this->model_admin->notify_message('alert-info', 'glyphicon-info-sign', $message);
+            }
+            else {
+                $data['row'] = $this->model_admin->check_rowID('teacher', $id);
+            }
+        }
+        else {
+            $update = array(
+                'teacher_id' => $this->input->post('teacher_id'),
+                'fname' => $this->input->post('fname'),
+                'mname' => $this->input->post('mname'),
+                'lname' => $this->input->post('lname')
+            );
+
+            $result = $this->model_admin->update_teacher($this->input->post('id'), $update);
+
+            if($result['is_success'] == FALSE) {
+                $message = '<strong>Error: </strong>'.  $result['db_error'];
+                $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
+
+                $data['message'] = $message;
+            }
+            else {
+                $message = '<strong>Success!</strong> Teacher updated.';
+                $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
+
+                $this->session->set_flashdata('message2', $message);
+                redirect(current_url());
+            }
+        }
+
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/edit_teacher', $data);
+        $this->load->view('admin/footer');
     }
 
     public function upload_students(){
@@ -178,10 +268,8 @@ class Admin extends CI_Controller {
        
         $data['title'] = 'Admin - Upload Student List';
         $data['header'] = 'Upload Student List';
-
-        $table = 'program';
         
-        $data['programs'] = $this->model_admin->check_rows($table);
+        $data['programs'] = $this->model_admin->check_rows('program');
 
         $config['upload_path'] = './uploads/';
         $config['allowed_types'] = 'csv';
@@ -192,9 +280,7 @@ class Admin extends CI_Controller {
 
         if($this->form_validation->run() == FALSE) {
             $data['message'] = '';
-            $this->load->view('admin/header', $data);
-            $this->load->view('admin/upload_students', $data);
-            $this->load->view('admin/footer');
+
         }
         elseif(!$this->upload->do_upload()){
             $data['message'] = $this->upload->display_errors('
@@ -203,10 +289,6 @@ class Admin extends CI_Controller {
                 <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                 <span class="sr-only">Error:</span>',
             '</div>');;
-
-            $this->load->view('admin/header', $data);
-            $this->load->view('admin/upload_students', $data);
-            $this->load->view('admin/footer');
         }
         else{
             $file_data = $this->upload->data();
@@ -230,67 +312,96 @@ class Admin extends CI_Controller {
                 }
 
                 if($result['is_success'] == TRUE) {
-                    $this->session->set_flashdata('message', $result['message']);
+                    $message = '<strong>Success!</strong> Teacher added.';
+                    $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
+
+                    $this->session->set_flashdata('message', $message);
                     redirect(current_url());
                 }
                 else {
-                    $data['message'] = $result['message'];
+                    $message = '<strong>Error: </strong>'.  $account_result['db_error'];
+                    $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
+
+                    $data['message'] = $message;
                 }
             }
             else {
-                $data['message'] = 'Error occured';
+                $data['message'] = 'File path error occured';
             }            
-                $this->load->view('admin/header', $data);
-                $this->load->view('admin/upload_students', $data);
-                $this->load->view('admin/footer');
         }
+
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/upload_students', $data);
+        $this->load->view('admin/footer');
     }
 
-    public function view_students($url = ''){
-        //URL becomes: admin/view_students/(any url name) because of the parameter, can add multiple parameters.
-        if(empty($url)) {
-            $table = 'student';
-            $data['title'] = 'Admin - Students List';
-            $data['header'] = 'View Student List';
-            $data['message'] = '';
+    public function view_students($url = 'edit'){
+        $data['title'] = 'Admin - Students List';
+        $data['header'] = 'View Student List';
+        $data['student_list'] = $this->model_admin->check_rows('student');
 
-            if($this->model_admin->check_rows($table) == TRUE){
-                $data['student_list'] = $this->model_admin->check_rows($table);
-            }
-            else{
-                $data['message'] = 'There are no currently students added.';
-            }
-
-            $this->load->view('admin/header', $data);
-            $this->load->view('admin/view_students', $data);
-            $this->load->view('admin/footer');
+        if($data['student_list'] == FALSE) {
+            $data['message'] = 'There are no currently students added.';
         }
-        //If ni direct url access siya sa admin/view_students/edit/ , i redirect kay useless.
-        //If mo direct access or type any non-existing url, ma retain ra ang theme pero maguba ang DataTables. No idea why.
-        //So mao ako gi ing ani nalang.
         else {
-            redirect('admin/view_students');
+            $data['message'] = '';
         }
+
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/view_students', $data);
+        $this->load->view('admin/footer');
     }
 
-    //See config/routes.php, gi route nako for view_students/edit/(number value)
-    public function edit_student(){
-        $table = 'student';
+    public function edit_student() {
         $data['title'] = 'Admin - Edit Student Information';
         $data['header'] = 'Edit Student Information';
         $data['message'] = '';
+        
+        $this->load->library('form_validation');
 
-        $id = $this->uri->segment(4);
+        $this->form_validation->set_rules('student_id', 'Student ID', 'required|trim|max_length[9]|numeric|');
+        $this->form_validation->set_rules('id', 'id', 'required|trim|numeric');
+        $this->form_validation->set_rules('fname', 'First Name', 'required|trim|max_length[20]|callback_alpha_dash_space');
+        $this->form_validation->set_rules('mname', 'Middle Name', 'required|trim|max_length[20]|callback_alpha_dash_space');
+        $this->form_validation->set_rules('lname', 'Last Name', 'required|trim|max_length[20]|callback_alpha_dash_space');
 
-        if(!is_numeric($id)) {
-            $data['message'] = 'Enter a valid ID number.';
-        }
-        elseif(!$this->model_admin->check_rowID($table, $id)) {
-            $data['message'] = 'ID number does not exists.';
+        if($this->form_validation->run() == FALSE) {
+            $id = $this->uri->segment(4);
+
+            if(!$this->model_admin->check_rowID('student', $id)) {
+                $message = 'ID number does not exists.';
+                $data['message'] = $this->model_admin->notify_message('alert-info', 'glyphicon-info-sign', $message);
+            }
+            else {
+                //Student's Information
+                $data['row'] = $this->model_admin->check_rowID('student', $id);
+            }
         }
         else {
-            //Student's Information
-            $data['row'] = $this->model_admin->check_rowID($table, $id);
+            $id = $this->input->post('id');
+
+            $update = array(
+                'student_id' => $this->input->post('student_id'),
+                'fname' => $this->input->post('fname'),
+                'mname' => $this->input->post('mname'),
+                'lname' => $this->input->post('lname')
+            );
+
+            $result = $this->model_admin->update_student($id, $update);
+
+            if($result['is_success'] == FALSE) {
+                $message = '<strong>Error: </strong>'.  $result['db_error'];
+                $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
+
+                $data['message'] = $message;
+            }
+            else {
+                $message = '<strong>Success!</strong> Student updated.';
+                $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
+
+                $this->session->set_flashdata('message2', $message);
+                redirect(current_url());
+            }
         }
 
         $this->load->view('admin/header', $data);

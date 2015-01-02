@@ -144,11 +144,12 @@ background-size: cover;
         color:#CAE4F1;
     }
     .div-trans {
+position: relative;
 padding-top: 5px;
+top: 200px;
 background-color: rgba(0, 0, 0, 0.5);
-min-height: 239px;
-margin-top: 150px;
 color: black;
+overflow: auto;
 -webkit-border-radius: 5px;
 -moz-border-radius: 5px;
 border-radius: 5px;
@@ -288,9 +289,8 @@ color:#fff;
 }
 .portfolio-item .overlay .preview {
   position: relative;
-  top: 50%;
+  top: -50px;
   display: inline-block;
-  margin-top: -20px;
 }
 .portfolio-item:hover .overlay {
   opacity: 1;

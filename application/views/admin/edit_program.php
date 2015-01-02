@@ -12,7 +12,7 @@
                                     <i class="fa fa-briefcase"></i>  Programs
                                 </li>
                                 <li class="active">
-                                    <i class="fa fa-list-alt"></i>  <?php echo $header;?>
+                                    <i class="fa fa-pencil-square-o"></i>  <?php echo $header;?>
                                 </li>
                             </ol>
                         </div>
@@ -57,3 +57,8 @@
         ?>
     </div>
     <?php endif;?>
+
+    <script type="text/javascript" language="javascript">
+        var d = document.getElementById("program_dropdown");
+        d.className = d.className + " active";
+    </script>

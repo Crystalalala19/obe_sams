@@ -12,47 +12,46 @@
                                     <i class="fa fa-briefcase"></i>  Programs
                                 </li>
                                 <li class="active">
-                                    <i class="fa fa-plus-square"></i>  <?php echo $header;?>
+                                    <i class="fa fa-pencil-square-o"></i>  <?php echo $header;?>
                                 </li>
                             </ol>
                         </div>
                     </div>
                     <!-- /.row -->
-<?php
-    echo $this->session->flashdata('message');
-    if (!empty($message)) echo $message;
-
+    <?php if (!empty($message)): echo $message;
+    
+    else:
+    echo $this->session->flashdata('message2');
     echo validation_errors('
     <div class="alert alert-danger alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> ', 
-    '</div>');
-    echo form_open('admin/add_teacher');
-?>
+    '</div>'); 
+
+    $attrib = array( 'onsubmit' => "return confirm('Do you really want to submit?');"); ?>
+    <?php echo form_open('admin/view_teachers/edit/'.$row['ID'], $attrib); ?>
         <div class="col-xs-4 col-sm-4 col-md-4">
             <div class="form-group">
-                <label for="teacher_fname">First Name:</label>
-                <input type="text" class="form-control input-sm" name="teacher_fname" id="teacher_fname" value="<?php echo set_value('teacher_fname'); ?>">
+                <label for="student_id">Teacher ID #:</label>
+                <input type="text" name="teacher_id" value="<?php echo set_value('teacher_id', $row['teacher_id']); ?>" id="student_id" class="form-control input-sm">
+                <input type="hidden" name="id" value="<?php echo set_value('id', $row['ID']); ?>">
             </div>
-
             <div class="form-group">
-                <label for="teacher_mname">Middle Name:</label>
-                <input type="text" class="form-control input-sm" name="teacher_mname" id="teacher_mname" value="<?php echo set_value('teacher_mname'); ?>">
+                <label for="fname">First Name:</label>
+                <input type="text" name="fname" value="<?php echo set_value('fname', $row['fname']); ?>" id="fname" class="form-control input-sm">
             </div>
-
             <div class="form-group">
-                <label for="teacher_lname">Last Name:</label>
-                <input type="text" class="form-control input-sm" name="teacher_lname" id="teacher_lname" value="<?php echo set_value('teacher_lname'); ?>">
+                <label for="mname">Middle Name:</label>
+                <input type="text" name="mname" value="<?php echo set_value('mname', $row['mname']); ?>" id="mname" class="form-control input-sm">
             </div>
-
             <div class="form-group">
-                <label for="login_id">ID Login:</label>
-                <input type="text" class="form-control input-sm" name="login_id" id="login_id" value="<?php echo set_value('login_id'); ?>">
+                <label for="lname">Last Name:</label>
+                <input type="text" name="lname" value="<?php echo set_value('lname', $row['lname']); ?>" id="lname" class="form-control input-sm">
             </div>
-
-            <input type="submit" class="btn btn-primary" name="submit" value="Submit">
+            <input type="submit" name="submit" value="Update" class="btn btn-success">
         </div>
     </form>
+    <?php endif;?>
 
     <script type="text/javascript" language="javascript">
         var d = document.getElementById("teacher_dropdown");

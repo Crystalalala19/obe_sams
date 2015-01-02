@@ -43,8 +43,8 @@
                     <td><?php echo $row['lname'];?></td>
                     <td>
                         <div class="btn-group inline pull-left">
-                            <a type="button" class="btn btn-primary btn-sm fa fa-pencil" href="<?php echo base_url();?>admin/view_students/edit/<?php echo $row['ID'];?>"></a>
-                            <a type="button" class="btn btn-danger btn-sm fa fa-trash-o" href="javascript:delpost('2','Cafe Maru')"></a>
+                            <a type="button" class="btn btn-primary btn-sm fa fa-pencil" href="<?php echo base_url();?>admin/view_students/edit/<?php echo $row['ID'];?>" target="_blank"></a>
+                            <a type="button" class="btn btn-danger btn-sm fa fa-trash-o" href="javascript:delpost('2','Cafe Maru')" target="_blank"></a>
                         </div>
                     </td>
                 </tr>
@@ -53,48 +53,50 @@
     </table>
     <?php endif; ?>
 
-<script type="text/javascript" language="javascript">
-    var d = document.getElementById("student_dropdown");
-    d.className = d.className + " active";
+    <script type="text/javascript" language="javascript">
+        var d = document.getElementById("student_dropdown");
+        d.className = d.className + " active";
 
-    var dataTableOptions = {
-        //Disable sorting for column Action
-        aoColumnDefs: [{ 'bSortable': false, 'aTargets': [3] }],
-    };
+        var dataTableOptions = {
+            //Auto sort column
+            aaSorting: [[1,'asc']],
+            //Disable sorting for column Action
+            aoColumnDefs: [{ 'bSortable': false, 'aTargets': [3] }],
+        };
 
-    var tableToolsOptions = {
-        "sSwfPath": "http://cdn.datatables.net/tabletools/2.2.3/swf/copy_csv_xls_pdf.swf",
-        "aButtons": [ {
-                "sExtends": "copy",
-                "sButtonText": "Copy",
-                //Columns to export as data, exluded Action column
-                "mColumns": [ 0, 1, 2 ],
-            }, {
-                "sExtends": "print",
-                "sButtonText": "Print",
-                "bShowAll": false
-            }, {
-                "sExtends":    "collection",
-                "sButtonText": "Save as...",
-                "aButtons":    [ {
-                        "sExtends": "xls",
-                        "oSelectorOpts": {
-                            page: 'current'
-                        },
-                        "mColumns": [ 0, 1, 2 ]
-                    }, {
-                        "sExtends": "pdf",
-                        "sButtonText": "PDF",
-                        "mColumns": [ 0, 1, 2 ]
-                    }
-                ]
-            }
-        ]
-    };
+        var tableToolsOptions = {
+            "sSwfPath": "http://cdn.datatables.net/tabletools/2.2.3/swf/copy_csv_xls_pdf.swf",
+            "aButtons": [ {
+                    "sExtends": "copy",
+                    "sButtonText": "Copy",
+                    //Columns to export as data, exluded Action column
+                    "mColumns": [ 0, 1, 2 ],
+                }, {
+                    "sExtends": "print",
+                    "sButtonText": "Print",
+                    "bShowAll": false
+                }, {
+                    "sExtends":    "collection",
+                    "sButtonText": "Save as...",
+                    "aButtons":    [ {
+                            "sExtends": "xls",
+                            "oSelectorOpts": {
+                                page: 'current'
+                            },
+                            "mColumns": [ 0, 1, 2 ]
+                        }, {
+                            "sExtends": "pdf",
+                            "sButtonText": "PDF",
+                            "mColumns": [ 0, 1, 2 ]
+                        }
+                    ]
+                }
+            ]
+        };
 
-    var table = $('#view_students').dataTable( dataTableOptions );
+        var table = $('#view_students').dataTable( dataTableOptions );
 
-    var tt = new $.fn.dataTable.TableTools( table, tableToolsOptions );
+        var tt = new $.fn.dataTable.TableTools( table, tableToolsOptions );
 
-    $( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
-</script>
+        $( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
+    </script>

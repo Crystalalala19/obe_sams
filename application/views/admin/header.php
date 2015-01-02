@@ -21,15 +21,13 @@
     <title><?php echo $title; ?></title>
 
     <!-- Offline files -->
-    <link rel="icon" href="<?php echo base_url();?>assets/img/logo.jpeg">
+    <link rel="icon" href="<?php echo base_url();?>assets/img/icon.png">
     <!--  Bootstrap Style -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/sb-admin.css">
     <!--  Font-Awesome Style -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/font-awesome.min.css">
-
-    <?php if(basename(current_url()) == 'view_students' OR basename(current_url()) == 'view_programs'):?>
     
     <!-- DataTables Style -->
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css">
@@ -38,7 +36,6 @@
         div.DTTT { margin-bottom: 0.5em; float: right; }
         div.dataTables_wrapper { clear: both; }
     </style>
-    <?php endif;?>
 
     <!--  Jquery Core Script -->
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
@@ -46,11 +43,9 @@
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/bootstrap.js"></script>
 
     <!-- Datatables -->
-    <?php if(basename(current_url()) == 'view_students' OR basename(current_url()) == 'view_programs'):?>
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/dataTables.tableTools.min.js"></script>
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/dataTables.bootstrap.js"></script>
-    <?php endif?>
 
     <!-- 
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
@@ -171,14 +166,8 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Admin <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                        </li>
                         <li>
                             <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
                         </li>
@@ -216,7 +205,7 @@
                                 <a href="<?php echo base_url();?>admin/add_teacher"><i class="fa fa-plus-square"></i> Add new Teacher</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url();?>admin/view_students"><i class="fa fa-list-alt"></i> View Teacher List</a>
+                                <a href="<?php echo base_url();?>admin/view_teachers"><i class="fa fa-list-alt"></i> View Teacher List</a>
                             </li>
                         </ul>
                     </li>

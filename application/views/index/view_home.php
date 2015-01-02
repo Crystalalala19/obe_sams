@@ -29,31 +29,30 @@
                     </div>
                     <div class="col-lg-3 col-md-3">
                         <div class="div-trans text-center">
-                            <h3>LOG IN</h3>
-                            <div class="col-lg-12 col-md-12 col-sm-12" >    
+                            <h3>Enter Information</h3>
+                            <div class="col-lg-12 col-md-12 col-sm-12" > 
+                            <?php 
+                                echo validation_errors('
+                                <div class="alert alert-danger" role="alert">', 
+                                '</div>');
+                            ?>   
                                 <?php echo form_open('site/login_validation'); ?>
-                                <?php echo validation_errors(); ?>
-                                <div class="form-group">    
-                                    <input type="text" class="form-control" name="idnum" value="<?php echo set_value('idnum'); ?>"  />
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control" name="password" value="<?php echo set_value('password'); ?>" />
-                                </div>
-                                <div class="form-group">
-                                    <?php echo form_submit('login_submit', 'Login'); ?>
-                                </div>
-                                 <?php echo form_close(); ?>   
-
-                                 <a href="<?php echo base_url()."site/signup"; ?>">Sign up!</a>
-                             </div>
+                                    <div class="form-group">    
+                                        <input type="text" class="form-control" name="idnum" value="<?php echo set_value('idnum'); ?>"  />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" name="password" value="<?php echo set_value('password'); ?>" />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-primary btn-block" name="login_submit" value="Login">
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
 
     </div>
     <!--./ HOME SECTION END -->
@@ -262,7 +261,7 @@
                                
                                 Laboratory Room
                             </p>
-                            <a class="preview  " title="Laboratory Room" href="assets/img/portfolio/laboratory.JPG"><i class="fa fa-search-plus fa-5x"></i></a>
+                            <a class="preview  " title="Laboratory Room" href="<?php echo base_url();?>assets/img/portfolio/laboratory.JPG"><i class="fa fa-search-plus fa-5x"></i></a>
 
                         </div>
                     </div>
@@ -281,7 +280,7 @@
                                
                                 Network Control Room
                             </p>
-                            <a class="preview " title="Network Control Room" href="assets/img/portfolio/network.jpg"><i class="fa fa-search-plus fa-5x"></i></a>
+                            <a class="preview " title="Network Control Room" href="<?php echo base_url();?>assets/img/portfolio/network.jpg"><i class="fa fa-search-plus fa-5x"></i></a>
 
                         </div>
                     </div>
@@ -300,7 +299,7 @@
                                
                                 Classroom
                             </p>
-                            <a class="preview " title="Classroom" href="assets/img/portfolio/room.JPG"><i class="fa fa-search-plus fa-5x"></i></a>
+                            <a class="preview " title="Classroom" href="<?php echo base_url();?>assets/img/portfolio/room.JPG"><i class="fa fa-search-plus fa-5x"></i></a>
 
                         </div>
                     </div>
@@ -323,7 +322,7 @@
                                
                                 Speech Laboratory
                             </p>
-                            <a class="preview  " title="Speech Laboratory" href="assets/img/portfolio/speech.JPG"><i class="fa fa-search-plus fa-5x"></i></a>
+                            <a class="preview  " title="Speech Laboratory" href="<?php echo base_url();?>assets/img/portfolio/speech.JPG"><i class="fa fa-search-plus fa-5x"></i></a>
 
                         </div>
                     </div>
@@ -342,7 +341,7 @@
                                
                                 Students
                             </p>
-                            <a class="preview " title="Students" href="assets/img/portfolio/students.jpg"><i class="fa fa-search-plus fa-5x"></i></a>
+                            <a class="preview " title="Students" href="<?php echo base_url();?>assets/img/portfolio/students.jpg"><i class="fa fa-search-plus fa-5x"></i></a>
 
                         </div>
                     </div>
@@ -361,7 +360,7 @@
                                
                                 Teaching
                             </p>
-                            <a class="preview " title="Teaching" href="assets/img/portfolio/teach.jpg"><i class="fa fa-search-plus fa-5x"></i></a>
+                            <a class="preview " title="Teaching" href="<?php echo base_url();?>assets/img/portfolio/teach.jpg"><i class="fa fa-search-plus fa-5x"></i></a>
 
                         </div>
                     </div>
@@ -384,7 +383,7 @@
                 <div class="row ">
 
                     <div class="col-lg-6 col-lg-offset-1  col-md-6 col-md-offset-1">
-                        <!-- <iframe src="http://player.vimeo.com/video/18312392" class="vedio-style wow fadeInUp animated" data-wow-delay="0.4s"></iframe> -->
+                        <iframe src="http://player.vimeo.com/video/18312392" class="vedio-style wow fadeInUp animated" data-wow-delay="0.4s"></iframe>
                     </div>
 
                     <div class="col-lg-4 col-md-4" style="padding-top: 50px;">

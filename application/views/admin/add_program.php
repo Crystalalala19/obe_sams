@@ -82,32 +82,32 @@
         </div>
     </form>
 
-<script>
-    var d = document.getElementById("program_dropdown");
-    d.className = d.className + " active";
+    <script type="text/javascript" language="javascript">
+        var d = document.getElementById("program_dropdown");
+        d.className = d.className + " active";
 
-    var table = document.getElementById("po-table");
+        var table = document.getElementById("po-table");
 
-    function addRow() {
-        var lastrow = table.rows.length;
-        var lastcol = table.rows[0].cells.length;   
-        var row = table.insertRow(lastrow); 
-        var cellcol0 = row.insertCell(0);
-        cellcol0.innerHTML = "<p style='margin:4px 2px;'>"+lastrow+".</p>";
-        var cellcol1 = row.insertCell(1);
-        cellcol1.innerHTML = "<input type='text' class='form-control input-sm' name='po_code[]'></input>";
-        var cellcol2 = row.insertCell(2);
-        cellcol2.innerHTML = "<input type='text' class='form-control input-sm' name='po_attrib[]'></input>";
-        var cellcol3 = row.insertCell(3);
-        cellcol3.innerHTML = "<textarea class='form-control input-sm' name='po_desc[]' rows='3'></textarea>";
-    }
-
-    function removeRow(){
-        var lastrow = table.rows.length;
-        if(lastrow<3){
-            alert("You have reached the minimal required rows.");
-            return;
+        function addRow() {
+            var lastrow = table.rows.length;
+            var lastcol = table.rows[0].cells.length;   
+            var row = table.insertRow(lastrow); 
+            var cellcol0 = row.insertCell(0);
+            cellcol0.innerHTML = "<p style='margin:4px 2px;'>"+lastrow+".</p>";
+            var cellcol1 = row.insertCell(1);
+            cellcol1.innerHTML = "<input type='text' class='form-control input-sm' name='po_code[]'></input>";
+            var cellcol2 = row.insertCell(2);
+            cellcol2.innerHTML = "<input type='text' class='form-control input-sm' name='po_attrib[]'></input>";
+            var cellcol3 = row.insertCell(3);
+            cellcol3.innerHTML = "<textarea class='form-control input-sm' name='po_desc[]' rows='3'></textarea>";
         }
-        table.deleteRow(lastrow-1);
-    }
-</script>
+
+        function removeRow(){
+            var lastrow = table.rows.length;
+            if(lastrow<3){
+                alert("You have reached the minimal required rows.");
+                return;
+            }
+            table.deleteRow(lastrow-1);
+        }
+    </script>

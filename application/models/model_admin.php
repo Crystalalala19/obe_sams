@@ -6,40 +6,27 @@ class Model_admin extends CI_Model {
         parent::__construct();
     }
 
-    function notify_message($message, $success){
-        if($success == TRUE){
-            $output = '
-            <div class="alert alert-success alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
-            '.$message;
-        }
-        else{
-            $output = '
-            <div class="alert alert-danger alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            '.$this->db->_error_message();
-        }
-
-        $output .= '</div>';
+    function notify_message($alert_type, $glyphicon, $message){
+        $output = '
+        <div class="alert '.$alert_type.' alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <span class="glyphicon '.$glyphicon.'" aria-hidden="true"></span>
+            '.$message.'
+        </div>';
 
         return $output;
     }
 
-    function check_query($query) {
-        if($query){
+    function check_query() {
+        if($this->db->affected_rows() >= 0){
             $data['is_success'] = TRUE;
-            $custom_message = '<strong>Success!</strong>';
 
-            $data['message'] = $this->notify_message($custom_message, TRUE);
             return $data;
         }
         else{
             $data['is_success'] = FALSE;
-            $custom_message = NULL;
+            $data['db_error'] = $this->db->_error_message();
 
-            $data['message'] = $this->notify_message($custom_message, FALSE);
             return $data;
         }
     }
@@ -47,14 +34,14 @@ class Model_admin extends CI_Model {
     function insert_program($data) {
         $query = $this->db->insert('program', $data);
 
-        return $this->check_query($query);
+        return $this->check_query();
     }
 
-    function insert_po($data){
-        $this->db->get_where('po', array('programID' => $this->get_lastId));
+    function insert_po($data) {
+        $this->db->get_where('po', array('programID' => $this->db->insert_id()));
         $query = $this->db->insert_batch('po', $data);
     
-        return $this->check_query($query);
+        return $this->check_query();
     }
 
     function check_rows($table) {
@@ -67,14 +54,29 @@ class Model_admin extends CI_Model {
         }
     }
 
-    function get_lastId(){
-        return $this->db->insert_id();
+    function get_teachers() {
+        $query = $this->db->get_where('teacher', array('role' => 'teacher'));
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        else {
+            return FALSE;
+        }
+    }
+
+    function get_lastId() {
+        if($this->db->affected_rows() > 0) {
+            return $this->db->insert_id();
+        }
+        else {
+            return FALSE;
+        }
     }
 
     function insert_csv($data) {
         $query = $this->db->insert('student', $data);
 
-        return $this->check_query($query);
+        return $this->check_query();
     }
 
     function if_id_exists($data){
@@ -88,7 +90,7 @@ class Model_admin extends CI_Model {
         }
     }
 
-    function check_rowID($table, $id){
+    function check_rowID($table, $id) {
         $query = $this->db->get_where($table, array('ID' => $id));
         if($query->num_rows() > 0)
             return $query->row_array();
@@ -100,7 +102,21 @@ class Model_admin extends CI_Model {
     function insert_teacher($table, $data) {
         $query = $this->db->insert($table, $data);
 
-        return $this->check_query($query);
+        return $this->check_query();
+    }
+
+    function update_student($id, $data) {
+        $this->db->where('ID', $id);
+        $query = $this->db->update('student', $data);
+
+        return $this->check_query();
+    }
+    
+    function update_teacher($id, $data) {
+        $this->db->where('ID', $id);
+        $query = $this->db->update('teacher', $data);
+
+        return $this->check_query();
     }
 }
 ?>

@@ -12,7 +12,7 @@
     <title><?php echo $title;?></title>
 
     <!-- Offline files -->
-    <link rel="icon" href="<?php echo base_url();?>assets/img/logo.jpeg">
+    <link rel="icon" href="<?php echo base_url();?>assets/img/icon.png">
     <!--  Bootstrap Style -->
     <link href="<?php echo base_url();?>assets/css/bootstrap.css" rel="stylesheet" />
     <!--  Font-Awesome Style -->
@@ -44,10 +44,10 @@
     <![endif]-->
 </head>
 <body>
-    <!-- <div id="pre-div">
+    <div id="pre-div">
         <div id="loader">
         </div>
-    </div> -->
+    </div>
     <!--/. PRELOADER END -->
     <div class="navbar navbar-default navbar-fixed-top move-me ">
         <div class="container">
