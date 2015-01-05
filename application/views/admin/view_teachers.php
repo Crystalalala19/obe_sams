@@ -18,14 +18,10 @@
                         </div>
                     </div>
                     <!-- /.row -->
-    <?php if(!empty($message)): ?>
-    <div class="alert alert-info alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>  
-        <span class="sr-only">Information:</span>
-        <?php echo $message;?>
-    </div>
-    <?php else: ?>
+    <?php if (!empty($message)): echo $message;
+
+    else: 
+    echo $this->session->flashdata('message2'); ?>
     <table id="view_teachers" class="table table-striped table-bordered dataTable" cellspacing="0" width="100%">
         <thead>
             <tr>
@@ -44,7 +40,7 @@
                     <td>
                         <div class="btn-group inline pull-left">
                             <a type="button" class="btn btn-primary btn-sm fa fa-pencil" href="<?php echo base_url();?>admin/view_teachers/edit/<?php echo $row['ID'];?>" target="_blank"></a>
-                            <a type="button" class="btn btn-danger btn-sm fa fa-trash-o" href="javascript:delpost('2','Cafe Maru')" target="_blank"></a>
+                            <a type="button" class="btn btn-danger btn-sm fa fa-trash-o" href="<?php echo base_url();?>admin/view_teachers/delete/<?php echo $row['ID'];?>" onclick="return confirm('Do you want to permanently delete?');"></a>
                         </div>
                     </td>
                 </tr>

@@ -12,7 +12,6 @@ class Admin extends CI_Controller {
 
         $this->load->view('admin/header', $data);
         $this->load->view('admin/index');
-        $this->encrypt->decode('password');
         $this->load->view('admin/footer');
     }
 
@@ -193,13 +192,14 @@ class Admin extends CI_Controller {
         $this->load->view('admin/footer');
     }
 
-    public function view_teachers($url = 'edit') {
+    public function view_teachers() {
         $data['title'] = 'Admin - View Teacher List';
         $data['header'] = 'View Teacher List';
         $data['teacher_list'] = $this->model_admin->get_teachers();
         
         if($data['teacher_list'] == FALSE) {
-            $data['message'] = 'No teachers found in record.';
+            $message = 'No teachers found in record.';
+            $data['message'] = $this->model_admin->notify_message('alert-info', 'glyphicon-info-sign', $message);
         } else {
             $data['message'] = '';
         }
@@ -335,13 +335,14 @@ class Admin extends CI_Controller {
         $this->load->view('admin/footer');
     }
 
-    public function view_students($url = 'edit'){
+    public function view_students(){
         $data['title'] = 'Admin - Students List';
         $data['header'] = 'View Student List';
         $data['student_list'] = $this->model_admin->check_rows('student');
 
         if($data['student_list'] == FALSE) {
-            $data['message'] = 'There are no currently students added.';
+            $message = 'There are no currently students added.';
+            $data['message'] = $this->model_admin->notify_message('alert-info', 'glyphicon-info-sign', $message);
         }
         else {
             $data['message'] = '';
@@ -407,5 +408,33 @@ class Admin extends CI_Controller {
         $this->load->view('admin/header', $data);
         $this->load->view('admin/edit_student', $data);
         $this->load->view('admin/footer');
+    }
+
+    public function delete_teacher() {
+        $id = $this->uri->segment(4);
+
+        if(!$this->model_admin->check_rowID('teacher', $id)) {
+            $message = 'ID number does not exists.';
+            $data['message'] = $this->model_admin->notify_message('alert-info', 'glyphicon-info-sign', $message);
+        }
+        else {
+            $delete = array('ID' => $id);
+
+            $result = $this->model_admin->delete_teacher($delete);
+
+            if($result['is_success'] == FALSE) {
+                $message = '<strong>Error: </strong>'.  $result['db_error'];
+                $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
+
+                $data['message'] = $message;
+            }
+            else {
+                $message = '<strong>Success!</strong> Teacher deleted.';
+                $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
+
+                $this->session->set_flashdata('message2', $message);
+                redirect('admin/view_teachers');
+            }
+        }
     }
 }

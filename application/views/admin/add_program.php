@@ -29,6 +29,7 @@
     '</div>');
     echo form_open('admin/add_program');
 ?>
+    <div id="step-1">
         <div class="form-group col-md-6">
             <label for="program_inp">Program:</label>
             <select class="form-control input-sm" id="program_inp" name="program">
@@ -55,7 +56,8 @@
                 yearDropdown(2000, 2100, "effective_year");
             ?>
         </div>
-
+    </div>
+    <div id="step-2">
         <div class="form-group col-md-12">
             <table class="table table-striped table-bordered dataTable no-footer text-center" id="po-table">
                 <tbody>
@@ -73,12 +75,21 @@
                     </tr>
                 </tbody>
             </table>
-            <button type="button" class="btn btn-default btn-xs" onclick="addRow()">Add Row</button>
-            <button type="button" class="btn btn-default btn-xs" onclick="removeRow()">Remove Row</button>
+            <button type="button" class="btn btn-default btn-xs" id="btnAddRow" onclick="addRow()">Add Row</button>
+            <button type="button" class="btn btn-default btn-xs" id="btnRemoveRow" onclick="removeRow()">Remove Row</button>
         </div>
+    </div>
+    <div id="step-3">
+        <!-- Step 3 goes here!!! -->
+    </div>
 
         <div class="form-group">
-            <input type="submit" class="btn btn-primary" name="submit" value="Submit">
+            <input type="submit" class="btn btn-primary disabled" id="btnSubmit" name="submit" value="Submit">
+
+            <!-- STEP Start -->
+            <div class="btn btn-primary disabled" id="btnPrevious" name="btnPrevious">Previous</div>
+            <div class="btn btn-primary disabled" id="btnNext" name="btnNext">Next</div>
+            <!-- STEP End -->
         </div>
     </form>
 
@@ -111,3 +122,4 @@
             table.deleteRow(lastrow-1);
         }
     </script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/step.js"></script>

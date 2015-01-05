@@ -54,16 +54,6 @@ class Model_admin extends CI_Model {
         }
     }
 
-    function get_teachers() {
-        $query = $this->db->get_where('teacher', array('role' => 'teacher'));
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
-        }
-        else {
-            return FALSE;
-        }
-    }
-
     function get_lastId() {
         if($this->db->affected_rows() > 0) {
             return $this->db->insert_id();
@@ -71,12 +61,6 @@ class Model_admin extends CI_Model {
         else {
             return FALSE;
         }
-    }
-
-    function insert_csv($data) {
-        $query = $this->db->insert('student', $data);
-
-        return $this->check_query();
     }
 
     function if_id_exists($data){
@@ -99,24 +83,52 @@ class Model_admin extends CI_Model {
         }
     }
 
-    function insert_teacher($table, $data) {
-        $query = $this->db->insert($table, $data);
+    // STUDENT
+    function insert_csv($data) {
+        $this->db->insert('student', $data);
 
         return $this->check_query();
     }
 
     function update_student($id, $data) {
         $this->db->where('ID', $id);
-        $query = $this->db->update('student', $data);
+        $this->db->update('student', $data);
 
         return $this->check_query();
     }
-    
+    // END STUDENT
+
+    // TEACHER
+     function get_teachers() {
+        $query = $this->db->get_where('teacher', array('role' => 'teacher'));
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        else {
+            return FALSE;
+        }
+    }
+
+    function insert_teacher($table, $data) {
+        $this->db->insert($table, $data);
+
+        return $this->check_query();
+    }
+
     function update_teacher($id, $data) {
         $this->db->where('ID', $id);
-        $query = $this->db->update('teacher', $data);
+        $this->db->update('teacher', $data);
 
         return $this->check_query();
     }
+
+    function delete_teacher($data) {
+        $query = $this->db->delete('teacher', $data);
+
+        return $this->check_query();
+    }
+    // END TEACHER
+
+    
 }
 ?>
