@@ -15,6 +15,17 @@ class Admin extends CI_Controller {
         $this->load->view('admin/footer');
     }
 
+    // CALLBACK and/or FUNCTIONS
+    function alpha_dash_space($str_in) {
+        if (! preg_match("/^([-a-z-9 ])+$/i", $str_in)) {
+            $this->form_validation->set_message('alpha_dash_space', 'The %s field may only contain alpha characters, spaces, and dashes.');
+            return FALSE;
+        } 
+        else {
+            return TRUE;
+        }
+    }
+
     public function add_program(){
         $data['title'] = 'Admin - Add new Program';
         $data['header'] = 'Add new Program';
@@ -135,20 +146,8 @@ class Admin extends CI_Controller {
         $this->load->view('admin/footer');
     }
 
-    function alpha_dash_space($str_in) {
-        if (! preg_match("/^([-a-z-9 ])+$/i", $str_in)) {
-            $this->form_validation->set_message('alpha_dash_space', 'The %s field may only contain alpha characters, spaces, and dashes.');
-            return FALSE;
-        } 
-        else {
-            return TRUE;
-        }
-    } 
+    public function teachers() {
 
-    public function add_teacher() {
-        $data['title'] = 'Admin - Add new Teacher';
-        $data['header'] = 'Add new Teacher';
-        
         $this->load->library('encrypt');
         $this->load->library('form_validation');
 
@@ -187,14 +186,13 @@ class Admin extends CI_Controller {
                 redirect(current_url());
             }
         }
-        $this->load->view('admin/header', $data);
-        $this->load->view('admin/add_teacher', $data);
-        $this->load->view('admin/footer');
+
+        $this->view_teachers();
     }
 
     public function view_teachers() {
-        $data['title'] = 'Admin - View Teacher List';
-        $data['header'] = 'View Teacher List';
+        $data['title'] = 'Admin - Teachers';
+        $data['header'] = 'Teachers';
         $data['teacher_list'] = $this->model_admin->get_teachers();
         
         if($data['teacher_list'] == FALSE) {
@@ -260,6 +258,34 @@ class Admin extends CI_Controller {
         $this->load->view('admin/header', $data);
         $this->load->view('admin/edit_teacher', $data);
         $this->load->view('admin/footer');
+    }
+
+    public function delete_teacher() {
+        $id = $this->uri->segment(4);
+
+        if(!$this->model_admin->check_rowID('teacher', $id)) {
+            $message = 'ID number does not exists.';
+            $data['message'] = $this->model_admin->notify_message('alert-info', 'glyphicon-info-sign', $message);
+        }
+        else {
+            $delete = array('ID' => $id);
+
+            $result = $this->model_admin->delete_teacher($delete);
+
+            if($result['is_success'] == FALSE) {
+                $message = '<strong>Error: </strong>'.  $result['db_error'];
+                $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
+
+                $data['message'] = $message;
+            }
+            else {
+                $message = '<strong>Success!</strong> Teacher deleted.';
+                $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
+
+                $this->session->set_flashdata('message', $message);
+                redirect('admin/teachers');
+            }
+        }
     }
 
     public function upload_students(){
@@ -408,33 +434,5 @@ class Admin extends CI_Controller {
         $this->load->view('admin/header', $data);
         $this->load->view('admin/edit_student', $data);
         $this->load->view('admin/footer');
-    }
-
-    public function delete_teacher() {
-        $id = $this->uri->segment(4);
-
-        if(!$this->model_admin->check_rowID('teacher', $id)) {
-            $message = 'ID number does not exists.';
-            $data['message'] = $this->model_admin->notify_message('alert-info', 'glyphicon-info-sign', $message);
-        }
-        else {
-            $delete = array('ID' => $id);
-
-            $result = $this->model_admin->delete_teacher($delete);
-
-            if($result['is_success'] == FALSE) {
-                $message = '<strong>Error: </strong>'.  $result['db_error'];
-                $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
-
-                $data['message'] = $message;
-            }
-            else {
-                $message = '<strong>Success!</strong> Teacher deleted.';
-                $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
-
-                $this->session->set_flashdata('message2', $message);
-                redirect('admin/view_teachers');
-            }
-        }
     }
 }

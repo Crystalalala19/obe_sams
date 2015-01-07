@@ -12,7 +12,7 @@
                                     <i class="fa fa-users"></i>  Students
                                 </li>
                                 <li class="active">
-                                    <i class="fa fa-plus-square"></i>  <?php echo $header;?>
+                                    <i class="fa fa-plus"></i>  <?php echo $header;?>
                                 </li>
                             </ol>
                         </div>
@@ -57,7 +57,7 @@
         </div>
 
         <div class="form-group">
-            <input type="submit" class="btn btn-primary" name="submit" value="Submit">
+            <input type="submit" class="btn btn-success" name="submit" value="Submit">
         </div>
     </form>
 

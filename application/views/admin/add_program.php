@@ -12,7 +12,7 @@
                                     <i class="fa fa-briefcase"></i>  Programs
                                 </li>
                                 <li class="active">
-                                    <i class="fa fa-plus-square"></i>  <?php echo $header;?>
+                                    <i class="fa fa-plus"></i>  <?php echo $header;?>
                                 </li>
                             </ol>
                         </div>
@@ -29,68 +29,72 @@
     '</div>');
     echo form_open('admin/add_program');
 ?>
-    <div id="step-1">
-        <div class="form-group col-md-6">
-            <label for="program_inp">Program:</label>
-            <select class="form-control input-sm" id="program_inp" name="program">
-                <option selected="selected" value="">Select program: </option>
-                <option value="BSCS">BSCS</option>
-                <option value="BSIT">BSIT</option>
-                <option value="BSICT">BSICT</option>
-            </select>
+        <div id="step-1">
+            <div class="form-group col-md-6">
+                <label class="control-label" for="program_inp">Program:</label>
+                <select class="form-control input-sm" id="program_inp" name="program">
+                    <option selected="selected" value="">Select program: </option>
+                    <option value="BSCS">BSCS</option>
+                    <option value="BSIT">BSIT</option>
+                    <option value="BSICT">BSICT</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label class="control-label" for="effective_year">Effective Year:</label>
+                <?php
+                    function yearDropdown($startYear, $endYear, $id="year"){
+                        //start the select tag
+                        echo "<select class='form-control input-sm' id=".$id." name=".$id.">";
+                            echo '<option selected="selected" value="">Select year: </option>';  
+                            //echo each year as an option    
+                            for ($i=$startYear;$i<=$endYear;$i++){
+                            echo "<option value=".$i.">".$i."</option>n";    
+                            }
+                        //close the select tag
+                        echo "</select>";
+                    }
+                    yearDropdown(2000, 2100, "effective_year");
+                ?>
+            </div>
         </div>
-        <div class="form-group col-md-6">
-            <label for="effective_year">Effective Year:</label>
-            <?php
-                function yearDropdown($startYear, $endYear, $id="year"){
-                    //start the select tag
-                    echo "<select class='form-control input-sm' id=".$id." name=".$id.">";
-                        echo '<option selected="selected" value="">Select year: </option>';  
-                        //echo each year as an option    
-                        for ($i=$startYear;$i<=$endYear;$i++){
-                        echo "<option value=".$i.">".$i."</option>n";    
-                        }
-                    //close the select tag
-                    echo "</select>";
-                }
-                yearDropdown(2000, 2100, "effective_year");
-            ?>
+        <div id="step-2">
+            <div class="form-group col-md-12">
+                <table class="table table-striped table-bordered dataTable no-footer text-center" id="po-table">
+                    <tbody>
+                        <tr>
+                            <th width="1%"></th>
+                            <th width="10%">PO Code</th>
+                            <th width="30%">PO Attribute</th>
+                            <th width="59%">PO Description</th>
+                        </tr>
+                        <tr>
+                            <td><p style="margin:4px 2px;">1.</p></td>
+                            <td><input type="text" class="form-control input-sm" name="po_code[]"></td>
+                            <td><input type="text" class="form-control input-sm" name="po_attrib[]"></td>
+                            <td><textarea class="form-control input-sm" name="po_desc[]" rows="3"></textarea></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" class="btn btn-default btn-xs" id="btnAddRow" onclick="addRow()">Add Row</button>
+                <button type="button" class="btn btn-default btn-xs" id="btnRemoveRow" onclick="removeRow()">Remove Row</button>
+            </div>
         </div>
-    </div>
-    <div id="step-2">
-        <div class="form-group col-md-12">
-            <table class="table table-striped table-bordered dataTable no-footer text-center" id="po-table">
-                <tbody>
-                    <tr>
-                        <th width="1%"></th>
-                        <th width="10%">PO Code</th>
-                        <th width="30%">PO Attribute</th>
-                        <th width="59%">PO Description</th>
-                    </tr>
-                    <tr>
-                        <td><p style="margin:4px 2px;">1.</p></td>
-                        <td><input type="text" class="form-control input-sm" name="po_code[]"></td>
-                        <td><input type="text" class="form-control input-sm" name="po_attrib[]"></td>
-                        <td><textarea class="form-control input-sm" name="po_desc[]" rows="3"></textarea></td>
-                    </tr>
-                </tbody>
-            </table>
-            <button type="button" class="btn btn-default btn-xs" id="btnAddRow" onclick="addRow()">Add Row</button>
-            <button type="button" class="btn btn-default btn-xs" id="btnRemoveRow" onclick="removeRow()">Remove Row</button>
+        <div id="step-3">
+            <!-- Step 3 goes here!!! -->
         </div>
-    </div>
-    <div id="step-3">
-        <!-- Step 3 goes here!!! -->
-    </div>
-
-        <div class="form-group">
-            <input type="submit" class="btn btn-primary disabled" id="btnSubmit" name="submit" value="Submit">
-
+        
+        <div class="form-group pull-left">
+            <input type="submit" class="btn btn-success" id="btnSubmit" name="submit" value="Submit">
+            <div class="clearfix"></div>
+        </div>
+        
+        <div class="form-group pull-right">
             <!-- STEP Start -->
-            <div class="btn btn-primary disabled" id="btnPrevious" name="btnPrevious">Previous</div>
-            <div class="btn btn-primary disabled" id="btnNext" name="btnNext">Next</div>
+            <button type="button" class="btn btn-primary disabled btn-sm" id="btnPrevious" name="btnPrevious">Previous</button>
+            <button type="button" class="btn btn-primary disabled btn-sm" id="btnNext" name="btnNext">Next</button>
             <!-- STEP End -->
         </div>
+
     </form>
 
     <script type="text/javascript" language="javascript">
@@ -122,4 +126,4 @@
             table.deleteRow(lastrow-1);
         }
     </script>
-    <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/step.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/step2.js"></script>

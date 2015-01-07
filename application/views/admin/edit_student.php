@@ -9,7 +9,7 @@
                                     <i class="fa fa-dashboard"></i>  <a href="<?php echo base_url(); ?>admin">Dashboard</a>
                                 </li>
                                 <li>
-                                    <i class="fa fa-briefcase"></i>  Programs
+                                    <i class="fa fa-users"></i>  Students
                                 </li>
                                 <li class="active">
                                     <i class="fa fa-pencil-square-o"></i>  <?php echo $header;?>
@@ -48,7 +48,16 @@
                 <label for="lname">Last Name:</label>
                 <input type="text" name="lname" value="<?php echo set_value('lname', $row['lname']); ?>" id="lname" class="form-control input-sm">
             </div>
-            <input type="submit" name="submit" value="Update" class="btn btn-success">
+
+            <div class="pull-left">
+                <input type="submit" name="submit" value="Update" class="btn btn-success">
+                <div class="clearfix"></div>
+            </div>
+            
+            <!-- window.top.close(); -->
+            <div class="pull-right">
+                <button type="button" class="btn btn-danger" onclick="window.open('','_self').close();"><i class="fa fa-times"></i> Close tab</button>
+            </div>
         </div>
     </form>
     <?php endif;?>

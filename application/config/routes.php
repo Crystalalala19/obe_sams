@@ -39,9 +39,11 @@
 */
 
 // $route['admin/view_programs/edit/(:num)'] = "admin/edit_program";
+
 $route['admin/view_students/edit/(:num)'] = "admin/edit_student";
-$route['admin/view_teachers/edit/(:num)'] = "admin/edit_teacher";
-$route['admin/view_teachers/delete/(:num)'] = "admin/delete_teacher";
+$route['admin/teachers/add'] = "admin/add_teacher";
+$route['admin/teachers/edit/(:num)'] = "admin/edit_teacher";
+$route['admin/teachers/delete/(:num)'] = "admin/delete_teacher";
 
 $route['default_controller'] = "site";
 $route['404_override'] = '';

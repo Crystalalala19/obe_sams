@@ -9,7 +9,7 @@
                                     <i class="fa fa-dashboard"></i>  <a href="<?php echo base_url(); ?>admin">Dashboard</a>
                                 </li>
                                 <li>
-                                    <i class="fa fa-briefcase"></i>  Programs
+                                    <i class="fa fa-university"></i>  <a href="<?php echo base_url(); ?>admin/teachers">Teachers</a>
                                 </li>
                                 <li class="active">
                                     <i class="fa fa-pencil-square-o"></i>  <?php echo $header;?>
@@ -29,7 +29,7 @@
     '</div>'); 
 
     $attrib = array( 'onsubmit' => "return confirm('Do you really want to submit?');"); ?>
-    <?php echo form_open('admin/view_teachers/edit/'.$row['ID'], $attrib); ?>
+    <?php echo form_open('admin/teachers/edit/'.$row['ID'], $attrib); ?>
         <div class="col-xs-4 col-sm-4 col-md-4">
             <div class="form-group">
                 <label for="student_id">Teacher ID #:</label>
@@ -48,12 +48,21 @@
                 <label for="lname">Last Name:</label>
                 <input type="text" name="lname" value="<?php echo set_value('lname', $row['lname']); ?>" id="lname" class="form-control input-sm">
             </div>
-            <input type="submit" name="submit" value="Update" class="btn btn-success">
+
+            <div class="pull-left">
+                <input type="submit" name="submit" value="Update" class="btn btn-success">
+                <div class="clearfix"></div>
+            </div>
+            
+            <!-- window.top.close(); -->
+            <div class="pull-right">
+                <button type="button" class="btn btn-danger" onclick="window.open('','_self').close();"><i class="fa fa-times"></i> Close tab</button>
+            </div>
         </div>
     </form>
     <?php endif;?>
 
     <script type="text/javascript" language="javascript">
-        var d = document.getElementById("teacher_dropdown");
+        var d = document.getElementById("teachers");
         d.className = d.className + " active";
     </script>

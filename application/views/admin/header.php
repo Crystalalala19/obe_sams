@@ -83,62 +83,6 @@
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
-                    <ul class="dropdown-menu message-dropdown">
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">
-                                            <strong>John Smith</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">
-                                            <strong>John Smith</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">
-                                            <strong>John Smith</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="message-footer">
-                            <a href="#">Read All New Messages</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu alert-dropdown">
                         <li>
@@ -190,7 +134,7 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#program"><i class="fa fa-briefcase"></i> Programs <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="program" class="collapse">
                             <li>
-                                <a href="<?php echo base_url();?>admin/add_program"><i class="fa fa-plus-square"></i> Add new Program</a>
+                                <a href="<?php echo base_url();?>admin/add_program"><i class="fa fa-plus"></i> Add new Program</a>
                             </li>
                             <li>
                                 <a href="<?php echo base_url();?>admin/view_programs"><i class="fa fa-list-alt"></i> View programs</a>
@@ -198,7 +142,11 @@
                         </ul>
                     </li>
 
-                    <li id="teacher_dropdown" class="">
+                    <li <?=echoActiveClassIfRequestMatches("teachers")?> id="teachers">
+                        <a href="<?php echo base_url();?>admin/teachers"><i class="fa fa-university"></i> Teachers</a>
+                    </li>
+
+<!--                     <li id="teacher_dropdown" class="">
                         <a href="javascript:;" data-toggle="collapse" data-target="#teacher"><i class="fa fa-university"></i> Teachers <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="teacher" class="collapse">
                             <li>
@@ -208,13 +156,13 @@
                                 <a href="<?php echo base_url();?>admin/view_teachers"><i class="fa fa-list-alt"></i> View Teacher List</a>
                             </li>
                         </ul>
-                    </li>
+                    </li> -->
                     
                     <li id="student_dropdown" class="">
                         <a href="javascript:;" data-toggle="collapse" data-target="#student"><i class="fa fa-users"></i> Students <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="student" class="collapse">
                             <li>
-                                <a href="<?php echo base_url();?>admin/upload_students"><i class="fa fa-plus-square"></i> Upload Student list</a>
+                                <a href="<?php echo base_url();?>admin/upload_students"><i class="fa fa-plus"></i> Upload Student list</a>
                             </li>
                             <li>
                                 <a href="<?php echo base_url();?>admin/view_students"><i class="fa fa-list-alt"></i> View Student list</a>

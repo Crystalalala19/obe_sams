@@ -8,20 +8,75 @@
                                 <li>
                                     <i class="fa fa-dashboard"></i>  <a href="<?php echo base_url(); ?>admin">Dashboard</a>
                                 </li>
-                                <li>
-                                    <i class="fa fa-users"></i>  Students
-                                </li>
                                 <li class="active">
-                                    <i class="fa fa-list-alt"></i>  <?php echo $header;?>
+                                    <i class="fa fa-university"></i>  <?php echo $header;?>
                                 </li>
                             </ol>
                         </div>
                     </div>
                     <!-- /.row -->
-    <?php if (!empty($message)): echo $message;
+    <?php
+    echo $this->session->flashdata('message');
+    if (!empty($message)) echo $message;
 
-    else: 
-    echo $this->session->flashdata('message2'); ?>
+    echo validation_errors('
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> ', 
+    '</div>');
+    ?>
+    
+    <button class="btn btn-info" data-toggle='modal' data-target='#add'> <i class="fa fa-plus"></i> Add new</button>
+
+    <!-- <a href="#add" role="button" class="btn btn-info" data-toggle="modal">
+        <i class="fa fa-plus"></i> Add new
+    </a> -->
+
+    <div class='modal fade' id='add' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+        <div class='modal-dialog modal-vertical-centered'>
+            <div class='modal-content'>
+                <div class='modal-header'>
+                    <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
+                    <h4 class='modal-title' id='myModalLabel'>Enter information</h4>
+                </div>
+                <div class='modal-body'>
+                    <?php echo form_open('admin/teachers'); ?>
+                        <div class="form-group col-xs-4 col-sm-4 col-md-4">
+                            <label for="teacher_fname">First Name:</label>
+                            <input type="text" class="form-control input-sm" name="teacher_fname" id="teacher_fname" value="<?php echo set_value('teacher_fname'); ?>">
+                            
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="form-group col-xs-4 col-sm-4 col-md-4">
+                            <label for="teacher_mname">Middle Name:</label>
+                            <input type="text" class="form-control input-sm" name="teacher_mname" id="teacher_mname" value="<?php echo set_value('teacher_mname'); ?>">
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="form-group col-xs-4 col-sm-4 col-md-4">
+                            <label for="teacher_lname">Last Name:</label>
+                            <input type="text" class="form-control input-sm" name="teacher_lname" id="teacher_lname" value="<?php echo set_value('teacher_lname'); ?>">
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="form-group col-xs-4 col-sm-4 col-md-4">
+                            <label for="login_id">ID Login:</label>
+                            <input type="text" class="form-control input-sm" name="login_id" id="login_id" value="<?php echo set_value('login_id'); ?>">
+                        </div>
+                        <div class="clearfix"></div>
+                </div>
+                <div class='modal-footer'>
+                    <input type="submit" class="btn btn-success" name="submit" value="Submit">
+                    <input type="reset" class="btn btn-info" value="Clear">
+                    <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+                </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+
+
     <table id="view_teachers" class="table table-striped table-bordered dataTable" cellspacing="0" width="100%">
         <thead>
             <tr>
@@ -39,19 +94,18 @@
                     <td><?php echo $row['lname'];?></td>
                     <td>
                         <div class="btn-group inline pull-left">
-                            <a type="button" class="btn btn-primary btn-sm fa fa-pencil" href="<?php echo base_url();?>admin/view_teachers/edit/<?php echo $row['ID'];?>" target="_blank"></a>
-                            <a type="button" class="btn btn-danger btn-sm fa fa-trash-o" href="<?php echo base_url();?>admin/view_teachers/delete/<?php echo $row['ID'];?>" onclick="return confirm('Do you want to permanently delete?');"></a>
+                            <a type="button" class="btn btn-primary btn-sm fa fa-pencil" href="<?php echo base_url();?>admin/teachers/edit/<?php echo $row['ID'];?>" target="_blank"></a>
+                            <a type="button" class="btn btn-danger btn-sm fa fa-trash-o" href="<?php echo base_url();?>admin/teachers/delete/<?php echo $row['ID'];?>" onclick="return confirm('Do you want to permanently delete?');"></a>
                         </div>
                     </td>
                 </tr>
             <?php endforeach; ?>        
         </tbody>
     </table>
-    <?php endif; ?>
 
     <script type="text/javascript" language="javascript">
-        var d = document.getElementById("teacher_dropdown");
-        d.className = d.className + " active";
+        // var d = document.getElementById("teacher_dropdown");
+        // d.className = d.className + " active";
 
         var dataTableOptions = {
             //Auto sort column
