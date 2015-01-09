@@ -41,7 +41,7 @@
                     <td><?php echo $row['effective_year'];?></td>
                     <td>
                         <div class="btn-group inline pull-left">
-                            <a type="button" class="btn btn-primary btn-sm fa fa-pencil" href="<?php echo base_url();?>admin/view_programs/edit/<?php echo $row['ID'];?>" target="_blank"></a>
+                            <a type="button" class="btn btn-primary btn-sm fa fa-pencil" href="<?php echo base_url();?>admin/programs/edit/<?php echo $row['ID'];?>" target="_blank"></a>
                             <a type="button" class="btn btn-danger btn-sm fa fa-trash-o" href="javascript:delpost('2','Cafe Maru')" target="_blank"></a>
                         </div>
                     </td>

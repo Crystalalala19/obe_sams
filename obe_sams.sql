@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.12
+-- version 4.2.11
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 02, 2015 at 03:54 PM
--- Server version: 5.6.16
--- PHP Version: 5.5.11
+-- Generation Time: Jan 09, 2015 at 10:27 AM
+-- Server version: 5.6.21
+-- PHP Version: 5.6.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -27,30 +27,10 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `course` (
-  `ID` int(3) NOT NULL AUTO_INCREMENT,
+`ID` int(3) NOT NULL,
   `CourseCode` varchar(9) NOT NULL,
-  `CourseDesc` varchar(255) NOT NULL,
-  `yearlvl` enum('1st','2nd','3rd','4th') NOT NULL,
-  `semester` enum('1st','2nd') NOT NULL,
-  `programID` int(3) NOT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `ID` (`ID`),
-  KEY `programID` (`programID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `electives`
---
-
-CREATE TABLE IF NOT EXISTS `electives` (
-  `ID` int(3) NOT NULL AUTO_INCREMENT,
-  `CourseCode` varchar(9) NOT NULL,
-  `courseID` int(3) NOT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `courseID` (`courseID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `CourseDesc` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -59,12 +39,9 @@ CREATE TABLE IF NOT EXISTS `electives` (
 --
 
 CREATE TABLE IF NOT EXISTS `equivalent` (
-  `ID` int(3) NOT NULL AUTO_INCREMENT,
   `CourseEquivalent` varchar(9) NOT NULL,
-  `courseID` int(3) NOT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `courseID` (`courseID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `courseID` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -73,23 +50,21 @@ CREATE TABLE IF NOT EXISTS `equivalent` (
 --
 
 CREATE TABLE IF NOT EXISTS `po` (
-  `ID` int(3) NOT NULL AUTO_INCREMENT,
+`ID` int(3) NOT NULL,
   `attribute` varchar(100) NOT NULL,
-  `poCode2` varchar(10) NOT NULL,
+  `poCode` varchar(10) NOT NULL,
   `description` text NOT NULL,
   `status` enum('0','1') NOT NULL,
-  `programID` int(3) NOT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `ID` (`ID`),
-  KEY `programID` (`programID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  `programID` int(3) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `po`
 --
 
-INSERT INTO `po` (`ID`, `attribute`, `poCode2`, `description`, `status`, `programID`) VALUES
-(1, 'Analysis', 'CS01', 'test', '0', 1);
+INSERT INTO `po` (`ID`, `attribute`, `poCode`, `description`, `status`, `programID`) VALUES
+(1, 'Analysis', 'CS01', 'test', '0', 1),
+(2, 'test', 'CS123', 'test', '0', 3);
 
 -- --------------------------------------------------------
 
@@ -98,12 +73,10 @@ INSERT INTO `po` (`ID`, `attribute`, `poCode2`, `description`, `status`, `progra
 --
 
 CREATE TABLE IF NOT EXISTS `program` (
-  `ID` int(3) NOT NULL AUTO_INCREMENT,
+`ID` int(3) NOT NULL,
   `programName` enum('BSICT','BSIT','BSCS') NOT NULL,
-  `effective_year` year(4) NOT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `ID` (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+  `effective_year` year(4) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `program`
@@ -111,7 +84,8 @@ CREATE TABLE IF NOT EXISTS `program` (
 
 INSERT INTO `program` (`ID`, `programName`, `effective_year`) VALUES
 (1, 'BSCS', 2014),
-(2, 'BSIT', 2014);
+(2, 'BSIT', 2014),
+(3, 'BSIT', 2058);
 
 -- --------------------------------------------------------
 
@@ -120,19 +94,8 @@ INSERT INTO `program` (`ID`, `programName`, `effective_year`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `scorecard` (
-  `studentID` bigint(20) NOT NULL,
-  `courseID` int(3) NOT NULL,
-  `teacherID` varchar(15) NOT NULL,
   `score` float NOT NULL,
-  `poID` int(3) NOT NULL,
-  KEY `courseID` (`courseID`),
-  KEY `teacherID` (`teacherID`),
-  KEY `poID` (`poID`),
-  KEY `studentID` (`studentID`),
-  KEY `studentID_2` (`studentID`),
-  KEY `courseID_2` (`courseID`),
-  KEY `teacherID_2` (`teacherID`),
-  KEY `poID_2` (`poID`)
+  `programID` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -142,24 +105,33 @@ CREATE TABLE IF NOT EXISTS `scorecard` (
 --
 
 CREATE TABLE IF NOT EXISTS `student` (
-  `ID` int(10) NOT NULL AUTO_INCREMENT,
-  `student_id` bigint(20) NOT NULL,
+`ID` int(10) NOT NULL,
+  `student_id` int(10) NOT NULL,
   `fname` varchar(20) NOT NULL,
   `mname` varchar(20) NOT NULL,
-  `lname` varchar(20) NOT NULL,
-  `programID` int(3) NOT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `ID` (`ID`),
-  KEY `curriculumID` (`programID`),
-  KEY `student_id` (`student_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  `lname` varchar(20) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `student`
 --
 
-INSERT INTO `student` (`ID`, `student_id`, `fname`, `mname`, `lname`, `programID`) VALUES
-(1, 11104551, 'Jovanne', 'Buque', 'Kjellberg', 2);
+INSERT INTO `student` (`ID`, `student_id`, `fname`, `mname`, `lname`) VALUES
+(1, 11104551, 'Jovanne', 'Buque', 'Kjellberg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_course`
+--
+
+CREATE TABLE IF NOT EXISTS `student_course` (
+  `courseID` int(3) NOT NULL,
+  `studentID` int(10) NOT NULL,
+  `programID` int(3) NOT NULL,
+  `schoo_year` year(4) NOT NULL,
+  `semester` enum('1','2','summer') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -168,70 +140,153 @@ INSERT INTO `student` (`ID`, `student_id`, `fname`, `mname`, `lname`, `programID
 --
 
 CREATE TABLE IF NOT EXISTS `teacher` (
-  `ID` int(3) NOT NULL AUTO_INCREMENT,
+`ID` int(3) NOT NULL,
   `teacher_id` varchar(15) NOT NULL,
   `fname` varchar(20) NOT NULL,
   `mname` varchar(20) NOT NULL,
   `lname` varchar(20) NOT NULL,
   `role` enum('admin','teacher') NOT NULL,
-  `password` varchar(255) NOT NULL,
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `teacher_id` (`teacher_id`),
-  KEY `login_id` (`teacher_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `teacher`
+-- Table structure for table `teacher_class`
 --
 
-INSERT INTO `teacher` (`ID`, `teacher_id`, `fname`, `mname`, `lname`, `role`, `password`) VALUES
-(1, 'admin10101', 'Admin', 'Admin', 'Admin', 'admin', 'vdFv6no4+7aTBUENnOVXT0TwNXQC2ZzWT9PfjapzFHvj9d1hSTovz927arTv+xY3MXru+B/3L5a6jcMTEPac4g=='),
-(2, '11101091QA', 'A', 'A', 'A', 'teacher', 'vdFv6no4+7aTBUENnOVXT0TwNXQC2ZzWT9PfjapzFHvj9d1hSTovz927arTv+xY3MXru+B/3L5a6jcMTEPac4g=='),
-(3, '11101091QS', 'Z', 'Z', 'Z', 'teacher', 'vdFv6no4+7aTBUENnOVXT0TwNXQC2ZzWT9PfjapzFHvj9d1hSTovz927arTv+xY3MXru+B/3L5a6jcMTEPac4g=='),
-(4, '1111111111', 'Daniel', 'Jonathan', 'Steven', 'teacher', 'vdFv6no4+7aTBUENnOVXT0TwNXQC2ZzWT9PfjapzFHvj9d1hSTovz927arTv+xY3MXru+B/3L5a6jcMTEPac4g==');
+CREATE TABLE IF NOT EXISTS `teacher_class` (
+  `ID` int(5) NOT NULL,
+  `group_num` int(4) NOT NULL,
+  `start_time` time NOT NULL,
+  `end_time` time NOT NULL,
+  `courseID` int(3) NOT NULL,
+  `teacherID` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `course`
+--
+ALTER TABLE `course`
+ ADD PRIMARY KEY (`ID`), ADD KEY `ID` (`ID`);
+
+--
+-- Indexes for table `equivalent`
+--
+ALTER TABLE `equivalent`
+ ADD PRIMARY KEY (`courseID`), ADD KEY `courseID` (`courseID`);
+
+--
+-- Indexes for table `po`
+--
+ALTER TABLE `po`
+ ADD PRIMARY KEY (`ID`), ADD KEY `ID` (`ID`), ADD KEY `programID` (`programID`);
+
+--
+-- Indexes for table `program`
+--
+ALTER TABLE `program`
+ ADD PRIMARY KEY (`ID`), ADD KEY `ID` (`ID`);
+
+--
+-- Indexes for table `scorecard`
+--
+ALTER TABLE `scorecard`
+ ADD KEY `programID` (`programID`);
+
+--
+-- Indexes for table `student`
+--
+ALTER TABLE `student`
+ ADD PRIMARY KEY (`ID`), ADD KEY `ID` (`ID`), ADD KEY `student_id` (`student_id`);
+
+--
+-- Indexes for table `student_course`
+--
+ALTER TABLE `student_course`
+ ADD KEY `courseID` (`courseID`,`studentID`), ADD KEY `studentID` (`studentID`), ADD KEY `programID` (`programID`);
+
+--
+-- Indexes for table `teacher`
+--
+ALTER TABLE `teacher`
+ ADD PRIMARY KEY (`ID`), ADD UNIQUE KEY `teacher_id` (`teacher_id`), ADD KEY `login_id` (`teacher_id`);
+
+--
+-- Indexes for table `teacher_class`
+--
+ALTER TABLE `teacher_class`
+ ADD KEY `courseID` (`courseID`,`teacherID`), ADD KEY `teacherID` (`teacherID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `course`
+--
+ALTER TABLE `course`
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `po`
+--
+ALTER TABLE `po`
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `program`
+--
+ALTER TABLE `program`
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `student`
+--
+ALTER TABLE `student`
+MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `teacher`
+--
+ALTER TABLE `teacher`
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `course`
---
-ALTER TABLE `course`
-  ADD CONSTRAINT `course_ibfk_1` FOREIGN KEY (`programID`) REFERENCES `program` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `electives`
---
-ALTER TABLE `electives`
-  ADD CONSTRAINT `electives_ibfk_1` FOREIGN KEY (`courseID`) REFERENCES `course` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `equivalent`
 --
 ALTER TABLE `equivalent`
-  ADD CONSTRAINT `equivalent_ibfk_1` FOREIGN KEY (`courseID`) REFERENCES `course` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `equivalent_ibfk_1` FOREIGN KEY (`courseID`) REFERENCES `course` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `po`
 --
 ALTER TABLE `po`
-  ADD CONSTRAINT `po_ibfk_1` FOREIGN KEY (`programID`) REFERENCES `program` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `po_ibfk_1` FOREIGN KEY (`programID`) REFERENCES `program` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `scorecard`
 --
 ALTER TABLE `scorecard`
-  ADD CONSTRAINT `scorecard_ibfk_2` FOREIGN KEY (`courseID`) REFERENCES `course` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `scorecard_ibfk_3` FOREIGN KEY (`teacherID`) REFERENCES `teacher` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `scorecard_ibfk_4` FOREIGN KEY (`studentID`) REFERENCES `student` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `scorecard_ibfk_5` FOREIGN KEY (`poID`) REFERENCES `po` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `scorecard_ibfk_1` FOREIGN KEY (`programID`) REFERENCES `student_course` (`programID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `student`
+-- Constraints for table `student_course`
 --
-ALTER TABLE `student`
-  ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`programID`) REFERENCES `program` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `student_course`
+ADD CONSTRAINT `student_course_ibfk_1` FOREIGN KEY (`studentID`) REFERENCES `student` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `student_course_ibfk_2` FOREIGN KEY (`courseID`) REFERENCES `course` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `student_course_ibfk_3` FOREIGN KEY (`programID`) REFERENCES `program` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `teacher_class`
+--
+ALTER TABLE `teacher_class`
+ADD CONSTRAINT `teacher_class_ibfk_1` FOREIGN KEY (`courseID`) REFERENCES `student_course` (`courseID`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `teacher_class_ibfk_2` FOREIGN KEY (`teacherID`) REFERENCES `teacher` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

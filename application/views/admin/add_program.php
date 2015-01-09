@@ -30,6 +30,7 @@
     echo form_open('admin/add_program');
 ?>
         <div id="step-1">
+            <p class="text-right">Step 1 of 3</p>
             <div class="form-group col-md-6">
                 <label class="control-label" for="program_inp">Program:</label>
                 <select class="form-control input-sm" id="program_inp" name="program">
@@ -58,6 +59,7 @@
             </div>
         </div>
         <div id="step-2">
+            <p class="pull-right">Step 2 of 3</p>
             <div class="form-group col-md-12">
                 <table class="table table-striped table-bordered dataTable no-footer text-center" id="po-table">
                     <tbody>
@@ -80,7 +82,29 @@
             </div>
         </div>
         <div id="step-3">
-            <!-- Step 3 goes here!!! -->
+            <p class="pull-right">Step 3 of 3</p>
+            <div class="form-group col-md-12">
+                <table class="table table-striped table-bordered dataTable no-footer text-center" id="course-table">
+                    <tbody>
+                        <tr>
+                            <th width="1%"></th>
+                            <th width="15%">Course Code</th>
+                            <th width="54%">Course Description</th>
+                            <th width="30%">Course Equivalents 
+                                <a data-popover="true" data-html="true" data-content="Separate by comma. <br>Ex: <b>IT110, IT111, IT116</b>" style="border-radius:40px;" class="btn" href="#"><i class="fa fa-question-circle"></i></a>   
+                            </th>
+                        </tr>
+                        <tr>
+                            <td><p style="margin:4px 2px;">1.</p></td>
+                            <td><input type="text" class="form-control input-sm" name="co_code[]"></td>
+                            <td><textarea class="form-control input-sm" name="co_desc[]" rows="3"></textarea></td>
+                            <td><input type="text" class="form-control input-sm" name="co_equi[]"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" class="btn btn-default btn-xs" id="btnAddRow" onclick="addRow2()">Add Row</button>
+                <button type="button" class="btn btn-default btn-xs" id="btnRemoveRow" onclick="removeRow2()">Remove Row</button>
+            </div>
         </div>
         
         <div class="form-group pull-left">
@@ -100,6 +124,8 @@
     <script type="text/javascript" language="javascript">
         var d = document.getElementById("program_dropdown");
         d.className = d.className + " active";
+
+        $('body').popover({ selector: '[data-popover]', trigger: 'click hover', placement: 'auto', delay: {show: 50, hide: 50}});
 
         var table = document.getElementById("po-table");
 
@@ -124,6 +150,31 @@
                 return;
             }
             table.deleteRow(lastrow-1);
+        }
+
+        var table2 = document.getElementById("course-table");
+
+        function addRow2() {
+            var lastrow = table2.rows.length;
+            var lastcol = table2.rows[0].cells.length;   
+            var row = table2.insertRow(lastrow); 
+            var cellcol0 = row.insertCell(0);
+            cellcol0.innerHTML = "<p style='margin:4px 2px;'>"+lastrow+".</p>";
+            var cellcol1 = row.insertCell(1);
+            cellcol1.innerHTML = "<input type='text' class='form-control input-sm' name='po_code[]'></input>";
+            var cellcol2 = row.insertCell(2);
+            cellcol2.innerHTML = "<input type='text' class='form-control input-sm' name='po_attrib[]'></input>";
+            var cellcol3 = row.insertCell(3);
+            cellcol3.innerHTML = "<textarea class='form-control input-sm' name='po_desc[]' rows='3'></textarea>";
+        }
+
+        function removeRow2(){
+            var lastrow = table2.rows.length;
+            if(lastrow<3){
+                alert("You have reached the minimal required rows.");
+                return;
+            }
+            table2.deleteRow(lastrow-1);
         }
     </script>
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/step2.js"></script>

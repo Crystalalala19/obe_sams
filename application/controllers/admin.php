@@ -25,6 +25,8 @@ class Admin extends CI_Controller {
             return TRUE;
         }
     }
+    
+    // END
 
     public function add_program(){
         $data['title'] = 'Admin - Add new Program';
@@ -97,8 +99,7 @@ class Admin extends CI_Controller {
         $this->load->view('admin/footer'); 
     }
 
-    //See view_students for explanation
-    public function view_programs($url = '') {
+    public function view_programs() {
         if(empty($url)) {
             $data['title'] = 'Admin - View Programs';
             $data['header'] = 'View Programs';
@@ -114,12 +115,6 @@ class Admin extends CI_Controller {
             $this->load->view('admin/header', $data);
             $this->load->view('admin/view_programs', $data);
             $this->load->view('admin/footer');
-        }
-        elseif($url == 'edit') {
-            $this->edit_program();
-        }
-        else {
-            show_404();
         }
     }
 
@@ -383,7 +378,7 @@ class Admin extends CI_Controller {
         $data['title'] = 'Admin - Edit Student Information';
         $data['header'] = 'Edit Student Information';
         $data['message'] = '';
-        
+
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('student_id', 'Student ID', 'required|trim|max_length[9]|numeric|');

@@ -134,10 +134,10 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#program"><i class="fa fa-briefcase"></i> Programs <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="program" class="collapse">
                             <li>
-                                <a href="<?php echo base_url();?>admin/add_program"><i class="fa fa-plus"></i> Add new Program</a>
+                                <a href="<?php echo base_url();?>admin/programs/add"><i class="fa fa-plus"></i> Add new Program</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url();?>admin/view_programs"><i class="fa fa-list-alt"></i> View programs</a>
+                                <a href="<?php echo base_url();?>admin/programs/view"><i class="fa fa-list-alt"></i> View programs</a>
                             </li>
                         </ul>
                     </li>

@@ -28,7 +28,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="<?php echo base_url();?>admin/add_program">
+                                <a href="<?php echo base_url();?>admin/programs/add">
                                     <div class="panel-footer">
                                         <span class="pull-left">Go</span>
                                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -48,7 +48,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="<?php echo base_url();?>admin/view_programs">
+                                <a href="<?php echo base_url();?>admin/programs/view">
                                     <div class="panel-footer">
                                         <span class="pull-left">Go</span>
                                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

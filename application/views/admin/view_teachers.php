@@ -43,26 +43,26 @@
                     <?php echo form_open('admin/teachers'); ?>
                         <div class="form-group col-xs-4 col-sm-4 col-md-4">
                             <label for="teacher_fname">First Name:</label>
-                            <input type="text" class="form-control input-sm" name="teacher_fname" id="teacher_fname" value="<?php echo set_value('teacher_fname'); ?>">
+                            <input type="text" class="form-control input-sm" name="teacher_fname" id="teacher_fname" value="<?php echo set_value('teacher_fname'); ?>" required>
                             
                         </div>
                         <div class="clearfix"></div>
 
                         <div class="form-group col-xs-4 col-sm-4 col-md-4">
                             <label for="teacher_mname">Middle Name:</label>
-                            <input type="text" class="form-control input-sm" name="teacher_mname" id="teacher_mname" value="<?php echo set_value('teacher_mname'); ?>">
+                            <input type="text" class="form-control input-sm" name="teacher_mname" id="teacher_mname" value="<?php echo set_value('teacher_mname'); ?>" required>
                         </div>
                         <div class="clearfix"></div>
 
                         <div class="form-group col-xs-4 col-sm-4 col-md-4">
                             <label for="teacher_lname">Last Name:</label>
-                            <input type="text" class="form-control input-sm" name="teacher_lname" id="teacher_lname" value="<?php echo set_value('teacher_lname'); ?>">
+                            <input type="text" class="form-control input-sm" name="teacher_lname" id="teacher_lname" value="<?php echo set_value('teacher_lname'); ?>" required>
                         </div>
                         <div class="clearfix"></div>
 
                         <div class="form-group col-xs-4 col-sm-4 col-md-4">
                             <label for="login_id">ID Login:</label>
-                            <input type="text" class="form-control input-sm" name="login_id" id="login_id" value="<?php echo set_value('login_id'); ?>">
+                            <input type="text" class="form-control input-sm" name="login_id" id="login_id" value="<?php echo set_value('login_id'); ?>" required>
                         </div>
                         <div class="clearfix"></div>
                 </div>

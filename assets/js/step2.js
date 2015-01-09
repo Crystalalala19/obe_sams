@@ -2,17 +2,16 @@ $(document).ready(function() {
     // Initializiation
     var stepCounter = 1;
 
-    var totalStepCount = 2;
+    var totalStepCount = 3;
 
-    $("#btnSubmit").hide();
-    $("#step-2").hide();
+    $("#btnSubmit, #step-2, #step-3").hide();
 
     if(stepCounter === 1) {
         $("#btnNext").removeClass("disabled");
-        
     }
 
     $("#btnNext").click(function(e) {
+        $("#step-" + stepCounter).hide();
         stepCounter++;
 
         if(stepCounter === totalStepCount) {
@@ -24,11 +23,11 @@ $(document).ready(function() {
             $("#btnPrevious").removeClass("disabled");
         }
 
-        $("#step-1").hide();
-        $("#step-2").show();
+        $("#step-" + stepCounter).show();
     });
 
     $("#btnPrevious").click(function(e){
+        $("#step-" + stepCounter).hide();
         stepCounter--;
 
         if(stepCounter === 1) {
@@ -40,7 +39,6 @@ $(document).ready(function() {
             $("#btnSubmit").hide();
         }
 
-        $("#step-2").hide();
-        $("#step-1").show();
+        $("#step-" + stepCounter).show();
     });
 });
