@@ -43,10 +43,24 @@ class Admin extends CI_Controller {
         }
         else{
             $fields = array();
+            $equi_exploded = array();
 
             $rows = $this->input->post('po_code');
             $attribs = $this->input->post('po_attrib');
             $descs = $this->input->post('po_desc');
+
+            $course_rows = $this->input->post('co_code');
+            $course_desc = $this->input->post('co_desc');
+            $course_equi = $this->input->post('co_equi');
+            $exploded = array();
+            
+            foreach($course_equi as $key => $val) {
+                $exploded[$key] = explode(", ", $val);
+            }
+
+            $course_equi_array = array();
+
+            
 
             $program = array(
                 'programName' => $this->input->post('program'),
@@ -71,6 +85,7 @@ class Admin extends CI_Controller {
                         'programID' => $id
                     );
                 }
+
                 $po_result = $this->model_admin->insert_po($fields);
 
                 if($po_result['is_success'] == FALSE) {
@@ -79,6 +94,31 @@ class Admin extends CI_Controller {
 
                     $data['message'] = $message;
                 }
+
+                $course_fields = array();
+
+                foreach($course_rows as $key => $val ) {
+                    $course_fields[] = array(
+                        'CourseCode' => $val,
+                        'CourseDesc' => $course_desc[$key],
+                        'programID' => $id
+                    );
+                }
+
+                $course_result = $this->model_admin->insert_course($course_fields);
+                $course_id = $this->model_admin->get_lastId();
+
+                $equi_fields = array();
+
+                foreach($exploded as $exploded_data) {
+                    foreach ($exploded_data as $key => $value) {
+                        $course_equi_array[$key]['CourseEquivalent'] = $value;
+                        $course_equi_array[$key]['courseID'] = $course_id;
+                    }
+                }
+                // print_r($equi_exploded);
+                $equi_result = $this->model_admin->insert_equivalents($course_equi_array);
+
                 if($this->db->trans_status() === FALSE) {
                    $this->db->trans_rollback();
                 }
@@ -142,7 +182,6 @@ class Admin extends CI_Controller {
     }
 
     public function teachers() {
-
         $this->load->library('encrypt');
         $this->load->library('form_validation');
 
@@ -155,17 +194,16 @@ class Admin extends CI_Controller {
             $data['message'] = '';
         }
         else {
-            $teacher_table = 'teacher';
             $teacher_data = array(
                 'teacher_id' => $this->input->post('login_id'),
                 'fname' => $this->input->post('teacher_fname'),
                 'mname' => $this->input->post('teacher_mname'),
                 'lname' => $this->input->post('teacher_lname'),
                 'role' => 'teacher',
-                'password' => $this->encrypt->encode($this->input->post('teacher_id'))
+                'password' => $this->encrypt->sha1($this->input->post('login_id'))
             );
 
-            $teacher_result = $this->model_admin->insert_teacher($teacher_table, $teacher_data);
+            $teacher_result = $this->model_admin->insert_teacher($teacher_data);
 
             if($teacher_result['is_success'] == FALSE) {
                 $message = '<strong>Error: </strong>'.  $teacher_result['db_error'];
@@ -191,7 +229,7 @@ class Admin extends CI_Controller {
         $data['teacher_list'] = $this->model_admin->get_teachers();
         
         if($data['teacher_list'] == FALSE) {
-            $message = 'No teachers found in record.';
+            $message = 'No teachers found in record. Please consider adding.';
             $data['message'] = $this->model_admin->notify_message('alert-info', 'glyphicon-info-sign', $message);
         } else {
             $data['message'] = '';

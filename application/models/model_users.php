@@ -16,18 +16,21 @@ class Model_users extends CI_Model {
 		return $row['role'];
 	}
 
-	public function can_log_in(){
+	public function can_log_in($data, $pass){
+        $this->load->library('encrypt');
 
-		$this->db->where('teacher_id', $this->input->post('idnum'));
-		// $this->db->where('password', $this->encrypt->encode($this->input->post('password')));
-		$query = $this->db->get('teacher');
-
+		$query = $this->db->get_where('teacher', $data);
         if($query->num_rows() == 1) {
-            $row = $query->row();
-            $password = $row->password;
 
-            if($this->encrypt->decode($password) == $this->input->post('password')) {
-                return true;
+            $row = $query->row_array();
+            $db_pass= $row['password'];
+
+            $hashed = $this->encrypt->sha1($pass);
+
+            echo $hashed;
+
+            if($db_pass == $hashed) {
+               return true;
             }
         }
         else {

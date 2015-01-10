@@ -17,7 +17,7 @@
                     <!-- /.row -->
     <?php
     echo $this->session->flashdata('message');
-    if (!empty($message)) echo $message;
+    if (!empty($message)): echo $message;
 
     echo validation_errors('
     <div class="alert alert-danger alert-dismissible" role="alert">
@@ -28,10 +28,7 @@
     
     <button class="btn btn-info" data-toggle='modal' data-target='#add'> <i class="fa fa-plus"></i> Add new</button>
 
-    <!-- <a href="#add" role="button" class="btn btn-info" data-toggle="modal">
-        <i class="fa fa-plus"></i> Add new
-    </a> -->
-
+    <?php else:?>
     <div class='modal fade' id='add' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
         <div class='modal-dialog modal-vertical-centered'>
             <div class='modal-content'>
@@ -75,7 +72,6 @@
             </div>
         </div>
     </div>
-
 
     <table id="view_teachers" class="table table-striped table-bordered dataTable" cellspacing="0" width="100%">
         <thead>
@@ -150,3 +146,5 @@
 
         $( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
     </script>
+
+    <?php endif;?>

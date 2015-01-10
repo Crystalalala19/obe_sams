@@ -32,15 +32,32 @@ class Model_admin extends CI_Model {
     }
 
     function insert_program($data) {
-        $query = $this->db->insert('program', $data);
+        $this->db->insert('program', $data);
 
         return $this->check_query();
     }
 
     function insert_po($data) {
-        $this->db->get_where('po', array('programID' => $this->db->insert_id()));
-        $query = $this->db->insert_batch('po', $data);
+        // $this->db->get_where('po', array('programID' => $this->db->insert_id()));
+        $this->db->insert_batch('po', $data);
     
+        return $this->check_query();
+    }
+
+    function insert_course($data) {
+        $this->db->insert_batch('course', $data);
+
+        return $this->check_query();
+    }
+
+    function insert_equivalents($data) {
+        // foreach($data as $value) {
+            // print_r($value);    
+            $this->db->insert_batch('equivalent', $data);
+        // }
+
+        // die();
+
         return $this->check_query();
     }
 
@@ -109,8 +126,8 @@ class Model_admin extends CI_Model {
         }
     }
 
-    function insert_teacher($table, $data) {
-        $this->db->insert($table, $data);
+    function insert_teacher($data) {
+        $this->db->insert('teacher', $data);
 
         return $this->check_query();
     }

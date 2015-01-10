@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2015 at 10:27 AM
+-- Generation Time: Jan 10, 2015 at 03:20 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -29,7 +29,8 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `course` (
 `ID` int(3) NOT NULL,
   `CourseCode` varchar(9) NOT NULL,
-  `CourseDesc` varchar(255) NOT NULL
+  `CourseDesc` varchar(255) NOT NULL,
+  `programID` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -39,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `course` (
 --
 
 CREATE TABLE IF NOT EXISTS `equivalent` (
-  `CourseEquivalent` varchar(9) NOT NULL,
+  `CourseEquivalent` varchar(100) NOT NULL,
   `courseID` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -56,15 +57,7 @@ CREATE TABLE IF NOT EXISTS `po` (
   `description` text NOT NULL,
   `status` enum('0','1') NOT NULL,
   `programID` int(3) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `po`
---
-
-INSERT INTO `po` (`ID`, `attribute`, `poCode`, `description`, `status`, `programID`) VALUES
-(1, 'Analysis', 'CS01', 'test', '0', 1),
-(2, 'test', 'CS123', 'test', '0', 3);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -76,16 +69,7 @@ CREATE TABLE IF NOT EXISTS `program` (
 `ID` int(3) NOT NULL,
   `programName` enum('BSICT','BSIT','BSCS') NOT NULL,
   `effective_year` year(4) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `program`
---
-
-INSERT INTO `program` (`ID`, `programName`, `effective_year`) VALUES
-(1, 'BSCS', 2014),
-(2, 'BSIT', 2014),
-(3, 'BSIT', 2058);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -129,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `student_course` (
   `courseID` int(3) NOT NULL,
   `studentID` int(10) NOT NULL,
   `programID` int(3) NOT NULL,
-  `schoo_year` year(4) NOT NULL,
+  `school_year` year(4) NOT NULL,
   `semester` enum('1','2','summer') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -146,8 +130,8 @@ CREATE TABLE IF NOT EXISTS `teacher` (
   `mname` varchar(20) NOT NULL,
   `lname` varchar(20) NOT NULL,
   `role` enum('admin','teacher') NOT NULL,
-  `password` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -172,13 +156,13 @@ CREATE TABLE IF NOT EXISTS `teacher_class` (
 -- Indexes for table `course`
 --
 ALTER TABLE `course`
- ADD PRIMARY KEY (`ID`), ADD KEY `ID` (`ID`);
+ ADD PRIMARY KEY (`ID`), ADD KEY `ID` (`ID`), ADD KEY `programID` (`programID`);
 
 --
 -- Indexes for table `equivalent`
 --
 ALTER TABLE `equivalent`
- ADD PRIMARY KEY (`courseID`), ADD KEY `courseID` (`courseID`);
+ ADD KEY `courseID` (`courseID`);
 
 --
 -- Indexes for table `po`
@@ -235,12 +219,12 @@ MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `po`
 --
 ALTER TABLE `po`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `program`
 --
 ALTER TABLE `program`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `student`
 --
@@ -250,10 +234,16 @@ MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT for table `teacher`
 --
 ALTER TABLE `teacher`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `course`
+--
+ALTER TABLE `course`
+ADD CONSTRAINT `course_ibfk_1` FOREIGN KEY (`programID`) REFERENCES `program` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `equivalent`

@@ -91,7 +91,7 @@
                             <th width="15%">Course Code</th>
                             <th width="54%">Course Description</th>
                             <th width="30%">Course Equivalents 
-                                <a data-popover="true" data-html="true" data-content="Separate by comma. <br>Ex: <b>IT110, IT111, IT116</b>" style="border-radius:40px;" class="btn" href="#"><i class="fa fa-question-circle"></i></a>   
+                                <a data-popover="true" data-html="true" data-content="Separate by comma. <br>Ex: <b>IT110, CS110, ICT110</b>" style="border-radius:40px;" class="btn" href="#"><i class="fa fa-question-circle"></i></a>   
                             </th>
                         </tr>
                         <tr>

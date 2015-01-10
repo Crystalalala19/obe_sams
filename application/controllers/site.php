@@ -5,7 +5,6 @@ class Site extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('model_users');
-        // Your own constructor code
     }
 
     public function index() {
@@ -24,7 +23,6 @@ class Site extends CI_Controller {
         elseif($this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'teacher') {
             $this->load->view('teacher/teacher');
         } 
-
         else{  
             redirect('site/restricted');
         }
@@ -61,7 +59,9 @@ class Site extends CI_Controller {
     }
 
     public function validate_credentials($query) {
-        if($this->model_users->can_log_in()) {
+        $data = array('teacher_id' => $this->input->post('idnum'));
+        $pass = $this->input->post('password');
+        if($this->model_users->can_log_in($data, $pass)) {
             return true;
         } 
         else {

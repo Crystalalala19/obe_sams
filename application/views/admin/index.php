@@ -123,11 +123,11 @@
                     </div>
                     <!-- /.row -->
 
-                    <!-- <div id="container">
+                    <div id="container">
                     	<?php
                     	   echo "<pre>";
                     	   print_r($this->session->all_userdata());
                     		echo "</pre>";
                     	?>
                     	<a href="<?php echo base_url()."site/logout" ?>">Logout</a>
-                    </div> -->
+                    </div>

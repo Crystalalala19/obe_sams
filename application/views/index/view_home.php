@@ -382,9 +382,9 @@
                 </div>
                 <div class="row ">
 
-                    <div class="col-lg-6 col-lg-offset-1  col-md-6 col-md-offset-1">
+                    <!-- <div class="col-lg-6 col-lg-offset-1  col-md-6 col-md-offset-1">
                         <iframe src="http://player.vimeo.com/video/18312392" class="vedio-style wow fadeInUp animated" data-wow-delay="0.4s"></iframe>
-                    </div>
+                    </div> -->
 
                     <div class="col-lg-4 col-md-4" style="padding-top: 50px;">
 
