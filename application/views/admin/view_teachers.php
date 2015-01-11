@@ -9,7 +9,7 @@
                                     <i class="fa fa-dashboard"></i>  <a href="<?php echo base_url(); ?>admin">Dashboard</a>
                                 </li>
                                 <li class="active">
-                                    <i class="fa fa-university"></i>  <?php echo $header;?>
+                                    <i class="fa fa-book"></i>  <?php echo $header;?>
                                 </li>
                             </ol>
                         </div>
@@ -25,10 +25,10 @@
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> ', 
     '</div>');
     ?>
-    
-    <button class="btn btn-info" data-toggle='modal' data-target='#add'> <i class="fa fa-plus"></i> Add new</button>
+    <?php endif;?>
 
-    <?php else:?>
+    <button class="btn btn-info" data-toggle='modal' data-target='#add' title="Add New"><i class="fa fa-plus"></i> Add new</button>
+
     <div class='modal fade' id='add' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
         <div class='modal-dialog modal-vertical-centered'>
             <div class='modal-content'>
@@ -73,6 +73,9 @@
         </div>
     </div>
 
+    <?php if($teacher_list != FALSE):?>
+    <a href="<?php echo base_url();?>admin/teachers/assign" role="button" class="btn btn-warning"><i class="fa fa-list"></i> Assign Classes</a>
+
     <table id="view_teachers" class="table table-striped table-bordered dataTable" cellspacing="0" width="100%">
         <thead>
             <tr>
@@ -90,8 +93,8 @@
                     <td><?php echo $row['lname'];?></td>
                     <td>
                         <div class="btn-group inline pull-left">
-                            <a type="button" class="btn btn-primary btn-sm fa fa-pencil" href="<?php echo base_url();?>admin/teachers/edit/<?php echo $row['ID'];?>" target="_blank"></a>
-                            <a type="button" class="btn btn-danger btn-sm fa fa-trash-o" href="<?php echo base_url();?>admin/teachers/delete/<?php echo $row['ID'];?>" onclick="return confirm('Do you want to permanently delete?');"></a>
+                            <a type="button" title="Edit Teacher" class="btn btn-primary btn-sm fa fa-pencil" href="<?php echo base_url();?>admin/teachers/edit/<?php echo $row['ID'];?>" target="_blank"></a>
+                            <a type="button" title="Delete Teacher" class="btn btn-danger btn-sm fa fa-trash-o" href="<?php echo base_url();?>admin/teachers/delete/<?php echo $row['ID'];?>" onclick="return confirm('Do you want to permanently delete?');"></a>
                         </div>
                     </td>
                 </tr>
@@ -146,5 +149,6 @@
 
         $( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
     </script>
-
     <?php endif;?>
+
+    

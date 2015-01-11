@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 10, 2015 at 03:20 PM
+-- Generation Time: Jan 11, 2015 at 03:50 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `course` (
 --
 
 CREATE TABLE IF NOT EXISTS `equivalent` (
-  `CourseEquivalent` varchar(100) NOT NULL,
+  `CourseEquivalent` varchar(30) NOT NULL,
   `courseID` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -131,7 +131,14 @@ CREATE TABLE IF NOT EXISTS `teacher` (
   `lname` varchar(20) NOT NULL,
   `role` enum('admin','teacher') NOT NULL,
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `teacher`
+--
+
+INSERT INTO `teacher` (`ID`, `teacher_id`, `fname`, `mname`, `lname`, `role`, `password`) VALUES
+(1, '1111111111', 'Test', 'Test', 'Test', 'teacher', 'e8248cbe79a288ffec75d7300ad2e07172f487f6');
 
 -- --------------------------------------------------------
 
@@ -140,11 +147,11 @@ CREATE TABLE IF NOT EXISTS `teacher` (
 --
 
 CREATE TABLE IF NOT EXISTS `teacher_class` (
-  `ID` int(5) NOT NULL,
+`ID` int(5) NOT NULL,
   `group_num` int(4) NOT NULL,
-  `start_time` time NOT NULL,
-  `end_time` time NOT NULL,
-  `courseID` int(3) NOT NULL,
+  `start_time` char(10) NOT NULL,
+  `end_time` char(10) NOT NULL,
+  `courseCode` varchar(9) NOT NULL,
   `teacherID` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -156,7 +163,7 @@ CREATE TABLE IF NOT EXISTS `teacher_class` (
 -- Indexes for table `course`
 --
 ALTER TABLE `course`
- ADD PRIMARY KEY (`ID`), ADD KEY `ID` (`ID`), ADD KEY `programID` (`programID`);
+ ADD PRIMARY KEY (`ID`), ADD UNIQUE KEY `CourseCode` (`CourseCode`), ADD KEY `ID` (`ID`), ADD KEY `programID` (`programID`);
 
 --
 -- Indexes for table `equivalent`
@@ -204,7 +211,7 @@ ALTER TABLE `teacher`
 -- Indexes for table `teacher_class`
 --
 ALTER TABLE `teacher_class`
- ADD KEY `courseID` (`courseID`,`teacherID`), ADD KEY `teacherID` (`teacherID`);
+ ADD PRIMARY KEY (`ID`), ADD KEY `courseID` (`courseCode`,`teacherID`), ADD KEY `teacherID` (`teacherID`), ADD KEY `courseCode` (`courseCode`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -234,7 +241,12 @@ MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT for table `teacher`
 --
 ALTER TABLE `teacher`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `teacher_class`
+--
+ALTER TABLE `teacher_class`
+MODIFY `ID` int(5) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --
@@ -275,8 +287,8 @@ ADD CONSTRAINT `student_course_ibfk_3` FOREIGN KEY (`programID`) REFERENCES `pro
 -- Constraints for table `teacher_class`
 --
 ALTER TABLE `teacher_class`
-ADD CONSTRAINT `teacher_class_ibfk_1` FOREIGN KEY (`courseID`) REFERENCES `student_course` (`courseID`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `teacher_class_ibfk_2` FOREIGN KEY (`teacherID`) REFERENCES `teacher` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `teacher_class_ibfk_2` FOREIGN KEY (`teacherID`) REFERENCES `teacher` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `teacher_class_ibfk_3` FOREIGN KEY (`courseCode`) REFERENCES `course` (`CourseCode`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

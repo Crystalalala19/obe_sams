@@ -45,18 +45,13 @@ class Model_admin extends CI_Model {
     }
 
     function insert_course($data) {
-        $this->db->insert_batch('course', $data);
+        $this->db->insert('course', $data);
 
         return $this->check_query();
     }
 
-    function insert_equivalents($data) {
-        // foreach($data as $value) {
-            // print_r($value);    
-            $this->db->insert_batch('equivalent', $data);
-        // }
-
-        // die();
+    function insert_equivalents($data) {  
+        $this->db->insert('equivalent', $data);
 
         return $this->check_query();
     }
@@ -146,6 +141,11 @@ class Model_admin extends CI_Model {
     }
     // END TEACHER
 
+    function insert_classes($data) {
+        $this->db->insert('teacher_class', $data);
+
+        return $this->check_query();
+    }
     
 }
 ?>

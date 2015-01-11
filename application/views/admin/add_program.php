@@ -27,13 +27,13 @@
         <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>', 
     '</div>');
-    echo form_open('admin/add_program');
+    echo form_open('admin/programs/add');
 ?>
         <div id="step-1">
             <p class="text-right">Step 1 of 3</p>
             <div class="form-group col-md-6">
                 <label class="control-label" for="program_inp">Program:</label>
-                <select class="form-control input-sm" id="program_inp" name="program">
+                <select class="form-control input-sm" id="program_inp" name="program" required>
                     <option selected="selected" value="">Select program: </option>
                     <option value="BSCS">BSCS</option>
                     <option value="BSIT">BSIT</option>
@@ -45,7 +45,7 @@
                 <?php
                     function yearDropdown($startYear, $endYear, $id="year"){
                         //start the select tag
-                        echo "<select class='form-control input-sm' id=".$id." name=".$id.">";
+                        echo "<select class='form-control input-sm' id=".$id." name=".$id." required>";
                             echo '<option selected="selected" value="">Select year: </option>';  
                             //echo each year as an option    
                             for ($i=$startYear;$i<=$endYear;$i++){
@@ -71,9 +71,9 @@
                         </tr>
                         <tr>
                             <td><p style="margin:4px 2px;">1.</p></td>
-                            <td><input type="text" class="form-control input-sm" name="po_code[]"></td>
-                            <td><input type="text" class="form-control input-sm" name="po_attrib[]"></td>
-                            <td><textarea class="form-control input-sm" name="po_desc[]" rows="3"></textarea></td>
+                            <td><input type="text" class="form-control input-sm" name="po_code[]" required></td>
+                            <td><input type="text" class="form-control input-sm" name="po_attrib[]" required></td>
+                            <td><textarea class="form-control input-sm" name="po_desc[]" rows="3" required></textarea></td>
                         </tr>
                     </tbody>
                 </table>
@@ -96,8 +96,8 @@
                         </tr>
                         <tr>
                             <td><p style="margin:4px 2px;">1.</p></td>
-                            <td><input type="text" class="form-control input-sm" name="co_code[]"></td>
-                            <td><textarea class="form-control input-sm" name="co_desc[]" rows="3"></textarea></td>
+                            <td><input type="text" class="form-control input-sm" name="co_code[]" required></td>
+                            <td><textarea class="form-control input-sm" name="co_desc[]" rows="3" required></textarea></td>
                             <td><input type="text" class="form-control input-sm" name="co_equi[]"></td>
                         </tr>
                     </tbody>
@@ -136,11 +136,11 @@
             var cellcol0 = row.insertCell(0);
             cellcol0.innerHTML = "<p style='margin:4px 2px;'>"+lastrow+".</p>";
             var cellcol1 = row.insertCell(1);
-            cellcol1.innerHTML = "<input type='text' class='form-control input-sm' name='po_code[]'></input>";
+            cellcol1.innerHTML = "<input type='text' class='form-control input-sm' name='po_code[]' required></input>";
             var cellcol2 = row.insertCell(2);
-            cellcol2.innerHTML = "<input type='text' class='form-control input-sm' name='po_attrib[]'></input>";
+            cellcol2.innerHTML = "<input type='text' class='form-control input-sm' name='po_attrib[]' required></input>";
             var cellcol3 = row.insertCell(3);
-            cellcol3.innerHTML = "<textarea class='form-control input-sm' name='po_desc[]' rows='3'></textarea>";
+            cellcol3.innerHTML = "<textarea class='form-control input-sm' name='po_desc[]' rows='3' required></textarea>";
         }
 
         function removeRow(){
@@ -161,13 +161,13 @@
             var cellcol0 = row.insertCell(0);
             cellcol0.innerHTML = "<p style='margin:4px 2px;'>"+lastrow+".</p>";
             var cellcol1 = row.insertCell(1);
-            cellcol1.innerHTML = "<input type='text' class='form-control input-sm' name='po_code[]'></input>";
+            cellcol1.innerHTML = "<input type='text' class='form-control input-sm' name='co_code[]' required></input>";
             var cellcol2 = row.insertCell(2);
-            cellcol2.innerHTML = "<input type='text' class='form-control input-sm' name='po_attrib[]'></input>";
+            cellcol2.innerHTML = "<textarea class='form-control input-sm' name='co_desc[]' rows='3'></textarea>";
             var cellcol3 = row.insertCell(3);
-            cellcol3.innerHTML = "<textarea class='form-control input-sm' name='po_desc[]' rows='3'></textarea>";
+            cellcol3.innerHTML = "<input type='text' class='form-control input-sm' name='co_equi[]' required></input>";
         }
-
+        
         function removeRow2(){
             var lastrow = table2.rows.length;
             if(lastrow<3){
