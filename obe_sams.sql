@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 11, 2015 at 03:50 PM
+-- Generation Time: Jan 11, 2015 at 07:50 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -163,7 +163,7 @@ CREATE TABLE IF NOT EXISTS `teacher_class` (
 -- Indexes for table `course`
 --
 ALTER TABLE `course`
- ADD PRIMARY KEY (`ID`), ADD UNIQUE KEY `CourseCode` (`CourseCode`), ADD KEY `ID` (`ID`), ADD KEY `programID` (`programID`);
+ ADD PRIMARY KEY (`ID`), ADD KEY `programID` (`programID`), ADD KEY `CourseCode` (`CourseCode`);
 
 --
 -- Indexes for table `equivalent`

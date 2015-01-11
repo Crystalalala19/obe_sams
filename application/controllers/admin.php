@@ -81,9 +81,15 @@ class Admin extends CI_Controller {
                 }
 
                 $po_result = $this->model_admin->insert_po($po_fields);
-                // die();
-                // works here
+
                 $exploded = array();
+                $course_equi_array = array();
+
+                foreach($course_equi as $key => $val) {
+                    $exploded[$key] = explode(", ", $val);                        
+                }
+
+                $course_id = array();
 
                 foreach($course_rows as $key => $val ) {
                     $course_fields = array(
@@ -91,29 +97,28 @@ class Admin extends CI_Controller {
                         'CourseDesc' => $course_desc[$key],
                         'programID' => $id
                     );
+                    $course_result = $this->model_admin->insert_course($course_fields);
 
-                    die($course_result = $this->model_admin->insert_course($course_fields));
-
-                    $course_id = $this->model_admin->get_lastId();
-
-                    foreach($course_equi as $key => $val) {
-                        $exploded[$key] = explode(", ", $val);
-                    }
-
-                    foreach($exploded as $key => $val) {
-                        $course_equi_array = array(
-                            'CourseEquivalent' => $val,
-                            'courseID' => $course_id
-                        );
-
-                        $equi_result = $this->model_admin->insert_equivalents($course_equi_array);
-                    }
+                    $course_id[] = $this->model_admin->get_lastId();
                 }
+
+                foreach($exploded as $key1 => $exploded_data) {
+                    // print_r($exploded_data);
+                    
+                    foreach ($exploded_data as $key2 => $value) {
+                        $course_equi_array[$key2]['CourseEquivalent'] = $value;
+                        $course_equi_array[$key2]['courseID'] = $course_id[$key1];
+                    }
+                    // print_r($course_equi_array);
+                }
+                
+                // die();
+                $equi_result = $this->model_admin->insert_equivalents($course_equi_array);
 
                 if($this->db->trans_status() === FALSE) {
                     $this->db->trans_rollback();
 
-                    $message = '<strong>Error: </strong>'. $this->db->_error_message();
+                    $message = '<strong>Error: </strong>'. $this->model_admin->show_error();
                     $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
 
                     $data['message'] = $message;

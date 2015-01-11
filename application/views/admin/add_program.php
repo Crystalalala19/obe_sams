@@ -165,7 +165,7 @@
             var cellcol2 = row.insertCell(2);
             cellcol2.innerHTML = "<textarea class='form-control input-sm' name='co_desc[]' rows='3'></textarea>";
             var cellcol3 = row.insertCell(3);
-            cellcol3.innerHTML = "<input type='text' class='form-control input-sm' name='co_equi[]' required></input>";
+            cellcol3.innerHTML = "<input type='text' class='form-control input-sm' name='co_equi[]'></input>";
         }
         
         function removeRow2(){

@@ -31,6 +31,10 @@ class Model_admin extends CI_Model {
         }
     }
 
+    function show_error() {
+        return $this->db->_error_message();
+    }
+
     function insert_program($data) {
         $this->db->insert('program', $data);
 
@@ -51,7 +55,7 @@ class Model_admin extends CI_Model {
     }
 
     function insert_equivalents($data) {  
-        $this->db->insert('equivalent', $data);
+        $this->db->insert_batch('equivalent', $data);
 
         return $this->check_query();
     }
