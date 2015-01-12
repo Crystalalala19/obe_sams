@@ -21,7 +21,14 @@ class Site extends CI_Controller {
             $this->load->view('admin/index');
         }  
         elseif($this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'teacher') {
-            $this->load->view('teacher/teacher');
+             
+             $this->load->model("model_users");
+             $data['user'] = $this->model_users->select_user();
+             $data['title'] = "Outcome-based Education";
+             
+             $this->load->view("teacher/header", $data);
+             $this->load->view('teacher/index', $data);
+             $this->load->view("teacher/footer");
         } 
         else{  
             redirect('site/restricted');
@@ -41,7 +48,7 @@ class Site extends CI_Controller {
 
         if ($this->form_validation->run()) {
             $data = array(
-                'login_id' => $this->input->post('idnum'),
+                'teacher_id' => $this->input->post('idnum'),
                 'is_logged_in' => 1,
                 'role' => $this->model_users->scalar('teacher','role')
             );
@@ -74,4 +81,44 @@ class Site extends CI_Controller {
         $this->session->sess_destroy();
         redirect(base_url());
     }
+
+
+    function course_list(){
+      
+      $this->load->model("model_users");
+      $data['teacher_class'] = $this->model_users->teacher_class();
+      $data['user'] = $this->model_users->select_user();
+      $data['title'] = "Outcome-based Education";
+
+      $this->load->view("teacher/header", $data);
+      $this->load->view('teacher/course_list', $data);
+      $this->load->view("teacher/footer");
+   }
+
+   function class_list(){
+      
+      $data['id'] = $this->uri->segment(4);
+      $data['row'] = $this->model_admin->check_rowID('teacher', $id);
+
+      $data['result'] = $this->model_users->select_class();
+      $data['user'] = $this->model_users->select_user();
+      $data['title'] = "Outcome-based Education";
+
+      $this->load->view("teacher/header", $data);
+      $this->load->view('teacher/class_list', $data);
+      $this->load->view("teacher/footer");
+   }
+
+    function scorecard(){
+      
+      $this->load->model("model_users");
+      $data['result'] = $this->model_users->select_class();
+      $data['user'] = $this->model_users->select_user();
+      $data['title'] = "Outcome-based Education";
+
+      $this->load->view("teacher/header", $data);
+      $this->load->view('teacher/scorecard', $data);
+      $this->load->view("teacher/footer");
+   }
+
 }

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 11, 2015 at 07:50 PM
+-- Generation Time: Jan 12, 2015 at 02:34 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -31,7 +31,14 @@ CREATE TABLE IF NOT EXISTS `course` (
   `CourseCode` varchar(9) NOT NULL,
   `CourseDesc` varchar(255) NOT NULL,
   `programID` int(3) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `course`
+--
+
+INSERT INTO `course` (`ID`, `CourseCode`, `CourseDesc`, `programID`) VALUES
+(1, 'CS110', 'basic programming', 1);
 
 -- --------------------------------------------------------
 
@@ -43,6 +50,13 @@ CREATE TABLE IF NOT EXISTS `equivalent` (
   `CourseEquivalent` varchar(30) NOT NULL,
   `courseID` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `equivalent`
+--
+
+INSERT INTO `equivalent` (`CourseEquivalent`, `courseID`) VALUES
+('IT110', 1);
 
 -- --------------------------------------------------------
 
@@ -57,7 +71,14 @@ CREATE TABLE IF NOT EXISTS `po` (
   `description` text NOT NULL,
   `status` enum('0','1') NOT NULL,
   `programID` int(3) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `po`
+--
+
+INSERT INTO `po` (`ID`, `attribute`, `poCode`, `description`, `status`, `programID`) VALUES
+(1, 'Ethics', 'CS01', 'etrtsertertwertwert', '0', 1);
 
 -- --------------------------------------------------------
 
@@ -69,7 +90,14 @@ CREATE TABLE IF NOT EXISTS `program` (
 `ID` int(3) NOT NULL,
   `programName` enum('BSICT','BSIT','BSCS') NOT NULL,
   `effective_year` year(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `program`
+--
+
+INSERT INTO `program` (`ID`, `programName`, `effective_year`) VALUES
+(1, 'BSCS', 2006);
 
 -- --------------------------------------------------------
 
@@ -113,8 +141,7 @@ CREATE TABLE IF NOT EXISTS `student_course` (
   `courseID` int(3) NOT NULL,
   `studentID` int(10) NOT NULL,
   `programID` int(3) NOT NULL,
-  `school_year` year(4) NOT NULL,
-  `semester` enum('1','2','summer') NOT NULL
+  `classID` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -151,8 +178,11 @@ CREATE TABLE IF NOT EXISTS `teacher_class` (
   `group_num` int(4) NOT NULL,
   `start_time` char(10) NOT NULL,
   `end_time` char(10) NOT NULL,
+  `days` char(7) NOT NULL,
+  `semester` enum('1','2','summer') NOT NULL,
+  `school_year` year(4) NOT NULL,
   `courseCode` varchar(9) NOT NULL,
-  `teacherID` int(3) NOT NULL
+  `teacherID` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -199,7 +229,7 @@ ALTER TABLE `student`
 -- Indexes for table `student_course`
 --
 ALTER TABLE `student_course`
- ADD KEY `courseID` (`courseID`,`studentID`), ADD KEY `studentID` (`studentID`), ADD KEY `programID` (`programID`);
+ ADD KEY `courseID` (`courseID`,`studentID`), ADD KEY `studentID` (`studentID`), ADD KEY `programID` (`programID`), ADD KEY `classID` (`classID`);
 
 --
 -- Indexes for table `teacher`
@@ -221,17 +251,17 @@ ALTER TABLE `teacher_class`
 -- AUTO_INCREMENT for table `course`
 --
 ALTER TABLE `course`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `po`
 --
 ALTER TABLE `po`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `program`
 --
 ALTER TABLE `program`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `student`
 --
@@ -279,16 +309,17 @@ ADD CONSTRAINT `scorecard_ibfk_1` FOREIGN KEY (`programID`) REFERENCES `student_
 -- Constraints for table `student_course`
 --
 ALTER TABLE `student_course`
-ADD CONSTRAINT `student_course_ibfk_1` FOREIGN KEY (`studentID`) REFERENCES `student` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `student_course_ibfk_1` FOREIGN KEY (`programID`) REFERENCES `program` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `student_course_ibfk_2` FOREIGN KEY (`courseID`) REFERENCES `course` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `student_course_ibfk_3` FOREIGN KEY (`programID`) REFERENCES `program` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `student_course_ibfk_3` FOREIGN KEY (`studentID`) REFERENCES `student` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `student_course_ibfk_4` FOREIGN KEY (`classID`) REFERENCES `teacher_class` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `teacher_class`
 --
 ALTER TABLE `teacher_class`
-ADD CONSTRAINT `teacher_class_ibfk_2` FOREIGN KEY (`teacherID`) REFERENCES `teacher` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `teacher_class_ibfk_3` FOREIGN KEY (`courseCode`) REFERENCES `course` (`CourseCode`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `teacher_class_ibfk_1` FOREIGN KEY (`teacherID`) REFERENCES `teacher` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `teacher_class_ibfk_2` FOREIGN KEY (`courseCode`) REFERENCES `course` (`CourseCode`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
