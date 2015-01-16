@@ -7,7 +7,6 @@ class Model_users extends CI_Model {
 	}
 
 	public function scalar($teacher, $role){
-
 		$this->db->where('teacher_id', $this->input->post('idnum'));
 		$this->db->select($role);                                                                                                                     
 
@@ -40,25 +39,19 @@ class Model_users extends CI_Model {
 
 
 	
-	function select_user(){
-		
-
+	function select_user(){		
 		$query = $this->db->query("SELECT * FROM teacher WHERE teacher_id = '".$this->session->userdata('teacher_id')."'");
-		//$query = $this->db->get_where('teacher',array('teacher_id=>1'));
 
 		return $query->result_array();
 	}
 
 	function teacher_class(){
-
 		$query = $this->db->query("SELECT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."'");
 
 		return $query->result();
-
 	}
 
 	function select_class(){
-
 		$query = $this->db->query("SELECT * FROM student_course INNER JOIN student ON student_course.studentID = student.student_id
 																INNER JOIN program ON student_course.programID = program.ID
 																INNER JOIN teacher_class ON student_course.courseID = teacher_class.courseID 
@@ -67,7 +60,6 @@ class Model_users extends CI_Model {
 	}
 
 	function check_row($table, $id){
-      
 		$query = $this->db->get_where($table, array('ID' => $id));
 		if($query->num_rows() > 0)
 			return $query->row_array();

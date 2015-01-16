@@ -35,14 +35,42 @@ class Model_admin extends CI_Model {
         return $this->db->_error_message();
     }
 
+    function get_programYears($data) {
+        $query1 = $this->db->get_where('program', $data);
+
+        foreach ($query1->result_array() as $row) {
+            $new = array(
+            'programID' => $row['ID']
+            );
+
+            $query2 = $this->db->get_where('program_year', $new);
+        }
+
+        return $query2->result_array();
+    }
+
     function insert_program($data) {
         $this->db->insert('program', $data);
 
         return $this->check_query();
     }
 
+    function insert_programYear($data, $year) {
+        $query = $this->db->get_where('program', $data);
+
+        foreach($query->result_array() as $row) {
+            $new = array(
+                'effective_year' => $year,
+                'programID' => $row['ID']
+            );
+        }
+
+        $this->db->insert('program_year', $new);
+
+        return $this->check_query();
+    }
+
     function insert_po($data) {
-        // $this->db->get_where('po', array('programID' => $this->db->insert_id()));
         $this->db->insert_batch('po', $data);
     
         return $this->check_query();

@@ -18,81 +18,100 @@
                         </div>
                     </div>
                     <!-- /.row -->
-    <?php if(!empty($message)): ?>
-    <div class="alert alert-info alert-dismissible" role="alert">
+    <?php
+    echo $this->session->flashdata('message');
+    if (!empty($message)): echo $message;
+
+    echo validation_errors('
+    <div class="alert alert-danger alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>  
-        <span class="sr-only">Information:</span>
-        <?php echo $message;?>
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> ', 
+    '</div>');
+    ?>
+    <?php endif;?>
+
+    <div class="form-group col-md-12">
+        <button class="btn btn-info" data-toggle='modal' data-target='#add' title="New Program"><i class="fa fa-plus"></i> New Program</button>
     </div>
-    <?php else: ?>
-    <table id="view_programs" class="table table-striped table-bordered dataTable no-footer">
-        <thead>
-            <tr>
-                <th>Program</th>
-                <th>Year</th>
-                <th width="10%">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach($program_list as $row): ?>
-                <tr>            
-                    <td><?php echo $row['programName'];?></td>
-                    <td><?php echo $row['effective_year'];?></td>
-                    <td>
-                        <div class="btn-group inline pull-left">
-                            <a type="button" class="btn btn-primary btn-sm fa fa-pencil" href="<?php echo base_url();?>admin/programs/edit/<?php echo $row['ID'];?>" target="_blank"></a>
-                            <a type="button" class="btn btn-danger btn-sm fa fa-trash-o" href="javascript:delpost('2','Cafe Maru')" target="_blank"></a>
+
+    <div class='modal fade' id='add' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+        <div class='modal-dialog modal-vertical-centered'>
+            <div class='modal-content'>
+                <div class='modal-header'>
+                    <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
+                    <h4 class='modal-title' id='myModalLabel'><i class="fa fa-plus"></i> New Program</h4>
+                </div>
+                <div class='modal-body'>
+                    <?php echo form_open('admin/programs/view'); ?>
+                        <div class="form-group col-xs-4 col-sm-4 col-md-4">
+                            <label for="program_name">Program Name:</label>
+                            <input type="text" class="form-control input-sm" name="program_name" id="program_name" value="<?php echo set_value('teacher_fname'); ?>" required>
                         </div>
-                    </td>
+                        <div class="clearfix"></div>
+                </div>
+                <div class='modal-footer'>
+                    <input type="submit" class="btn btn-success" name="submit" value="Submit">
+                    <input type="reset" class="btn btn-info" value="Clear">
+                    <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+                </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+
+    <?php if($program_list != FALSE):?>
+    <div class="form-group col-md-2">
+        <label for="program_ajax">Program:</label>
+        <select name="program" class="form-control input-sm" id="program_ajax">
+            <option selected="selected" value="">Select program: </option>
+            <?php foreach($program_list as $row): ?>
+            <option value="<?php echo $row['programName'];?>"><?php echo $row['programName'];?></option>
+            <?php endforeach;?>
+        </select>
+    </div>
+
+    <div class="form-group col-md-10">
+        <table id="view_programs" class="table table-striped table-bordered dataTable no-footer">
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th width="10%">Action</th>
                 </tr>
-            <?php endforeach; ?>        
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                    
+            </tbody>
+        </table>
+    </div>
+
     <?php endif; ?>
 
     <script type="text/javascript" language="javascript">
         var d = document.getElementById("program_dropdown");
         d.className = d.className + " active";
-        
-        var dataTableOptions = {
-            //Disable sorting for column Action
-            aoColumnDefs: [{ 'bSortable': false, 'aTargets': [2] }],
-        };
 
-        var tableToolsOptions = {
-            "sSwfPath": "http://cdn.datatables.net/tabletools/2.2.3/swf/copy_csv_xls_pdf.swf",
-            "aButtons": [ {
-                    "sExtends": "copy",
-                    "sButtonText": "Copy",
-                    //Columns to export as data, exluded Action column
-                    "mColumns": [ 0, 1 ],
-                }, {
-                    "sExtends": "print",
-                    "sButtonText": "Print",
-                    "bShowAll": false
-                }, {
-                    "sExtends":    "collection",
-                    "sButtonText": "Save as...",
-                    "aButtons":    [ {
-                            "sExtends": "xls",
-                            "oSelectorOpts": {
-                                page: 'current'
-                            },
-                            "mColumns": [ 0, 1 ]
-                        }, {
-                            "sExtends": "pdf",
-                            "sButtonText": "PDF",
-                            "mColumns": [ 0, 1 ]
-                        }
-                    ]
-                }
-            ]
-        };
+        $('#program_ajax').change(function() {
+            var selectedValue = this.value;
+            
+            if(selectedValue == '') {
+                alert('Empty');
+            }
+            else {
+                $.ajax({
+                    url: '<?php echo site_url("index.php/admin/program_ajax");?>',
+                    type: 'post',
+                    data: {option: selectedValue},
+                    dataType: 'json',
+                    success: function(response) {
+                        $.each(response, function(key, value) {
+                            $('<tr>').append(
+                                $('<td>').text(value.effective_year)
+                            ).appendTo('#view_programs');
+                        });
 
-        var table = $('#view_programs').dataTable( dataTableOptions );
-
-        var tt = new $.fn.dataTable.TableTools( table, tableToolsOptions );
-
-        $( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
+                        console.log(response);
+                    }
+                });
+            }
+        });
     </script>

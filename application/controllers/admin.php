@@ -25,11 +25,12 @@ class Admin extends CI_Controller {
             return TRUE;
         }
     }
+
     // END
 
     public function add_program(){
         $data['title'] = 'Admin - Add new Program';
-        $data['header'] = 'Add new Program';
+        $data['header'] = 'Add Program Outcome';
 
         $this->load->library('form_validation');
 
@@ -40,6 +41,8 @@ class Admin extends CI_Controller {
         $this->form_validation->set_rules("po_desc[]", "PO Description", "required|trim");
         $this->form_validation->set_rules("co_code[]", "Course Code", "required|trim");
         $this->form_validation->set_rules("co_desc[]", "Course Description", "required|trim");
+
+        $data['program_list'] = $this->model_admin->check_rows('program');
         
         if($this->form_validation->run() == FALSE){
             $data['message'] = '';
@@ -54,12 +57,16 @@ class Admin extends CI_Controller {
             $course_equi = $this->input->post('co_equi');
 
             $program = array(
-                'programName' => $this->input->post('program'),
-                'effective_year' => $this->input->post('effective_year')
+                'programName' => $this->input->post('program')
             );
 
+            $year = $this->input->post('effective_year');
+
             $this->db->trans_start();
-            $program_result = $this->model_admin->insert_program($program);
+
+            //PROGRAM YEAR INSERT NOT WORKING, TO DO
+
+            $program_result = $this->model_admin->insert_programYear($program, $year);
             $id = $this->model_admin->get_lastId();
 
             if($program_result['is_success'] == FALSE) {
@@ -102,6 +109,7 @@ class Admin extends CI_Controller {
                     $course_id[] = $this->model_admin->get_lastId();
                 }
 
+                // print_r($exploded);
                 foreach($exploded as $key1 => $exploded_data) {
                     // print_r($exploded_data);
                     
@@ -140,23 +148,67 @@ class Admin extends CI_Controller {
         $this->load->view('admin/footer'); 
     }
 
-    public function view_programs() {
-        if(empty($url)) {
-            $data['title'] = 'Admin - View Programs';
-            $data['header'] = 'View Programs';
-            $data['program_list'] = $this->model_admin->check_rows('program');
+    function test() {
+        $data = array(
+            'programName' => 'BSCS'
+        );
 
-            if($data['program_list'] == FALSE) {
-                $data['message'] = 'No programs found. Please consider adding.';
+        $year = '2007';
+
+        $result = $this->model_admin->insert_programYear($data, $year);
+    }
+
+    function program_ajax() {
+        $data = array(
+            'programName' => $this->input->post('option')
+        );
+
+        $result = $this->model_admin->get_programYears($data);
+
+        echo json_encode($result);
+    }
+
+    public function view_programs() {
+        $data['title'] = 'Admin - View Programs';
+        $data['header'] = 'View Programs';
+        
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('program_name', 'Program Name', 'required|trim');
+
+        if($this->form_validation->run() == FALSE) {
+            $data['message'] = '';
+        }
+        else {
+            $data = array(
+                'programName' => $this->input->post('program_name')
+            );
+            $result = $this->model_admin->insert_program($data);
+
+            if($result['is_success'] == FALSE) {
+                $message = '<strong>Error: </strong>'.  $result['db_error'];
+                $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
+
+                $data['message'] = $message; 
             }
             else {
-                $data['message'] = '';
-            }
+                $message = '<strong>Success!</strong> Program added.';
+                $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
 
-            $this->load->view('admin/header', $data);
-            $this->load->view('admin/view_programs', $data);
-            $this->load->view('admin/footer');
+                $this->session->set_flashdata('message', $message);
+                redirect(current_url());
+            }
         }
+        
+        $data['program_list'] = $this->model_admin->check_rows('program');
+
+        if($data['program_list'] == FALSE) {
+            $data['message'] = 'No programs found. Please consider adding.';
+        }
+
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/view_programs', $data);
+        $this->load->view('admin/footer');
     }
 
     public function edit_program() {
