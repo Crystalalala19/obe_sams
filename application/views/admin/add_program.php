@@ -34,7 +34,7 @@
             <div class="form-group col-md-6">
                 <label class="control-label" for="program_inp">Program:</label>
                 <?php if($program_list == FALSE):?>
-                    <div class="alert alert-danger"><strong>Notice:</strong> No programs found. Please consider adding.</div>
+                    <div class="alert alert-info"><strong>Notice:</strong> No programs to list. <a href="<?php echo base_url(); ?>admin/programs/view">Click here to add.</a></div>
                 <?php else:?>
                 <select class="form-control input-sm" id="program_inp" name="program" required>
                     <option selected="selected" value="">Select program: </option>
@@ -58,7 +58,7 @@
                         //close the select tag
                         echo "</select>";
                     }
-                    yearDropdown(2000, 2100, "effective_year");
+                    yearDropdown(date('Y'), 2100, "effective_year");
                 ?>
             </div>
         </div>

@@ -20,7 +20,7 @@
                     <!-- /.row -->
     <?php
     echo $this->session->flashdata('message');
-    if (!empty($message)): echo $message;
+    if (!empty($message)) echo $message;
 
     echo validation_errors('
     <div class="alert alert-danger alert-dismissible" role="alert">
@@ -28,7 +28,6 @@
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> ', 
     '</div>');
     ?>
-    <?php endif;?>
 
     <div class="form-group col-md-12">
         <button class="btn btn-info" data-toggle='modal' data-target='#add' title="New Program"><i class="fa fa-plus"></i> New Program</button>
@@ -71,11 +70,11 @@
     </div>
 
     <div class="form-group col-md-10">
-        <table id="view_programs" class="table table-striped table-bordered dataTable no-footer">
+        <table id="view_programs" class="table table-striped table-bordered">
             <thead>
                 <tr>
                     <th>Year</th>
-                    <th width="10%">Action</th>
+                    <th width="12%">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -83,8 +82,6 @@
             </tbody>
         </table>
     </div>
-
-    <?php endif; ?>
 
     <script type="text/javascript" language="javascript">
         var d = document.getElementById("program_dropdown");
@@ -105,13 +102,14 @@
                     success: function(response) {
                         $.each(response, function(key, value) {
                             $('<tr>').append(
-                                $('<td>').text(value.effective_year)
+                                $('<td>').html(value.effective_year),
+                                $('<td>').html("<div class='btn-group inline pull-left'><a type='button' href='<?php echo base_url();?>admin/programs/edit/"+selectedValue+"/"+value.effective_year+"' class='btn btn-primary btn-sm btn-responsive fa fa-pencil' target='_blank'></a><a type='button' href='<?php echo base_url();?>admin/programs/delete/"+value.effective_year+"' class='btn btn-danger btn-sm btn-responsive fa fa-trash-o' onclick='return confirm(\"Do you want to permanently delete?\");'></a></div>")
                             ).appendTo('#view_programs');
                         });
-
                         console.log(response);
                     }
                 });
             }
         });
     </script>
+    <?php endif; ?>

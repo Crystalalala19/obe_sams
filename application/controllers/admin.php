@@ -7,6 +7,12 @@ class Admin extends CI_Controller {
         $this->load->model('model_admin');
     }
 
+    // Sublime -> Preferences -> Settings - User
+    // "translate_tabs_to_spaces": true,
+    // "tab_size": 4,
+    // "indent_to_bracket": true,
+    // "detect_indentation": false
+
     public function index(){
         $data['title'] = 'Admin - Dashboard';
 
@@ -26,10 +32,32 @@ class Admin extends CI_Controller {
         }
     }
 
-    // END
+    function test() {
+        $data = array(
+            'programName' => 'BSCS'
+        );
+
+        $year = '2007';
+
+        $result = $this->model_admin->insert_programYear($data, $year);
+
+        echo $result;
+        die();
+    }
+
+    function program_ajax() {
+        $data = array(
+            'programName' => $this->input->post('option')
+        );
+
+        $result = $this->model_admin->get_programYears($data);
+
+        echo json_encode($result);
+    }
+    // END FUNCTIONS
 
     public function add_program(){
-        $data['title'] = 'Admin - Add new Program';
+        $data['title'] = 'Admin - Add Program Outcome';
         $data['header'] = 'Add Program Outcome';
 
         $this->load->library('form_validation');
@@ -64,108 +92,79 @@ class Admin extends CI_Controller {
 
             $this->db->trans_start();
 
-            //PROGRAM YEAR INSERT NOT WORKING, TO DO
-
             $program_result = $this->model_admin->insert_programYear($program, $year);
-            $id = $this->model_admin->get_lastId();
+            $id = $program_result;
 
-            if($program_result['is_success'] == FALSE) {
-                $message = '<strong>Error: </strong>'.  $program_result['db_error'];
+            $po_fields = array();
+
+            foreach($po_rows as $key => $val){
+                $po_fields[] = array(
+                    'poCode' => $val,
+                    'attribute' => $attribs[$key],
+                    'description' => $descs[$key],
+                    'programID' => $id
+                );
+            }
+
+            $po_result = $this->model_admin->insert_po($po_fields);
+
+            $exploded = array();
+            $course_equi_array = array();
+
+            foreach($course_equi as $key => $val) {
+                $exploded[$key] = explode(", ", $val);                        
+            }
+
+            $course_id = array();
+
+            foreach($course_rows as $key => $val ) {
+                $course_fields = array(
+                    'CourseCode' => $val,
+                    'CourseDesc' => $course_desc[$key],
+                    'programID' => $id
+                );
+                $course_result = $this->model_admin->insert_course($course_fields);
+
+                $course_id[] = $this->model_admin->get_lastId();
+            }
+
+            // print_r($exploded);
+            foreach($exploded as $key1 => $exploded_data) {
+                // print_r($exploded_data);
+                
+                foreach ($exploded_data as $key2 => $value) {
+                    $course_equi_array[$key2]['CourseEquivalent'] = $value;
+                    $course_equi_array[$key2]['courseID'] = $course_id[$key1];
+                }
+                // print_r($course_equi_array);
+            }
+            
+            // die();
+            $equi_result = $this->model_admin->insert_equivalents($course_equi_array);
+
+            if($this->db->trans_status() === FALSE) {
+                $this->db->trans_rollback();
+
+                $message = '<strong>Error: </strong>'. $this->model_admin->show_error();
                 $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
 
                 $data['message'] = $message;
             }
-            else {
-                $po_fields = array();
+            else{
+                $this->db->trans_complete();
 
-                foreach($po_rows as $key => $val){
-                    $po_fields[] = array(
-                        'poCode' => $val,
-                        'attribute' => $attribs[$key],
-                        'description' => $descs[$key],
-                        'programID' => $id
-                    );
-                }
+                $message = '<strong>Success!</strong> Program added.';
+                $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
 
-                $po_result = $this->model_admin->insert_po($po_fields);
-
-                $exploded = array();
-                $course_equi_array = array();
-
-                foreach($course_equi as $key => $val) {
-                    $exploded[$key] = explode(", ", $val);                        
-                }
-
-                $course_id = array();
-
-                foreach($course_rows as $key => $val ) {
-                    $course_fields = array(
-                        'CourseCode' => $val,
-                        'CourseDesc' => $course_desc[$key],
-                        'programID' => $id
-                    );
-                    $course_result = $this->model_admin->insert_course($course_fields);
-
-                    $course_id[] = $this->model_admin->get_lastId();
-                }
-
-                // print_r($exploded);
-                foreach($exploded as $key1 => $exploded_data) {
-                    // print_r($exploded_data);
-                    
-                    foreach ($exploded_data as $key2 => $value) {
-                        $course_equi_array[$key2]['CourseEquivalent'] = $value;
-                        $course_equi_array[$key2]['courseID'] = $course_id[$key1];
-                    }
-                    // print_r($course_equi_array);
-                }
-                
-                // die();
-                $equi_result = $this->model_admin->insert_equivalents($course_equi_array);
-
-                if($this->db->trans_status() === FALSE) {
-                    $this->db->trans_rollback();
-
-                    $message = '<strong>Error: </strong>'. $this->model_admin->show_error();
-                    $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
-
-                    $data['message'] = $message;
-                }
-                else{
-                    $this->db->trans_complete();
-
-                    $message = '<strong>Success!</strong> Program added.';
-                    $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
-
-                    $this->session->set_flashdata('message', $message);
-                    redirect(current_url());
-                }
+                $this->session->set_flashdata('message', $message);
+                redirect(current_url());
             }
+            
         }
 
         $this->load->view('admin/header', $data);
         $this->load->view('admin/add_program', $data);
         $this->load->view('admin/footer'); 
-    }
-
-    function test() {
-        $data = array(
-            'programName' => 'BSCS'
-        );
-
-        $year = '2007';
-
-        $result = $this->model_admin->insert_programYear($data, $year);
-    }
-
-    function program_ajax() {
-        $data = array(
-            'programName' => $this->input->post('option')
-        );
-
-        $result = $this->model_admin->get_programYears($data);
-
-        echo json_encode($result);
     }
 
     public function view_programs() {
@@ -203,7 +202,8 @@ class Admin extends CI_Controller {
         $data['program_list'] = $this->model_admin->check_rows('program');
 
         if($data['program_list'] == FALSE) {
-            $data['message'] = 'No programs found. Please consider adding.';
+            $message = 'No programs found. Please consider adding.';
+            $data['message'] = $this->model_admin->notify_message('alert-info', 'glyphicon-info-sign', $message);
         }
 
         $this->load->view('admin/header', $data);
@@ -216,17 +216,25 @@ class Admin extends CI_Controller {
         $data['header'] = 'Edit Program';
         $data['message'] = '';
 
-        $id = $this->uri->segment(4);
+        $program = $this->uri->segment(4);
+        $year = $this->uri->segment(5);
 
-        if(!is_numeric($id)) {
-            $data['message'] = 'Invalid supplied data.';
-        }
-        elseif(!$this->model_admin->check_rowID('program', $id)) {
+        $program_data = array(
+            'programName' => $program
+        );
+
+        $year_data = array(
+            'effective_year' => $year
+        );
+
+        if(!$this->model_admin->get_year($year_data)) {
             $data['message'] = 'Program does not exists.';
         }
         else {
-            //Program's Information
-            $data['row'] = $this->model_admin->check_rowID('program', $id);
+            $data['program'] = $this->model_admin->get_program($program_data);
+            $data['program_list'] = $this->model_admin->check_rows('program');
+
+            $data['year'] = $this->model_admin->get_year($year_data);
         }
 
         $this->load->view('admin/header', $data);
@@ -234,6 +242,47 @@ class Admin extends CI_Controller {
         $this->load->view('admin/footer');
     }
 
+    public function delete_program() {
+        $id = $this->uri->segment(4);
+
+        if(!$this->model_admin->check_rowID('program', $id)) {
+            $message = 'ID number does not exists.';
+            $data['message'] = $this->model_admin->notify_message('alert-info', 'glyphicon-info-sign', $message);
+        }
+        else {
+            $delete = array('ID' => $id);
+
+            $result = $this->model_admin->delete_program($delete);
+
+            if($result['is_success'] == FALSE) {
+                $message = '<strong>Error: </strong>'.  $result['db_error'];
+                $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
+
+                $data['message'] = $message;
+            }
+            else {
+                $message = '<strong>Success!</strong> Program deleted.';
+                $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
+
+                $this->session->set_flashdata('message', $message);
+                redirect('admin/programs/view');
+            }
+        }
+    }
+
+    public function program_matrix() {
+        $data['title'] = 'Admin - Program Outcomes';
+        $data['header'] = 'Program Outcomes';
+        $data['message'] = '';
+
+
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/program_matrix', $data);
+        $this->load->view('admin/footer');
+    }
+    // END PROGRAM
+
+    // TEACHER
     public function teachers() {
         $this->load->library('encrypt');
         $this->load->library('form_validation');
@@ -373,6 +422,7 @@ class Admin extends CI_Controller {
             }
         }
     }
+    // END TEACHER
 
     public function upload_students(){
         $this->load->library('csvimport');

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 12, 2015 at 02:34 PM
+-- Generation Time: Jan 18, 2015 at 06:30 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -31,14 +31,7 @@ CREATE TABLE IF NOT EXISTS `course` (
   `CourseCode` varchar(9) NOT NULL,
   `CourseDesc` varchar(255) NOT NULL,
   `programID` int(3) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `course`
---
-
-INSERT INTO `course` (`ID`, `CourseCode`, `CourseDesc`, `programID`) VALUES
-(1, 'CS110', 'basic programming', 1);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -50,13 +43,6 @@ CREATE TABLE IF NOT EXISTS `equivalent` (
   `CourseEquivalent` varchar(30) NOT NULL,
   `courseID` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `equivalent`
---
-
-INSERT INTO `equivalent` (`CourseEquivalent`, `courseID`) VALUES
-('IT110', 1);
 
 -- --------------------------------------------------------
 
@@ -71,14 +57,7 @@ CREATE TABLE IF NOT EXISTS `po` (
   `description` text NOT NULL,
   `status` enum('0','1') NOT NULL,
   `programID` int(3) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `po`
---
-
-INSERT INTO `po` (`ID`, `attribute`, `poCode`, `description`, `status`, `programID`) VALUES
-(1, 'Ethics', 'CS01', 'etrtsertertwertwert', '0', 1);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -88,16 +67,19 @@ INSERT INTO `po` (`ID`, `attribute`, `poCode`, `description`, `status`, `program
 
 CREATE TABLE IF NOT EXISTS `program` (
 `ID` int(3) NOT NULL,
-  `programName` enum('BSICT','BSIT','BSCS') NOT NULL,
-  `effective_year` year(4) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `programName` char(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `program`
+-- Table structure for table `program_year`
 --
 
-INSERT INTO `program` (`ID`, `programName`, `effective_year`) VALUES
-(1, 'BSCS', 2006);
+CREATE TABLE IF NOT EXISTS `program_year` (
+  `effective_year` year(4) NOT NULL,
+  `programID` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -214,6 +196,12 @@ ALTER TABLE `program`
  ADD PRIMARY KEY (`ID`), ADD KEY `ID` (`ID`);
 
 --
+-- Indexes for table `program_year`
+--
+ALTER TABLE `program_year`
+ ADD KEY `programID` (`programID`), ADD KEY `programID_2` (`programID`);
+
+--
 -- Indexes for table `scorecard`
 --
 ALTER TABLE `scorecard`
@@ -251,17 +239,17 @@ ALTER TABLE `teacher_class`
 -- AUTO_INCREMENT for table `course`
 --
 ALTER TABLE `course`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `po`
 --
 ALTER TABLE `po`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `program`
 --
 ALTER TABLE `program`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `student`
 --
@@ -298,6 +286,12 @@ ADD CONSTRAINT `equivalent_ibfk_1` FOREIGN KEY (`courseID`) REFERENCES `course` 
 --
 ALTER TABLE `po`
 ADD CONSTRAINT `po_ibfk_1` FOREIGN KEY (`programID`) REFERENCES `program` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `program_year`
+--
+ALTER TABLE `program_year`
+ADD CONSTRAINT `program_year_ibfk_1` FOREIGN KEY (`programID`) REFERENCES `program` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `scorecard`

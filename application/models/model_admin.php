@@ -35,59 +35,6 @@ class Model_admin extends CI_Model {
         return $this->db->_error_message();
     }
 
-    function get_programYears($data) {
-        $query1 = $this->db->get_where('program', $data);
-
-        foreach ($query1->result_array() as $row) {
-            $new = array(
-            'programID' => $row['ID']
-            );
-
-            $query2 = $this->db->get_where('program_year', $new);
-        }
-
-        return $query2->result_array();
-    }
-
-    function insert_program($data) {
-        $this->db->insert('program', $data);
-
-        return $this->check_query();
-    }
-
-    function insert_programYear($data, $year) {
-        $query = $this->db->get_where('program', $data);
-
-        foreach($query->result_array() as $row) {
-            $new = array(
-                'effective_year' => $year,
-                'programID' => $row['ID']
-            );
-        }
-
-        $this->db->insert('program_year', $new);
-
-        return $this->check_query();
-    }
-
-    function insert_po($data) {
-        $this->db->insert_batch('po', $data);
-    
-        return $this->check_query();
-    }
-
-    function insert_course($data) {
-        $this->db->insert('course', $data);
-
-        return $this->check_query();
-    }
-
-    function insert_equivalents($data) {  
-        $this->db->insert_batch('equivalent', $data);
-
-        return $this->check_query();
-    }
-
     function check_rows($table) {
         $query = $this->db->get($table);
         if ($query->num_rows() > 0) {
@@ -95,6 +42,15 @@ class Model_admin extends CI_Model {
         }
         else {
             return FALSE;
+        }
+    }
+
+    function check_rowID($table, $id) {
+        $query = $this->db->get_where($table, array('ID' => $id));
+        if($query->num_rows() > 0)
+            return $query->row_array();
+        else {
+            return false;
         }
     }
 
@@ -118,14 +74,91 @@ class Model_admin extends CI_Model {
         }
     }
 
-    function check_rowID($table, $id) {
-        $query = $this->db->get_where($table, array('ID' => $id));
-        if($query->num_rows() > 0)
-            return $query->row_array();
+    // PROGRAMS
+    function insert_program($data) {
+        $this->db->insert('program', $data);
+
+        return $this->check_query();
+    }
+
+    function insert_programYear($data, $year) {
+        $query = $this->db->get_where('program', $data);
+
+        foreach($query->result_array() as $row) {
+            $new = array(
+                'effective_year' => $year,
+                'programID' => $row['ID']
+            );
+        }
+
+        $this->db->insert('program_year', $new);
+
+        return $row['ID'];
+    }
+
+    function insert_po($data) {
+        $this->db->insert_batch('po', $data);
+    
+        return $this->check_query();
+    }
+
+    function insert_course($data) {
+        $this->db->insert('course', $data);
+
+        return $this->check_query();
+    }
+
+    function insert_equivalents($data) {  
+        $this->db->insert_batch('equivalent', $data);
+
+        return $this->check_query();
+    }
+
+    function delete_program($data) {
+        $query = $this->db->delete('program', $data);
+
+        return $this->check_query();
+    }
+
+    function get_programYears($data) {
+        $query1 = $this->db->get_where('program', $data);
+
+        foreach ($query1->result_array() as $row) {
+            $new = array(
+            'programID' => $row['ID']
+            );
+
+            $query2 = $this->db->query("SELECT * FROM program_year WHERE programID = '".$row['ID']."' ORDER BY effective_year asc");
+        }
+
+        return $query2->result_array();
+    }
+
+    function get_year($data) {
+        $query = $this->db->get_where('program_year', $data);
+        
+        if ($query->num_rows() > 0){
+            $row = $query->row_array();
+            return $row['effective_year'];
+        }
         else {
-            return false;
+            return FALSE;
         }
     }
+
+    function get_program($data) {
+        $query = $this->db->get_where('program', $data);
+
+        if($query->num_rows() > 0){
+            $row = $query->row_array();
+            return $row['programName'];
+        }
+        else {
+            return FALSE;
+        }
+    }
+
+    // END PROGRAM
 
     // STUDENT
     function insert_csv($data) {
@@ -178,6 +211,5 @@ class Model_admin extends CI_Model {
 
         return $this->check_query();
     }
-    
 }
 ?>

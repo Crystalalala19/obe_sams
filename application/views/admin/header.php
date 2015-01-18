@@ -145,6 +145,10 @@
                     <li <?=echoActiveClassIfRequestMatches("teachers")?> id="teachers">
                         <a href="<?php echo base_url();?>admin/teachers"><i class="fa fa-book"></i> Teachers</a>
                     </li>
+
+                    <li>
+                        <a href="<?php echo base_url();?>admin/program_matrix"><i class="fa fa-book"></i> Program Outcome</a>
+                    </li>
                     
                     <!-- <li id="student_dropdown" class="">
                         <a href="javascript:;" data-toggle="collapse" data-target="#student"><i class="fa fa-users"></i> Students <i class="fa fa-fw fa-caret-down"></i></a>

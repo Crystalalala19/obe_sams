@@ -41,7 +41,8 @@
 //Programs
 $route['admin/programs/add'] = "admin/add_program";
 $route['admin/programs/view'] = "admin/view_programs";
-$route['admin/programs/edit/(:num)'] = "admin/edit_program";
+$route['admin/programs/edit/(:any)/(:num)'] = "admin/edit_program";
+$route['admin/programs/delete/(:num)'] = "admin/delete_program";
 
 $route['admin/view_students/edit/(:num)'] = "admin/edit_student";
 
