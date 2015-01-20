@@ -1,3 +1,14 @@
+<!-- For filter table -->
+<link href="shttp://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+<link href="http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/css/bootstrap-editable.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/css/bootstrap-filterable.css" rel="stylesheet">
+<link href="http://lightswitch05.github.io/filterable/stylesheets/main.css" rel="stylesheet">
+
+<!-- End filter table -->
+
+
+
 <section id='tools'>
         <ul class='breadcrumb' id='breadcrumb'>
           <li class='title'>Scorecard</li>
@@ -53,7 +64,7 @@
                                               <table class='table table-condensed'>
                                                 <thead>
                                                   <tr>
-                                                    <th>Course Code</th>
+                                                    <th style="visibility: hidden">Course Code</th>
                                                     <th>Program Outcome</th>
                                                    
                                                   </tr>
@@ -61,18 +72,24 @@
                                                 <tbody>
                                                   <tr>
                                                     <td>
-                                                        <table class='table table-condensed'>
+                                                   
+
+                                                         <table id="example-table" class="table table-striped table-hover table-condensed">
                                                             <thead>
-                                                              <tr>
-                                                                <th><div style="visibility: hidden">Course Code</div></th>                                                               
-                                                              </tr>
+                                                                <tr>
+                                                                    <th>Course Code</th>   
+                                                                </tr>
                                                             </thead>
-                                                            <tbody>
-                                                              <tr>
-                                                                <td>1</td>
-                                                              </tr>
-                                                            </tbody>
-                                                        </table>
+                                                             <tbody>
+                                                                    <tr>
+                                                                        <td>CS11</td>   
+                                                                    </tr>                                                                       
+                                                                </tbody>
+                                                            </table>
+
+
+
+
                                                     </td>
                                                     <td>
                                                         <table class='table table-bordered table-condensed'>
@@ -91,15 +108,15 @@
                                                             </thead>
                                                             <tbody>
                                                               <tr>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
+                                                                <td>1.9</td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
                                                               </tr>
                                                             </tbody>
                                                         </table>
@@ -218,7 +235,7 @@
                                                             </thead>
                                                             <tbody>
                                                               <tr>
-                                                                <td>1</td>
+                                                                <td>CS11</td>
                                                               </tr>
                                                             </tbody>
                                                         </table>
@@ -543,11 +560,14 @@
 </div>
 
 
-<!--Datatables-->
-<script src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
-<script src="<?php echo base_url();?>assets/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url();?>assets/js/dataTables.bootstrap.js"></script>
-<!--Datatables-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/bootstrap-editable.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/filterable-utils.js"></script>
+<script src="<?php echo base_url();?>assets/js/filterable-cell.js"></script>
+<script src="<?php echo base_url();?>assets/js/filterable-row.js"></script>
+<script src="<?php echo base_url();?>assets/js/filterable.js"></script>
+
 
 <script>
   $('#myTab a').click(function (e) {
@@ -564,30 +584,11 @@ $('#myTab1 a').click(function (e) {
 </script>
 
 <script type="text/javascript" language="javascript" class="init">
-    var d = document.getElementById('courselist');
+    var d = document.getElementById('studentlist');
     d.className = d.className + " active";
 </script>
 
-<script type="text/javascript" language="javascript" class="init">
-    $(document).ready(function() {
-        // Setup - add a text input to each footer cell
-        $('#example tfoot th').each( function () {
-            var title = $('#example thead th').eq( $(this).index() ).text();
-            $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
-        } );
-
-        // DataTable
-        var table = $('#example').DataTable();
-
-        // Apply the search
-        table.columns().eq( 0 ).each( function ( colIdx ) {
-
-            $( 'input', table.column( colIdx ).footer() ).on( 'keyup change', function () {
-                table
-                    .column( colIdx )
-                    .search( this.value )
-                    .draw();
-            } );
-        } );
-    } );
+<script type="text/javascript">
+   $('#example-table').filterable();
 </script>
+

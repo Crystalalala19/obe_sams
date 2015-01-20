@@ -19,15 +19,23 @@
         <link href="<?php echo base_url();?>assets/img/teacher.png" rel="icon" type="image/ico" />
         <!--  Bootstrap Style -->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.css">
-         <!-- Custom CSS -->
+         <!-- Custom CSS -->    
         <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/teacher.css">
         <!--  Font-Awesome Style -->
         <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/3.2.0/css/font-awesome.min.css">
         <!-- For datatable -->
         <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css">
-          
         <!-- end datatable -->
+        <style type="text/css">
+            div.DTTT { margin-bottom: 0.5em; float: right; }
+            div.dataTables_wrapper { clear: both; }
+        </style>
 
+
+        <!-- FOOTER -->
+
+        
+        
         <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
         <!--  Core Bootstrap Script -->
         <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/bootstrap.js"></script>
@@ -36,8 +44,10 @@
         
         <!--Datatables-->
         <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/dataTables.tableTools.min.js"></script>
         <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/dataTables.bootstrap.js"></script>
         <!--Datatables-->
+        
     </head>
     
     <body class='main page'>
@@ -80,6 +90,10 @@
                     <li id="courselist" <?=echoActiveClassIfRequestMatches("course_list")?> class='launcher'>
                         <i class='icon-table'></i>
                         <a href="<?php echo base_url();?>site/course_list/">Course</a>
+                    </li>
+                    <li id="studentlist" <?=echoActiveClassIfRequestMatches("student_list")?> class='launcher'>
+                        <i class='icon-user'></i>
+                        <a href="<?php echo base_url();?>site/student_list/">Student List</a>
                     </li>
                       <!--<li <?=echoActiveClassIfRequestMatches("forms")?> class="launcher">
                         <i class='icon-file-text-alt'></i>
