@@ -17,7 +17,7 @@
                     <!-- /.row -->
     <?php
     echo $this->session->flashdata('message');
-    if (!empty($message)): echo $message;
+    if (!empty($message)) echo $message;
 
     echo validation_errors('
     <div class="alert alert-danger alert-dismissible" role="alert">
@@ -25,7 +25,6 @@
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> ', 
     '</div>');
     ?>
-    <?php endif;?>
 
     <button class="btn btn-info" data-toggle='modal' data-target='#add' title="Add New"><i class="fa fa-plus"></i> Add new</button>
 
@@ -34,7 +33,7 @@
             <div class='modal-content'>
                 <div class='modal-header'>
                     <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
-                    <h4 class='modal-title' id='myModalLabel'>Enter information</h4>
+                    <h4 class='modal-title' id='myModalLabel'><i class="fa fa-plus"></i> Add Teacher</h4>
                 </div>
                 <div class='modal-body'>
                     <?php echo form_open('admin/teachers'); ?>
@@ -76,7 +75,7 @@
     <?php if($teacher_list != FALSE):?>
     <a href="<?php echo base_url();?>admin/teachers/assign" role="button" class="btn btn-warning"><i class="fa fa-list"></i> Assign Classes</a>
 
-    <table id="view_teachers" class="table table-striped table-bordered dataTable" cellspacing="0" width="100%">
+    <table id="view_teachers" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
             <tr>
                 <th width="15%">ID #</th>
@@ -93,8 +92,9 @@
                     <td><?php echo $row['lname'];?></td>
                     <td>
                         <div class="btn-group inline pull-left">
-                            <a type="button" title="Edit Teacher" class="btn btn-primary btn-sm fa fa-pencil" href="<?php echo base_url();?>admin/teachers/edit/<?php echo $row['ID'];?>" target="_blank"></a>
-                            <a type="button" title="Delete Teacher" class="btn btn-danger btn-sm fa fa-trash-o" href="<?php echo base_url();?>admin/teachers/delete/<?php echo $row['ID'];?>" onclick="return confirm('Do you want to permanently delete?');"></a>
+                            <a type="button" title="View Classes" class="btn btn-warning btn-sm btn-responsive fa fa-book" href="<?php echo base_url();?>admin/teachers/classes/<?php echo $row['ID'];?>" target="_blank"></a>
+                            <a type="button" title="Edit Teacher" class="btn btn-primary btn-sm btn-responsive fa fa-pencil-square-o" href="<?php echo base_url();?>admin/teachers/edit/<?php echo $row['ID'];?>" target="_blank"></a>
+                            <a type="button" title="Delete Teacher" class="btn btn-danger btn-sm btn-responsive fa fa-trash-o" href="<?php echo base_url();?>admin/teachers/delete/<?php echo $row['ID'];?>" onclick="return confirm('Do you want to permanently delete?');"></a>
                         </div>
                     </td>
                 </tr>
@@ -103,9 +103,6 @@
     </table>
 
     <script type="text/javascript" language="javascript">
-        // var d = document.getElementById("teacher_dropdown");
-        // d.className = d.className + " active";
-
         var dataTableOptions = {
             //Auto sort column
             aaSorting: [[1,'asc']],

@@ -25,13 +25,13 @@
         <span class="sr-only">Information:</span>
         <?php echo $message; ?>
     </div>
-    <?php else:  $program = $row['programName']; $year = $row['effective_year'];?>
+    <?php else: ?>
     <div class="form-group col-xs-6 col-sm-6 col-md-6">
         <label for="program_inp">Program:</label>
         <select class="form-control input-sm" id="program_inp" name="program">
-            <option value="BSCS" <?php if($program == "BSCS") echo 'selected="selected"'; ?>>BSCS</option>
-            <option value="BSIT" <?php if($program == "BSIT") echo 'selected="selected"'; ?>>BSIT</option>
-            <option value="BSICT" <?php if($program == "BSICT") echo 'selected="selected"'; ?>>BSICT</option>
+            <?php foreach($program_list as $row):?>
+            <option value="<?php echo $row['programName'];?>" <?php if($program == $row['programName']) echo 'selected="selected"'; ?>><?php echo $row['programName'];?></option>
+            <?php endforeach;?>
         </select>
     </div>
 
@@ -53,7 +53,7 @@
                 //close the select tag
                 echo "</select>";
             }
-            yearDropdown(2000, 2100, "effective_year", $year);
+            yearDropdown(date('Y'), 2100, "effective_year", $year);
         ?>
     </div>
     <?php endif;?>

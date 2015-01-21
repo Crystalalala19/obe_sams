@@ -33,11 +33,15 @@
             <p class="text-right">Step 1 of 3</p>
             <div class="form-group col-md-6">
                 <label class="control-label" for="program_inp">Program:</label>
+                <?php if($program_list == FALSE):?>
+                    <div class="alert alert-info"><strong>Notice:</strong> No programs to list. <a href="<?php echo base_url(); ?>admin/programs/view">Click here to add.</a></div>
+                <?php else:?>
                 <select class="form-control input-sm" id="program_inp" name="program" required>
                     <option selected="selected" value="">Select program: </option>
-                    <option value="BSCS">BSCS</option>
-                    <option value="BSIT">BSIT</option>
-                    <option value="BSICT">BSICT</option>
+                    <?php foreach ($program_list as $row): ?>
+                    <option value="<?php echo $row['programName']; ?>"><?php echo $row['programName']; ?></option>
+                    <?php endforeach;?>
+                    <?php endif;?>
                 </select>
             </div>
             <div class="form-group col-md-6">
@@ -54,7 +58,7 @@
                         //close the select tag
                         echo "</select>";
                     }
-                    yearDropdown(2000, 2100, "effective_year");
+                    yearDropdown(date('Y'), 2100, "effective_year");
                 ?>
             </div>
         </div>

@@ -38,10 +38,10 @@
                             ?>   
                                 <?php echo form_open('site/login_validation'); ?>
                                     <div class="form-group">    
-                                        <input type="text" class="form-control" name="idnum" value="<?php echo set_value('idnum'); ?>" required>
+                                        <input type="text" class="login-field form-control" name="idnum" value="<?php echo set_value('idnum'); ?>" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control" name="password" value="<?php echo set_value('password'); ?>" required>
+                                        <input type="password" class="login-field form-control" name="password" value="<?php echo set_value('password'); ?>" required>
                                     </div>
                                     <div class="form-group">
                                         <input type="submit" class="btn btn-primary btn-block" name="login_submit" value="Login">
@@ -68,18 +68,17 @@
                     </p>
                 </div>
             </div>
-            <div class="row ">
+            <div class="row">
                 <div class="col-lg-4 col-md-4">
                     <div class="media wow fadeInUp animated" data-wow-delay="0.2s">
                         <div class="pull-left">
-                            <i class="fa fa-recycle fa-4x  "></i>
+                            <i class="fa fa-graduation-cap fa-4x  "></i>
                         </div>
                         <div class="media-body">
                             <h3 class="media-heading">End-in-mind Philosophy</h3>
-                            <p >
+                            <p>
                                 Student focused and student capability conscious. 
                             </p>
-
                         </div>
                     </div>
                     <div class="media wow fadeInUp animated" data-wow-delay="0.3s">
@@ -91,34 +90,31 @@
                             <p>
                                 Well-thought of and reflected upon activities. Direct development. Success oriented.
                             </p>
-
                         </div>
                     </div>
-
                 </div>
+
                 <div class="col-lg-4 col-md-4 wow fadeInUp animated">
-                        <div class="pull-left">
-                            <i class="fa fa-star-o fa-4x  "></i>
-                        </div>
-                        <div class="media-body">
-                            <h3 class="media-heading">Stakeholders Involved</h3>
-                            <p>
-                                Stakeholders are involved in all the stages of the educational process.
-                            </p>
+                    <div class="pull-left">
+                        <i class="fa fa-globe fa-4x  "></i>
+                    </div>
+                    <div class="media-body">
+                        <h3 class="media-heading">Stakeholders Involved</h3>
+                        <p>
+                            Stakeholders are involved in all the stages of the educational process.
+                        </p>
+                    </div>
 
-                        </div>
-
-                        <div class="pull-left">
-                            <i class="fa fa-mortar-board fa-4x  "></i>
-                        </div>
-                        <div class="media-body">
-                            <h3 class="media-heading"><br>Constructivist Philosophy</h3>
-                            <p>
-                                Change in educational perspective and mindset. Change in teaching 
-                                and learning perspective.
-                            </p>
-
-                        </div>
+                    <div class="pull-left">
+                        <i class="fa fa-university fa-4x  "></i>
+                    </div>
+                    <div class="media-body">
+                        <h3 class="media-heading"><br>Constructivist Philosophy</h3>
+                        <p>
+                            Change in educational perspective and mindset. Change in teaching 
+                            and learning perspective.
+                        </p>
+                    </div>
                 </div>
 
                 <div class="col-lg-4 col-md-4">
@@ -144,7 +140,6 @@
                             <p>
                                 Importance of quality assurance and assessment system in place.
                             </p>
-
                         </div>
                     </div>
                 </div>
@@ -158,25 +153,19 @@
                         To train students to become world-leading computer science 
                         specialists by considering technologies for efficient “Information” exchange; 
                         and to configure computer technologies to help human society
-
                     </p>
                     <p>
                         To educate students to become well-rounded individuals to 
                         be able to contribute much more than a narrow technical expertise
-
                     </p>
                     <p>
                         To perform world-class research works in selected areas in the in the computing sciences
-
                     </p>
                 </div>
 
                 <div class="col-lg-4 col-md-4 col-sm-4 text-center" >
                     <i class="fa fa-lightbulb-o big-icon "></i>
-
-
                 </div>
-
             </div>
         </div>
     </div>
@@ -248,10 +237,7 @@
             </div>
             <div class="row ">
                 <div class="col-lg-4 col-md-4 col-sm-4 ">
-
                     <div class="portfolio-item wow fadeInUp animated" data-wow-delay="0.4s">
-
-
                         <img src="<?php echo base_url();?>assets/img/portfolio/laboratory.JPG" class="img-responsive " alt="" />
                         <div class="overlay">
                             <p>
@@ -267,107 +253,79 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 ">
-
                     <div class="portfolio-item wow fadeInUp animated" data-wow-delay="0.5s">
-
-
                         <img src="<?php echo base_url();?>assets/img/portfolio/network.jpg" class="img-responsive " alt="" />
                         <div class="overlay">
                             <p>
                                 <span>
-                                 Department of Computer Science
+                                    Department of Computer Science
                                 </span>
-                               
                                 Network Control Room
                             </p>
                             <a class="preview " title="Network Control Room" href="<?php echo base_url();?>assets/img/portfolio/network.jpg"><i class="fa fa-search-plus fa-5x"></i></a>
-
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 ">
-
                     <div class="portfolio-item wow fadeInUp animated" data-wow-delay="0.6s">
-
-
                         <img src="<?php echo base_url();?>assets/img/portfolio/room.JPG" class="img-responsive " alt="" />
                         <div class="overlay">
                           <p>
                                 <span>
-                                 Department of Computer Science
+                                    Department of Computer Science
                                 </span>
-                               
                                 Classroom
                             </p>
                             <a class="preview " title="Classroom" href="<?php echo base_url();?>assets/img/portfolio/room.JPG"><i class="fa fa-search-plus fa-5x"></i></a>
-
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <div class="row " style="padding-top: 50px;">
                 <div class="col-lg-4 col-md-4 col-sm-4 ">
-
                     <div class="portfolio-item wow fadeInUp animated" data-wow-delay="0.7s">
-
-
                         <img src="<?php echo base_url();?>assets/img/portfolio/speech.JPG" class="img-responsive " alt="" />
                         <div class="overlay">
                            <p>
                                 <span>
-                                 Department of Computer Science
+                                    Department of Computer Science
                                 </span>
-                               
                                 Speech Laboratory
                             </p>
                             <a class="preview  " title="Speech Laboratory" href="<?php echo base_url();?>assets/img/portfolio/speech.JPG"><i class="fa fa-search-plus fa-5x"></i></a>
-
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 ">
-
                     <div class="portfolio-item wow fadeInUp animated" data-wow-delay="0.8s">
-
-
                         <img src="<?php echo base_url();?>assets/img/portfolio/students.jpg" class="img-responsive " alt="" />
                         <div class="overlay">
                             <p>
                                 <span>
-                                 Department of Computer Science
+                                    Department of Computer Science
                                 </span>
-                               
                                 Students
                             </p>
                             <a class="preview " title="Students" href="<?php echo base_url();?>assets/img/portfolio/students.jpg"><i class="fa fa-search-plus fa-5x"></i></a>
-
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 ">
-
                     <div class="portfolio-item wow fadeInUp animated" data-wow-delay="0.9s">
-
-
                         <img src="<?php echo base_url();?>assets/img/portfolio/teach.jpg" class="img-responsive " alt="" />
                         <div class="overlay">
                           <p>
                                 <span>
-                                Department of Computer Science
+                                    Department of Computer Science
                                 </span>
-                               
                                 Teaching
                             </p>
                             <a class="preview " title="Teaching" href="<?php echo base_url();?>assets/img/portfolio/teach.jpg"><i class="fa fa-search-plus fa-5x"></i></a>
-
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
     </div>
     <!--./ GALLERY/PORTFOLIO SECTION END -->
@@ -377,7 +335,7 @@
                 <div class="row text-center">
                     <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
                         <h2 data-wow-delay="0.3s" class="wow fadeInUp animated"><strong>FACULTY</strong></h2>
-                        <p class="sub-head">Checkout this video , which will let you know the Head and teachers of the Department. </p>
+                        <p class="sub-head">Checkout this video, which will let you know the Head and teachers of the Department. </p>
                     </div>
                 </div>
                 <div class="row ">
@@ -398,7 +356,6 @@
                                     Aenean faucibus luctus enim. Duis quis sem risu suspend lacinia elementum nunc. 
                                 Aenean faucibus luctus enim. 
                                 </p>
-
                             </div>
                         </div>
                         <div class="media wow fadeInUp animated" data-wow-delay="0.6s">
@@ -411,17 +368,12 @@
                                     Aenean faucibus luctus enim. Duis quis sem risu suspend lacinia elementum nunc. 
                                 Aenean faucibus luctus enim. 
                                 </p>
-
                             </div>
                         </div>
-
                     </div>
                 </div>
-
-
             </div>
         </div>
-
     </div>
     <!--./ HELP SECTION END -->
     <div id="contact" >
@@ -459,12 +411,9 @@
                         <div class="form-group">
                             <button type="submit" class="btn btn-success btn-block btn-lg wow fadeInUp animated " data-wow-delay="0.8s">SUBMIT REQUEST</button>
                         </div>
-
                     </form>
                 </div>
-
             </div>
-            
         </div>
     </div>
     <!--./ CONTACT SECTION END -->
@@ -472,9 +421,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12">
-                 &copy; 2014 yourdomian.com | by <a href="http://www.binarytheme.com/" style="color:#fff;" target="_blank" >binarytheme.com</a>
+                    &copy; 2014 yourdomian.com | by <a href="http://www.binarytheme.com/" style="color:#fff;" target="_blank" >binarytheme.com</a>
                 </div>
             </div>
-
         </div>
     </div>
