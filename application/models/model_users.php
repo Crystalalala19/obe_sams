@@ -49,9 +49,6 @@ class Model_users extends CI_Model {
 
 		$query = $this->db->query("SELECT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 1 ");
 
-	function teacher_class(){
-		$query = $this->db->query("SELECT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."'");
-
 		return $query->result();
 	}
 
