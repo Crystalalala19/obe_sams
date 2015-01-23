@@ -12,7 +12,7 @@
                                     <i class="fa fa-briefcase"></i>  Programs
                                 </li>
                                 <li class="active">
-                                    <i class="fa fa-list-alt"></i>  <?php echo $header;?>
+                                    <i class="fa fa-list"></i>  <?php echo $header;?>
                                 </li>
                             </ol>
                         </div>
@@ -69,19 +69,17 @@
         </select>
     </div>
 
-    <div class="form-group col-md-10">
-        <table id="view_programs" class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th>Year</th>
-                    <th width="12%">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                    
-            </tbody>
-        </table>
-    </div>
+    <table id="view_programs" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Year</th>
+                <th width="12%">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+                
+        </tbody>
+    </table>
 
     <script type="text/javascript" language="javascript">
         var d = document.getElementById("program_dropdown");
@@ -103,7 +101,7 @@
                         $.each(response, function(key, value) {
                             $('<tr>').append(
                                 $('<td>').html(value.effective_year),
-                                $('<td>').html("<div class='btn-group inline pull-left'><a type='button' href='<?php echo base_url();?>admin/programs/edit/"+selectedValue+"/"+value.effective_year+"' class='btn btn-primary btn-sm btn-responsive fa fa-pencil' target='_blank'></a><a type='button' href='<?php echo base_url();?>admin/programs/delete/"+value.effective_year+"' class='btn btn-danger btn-sm btn-responsive fa fa-trash-o' onclick='return confirm(\"Do you want to permanently delete?\");'></a></div>")
+                                $('<td>').html("<div class='btn-group inline pull-left'><a type='button' href='<?php echo base_url();?>admin/programs/outcome/"+selectedValue+"/"+value.effective_year+"' class='btn btn-warning btn-sm btn-responsive fa fa-list-alt' title='Program Outcome' target='_blank'></a><a type='button' href='<?php echo base_url();?>admin/programs/edit/"+selectedValue+"/"+value.effective_year+"' class='btn btn-primary btn-sm btn-responsive fa fa-pencil' title='Edit Program' target='_blank'></a><a type='button' href='<?php echo base_url();?>admin/programs/delete/"+selectedValue+ "/"+value.effective_year+"' class='btn btn-danger btn-sm btn-responsive fa fa-trash-o' title='Delete Program' onclick='return confirm(\"Do you want to permanently delete?\");'></a></div>")
                             ).appendTo('#view_programs');
                         });
                         console.log(response);

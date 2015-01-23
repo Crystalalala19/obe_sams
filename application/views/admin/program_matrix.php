@@ -18,25 +18,44 @@
                         </div>
                     </div>
                     <!-- /.row -->
-
-    <?php 
-        $pos = 9;
+    <?php
+        $po_count = count($po_list);
     ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap-switch.min.css">
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/bootstrap-switch.min.js"></script>
+
     <h3>Major Subjects</h3>
     <div class="form-group">
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th width="10%">Code</th>
-                    <th width="20%">Subject</th>
-                    <?php for($x = 1; $x <= $pos; $x++):?>
-                    <th>PO <?php echo $x?></th>
+                    <th>Code</th>
+                    <th>Subject</th>
+                    <?php for($x = 1; $x <= $po_count; $x++):?>
+                    <th>PO <?php echo $x;?></th>
                     <?php endfor;?>
                 </tr>
             </thead>
+
             <tbody>
-
+                <?php foreach($course_list as $row):?>
+                <tr>
+                    <td><?php echo $row['CourseCode']; ?></td>
+                    <td><?php echo $row['CourseDesc']; ?></td>
+                    <?php foreach($po_list as $row): ?>
+                    <td><input type="checkbox" data-size='mini' <?php if($row['status'] == 1) echo 'checked';?> ></td>
+                    <?php endforeach;?>
+                </tr>
+               
+                <?php endforeach;?>
+                <!-- <tr>
+                    <td>Hey</td>
+                    <td>Hey2</td>
+                </tr> -->
             </tbody>
-
         </table>
     </div>
+
+    <script type="text/javascript">
+        $("[type='checkbox']").bootstrapSwitch();
+    </script>

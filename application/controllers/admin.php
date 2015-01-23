@@ -56,9 +56,45 @@ class Admin extends CI_Controller {
     }
     // END FUNCTIONS
 
+    public function program_matrix() {
+        $data['title'] = 'Admin - Program Outcomes';
+        $data['header'] = 'Program Outcomes';
+       
+        $program = $this->uri->segment(4);
+        $year = $this->uri->segment(5);
+
+        //PROGRAM MATRIX view
+        //  $program_id = array(
+        //     'programID' => $id
+        // );
+        // $data['course_list'] = $this->model_admin->get_courses($program_id);
+        // $data['po_list'] = $this->model_admin->get_pos($program_id);
+
+        $program_data = array(
+            'programName' => $program
+        );
+
+        $program_id = $this->model_admin->get_programID($program_data);
+        $year_id = $this->model_admin->get_programYearID($program_id ,$year);
+
+        $year_data = array(
+            'pyID' => $year_id
+        );
+
+        $data['course_list'] = $this->model_admin->get_courses($year_data);
+        $data['po_list'] = $this->model_admin->get_pos($year_data);
+        $data['year_id'] = $year_id;
+
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/program_matrix', $data);
+        $this->load->view('admin/footer');
+    }
+
     public function add_program(){
         $data['title'] = 'Admin - Add Program Outcome';
         $data['header'] = 'Add Program Outcome';
+
+        $data['program_list'] = $this->model_admin->check_rows('program');
 
         $this->load->library('form_validation');
 
@@ -69,8 +105,6 @@ class Admin extends CI_Controller {
         $this->form_validation->set_rules("po_desc[]", "PO Description", "required|trim");
         $this->form_validation->set_rules("co_code[]", "Course Code", "required|trim");
         $this->form_validation->set_rules("co_desc[]", "Course Description", "required|trim");
-
-        $data['program_list'] = $this->model_admin->check_rows('program');
         
         if($this->form_validation->run() == FALSE){
             $data['message'] = '';
@@ -102,7 +136,7 @@ class Admin extends CI_Controller {
                     'poCode' => $val,
                     'attribute' => $attribs[$key],
                     'description' => $descs[$key],
-                    'programID' => $id
+                    'pyID' => $id
                 );
             }
 
@@ -121,7 +155,7 @@ class Admin extends CI_Controller {
                 $course_fields = array(
                     'CourseCode' => $val,
                     'CourseDesc' => $course_desc[$key],
-                    'programID' => $id
+                    'pyID' => $id
                 );
                 $course_result = $this->model_admin->insert_course($course_fields);
 
@@ -145,7 +179,7 @@ class Admin extends CI_Controller {
             if($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();
 
-                $message = '<strong>Error: </strong>'. $this->model_admin->show_error();
+                $message = '<strong>Error inserting data!</strong>';
                 $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
 
                 $data['message'] = $message;
@@ -157,9 +191,11 @@ class Admin extends CI_Controller {
                 $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
 
                 $this->session->set_flashdata('message', $message);
-                redirect(current_url());
+
+                // $data['success'] = TRUE;
+
+                redirect('admin/programs/outcome/'. $this->input->post('program') . '/' . $year);
             }
-            
         }
 
         $this->load->view('admin/header', $data);
@@ -242,43 +278,40 @@ class Admin extends CI_Controller {
         $this->load->view('admin/footer');
     }
 
-    public function delete_program() {
-        $id = $this->uri->segment(4);
+    public function delete_prgraom() {
 
-        if(!$this->model_admin->check_rowID('program', $id)) {
-            $message = 'ID number does not exists.';
-            $data['message'] = $this->model_admin->notify_message('alert-info', 'glyphicon-info-sign', $message);
+    }
+
+    public function delete_programYear() {
+        $program = $this->uri->segment(4);
+        $year = $this->uri->segment(5);
+
+        $program_data = array(
+            'programName' => $program
+        );
+
+        if(!$this->model_admin->get_year($year_data)) {
+            $data['message'] = 'Program does not exists.';
         }
         else {
-            $delete = array('ID' => $id);
+            $program_id = $this->model_admin->get_programID($program_data);
 
-            $result = $this->model_admin->delete_program($delete);
+            $result = $this->model_admin->delete_programYear($year, $program_id);
 
             if($result['is_success'] == FALSE) {
-                $message = '<strong>Error: </strong>'.  $result['db_error'];
+                $message = '<strong>Error in deleting.</strong>';
                 $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
 
-                $data['message'] = $message;
+                $this->session->set_flashdata('message', $message);
             }
             else {
                 $message = '<strong>Success!</strong> Program deleted.';
                 $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
 
                 $this->session->set_flashdata('message', $message);
-                redirect('admin/programs/view');
             }
+            redirect('admin/programs/view');
         }
-    }
-
-    public function program_matrix() {
-        $data['title'] = 'Admin - Program Outcomes';
-        $data['header'] = 'Program Outcomes';
-        $data['message'] = '';
-
-
-        $this->load->view('admin/header', $data);
-        $this->load->view('admin/program_matrix', $data);
-        $this->load->view('admin/footer');
     }
     // END PROGRAM
 

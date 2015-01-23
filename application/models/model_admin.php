@@ -31,10 +31,6 @@ class Model_admin extends CI_Model {
         }
     }
 
-    function show_error() {
-        return $this->db->_error_message();
-    }
-
     function check_rows($table) {
         $query = $this->db->get($table);
         if ($query->num_rows() > 0) {
@@ -93,7 +89,7 @@ class Model_admin extends CI_Model {
 
         $this->db->insert('program_year', $new);
 
-        return $row['ID'];
+        return $this->db->insert_id();
     }
 
     function insert_po($data) {
@@ -116,6 +112,12 @@ class Model_admin extends CI_Model {
 
     function delete_program($data) {
         $query = $this->db->delete('program', $data);
+
+        return $this->check_query();
+    }
+
+    function delete_programYear($year, $id) {
+        $this->db->query("DELETE FROM program_year WHERE effective_year = '".$year."' AND programID = '".$id."' ");
 
         return $this->check_query();
     }
@@ -158,6 +160,38 @@ class Model_admin extends CI_Model {
         }
     }
 
+    function get_programYearID($program_id, $year) {
+        $query = $this->db->query("SELECT * FROM program_year WHERE programID = '".$program_id."' AND effective_year = '".$year."' ");
+
+        if($query->num_rows() > 0){
+            $row = $query->row_array();
+            return $row['ID'];
+        }
+        else {
+            return FALSE;
+        }
+    }
+
+    function get_programID($data) {
+        $query = $this->db->get_where('program', $data);
+
+        if($query->num_rows() > 0){
+            $row = $query->row_array();
+            return $row['ID'];
+        }
+    }
+
+    function get_courses($data) {
+        $query = $this->db->get_where('course', $data);
+
+        return $query->result_array();
+    }
+
+    function get_pos($data) {
+        $query = $this->db->get_where('po', $data);
+
+        return $query->result_array();
+    }
     // END PROGRAM
 
     // STUDENT

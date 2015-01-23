@@ -137,7 +137,7 @@
                                 <a href="<?php echo base_url();?>admin/programs/add"><i class="fa fa-plus"></i> Add Program Outcome</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url();?>admin/programs/view"><i class="fa fa-list-alt"></i> View programs</a>
+                                <a href="<?php echo base_url();?>admin/programs/view"><i class="fa fa-list"></i> View programs</a>
                             </li>
                         </ul>
                     </li>
