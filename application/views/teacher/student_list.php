@@ -21,7 +21,7 @@
                 <tr>            
                     <td><center><a href="<?php echo base_url();?>site/scorecard/<?php echo $row->student_id;?>"><?php echo $row->student_id;?></a></center></td>
                     <td><center><?php echo $row->fname." ".$row->mname." ".$row->lname;?></center></td>
-                    <td><center><?php echo $row->programName."-".$row->effective_year;?></center></td>
+                    <td><center><?php echo $row->effective_year."-".$row->effective_year;?></center></td>
                 </tr>
                         <?php endforeach; ?>   
 

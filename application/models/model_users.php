@@ -91,15 +91,17 @@ class Model_users extends CI_Model {
 
 	function select_class(){
 		$query = $this->db->query("SELECT * FROM student_course INNER JOIN student ON student_course.studentID = student.student_id
-																INNER JOIN program ON student_course.programID = program.ID
-																INNER JOIN teacher_class ON student_course.classID = teacher_class.ID WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' AND student_course.classID = 1");
+																INNER JOIN program_year ON student_course.pyID = program_year.ID
+																INNER JOIN teacher_class ON student_course.classID = teacher_class.ID 
+                                                                WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' AND student_course.classID = 1");
 		return $query->result();
 	}
 
 	function scorecard(){
 
 		$query = $this->db->query("SELECT * FROM student_course INNER JOIN student ON student_course.studentID = student.student_id
-																INNER JOIN teacher_class ON student_course.classID = teacher_class.ID WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' AND student_course.classID = 1 AND student_course.studentID = 11101091");
+																INNER JOIN teacher_class ON student_course.classID = teacher_class.ID 
+                                                                WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' AND student_course.classID = 1 AND student_course.studentID = 11101091");
 		return $query->result();
 	}
 
@@ -115,8 +117,9 @@ class Model_users extends CI_Model {
    function student_list(){
 
    	$query = $this->db->query("SELECT * FROM student_course INNER JOIN student ON student_course.studentID = student.student_id
+                                                            INNER JOIN program_year ON student_course.pyID = program_year.ID
    															INNER JOIN teacher_class ON student_course.classID = teacher_class.ID 
-   															INNER JOIN program ON student_course.programID = program.ID WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' ");
+   															WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' ");
    	
    	return $query->result();
 

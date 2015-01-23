@@ -50,7 +50,7 @@
                         <?php foreach($class_list as $row): ?>
                         <td><center><a href="<?php echo base_url();?>site/scorecard/<?php echo $row->student_id;?>"><?php echo $row->student_id;?></a></center></td>
                         <td><center><?php echo $row->fname; echo " ".$row->mname; echo " ".$row->lname;?></center></td>
-                        <td><center><?php echo $row->programName;?> - <?php echo $row->effective_year;?></center></td>
+                        <td><center><?php echo $row->effective_year;?> - <?php echo $row->effective_year;?></center></td>
                     </tr>
                         <?php endforeach; ?>        
                        
