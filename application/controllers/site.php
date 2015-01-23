@@ -40,7 +40,7 @@ class Site extends CI_Controller {
 	}
 
    public function login_validation() {
-<<<<<<< HEAD
+
         $this->load->library('form_validation');
         $this->load->library('encrypt');
 
@@ -107,7 +107,7 @@ class Site extends CI_Controller {
       $data['class_list'] = $this->model_users->select_class();
       $data['user'] = $this->model_users->select_user();
       $data['title'] = "Outcome-based Education";
-=======
+
 		$this->load->library('form_validation');
 		$this->load->library('encrypt');
 
@@ -171,27 +171,26 @@ class Site extends CI_Controller {
 	  $data['result'] = $this->model_users->select_class();
 	  $data['user'] = $this->model_users->select_user();
 	  $data['title'] = "Outcome-based Education";
->>>>>>> origin/master
 
 	  $this->load->view("teacher/header", $data);
 	  $this->load->view('teacher/class_list', $data);
 	  $this->load->view("teacher/footer");
    }
 
-<<<<<<< HEAD
+
     function scorecard(){
       
       $data['scorecard'] = $this->model_users->scorecard();
       $data['user'] = $this->model_users->select_user();
       $data['title'] = "Outcome-based Education";
-=======
+
 	function scorecard(){
 	  
 	  $this->load->model("model_users");
 	  $data['result'] = $this->model_users->select_class();
 	  $data['user'] = $this->model_users->select_user();
 	  $data['title'] = "Outcome-based Education";
->>>>>>> origin/master
+
 
 	  $this->load->view("teacher/header", $data);
 	  $this->load->view('teacher/scorecard', $data);
