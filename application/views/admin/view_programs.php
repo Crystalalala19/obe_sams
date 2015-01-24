@@ -82,6 +82,23 @@
     </table>
 
     <script type="text/javascript" language="javascript">
+            
+        $(document).ready(function(){
+    $('#purpose').on('change', function() {
+      if ( this.value == '1')
+      {
+        $("#business").show();
+      }
+      else
+      {
+        $("#business").hide();
+      }
+    });
+});
+
+
+
+
         var d = document.getElementById("program_dropdown");
         d.className = d.className + " active";
 

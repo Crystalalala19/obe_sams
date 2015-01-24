@@ -89,34 +89,49 @@ class Model_users extends CI_Model {
 		return $query->result();
 	}
 
-	function select_class(){
+    function select_SY(){
+
+        $query = $this->db->query("SELECT DISTINCT teacher_class.school_year, teacher_class.teacherID FROM student_course
+                                                                             INNER JOIN teacher_class ON student_course.classID = teacher_class.ID  
+                                                                             WHERE teacherID = '".$this->session->userdata('teacher_id')."' ");
+        
+        return $query->result();
+
+    }
+
+    function select_schedule($id){
+
+        $query = $this->db->query("SELECT * FROM student_course INNER JOIN student ON student_course.studentID = student.student_id
+                                                                INNER JOIN teacher_class ON student_course.classID = teacher_class.ID 
+                                                                WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' AND student_course.classID = '".$id."' 
+                                                                GROUP BY classID");
+        return $query->result();
+
+    }
+
+	function select_class($id){
+
 		$query = $this->db->query("SELECT * FROM student_course INNER JOIN student ON student_course.studentID = student.student_id
 																INNER JOIN program_year ON student_course.pyID = program_year.ID
 																INNER JOIN teacher_class ON student_course.classID = teacher_class.ID 
-                                                                WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' AND student_course.classID = 1");
+                                                                WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' AND student_course.classID = '".$id."' 
+                                                                ");
 		return $query->result();
 	}
 
-	function scorecard(){
+	function scorecard($id){
 
 		$query = $this->db->query("SELECT * FROM student_course INNER JOIN student ON student_course.studentID = student.student_id
 																INNER JOIN teacher_class ON student_course.classID = teacher_class.ID 
-                                                                WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' AND student_course.classID = 1 AND student_course.studentID = 11101091");
+                                                                WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' AND student_course.classID = 1 AND student_course.studentID = '".$id."'
+                                                                GROUP BY student_course.studentID, student.lname, student.fname, student.mname ");
 		return $query->result();
 	}
 
-	function check_row($table, $id){
-		$query = $this->db->get_where($table, array('ID' => $id));
-		if($query->num_rows() > 0)
-			return $query->row_array();
-		else {
-			return false;
-		}
-   }
-
+	
    function student_list(){
 
-   	$query = $this->db->query("SELECT * FROM student_course INNER JOIN student ON student_course.studentID = student.student_id
+   	$query = $this->db->query("SELECT DISTINCT studentID, student.lname, student.mname, student.fname, program_year.effective_year FROM student_course INNER JOIN student ON student_course.studentID = student.student_id
                                                             INNER JOIN program_year ON student_course.pyID = program_year.ID
    															INNER JOIN teacher_class ON student_course.classID = teacher_class.ID 
    															WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' ");

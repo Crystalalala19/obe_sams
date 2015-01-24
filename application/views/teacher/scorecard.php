@@ -11,22 +11,19 @@
 
 <section id='tools'>
         <ul class='breadcrumb' id='breadcrumb'>
-          <li class='title'>Scorecard</li>
+            <li class='active'><a href="<?php echo base_url();?>site/home"><i class='icon-dashboard'></i> Course</a></li>
+            <li class='title'><i class='icon-table'></i> Scorecard</li>
         </ul>
       </section>
 
 <div id='content'>
-     <ul class='breadcrumb' id='breadcrumb'>
-         <li class='active'><a href="<?php echo base_url();?>site/home"><i class='icon-dashboard'></i> Course</a></li>
-         <li class='title'><i class='icon-table'></i> Scorecard</li>
-         
-     </ul>
-             
      <div class='panel panel-default grid'>
-       <div class='panel-heading'>
-         <i class='icon-table icon-large'></i>
-         Padding Table
-         <div class='panel-tools'>
+        <div class='panel-heading'>
+            <?php foreach($scorecard as $row): ?> 
+            <?php echo $row->studentID.'  ';?>
+            <?php echo $row->lname.', '.$row->fname.' '.$row->mname; ?>
+            <?php endforeach; ?>      
+        <div class='panel-tools'>
            <div class='badge'><font size = '4'>Student Scorecard</font></div>
          </div>
        </div>
@@ -77,12 +74,12 @@
                                                          <table id="example-table" class="table table-striped table-hover table-condensed">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>Course Code</th>   
+                                                                    <th>Course Code <i class="icon-filter"></th>   
                                                                 </tr>
                                                             </thead>
                                                              <tbody>
                                                                     <tr>
-                                                                        <td>CS11</td>   
+                                                                        <td>CS110</td>   
                                                                     </tr>                                                                       
                                                                 </tbody>
                                                             </table>
@@ -108,7 +105,7 @@
                                                             </thead>
                                                             <tbody>
                                                               <tr>
-                                                                <td>1.9</td>
+                                                                <td>1.2</td>
                                                                 <td></td>
                                                                 <td></td>
                                                                 <td></td>

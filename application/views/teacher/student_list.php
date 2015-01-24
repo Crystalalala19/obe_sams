@@ -5,7 +5,7 @@
 </section>
 
 <div id='content'>
-      	<table id="view_programs" class="table table-striped table-bordered dataTable no-footer">
+      	<table id="view_studentlist" class="table table-striped table-bordered dataTable no-footer">
 
         <thead>
             <tr>
@@ -16,23 +16,26 @@
         </thead>
         
         <tbody>
-              	<?php foreach($student_list as $row): ?>      
-
-                <tr>            
-                    <td><center><a href="<?php echo base_url();?>site/scorecard/<?php echo $row->student_id;?>"><?php echo $row->student_id;?></a></center></td>
+              	<?php foreach($student_list as $row): ?>   
+                <tr>          
+                    <td><center><a href="<?php echo base_url();?>site/scorecard/<?php echo $row->studentID;?>"><?php echo $row->studentID;?></a></center></td>
                     <td><center><?php echo $row->fname." ".$row->mname." ".$row->lname;?></center></td>
                     <td><center><?php echo $row->effective_year."-".$row->effective_year;?></center></td>
                 </tr>
-                        <?php endforeach; ?>   
+                    <?php endforeach; ?>   
 
         </tbody>
 
     </table>
+
+    
 </div>
 
 
+
+
 <script type="text/javascript" language="javascript">
-        
+      
         
         var dataTableOptions = {
             //Disable sorting for column Action
@@ -69,7 +72,7 @@
             ]
         };
 
-        var table = $('#view_programs').dataTable( dataTableOptions );
+        var table = $('#view_studentlist').dataTable( dataTableOptions );
 
         var tt = new $.fn.dataTable.TableTools( table, tableToolsOptions );
 
