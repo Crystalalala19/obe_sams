@@ -32,19 +32,6 @@ class Admin extends CI_Controller {
         }
     }
 
-    function test() {
-        $data = array(
-            'programName' => 'BSCS'
-        );
-
-        $year = '2007';
-
-        $result = $this->model_admin->insert_programYear($data, $year);
-
-        echo $result;
-        die();
-    }
-
     function program_ajax() {
         $data = array(
             'programName' => $this->input->post('option')
@@ -63,13 +50,6 @@ class Admin extends CI_Controller {
         $program = $this->uri->segment(4);
         $year = $this->uri->segment(5);
 
-        //PROGRAM MATRIX view
-        //  $program_id = array(
-        //     'programID' => $id
-        // );
-        // $data['course_list'] = $this->model_admin->get_courses($program_id);
-        // $data['po_list'] = $this->model_admin->get_pos($program_id);
-
         $program_data = array(
             'programName' => $program
         );
@@ -84,6 +64,21 @@ class Admin extends CI_Controller {
         $data['course_list'] = $this->model_admin->get_courses($year_data);
         $data['po_list'] = $this->model_admin->get_pos($year_data);
         $data['year_id'] = $year_id;
+
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('po[]', 'PO check', 'trim');
+        
+        if($this->form_validation->run() == FALSE) {
+            $data['message'] = '';
+        }
+        else {
+            $pc_rows = $this->input->post('po');
+
+            // var_dump($this->input->post());
+            print_r($this->input->post());
+            die();
+        }
 
         $this->load->view('admin/header', $data);
         $this->load->view('admin/program_matrix', $data);
@@ -129,18 +124,19 @@ class Admin extends CI_Controller {
             $program_result = $this->model_admin->insert_programYear($program, $year);
             $id = $program_result;
 
-            $po_fields = array();
+            $po_id = array();
 
             foreach($po_rows as $key => $val){
-                $po_fields[] = array(
+                $po_fields = array(
                     'poCode' => $val,
                     'attribute' => $attribs[$key],
                     'description' => $descs[$key],
                     'pyID' => $id
                 );
-            }
+                $po_result = $this->model_admin->insert_po($po_fields);
 
-            $po_result = $this->model_admin->insert_po($po_fields);
+                $po_id[] = $this->model_admin->get_lastId();
+            }
 
             $exploded = array();
             $course_equi_array = array();
@@ -151,7 +147,7 @@ class Admin extends CI_Controller {
 
             $course_id = array();
 
-            foreach($course_rows as $key => $val ) {
+            foreach($course_rows as $key => $val) {
                 $course_fields = array(
                     'CourseCode' => $val,
                     'CourseDesc' => $course_desc[$key],
@@ -160,6 +156,17 @@ class Admin extends CI_Controller {
                 $course_result = $this->model_admin->insert_course($course_fields);
 
                 $course_id[] = $this->model_admin->get_lastId();
+            }
+
+            foreach($course_id as $key => $val) {
+                foreach($po_id as $key2 => $val2) {
+                    $pc_field = array(
+                        'status' => '0',
+                        'poID' => $val2,
+                        'courseID' => $val
+                    );
+                    $pc_result = $this->model_admin->insert_poCourse($pc_field);
+                }
             }
 
             // print_r($exploded);
@@ -209,7 +216,7 @@ class Admin extends CI_Controller {
         
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('program_name', 'Program Name', 'required|trim');
+        $this->form_validation->set_rules('program_name', 'Program Name', 'required|trim|max_length[8]');
 
         if($this->form_validation->run() == FALSE) {
             $data['message'] = '';
@@ -382,7 +389,7 @@ class Admin extends CI_Controller {
 
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('teacher_id', 'Teacher ID', 'required|trim|max_length[11]|alpha_numeric');
+        $this->form_validation->set_rules('teacher_id', 'Teacher ID', 'required|trim|min_length[10]|max_length[15]|alpha_numeric');
         $this->form_validation->set_rules('id', 'id', 'required|trim|numeric');
         $this->form_validation->set_rules('fname', 'First Name', 'required|trim|max_length[20]|callback_alpha_dash_space');
         $this->form_validation->set_rules('mname', 'Middle Name', 'required|trim|max_length[20]|callback_alpha_dash_space');
@@ -637,32 +644,42 @@ class Admin extends CI_Controller {
             
             if ($this->csvimport->get_array($file_path)) {
                 $insert_data = array();
-                $csv_array = $this->csvimport->get_array($file_path, array('Group Number', 'Start Time', 'Time', 'Course Code'));
+                $csv_array = $this->csvimport->get_array($file_path, array('Group Number', 'Course Code', 'Start Time', 'End Time', 'Days'));
                 
                 foreach ($csv_array as $row) {
                     // var_dump($row);
                     
-                    $insert_data = array(
+                    $insert_data[] = array(
                         'group_num'=>$row['Group Number'],
+                        'courseCode'=>$row['Course Code'],
                         'start_time'=>$row['Start Time'],
                         'end_time'=>$row['Time'],
-                        'courseCode'=>$row['Course Code'],
+                        'days'=>$row['Days'],
+                        //TO DO: PUT SEMESTER CODE HERE
+                        // 'semester'=> ,
+                        'school_year'=> date('Y'),
                         'teacherID'=> $this->input->post('teacher')
                     );
-                    $result = $this->model_admin->insert_classes($insert_data);
                 }
-
-                $message = '<strong>Success!</strong> Classes added.';
-                $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
-
-                $this->session->set_flashdata('message', $message);
-                redirect(current_url());
-            }
-            else {
                 $result = $this->model_admin->insert_classes($insert_data);
 
-                $message = '<strong>Error: </strong>'.  $result['db_error'];
-                $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
+                if($result['is_success'] == FALSE) {
+                    $message = '<strong>Error: </strong>'.  $result['db_error'];
+                    $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
+
+                    $data['message'] = $message; 
+                }
+                else {
+                    $message = '<strong>Success!</strong> Classes added.';
+                    $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
+
+                    $this->session->set_flashdata('message', $message);
+
+                    redirect(current_url());
+                }
+            }
+            else {
+                $message = '<strong>Error: Inserting .CSV file.</strong>';
 
                 $data['message'] = $message;
             }            

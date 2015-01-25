@@ -93,7 +93,7 @@ class Model_admin extends CI_Model {
     }
 
     function insert_po($data) {
-        $this->db->insert_batch('po', $data);
+        $this->db->insert('po', $data);
     
         return $this->check_query();
     }
@@ -106,6 +106,12 @@ class Model_admin extends CI_Model {
 
     function insert_equivalents($data) {  
         $this->db->insert_batch('equivalent', $data);
+
+        return $this->check_query();
+    }
+
+    function insert_poCourse($data) {
+        $this->db->insert('po_course', $data);
 
         return $this->check_query();
     }
@@ -241,7 +247,7 @@ class Model_admin extends CI_Model {
     // END TEACHER
 
     function insert_classes($data) {
-        $this->db->insert('teacher_class', $data);
+        $this->db->insert_batch('teacher_class', $data);
 
         return $this->check_query();
     }

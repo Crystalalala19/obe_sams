@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 23, 2015 at 02:14 PM
+-- Generation Time: Jan 24, 2015 at 01:36 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -38,10 +38,8 @@ CREATE TABLE IF NOT EXISTS `course` (
 --
 
 INSERT INTO `course` (`ID`, `CourseCode`, `CourseDesc`, `pyID`) VALUES
-(1, 'ICT110', 'asd', 14),
-(2, 'ICT116', 'asd', 14),
-(3, 'ICT110', 'ASDASD', 15),
-(4, 'ICT116', 'ASDASD', 15);
+(3, 'ICT110', 'asd', 2),
+(4, 'ICT116', 'asd', 2);
 
 -- --------------------------------------------------------
 
@@ -59,12 +57,9 @@ CREATE TABLE IF NOT EXISTS `equivalent` (
 --
 
 INSERT INTO `equivalent` (`CourseEquivalent`, `courseID`) VALUES
-('IT116', 2),
-('CS110', 1),
-('ACT110', 1),
 ('IT116', 4),
-('CS110', 3),
-('ACT110', 3);
+('CS116', 4),
+('ACT100', 3);
 
 -- --------------------------------------------------------
 
@@ -77,27 +72,44 @@ CREATE TABLE IF NOT EXISTS `po` (
   `attribute` varchar(100) NOT NULL,
   `poCode` varchar(10) NOT NULL,
   `description` text NOT NULL,
-  `status` enum('0','1') NOT NULL,
   `pyID` int(3) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `po`
 --
 
-INSERT INTO `po` (`ID`, `attribute`, `poCode`, `description`, `status`, `pyID`) VALUES
-(1, 'asdasd', 'ICT01', 'asdasd', '0', 14),
-(2, 'asd', 'ICT02', 'asd', '0', 14),
-(3, 'asd', 'ICT03', 'asd', '0', 14),
-(4, 'ASDA', 'ICT01', 'ASDASD', '1', 15),
-(5, 'ASD', 'ICT02', 'ASDASD', '0', 15),
-(6, 'ASD', 'ICT03', 'ASD', '0', 15),
-(7, 'ASDASD', 'ICT04', 'ASD', '0', 15),
-(8, 'ASD', 'ICT05', 'ASD', '0', 15),
-(9, 'ASD', 'ICT06', 'ASD', '0', 15),
-(10, 'ASD', 'ICT07', 'ASD', '0', 15),
-(11, 'ASDBASD', 'ICT08', 'ABSD', '0', 15),
-(12, 'ASDB', 'ICT09', 'ASD', '0', 15);
+INSERT INTO `po` (`ID`, `attribute`, `poCode`, `description`, `pyID`) VALUES
+(5, 'asd', 'ICT01', 'asd', 2),
+(6, 'asd', 'ICT02', 'asd', 2),
+(7, 'asd', 'ICT03', 'asd', 2),
+(8, 'asd', 'ICT04', 'asd', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `po_course`
+--
+
+CREATE TABLE IF NOT EXISTS `po_course` (
+  `status` enum('0','1') NOT NULL,
+  `poID` int(3) NOT NULL,
+  `courseID` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `po_course`
+--
+
+INSERT INTO `po_course` (`status`, `poID`, `courseID`) VALUES
+('0', 5, 3),
+('0', 6, 3),
+('0', 7, 3),
+('0', 8, 3),
+('0', 5, 4),
+('0', 6, 4),
+('0', 7, 4),
+('0', 8, 4);
 
 -- --------------------------------------------------------
 
@@ -108,14 +120,14 @@ INSERT INTO `po` (`ID`, `attribute`, `poCode`, `description`, `status`, `pyID`) 
 CREATE TABLE IF NOT EXISTS `program` (
 `ID` int(3) NOT NULL,
   `programName` char(8) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `program`
 --
 
 INSERT INTO `program` (`ID`, `programName`) VALUES
-(2, 'BSICT');
+(1, 'BSICT');
 
 -- --------------------------------------------------------
 
@@ -127,15 +139,14 @@ CREATE TABLE IF NOT EXISTS `program_year` (
 `ID` int(3) NOT NULL,
   `effective_year` year(4) NOT NULL,
   `programID` int(3) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `program_year`
 --
 
 INSERT INTO `program_year` (`ID`, `effective_year`, `programID`) VALUES
-(14, 2015, 2),
-(15, 2029, 2);
+(2, 2015, 1);
 
 -- --------------------------------------------------------
 
@@ -243,7 +254,13 @@ ALTER TABLE `equivalent`
 -- Indexes for table `po`
 --
 ALTER TABLE `po`
- ADD PRIMARY KEY (`ID`), ADD KEY `ID` (`ID`), ADD KEY `programID` (`pyID`);
+ ADD PRIMARY KEY (`ID`), ADD KEY `ID` (`ID`), ADD KEY `pyID` (`pyID`);
+
+--
+-- Indexes for table `po_course`
+--
+ALTER TABLE `po_course`
+ ADD KEY `poID` (`poID`), ADD KEY `courseID` (`courseID`);
 
 --
 -- Indexes for table `program`
@@ -300,17 +317,17 @@ MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 -- AUTO_INCREMENT for table `po`
 --
 ALTER TABLE `po`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `program`
 --
 ALTER TABLE `program`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `program_year`
 --
 ALTER TABLE `program_year`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `student`
 --
@@ -347,6 +364,13 @@ ADD CONSTRAINT `equivalent_ibfk_1` FOREIGN KEY (`courseID`) REFERENCES `course` 
 --
 ALTER TABLE `po`
 ADD CONSTRAINT `po_ibfk_1` FOREIGN KEY (`pyID`) REFERENCES `program_year` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `po_course`
+--
+ALTER TABLE `po_course`
+ADD CONSTRAINT `po_course_ibfk_1` FOREIGN KEY (`poID`) REFERENCES `po` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `po_course_ibfk_2` FOREIGN KEY (`courseID`) REFERENCES `course` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `program_year`

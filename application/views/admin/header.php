@@ -27,7 +27,8 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/sb-admin.css">
     <!--  Font-Awesome Style -->
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/font-awesome.min.css"> -->
     
     <!-- DataTables Style -->
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css">
@@ -145,10 +146,6 @@
                     <li <?=echoActiveClassIfRequestMatches("teachers")?> id="teachers">
                         <a href="<?php echo base_url();?>admin/teachers"><i class="fa fa-book"></i> Teachers</a>
                     </li>
-
-                    <li>
-                        <a href="<?php echo base_url();?>admin/program_matrix"><i class="fa fa-book"></i> Program Outcome</a>
-                    </li>
                     
                     <!-- <li id="student_dropdown" class="">
                         <a href="javascript:;" data-toggle="collapse" data-target="#student"><i class="fa fa-users"></i> Students <i class="fa fa-fw fa-caret-down"></i></a>
@@ -167,6 +164,5 @@
         </nav>
 
         <div id="page-wrapper">
-
             <div class="container-fluid">
             

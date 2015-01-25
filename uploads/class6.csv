@@ -1,3 +1,3 @@
-Group Number,Start Time,End Time,Course Code
-1,7:30 AM,9:00 AM,ICT110
-1,7:30 AM,9:00 AM,ICT111
+Group Number,Course Code,Start Time,End Time,Days
+1,ICT110,7:30 AM,9:00 AM,MW
+1,ICT111,7:30 AM,9:00 AM,TTh

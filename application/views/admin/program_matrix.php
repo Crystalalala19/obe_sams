@@ -18,13 +18,23 @@
                         </div>
                     </div>
                     <!-- /.row -->
-    <?php
-        $po_count = count($po_list);
-    ?>
+<?php
+    echo $this->session->flashdata('message');
+    if (!empty($message)) echo $message;
+
+    echo validation_errors('
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>', 
+    '</div>');
+
+    $po_count = count($po_list);
+?>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap-switch.min.css">
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/bootstrap-switch.min.js"></script>
 
     <h3>Major Subjects</h3>
+    <?php echo form_open();?>
     <div class="form-group">
         <table class="table table-striped table-bordered">
             <thead>
@@ -38,24 +48,29 @@
             </thead>
 
             <tbody>
-                <?php foreach($course_list as $row):?>
+                <?php foreach($course_list as $key => $row): $po_num=1;?>
                 <tr>
-                    <td><?php echo $row['CourseCode']; ?></td>
+                    <td><input type="hidden" name="course_code" value="<?php echo $row['CourseCode'];?>"><?php echo $row['CourseCode'];?></td>
                     <td><?php echo $row['CourseDesc']; ?></td>
-                    <?php foreach($po_list as $row): ?>
-                    <td><input type="checkbox" data-size='mini' <?php if($row['status'] == 1) echo 'checked';?> ></td>
+                    <?php foreach($po_list as $key2 => $row2):?>
+                    <td>
+                        <input type="hidden" name="course_id[]" value="<?php echo $row['ID'];?>">
+                        <input type="hidden" name="po_id[]" value="<?php echo $row2['ID'];?>">
+                        <input type="checkbox" data-size='mini' name='po<?php echo $po_num; $po_num++;?>[]'>
+                    </td>
                     <?php endforeach;?>
                 </tr>
-               
                 <?php endforeach;?>
-                <!-- <tr>
-                    <td>Hey</td>
-                    <td>Hey2</td>
-                </tr> -->
             </tbody>
         </table>
     </div>
 
-    <script type="text/javascript">
+        <input type="submit" class="btn btn-success" id="btnSubmit" name="submit" value="Save">
+    </form>
+
+    <script type="text/javascript" language="javascript">
+        var d = document.getElementById("program_dropdown");
+        d.className = d.className + " active";
+
         $("[type='checkbox']").bootstrapSwitch();
     </script>
