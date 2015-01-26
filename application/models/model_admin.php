@@ -198,6 +198,30 @@ class Model_admin extends CI_Model {
 
         return $query->result_array();
     }
+
+    function update_checks($activate, $pc_cid, $pc_pid, $course_code, $py_id) {
+        $query = $this->db->query("
+        UPDATE po_course
+        INNER JOIN course ON course.ID = po_course.courseID
+        INNER JOIN program_year ON course.pyID = program_year.ID
+        SET status = '".$activate."'
+        WHERE (po_course.courseID = '".$pc_cid."' AND po_course.poID = '".$pc_pid."') AND (CourseCode = '".$course_code."' AND program_year.ID = '".$py_id."')
+        ");
+
+        // UPDATE po_course 
+        // INNER JOIN course ON course.ID = po_course.courseID
+        // INNER JOIN program_year ON course.pyID = program_year.ID
+        // SET status = '1' 
+        // WHERE (po_course.courseID = '3' AND po_course.poID = '5') AND (CourseCode = 'ICT110' AND program_year.ID = '2')
+        return $this->check_query();
+    }
+
+    function populate_checks() {
+        $query = $this->db->query("SELECT * FROM po_course");
+
+        return $query->result_array();
+    }
+
     // END PROGRAM
 
     // STUDENT

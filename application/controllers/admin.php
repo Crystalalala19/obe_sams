@@ -73,11 +73,65 @@ class Admin extends CI_Controller {
             $data['message'] = '';
         }
         else {
-            $pc_rows = $this->input->post('po');
+            $programYear_id = $this->input->post('py_id');
+            $pos_id = $this->input->post('po_id');
+            $course_code = $this->input->post('course_code');
+            $course_id = $this->input->post('course_id');
+            $po_rows = $this->input->post('row');
 
-            // var_dump($this->input->post());
-            print_r($this->input->post());
-            die();
+            // print_r($po_rows);
+
+            // print_r($this->input->post());
+            // die();
+
+            // foreach($pos_id as $key => $val) {
+                foreach($course_code as $key2 => $val2) {
+                    $c_id = $course_id[$key2];
+
+                    // if(!empty($po_rows)) {
+                        foreach($po_rows as $key3 => $val3) {
+                            // print_r($val3);                            
+
+                            // echo $val3[$key3];
+
+                            foreach($val3 as $key4 => $val4) {
+                                
+                                if($val4) {
+                                    $activate = 1;
+                                }
+                                else {
+                                    $activate = 0;
+                                }
+    
+
+                                $result = $this->model_admin->update_checks($activate, $c_id, $val4, $val2, $programYear_id);
+
+                                // var_dump($result);
+                                // die();
+                            }
+
+                            // $this->model_admin->update_checks($activate, $c_id, $val, $val2, $programYear_id);
+
+                            // print_r($po_row);
+
+                            // echo '
+                            // UPDATE po_course <br>
+                            // INNER JOIN course ON course.ID = po_course.courseID<br>
+                            // INNER JOIN program_year ON course.pyID = program_year.ID<br>
+                            // SET status = 1'.'
+                            // WHERE (po_course.courseID) = '.$c_id.' AND po_course.poID = '.$val.') AND (CourseCode = '.$val2.' AND program_year.ID = '.$programYear_id.')
+                            // ';
+                            // UPDATE po_course 
+                            // INNER JOIN course ON course.ID = po_course.courseID
+                            // INNER JOIN program_year ON course.pyID = program_year.ID
+                            // SET status = '1' 
+                            // WHERE (po_course.courseID = '3' AND po_course.poID = '5') AND (CourseCode = 'ICT110' AND program_year.ID = '2')    
+                        }
+                        // die();
+
+                    // }
+                }
+            // }
         }
 
         $this->load->view('admin/header', $data);
