@@ -45,9 +45,9 @@ class Model_users extends CI_Model {
 		return $query->result_array();
 	}
 
-	function teacher_class1(){
+	function teacher_class1($courseCode){
 
-		$query = $this->db->query("SELECT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 1 ");
+		$query = $this->db->query("SELECT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND courseCode = 'ICT110' AND semester = 1 ");
 
 		return $query->result();
 	}
@@ -70,21 +70,21 @@ class Model_users extends CI_Model {
 
 	function course1(){
 
-		$query = $this->db->query("SELECT courseCode, semester FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 1");
+		$query = $this->db->query("SELECT DISTINCT courseCode, semester FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 1");
 
 		return $query->result();
 	}
 
 	function course2(){
 
-		$query = $this->db->query("SELECT  courseCode, semester FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 2");
+		$query = $this->db->query("SELECT DISTINCT courseCode, semester FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 2");
 
 		return $query->result();
 	}
 
 	function course3(){
 
-		$query = $this->db->query("SELECT courseCode, semester FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 'summer' ");
+		$query = $this->db->query("SELECT DISTINCT courseCode, semester FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 'summer' ");
 
 		return $query->result();
 	}

@@ -11,19 +11,14 @@
 
 <section id='tools'>
         <ul class='breadcrumb' id='breadcrumb'>
-          <li class='title'>Course List</li>
+          <li class='title'>Course</li>
         </ul>
 </section>
 
 <div id='content'>
     <div class='panel panel-default grid'>
         <div class='panel-heading'>
-            <i class='icon-table icon-large'></i>
-            <div class='panel-tools'>
-                <div class='badge'>
-                    <font size = '4'>Assigned Course List</font>
-                </div>
-            </div>
+            Assigned Classes
         </div>
         <div class='panel-body'>   
             <div class="container">
@@ -58,7 +53,7 @@
                                                             <?php foreach($course1 as $row2): ?>
 
                                                             <tr class="clickable" data-toggle="collapse" id="rowa<?php echo $count;?>" data-target=".rowa<?php echo $count;?>">
-                                                                <td><?php echo $row2->courseCode." ";?> <button class="btn"><i class="icon-plus-sign"></i></button></td>
+                                                                <td><a href="<?php echo base_url();?>site/course_list/#sample/<?php echo $row2->courseCode;?>"><button class="btn"><i class="icon-plus-sign"></i></button></a> <?php echo $row2->courseCode." ";?> </td>
                                                                 <td style="visibility:hidden;">asdasdf</td>
                                                                 <td style="visibility:hidden;">asdfasd</td>
                                                                 <td style="visibility:hidden;">asdfasd</td>
@@ -68,7 +63,7 @@
                                                 
                                                             <?php foreach($teacher_class1 as $row1): ?> 
 
-                                                            <tr class="collapse rowa<?php echo $count;?>">
+                                                            <a name="sample"><tr class="collapse rowa<?php echo $count;?>">
                                                                 <td style="visibility:hidden;">fasdasdfasd</td>
                                                                 <td style="visibility:hidden;">erwertwert</td>
                                                                 <td><?php echo "Group: ".$row1->group_num;?></td>
@@ -78,7 +73,7 @@
                                                                         <i class="icon-eye-open"></i> View Class
                                                                     </a>
                                                                 </td>
-                                                            </tr>      
+                                                            </tr></a>      
 
                                                             <?php endforeach; ?>   
                                                             <?php $count++;?> 

@@ -86,7 +86,9 @@ class Site extends CI_Controller {
 
     function course_list(){
 
-        $data['teacher_class1'] = $this->model_users->teacher_class1();
+        $courseCode = $this->uri->segment(4);
+
+        $data['teacher_class1'] = $this->model_users->teacher_class1($courseCode);
         $data['teacher_class2'] = $this->model_users->teacher_class2();
         $data['teacher_class3'] = $this->model_users->teacher_class3();
         $data['course1'] = $this->model_users->course1();

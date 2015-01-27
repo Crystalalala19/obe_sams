@@ -20,12 +20,9 @@
      <div class='panel panel-default grid'>
         <div class='panel-heading'>
             <?php foreach($scorecard as $row): ?> 
-            <?php echo $row->studentID.'  ';?>
+            <?php echo '[ '.$row->studentID.' ]  ';?>
             <?php echo $row->lname.', '.$row->fname.' '.$row->mname; ?>
-            <?php endforeach; ?>      
-        <div class='panel-tools'>
-           <div class='badge'><font size = '4'>Student Scorecard</font></div>
-         </div>
+            <?php endforeach; ?>     
        </div>
        <br>
 
