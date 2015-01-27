@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 24, 2015 at 01:36 PM
+-- Generation Time: Jan 27, 2015 at 06:53 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -102,14 +102,14 @@ CREATE TABLE IF NOT EXISTS `po_course` (
 --
 
 INSERT INTO `po_course` (`status`, `poID`, `courseID`) VALUES
-('0', 5, 3),
+('1', 5, 3),
 ('0', 6, 3),
 ('0', 7, 3),
 ('0', 8, 3),
-('0', 5, 4),
-('0', 6, 4),
+('1', 5, 4),
+('1', 6, 4),
 ('0', 7, 4),
-('0', 8, 4);
+('1', 8, 4);
 
 -- --------------------------------------------------------
 
@@ -156,7 +156,7 @@ INSERT INTO `program_year` (`ID`, `effective_year`, `programID`) VALUES
 
 CREATE TABLE IF NOT EXISTS `scorecard` (
   `score` float NOT NULL,
-  `programID` int(3) NOT NULL
+  `pyID` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -278,7 +278,7 @@ ALTER TABLE `program_year`
 -- Indexes for table `scorecard`
 --
 ALTER TABLE `scorecard`
- ADD KEY `programID` (`programID`);
+ ADD KEY `programID` (`pyID`);
 
 --
 -- Indexes for table `student`
@@ -382,7 +382,7 @@ ADD CONSTRAINT `program_year_ibfk_1` FOREIGN KEY (`programID`) REFERENCES `progr
 -- Constraints for table `scorecard`
 --
 ALTER TABLE `scorecard`
-ADD CONSTRAINT `scorecard_ibfk_1` FOREIGN KEY (`programID`) REFERENCES `student_course` (`pyID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `scorecard_ibfk_1` FOREIGN KEY (`pyID`) REFERENCES `student_course` (`pyID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `student_course`

@@ -46,7 +46,7 @@
                 <select class="form-control input-sm" name="teacher" id="lists" required>
                     <option selected="selected" value="">Select Teacher: </option>
                     <?php foreach($teacher_list as $row): ?>
-                    <option value="<?php echo $row['ID']?>"><?php echo $row['lname'].', '. $row['fname']; ?></option>
+                    <option value="<?php echo $row['teacher_id']?>"><?php echo $row['lname'].', '. $row['fname']; ?></option>
                     <?php endforeach; ?>
                 </select>
             <?php endif; ?>

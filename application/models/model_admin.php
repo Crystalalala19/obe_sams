@@ -199,20 +199,13 @@ class Model_admin extends CI_Model {
         return $query->result_array();
     }
 
-    function update_checks($activate, $pc_cid, $pc_pid, $course_code, $py_id) {
+    function update_checks($activate, $pc_cid, $pc_pid) {
         $query = $this->db->query("
         UPDATE po_course
-        INNER JOIN course ON course.ID = po_course.courseID
-        INNER JOIN program_year ON course.pyID = program_year.ID
         SET status = '".$activate."'
-        WHERE (po_course.courseID = '".$pc_cid."' AND po_course.poID = '".$pc_pid."') AND (CourseCode = '".$course_code."' AND program_year.ID = '".$py_id."')
+        WHERE (po_course.courseID = '".$pc_cid."' AND po_course.poID = '".$pc_pid."') 
         ");
 
-        // UPDATE po_course 
-        // INNER JOIN course ON course.ID = po_course.courseID
-        // INNER JOIN program_year ON course.pyID = program_year.ID
-        // SET status = '1' 
-        // WHERE (po_course.courseID = '3' AND po_course.poID = '5') AND (CourseCode = 'ICT110' AND program_year.ID = '2')
         return $this->check_query();
     }
 
@@ -274,6 +267,13 @@ class Model_admin extends CI_Model {
         $this->db->insert_batch('teacher_class', $data);
 
         return $this->check_query();
+    }
+
+    function get_po_course($courseID) {
+        $this->db->where('courseID', $courseID);
+        $query = $this->db->get('po_course');
+
+        return $query->result_array();
     }
 }
 ?>

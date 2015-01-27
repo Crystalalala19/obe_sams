@@ -75,6 +75,10 @@
                 <th>Year</th>
                 <th width="12%">Action</th>
             </tr>
+            <tr id="toBeRemoved">
+                <td>Please select a program.</td>
+                <td></td>
+            </tr>
         </thead>
         <tbody>
                 
@@ -89,7 +93,10 @@
             var selectedValue = this.value;
             
             if(selectedValue == '') {
-                alert('Empty');
+                $("#toBeRemoved td").remove();
+                $("#toBeRemoved").append(
+                    $('<td>').html("Please select a program."),
+                    $('<td>').html("")).appendTo('#view_programs');
             }
             else {
                 $.ajax({
@@ -98,8 +105,9 @@
                     data: {option: selectedValue},
                     dataType: 'json',
                     success: function(response) {
+                        $("#toBeRemoved td").remove();
                         $.each(response, function(key, value) {
-                            $('<tr>').append(
+                            $("#toBeRemoved").append(
                                 $('<td>').html(value.effective_year),
                                 $('<td>').html("<div class='btn-group inline pull-left'><a type='button' href='<?php echo base_url();?>admin/programs/outcome/"+selectedValue+"/"+value.effective_year+"' class='btn btn-warning btn-sm btn-responsive fa fa-list-alt' title='Program Outcome' target='_blank'></a><a type='button' href='<?php echo base_url();?>admin/programs/edit/"+selectedValue+"/"+value.effective_year+"' class='btn btn-primary btn-sm btn-responsive fa fa-pencil' title='Edit Program' target='_blank'></a><a type='button' href='<?php echo base_url();?>admin/programs/delete/"+selectedValue+ "/"+value.effective_year+"' class='btn btn-danger btn-sm btn-responsive fa fa-trash-o' title='Delete Program' onclick='return confirm(\"Do you want to permanently delete?\");'></a></div>")
                             ).appendTo('#view_programs');

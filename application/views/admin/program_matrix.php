@@ -36,7 +36,6 @@
     <h3>Major Subjects</h3>
     <?php echo form_open();?>
 
-    <input type="hidden" name="py_id" value="<?php echo $po_list[0]['pyID'];?>">
     <?php foreach($po_list as $key => $row): ?>
         <input type="hidden" name="po_id[]" value="<?php echo $row['ID'];?>">
     <?php endforeach ?>
@@ -57,13 +56,12 @@
                 <?php foreach($course_list as $key => $row): ?>
                 <tr>
                     <td>
-                        <input type="hidden" name="course_id[]" value="<?php echo $row['ID'];?>">
-                        <input type="hidden" name="course_code[]" value="<?php echo $row['CourseCode'];?>"><?php echo $row['CourseCode'];?>
+                        <input type="hidden" name="course_id[]" value="<?php echo $row['ID'];?>"><?php echo $row['CourseCode'];?>
                     </td>
                     <td><?php echo $row['CourseDesc']; ?></td>
                     <?php foreach($po_list as $key2 => $row2): ?>
                     <td>
-                        <input type="checkbox" data-size='mini' name='row[<?php echo $key;?>][]' value='<?php echo $row2['ID'];?>'>
+                        <input type="checkbox" data-size='mini' name='row[<?php echo $key;?>][]' value='<?php echo $row2['ID'];?>' <?php if($m_array[$key][$key2]['status'] == '1') echo "checked=\"checked\""; ?>>
                     </td>
                     <?php endforeach; $row_num++; ?>
                 </tr>
