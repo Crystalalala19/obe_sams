@@ -22,8 +22,23 @@
         </div>
         <div class='panel-body'>   
             <div class="container">
+                <div class="form-group col-md-2">
+                    <label for="program_ajax">School Year:</label>
+                    <select name="SY" class="form-control input-sm" id='course_ajax'>
+                        <option selected="selected" value="">Select SY: </option>
+                        <?php foreach($select_SY as $row): ?>
+                        <option value="<?php echo $row->school_year;?>"><?php echo $row->school_year;?></option>
+                        <?php endforeach;?>
+                    </select>
+                    
+                    <div style='display:none;' id='business'>Business Name<br/>&nbsp;
+                        <br/>&nbsp;
+                            <input type='text' class='text' name='business' value size='20' />
+                        <br/>
+                    </div>
+                </div>
+                <div class="form-group col-md-12"></div>
                 <div class="tabbable">
-                
                     <div class='panel-body'>   
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab1">
@@ -190,21 +205,7 @@
     </div>
 
     <body>
-        <div class="form-group col-md-2">
-            <label for="program_ajax">School Year:</label>
-            <select name="SY" class="form-control input-sm" id='course_ajax'>
-                <option selected="selected" value="">Select SY: </option>
-                <?php foreach($select_SY as $row): ?>
-                <option value="<?php echo $row->school_year;?>"><?php echo $row->school_year;?></option>
-                <?php endforeach;?>
-            </select>
-            
-            <div style='display:none;' id='business'>Business Name<br/>&nbsp;
-                <br/>&nbsp;
-                    <input type='text' class='text' name='business' value size='20' />
-                <br/>
-            </div>
-        </div>
+      
     </body>
 
 
