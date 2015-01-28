@@ -199,6 +199,19 @@ class Model_admin extends CI_Model {
         return $query->result_array();
     }
 
+    function check_programYear($program, $year) {
+        $query = $this->db->query("SELECT programName, effective_year FROM program 
+                                  INNER JOIN program_year ON program.ID = program_year.programID 
+                                  WHERE programName =  '".$program."' AND effective_year = '".$year."' ");
+    
+        if($query->num_rows() == 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     function update_checks($activate, $pc_cid, $pc_pid) {
         $query = $this->db->query("
         UPDATE po_course

@@ -41,6 +41,22 @@ class Admin extends CI_Controller {
 
         echo json_encode($result);
     }
+
+    function get_semester() {
+        $date = getdate();
+
+        if($date['mon'] >= 6 AND $date['mon'] <= 10) {
+            $semester = 1;
+        }
+        elseif($date['mon'] >= 11 OR $date['mon'] <= 3) {
+            $semester = 2;
+        }
+        else {
+            $semester = 'summer';
+        }
+        
+        return $semester;
+    }
     // END FUNCTIONS
 
     public function program_matrix() {
@@ -109,6 +125,12 @@ class Admin extends CI_Controller {
                     }
                 }
             }
+
+            $message = '<strong>Success!</strong>';
+            $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
+
+            $this->session->set_flashdata('message', $message);
+
             redirect(current_url());
         }
 
@@ -125,16 +147,25 @@ class Admin extends CI_Controller {
 
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('program', 'Program Name', 'required|trim');
-        $this->form_validation->set_rules('effective_year', "Effective Year", 'required|trim');
+        $this->form_validation->set_rules("program", "Program Name", "required|trim");
+        $this->form_validation->set_rules("effective_year", "Effective Year", "required|trim");
         $this->form_validation->set_rules("po_code[]", "PO Code", "required|trim");
         $this->form_validation->set_rules("po_attrib[]", "PO Attribute", "required|trim");
         $this->form_validation->set_rules("po_desc[]", "PO Description", "required|trim");
         $this->form_validation->set_rules("co_code[]", "Course Code", "required|trim");
         $this->form_validation->set_rules("co_desc[]", "Course Description", "required|trim");
         
+        $program = $this->input->post('program');
+        $year = $this->input->post('effective_year');
+
         if($this->form_validation->run() == FALSE){
             $data['message'] = '';
+        }
+        elseif($this->model_admin->check_programYear($program, $year)) {
+            $message = '<strong>Effective Year</strong> for the <strong>Program</strong> exists.';
+            $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
+
+            $data['message'] = $message;
         }
         else{
             $po_rows = $this->input->post('po_code');
@@ -201,19 +232,15 @@ class Admin extends CI_Controller {
                 }
             }
 
-            // print_r($exploded);
             foreach($exploded as $key1 => $exploded_data) {
-                // print_r($exploded_data);
                 $course_equi_array = array();
                 
                 foreach ($exploded_data as $key2 => $value) {
                     $course_equi_array[$key2]['CourseEquivalent'] = $value;
                     $course_equi_array[$key2]['courseID'] = $course_id[$key1];
                 }
-                // print_r($course_equi_array);
             }
             
-            // die();
             $equi_result = $this->model_admin->insert_equivalents($course_equi_array);
 
             if($this->db->trans_status() === FALSE) {
@@ -231,8 +258,6 @@ class Admin extends CI_Controller {
                 $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
 
                 $this->session->set_flashdata('message', $message);
-
-                // $data['success'] = TRUE;
 
                 redirect('admin/programs/outcome/'. $this->input->post('program') . '/' . $year);
             }
@@ -318,7 +343,7 @@ class Admin extends CI_Controller {
         $this->load->view('admin/footer');
     }
 
-    public function delete_prgraom() {
+    public function delete_program() {
 
     }
 
@@ -435,6 +460,7 @@ class Admin extends CI_Controller {
                 $data['message'] = $this->model_admin->notify_message('alert-info', 'glyphicon-info-sign', $message);
             }
             else {
+                //Teacher's Information
                 $data['row'] = $this->model_admin->check_rowID('teacher', $id);
             }
         }
@@ -494,6 +520,87 @@ class Admin extends CI_Controller {
                 redirect('admin/teachers');
             }
         }
+    }
+
+        public function assign_class() {
+        $this->load->library('csvimport');
+        $this->load->library('form_validation');
+
+        $data['title'] = 'Admin - Assign Classes';
+        $data['header'] = 'Assign Classes';
+        
+        $data['teacher_list'] = $this->model_admin->check_rows('teacher');
+
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = 'csv';
+        $config['max_size'] = '1000';
+        $this->load->library('upload', $config);
+
+        $this->form_validation->set_rules('teacher', 'Teacher', 'required|trim');
+
+        if($this->form_validation->run() == FALSE) {
+            $data['message'] = '';
+        }
+        elseif(!$this->upload->do_upload()){
+            $data['message'] = $this->upload->display_errors('
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>',
+            '</div>');;
+        }
+        else{
+            $file_data = $this->upload->data();
+            $file_path =  './uploads/'.$file_data['file_name'];
+            
+            if ($this->csvimport->get_array($file_path)) {
+                $insert_data = array();
+                $csv_array = $this->csvimport->get_array($file_path, array('Group Number', 'Course Code', 'Start Time', 'End Time', 'Days'));
+                
+                foreach ($csv_array as $row) {                    
+                    $insert_data[] = array(
+                        'group_num'=>$row['Group Number'],
+                        'courseCode'=>$row['Course Code'],
+                        'start_time'=>$row['Start Time'],
+                        'end_time'=>$row['End Time'],
+                        'days'=>$row['Days'],
+                        'semester'=> $this->get_semester(),
+                        'school_year'=> date('Y'),
+                        'teacherID'=> $this->input->post('teacher')
+                    );
+                }
+
+                $result = $this->model_admin->insert_classes($insert_data);
+
+                //Deletes uploaded file
+                unlink($file_path);
+
+                if($result['is_success'] == FALSE) {
+                    $message = '<strong>Error: </strong>'.  $result['db_error'];
+                    $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
+
+                    $data['message'] = $message; 
+                }
+                else {
+                    $message = '<strong>Success!</strong> Classes added.';
+                    $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
+
+                    $this->session->set_flashdata('message', $message);
+
+                    redirect(current_url());
+                }
+            }
+            else {
+                $message = '<strong>Error:</strong> Inserting .CSV file.';
+                $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
+
+                $data['message'] = $message;
+            }            
+        }
+
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/assign_class', $data);
+        $this->load->view('admin/footer');
     }
     // END TEACHER
 
@@ -641,84 +748,6 @@ class Admin extends CI_Controller {
 
         $this->load->view('admin/header', $data);
         $this->load->view('admin/edit_student', $data);
-        $this->load->view('admin/footer');
-    }
-
-    public function assign_class() {
-        $this->load->library('csvimport');
-        $this->load->library('form_validation');
-
-        $data['title'] = 'Admin - Assign Classes';
-        $data['header'] = 'Assign Classes';
-        
-        $data['teacher_list'] = $this->model_admin->check_rows('teacher');
-
-        $config['upload_path'] = './uploads/';
-        $config['allowed_types'] = 'csv';
-        $config['max_size'] = '1000';
-        $this->load->library('upload', $config);
-
-        $this->form_validation->set_rules('teacher', 'Teacher', 'required|trim');
-
-        if($this->form_validation->run() == FALSE) {
-            $data['message'] = '';
-        }
-        elseif(!$this->upload->do_upload()){
-            $data['message'] = $this->upload->display_errors('
-            <div class="alert alert-danger alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                <span class="sr-only">Error:</span>',
-            '</div>');;
-        }
-        else{
-            $file_data = $this->upload->data();
-            $file_path =  './uploads/'.$file_data['file_name'];
-            
-            if ($this->csvimport->get_array($file_path)) {
-                $insert_data = array();
-                $csv_array = $this->csvimport->get_array($file_path, array('Group Number', 'Course Code', 'Start Time', 'End Time', 'Days'));
-                
-                foreach ($csv_array as $row) {
-                    // var_dump($row);
-                    
-                    $insert_data[] = array(
-                        'group_num'=>$row['Group Number'],
-                        'courseCode'=>$row['Course Code'],
-                        'start_time'=>$row['Start Time'],
-                        'end_time'=>$row['End Time'],
-                        'days'=>$row['Days'],
-                        'semester'=> '1',
-                        'school_year'=> date('Y'),
-                        'teacherID'=> $this->input->post('teacher')
-                    );
-                }
-                $result = $this->model_admin->insert_classes($insert_data);
-
-                if($result['is_success'] == FALSE) {
-                    $message = '<strong>Error: </strong>'.  $result['db_error'];
-                    $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
-
-                    $data['message'] = $message; 
-                }
-                else {
-                    $message = '<strong>Success!</strong> Classes added.';
-                    $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
-
-                    $this->session->set_flashdata('message', $message);
-
-                    redirect(current_url());
-                }
-            }
-            else {
-                $message = '<strong>Error: Inserting .CSV file.</strong>';
-
-                $data['message'] = $message;
-            }            
-        }
-
-        $this->load->view('admin/header', $data);
-        $this->load->view('admin/assign_class', $data);
         $this->load->view('admin/footer');
     }
 }

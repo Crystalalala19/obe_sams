@@ -75,13 +75,12 @@
                 <th>Year</th>
                 <th width="12%">Action</th>
             </tr>
+        </thead>
+        <tbody>
             <tr id="toBeRemoved">
                 <td>Please select a program.</td>
                 <td></td>
-            </tr>
-        </thead>
-        <tbody>
-                
+            </tr>   
         </tbody>
     </table>
 
@@ -96,7 +95,8 @@
                 $("#toBeRemoved td").remove();
                 $("#toBeRemoved").append(
                     $('<td>').html("Please select a program."),
-                    $('<td>').html("")).appendTo('#view_programs');
+                    $('<td>').html("")
+                ).appendTo('#view_programs');
             }
             else {
                 $.ajax({
