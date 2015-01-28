@@ -29,8 +29,9 @@
     '</div>');
     ?>
 
-    <div class="form-group col-md-12">
+    <div class="form-group">
         <button class="btn btn-info" data-toggle='modal' data-target='#add' title="New Program"><i class="fa fa-plus"></i> New Program</button>
+        <a id="delprogram" type="button" class="btn btn-danger" title="Delete Program"><i class="fa fa-trash"></i> Delete Program</a>
     </div>
 
     <div class='modal fade' id='add' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
@@ -88,14 +89,17 @@
         var d = document.getElementById("program_dropdown");
         d.className = d.className + " active";
 
+        $("#delprogram").hide();
+
         $('#program_ajax').change(function() {
             var selectedValue = this.value;
             
             if(selectedValue == '') {
+                $("#delprogram").hide();
+
                 $("#toBeRemoved td").remove();
                 $("#toBeRemoved").append(
-                    $('<td>').html("Please select a program."),
-                    $('<td>').html("")
+                    $("<td colspan='2'>").html("No program selected.")
                 ).appendTo('#view_programs');
             }
             else {
@@ -105,14 +109,23 @@
                     data: {option: selectedValue},
                     dataType: 'json',
                     success: function(response) {
+                        $("#delprogram").show().attr("href", selectedValue);
+
                         $("#toBeRemoved td").remove();
-                        $.each(response, function(key, value) {
+                        if(jQuery.isEmptyObject(response)) {
                             $("#toBeRemoved").append(
-                                $('<td>').html(value.effective_year),
-                                $('<td>').html("<div class='btn-group inline pull-left'><a type='button' href='<?php echo base_url();?>admin/programs/outcome/"+selectedValue+"/"+value.effective_year+"' class='btn btn-warning btn-sm btn-responsive fa fa-list-alt' title='Program Outcome' target='_blank'></a><a type='button' href='<?php echo base_url();?>admin/programs/edit/"+selectedValue+"/"+value.effective_year+"' class='btn btn-primary btn-sm btn-responsive fa fa-pencil' title='Edit Program' target='_blank'></a><a type='button' href='<?php echo base_url();?>admin/programs/delete/"+selectedValue+ "/"+value.effective_year+"' class='btn btn-danger btn-sm btn-responsive fa fa-trash-o' title='Delete Program' onclick='return confirm(\"Do you want to permanently delete?\");'></a></div>")
+                                $("<td colspan='2'>").html("No Effective Years found.")
                             ).appendTo('#view_programs');
-                        });
-                        console.log(response);
+                        }
+                        else {
+                            $.each(response, function(key, value) {
+                                    $("#toBeRemoved").append(
+                                        $('<td>').html(value.effective_year),
+                                        $('<td>').html("<div class='btn-group inline pull-left'><a type='button' href='<?php echo base_url();?>admin/programs/outcome/"+selectedValue+"/"+value.effective_year+"' class='btn btn-warning btn-sm btn-responsive fa fa-list-alt' title='Program Outcome' target='_blank'></a><a type='button' href='<?php echo base_url();?>admin/programs/edit/"+selectedValue+"/"+value.effective_year+"' class='btn btn-primary btn-sm btn-responsive fa fa-pencil' title='Edit Program' target='_blank'></a><a type='button' href='<?php echo base_url();?>admin/programs/delete/"+selectedValue+ "/"+value.effective_year+"' class='btn btn-danger btn-sm btn-responsive fa fa-trash-o' title='Delete Program Year' onclick='return confirm(\"Do you want to permanently delete?\");'></a></div>")
+                                    ).appendTo('#view_programs');
+                            });
+                            console.log(response);
+                        }
                     }
                 });
             }

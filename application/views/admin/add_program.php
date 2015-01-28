@@ -44,6 +44,7 @@
                     <?php endif;?>
                 </select>
             </div>
+            <?php if($program_list == TRUE):?>
             <div class="form-group col-md-6">
                 <label class="control-label" for="effective_year">Effective Year:</label>
                 <?php
@@ -182,3 +183,4 @@
         }
     </script>
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/step2.js"></script>
+    <?php endif;?>

@@ -117,11 +117,8 @@
                     "sButtonText": "Copy",
                     //Columns to export as data, exluded Action column
                     "mColumns": [ 0, 1, 2 ],
-                }, {
-                    "sExtends": "print",
-                    "sButtonText": "Print",
-                    "bShowAll": false
-                }, {
+                }, 
+                {
                     "sExtends":    "collection",
                     "sButtonText": "Save as...",
                     "aButtons":    [ {
