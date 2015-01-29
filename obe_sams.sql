@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 27, 2015 at 06:53 AM
+-- Generation Time: Jan 29, 2015 at 03:41 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `course` (
   `CourseCode` varchar(9) NOT NULL,
   `CourseDesc` varchar(255) NOT NULL,
   `pyID` int(3) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `course`
@@ -39,7 +39,10 @@ CREATE TABLE IF NOT EXISTS `course` (
 
 INSERT INTO `course` (`ID`, `CourseCode`, `CourseDesc`, `pyID`) VALUES
 (3, 'ICT110', 'asd', 2),
-(4, 'ICT116', 'asd', 2);
+(4, 'ICT116', 'asd', 2),
+(5, 'ICT111', 'sdfsdfs', 2),
+(6, 'CS11', 'dscsd', 3),
+(7, 'CS110', 'sdfsad', 4);
 
 -- --------------------------------------------------------
 
@@ -59,7 +62,8 @@ CREATE TABLE IF NOT EXISTS `equivalent` (
 INSERT INTO `equivalent` (`CourseEquivalent`, `courseID`) VALUES
 ('IT116', 4),
 ('CS116', 4),
-('ACT100', 3);
+('ACT100', 3),
+('IT110', 7);
 
 -- --------------------------------------------------------
 
@@ -73,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `po` (
   `poCode` varchar(10) NOT NULL,
   `description` text NOT NULL,
   `pyID` int(3) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `po`
@@ -83,7 +87,8 @@ INSERT INTO `po` (`ID`, `attribute`, `poCode`, `description`, `pyID`) VALUES
 (5, 'asd', 'ICT01', 'asd', 2),
 (6, 'asd', 'ICT02', 'asd', 2),
 (7, 'asd', 'ICT03', 'asd', 2),
-(8, 'asd', 'ICT04', 'asd', 2);
+(8, 'asd', 'ICT04', 'asd', 2),
+(9, 'Ethics', 'CS01', 'sddfsdf', 4);
 
 -- --------------------------------------------------------
 
@@ -92,24 +97,18 @@ INSERT INTO `po` (`ID`, `attribute`, `poCode`, `description`, `pyID`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `po_course` (
-  `status` enum('0','1') NOT NULL,
+`ID` int(5) NOT NULL,
+  `status` enum('1','0') NOT NULL,
   `poID` int(3) NOT NULL,
   `courseID` int(3) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `po_course`
 --
 
-INSERT INTO `po_course` (`status`, `poID`, `courseID`) VALUES
-('1', 5, 3),
-('0', 6, 3),
-('0', 7, 3),
-('0', 8, 3),
-('1', 5, 4),
-('1', 6, 4),
-('0', 7, 4),
-('1', 8, 4);
+INSERT INTO `po_course` (`ID`, `status`, `poID`, `courseID`) VALUES
+(1, '1', 5, 3);
 
 -- --------------------------------------------------------
 
@@ -120,14 +119,16 @@ INSERT INTO `po_course` (`status`, `poID`, `courseID`) VALUES
 CREATE TABLE IF NOT EXISTS `program` (
 `ID` int(3) NOT NULL,
   `programName` char(8) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `program`
 --
 
 INSERT INTO `program` (`ID`, `programName`) VALUES
-(1, 'BSICT');
+(1, 'BSICT'),
+(2, 'BSCS'),
+(3, 'BS ICT');
 
 -- --------------------------------------------------------
 
@@ -139,25 +140,16 @@ CREATE TABLE IF NOT EXISTS `program_year` (
 `ID` int(3) NOT NULL,
   `effective_year` year(4) NOT NULL,
   `programID` int(3) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `program_year`
 --
 
 INSERT INTO `program_year` (`ID`, `effective_year`, `programID`) VALUES
-(2, 2015, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `scorecard`
---
-
-CREATE TABLE IF NOT EXISTS `scorecard` (
-  `score` float NOT NULL,
-  `pyID` int(3) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+(2, 2015, 1),
+(3, 2011, 2),
+(4, 2015, 2);
 
 -- --------------------------------------------------------
 
@@ -171,14 +163,16 @@ CREATE TABLE IF NOT EXISTS `student` (
   `fname` varchar(20) NOT NULL,
   `mname` varchar(20) NOT NULL,
   `lname` varchar(20) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `student`
 --
 
 INSERT INTO `student` (`ID`, `student_id`, `fname`, `mname`, `lname`) VALUES
-(1, 11104551, 'Jovanne', 'Buque', 'Kjellberg');
+(1, 11104551, 'Jovanne', 'Buque', 'Kjellberg'),
+(2, 11101091, 'John', 'Smith', 'Doe'),
+(3, 11101092, 'Mae', 'Doe', 'Smith');
 
 -- --------------------------------------------------------
 
@@ -187,11 +181,19 @@ INSERT INTO `student` (`ID`, `student_id`, `fname`, `mname`, `lname`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `student_course` (
-  `courseID` int(3) NOT NULL,
-  `studentID` int(10) NOT NULL,
+  `po_courseID` int(5) NOT NULL,
   `pyID` int(3) NOT NULL,
-  `classID` int(5) NOT NULL
+  `studentID` int(10) NOT NULL,
+  `classID` int(5) NOT NULL,
+  `score` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `student_course`
+--
+
+INSERT INTO `student_course` (`po_courseID`, `pyID`, `studentID`, `classID`, `score`) VALUES
+(1, 2, 11101091, 1, 1.2);
 
 -- --------------------------------------------------------
 
@@ -232,7 +234,16 @@ CREATE TABLE IF NOT EXISTS `teacher_class` (
   `school_year` year(4) NOT NULL,
   `courseCode` varchar(9) NOT NULL,
   `teacherID` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `teacher_class`
+--
+
+INSERT INTO `teacher_class` (`ID`, `group_num`, `start_time`, `end_time`, `days`, `semester`, `school_year`, `courseCode`, `teacherID`) VALUES
+(1, 1, '01:00:00', '02:30:00', 'MWF', '1', 2013, 'ICT110', '1111111111'),
+(2, 4, '03:00:00', '04:30:00', 'MWF', '1', 2013, 'ICT111', '1111111111'),
+(3, 4, '09:00:00', '10:30:00', 'TTH', '1', 2013, 'CS11', '1111111111');
 
 --
 -- Indexes for dumped tables
@@ -260,7 +271,7 @@ ALTER TABLE `po`
 -- Indexes for table `po_course`
 --
 ALTER TABLE `po_course`
- ADD KEY `poID` (`poID`), ADD KEY `courseID` (`courseID`);
+ ADD PRIMARY KEY (`ID`), ADD KEY `poID` (`poID`,`courseID`), ADD KEY `courseID` (`courseID`);
 
 --
 -- Indexes for table `program`
@@ -275,12 +286,6 @@ ALTER TABLE `program_year`
  ADD PRIMARY KEY (`ID`), ADD KEY `programID` (`programID`), ADD KEY `programID_2` (`programID`);
 
 --
--- Indexes for table `scorecard`
---
-ALTER TABLE `scorecard`
- ADD KEY `programID` (`pyID`);
-
---
 -- Indexes for table `student`
 --
 ALTER TABLE `student`
@@ -290,7 +295,7 @@ ALTER TABLE `student`
 -- Indexes for table `student_course`
 --
 ALTER TABLE `student_course`
- ADD KEY `courseID` (`courseID`,`studentID`), ADD KEY `studentID` (`studentID`), ADD KEY `programID` (`pyID`), ADD KEY `classID` (`classID`);
+ ADD KEY `courseID` (`po_courseID`,`studentID`), ADD KEY `studentID` (`studentID`), ADD KEY `classID` (`classID`), ADD KEY `pyID` (`pyID`);
 
 --
 -- Indexes for table `teacher`
@@ -312,27 +317,32 @@ ALTER TABLE `teacher_class`
 -- AUTO_INCREMENT for table `course`
 --
 ALTER TABLE `course`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `po`
 --
 ALTER TABLE `po`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT for table `po_course`
+--
+ALTER TABLE `po_course`
+MODIFY `ID` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `program`
 --
 ALTER TABLE `program`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `program_year`
 --
 ALTER TABLE `program_year`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `teacher`
 --
@@ -342,7 +352,7 @@ MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT for table `teacher_class`
 --
 ALTER TABLE `teacher_class`
-MODIFY `ID` int(5) NOT NULL AUTO_INCREMENT;
+MODIFY `ID` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- Constraints for dumped tables
 --
@@ -379,19 +389,13 @@ ALTER TABLE `program_year`
 ADD CONSTRAINT `program_year_ibfk_1` FOREIGN KEY (`programID`) REFERENCES `program` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `scorecard`
---
-ALTER TABLE `scorecard`
-ADD CONSTRAINT `scorecard_ibfk_1` FOREIGN KEY (`pyID`) REFERENCES `student_course` (`pyID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `student_course`
 --
 ALTER TABLE `student_course`
-ADD CONSTRAINT `student_course_ibfk_2` FOREIGN KEY (`courseID`) REFERENCES `course` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `student_course_ibfk_1` FOREIGN KEY (`pyID`) REFERENCES `program_year` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `student_course_ibfk_2` FOREIGN KEY (`po_courseID`) REFERENCES `po_course` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `student_course_ibfk_3` FOREIGN KEY (`studentID`) REFERENCES `student` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `student_course_ibfk_4` FOREIGN KEY (`classID`) REFERENCES `teacher_class` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `student_course_ibfk_5` FOREIGN KEY (`pyID`) REFERENCES `program_year` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `student_course_ibfk_4` FOREIGN KEY (`classID`) REFERENCES `teacher_class` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `teacher_class`
