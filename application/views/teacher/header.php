@@ -16,7 +16,7 @@
         <title><?php echo $title; ?></title>
 
         <!-- Offline files -->
-        <link href="<?php echo base_url();?>assets/img/teacher.png" rel="icon" type="image/ico" />
+        <link href="<?php echo base_url();?>assets/img/icon.png" rel="icon" type="image/ico" />
         <!--  Bootstrap Style -->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.css">
          <!-- Custom CSS -->    
@@ -26,6 +26,9 @@
         <!-- For datatable -->
         <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css">
         <!-- end datatable -->
+
+        
+
         <style type="text/css">
             div.DTTT { margin-bottom: 0.5em; float: right; }
             div.dataTables_wrapper { clear: both; }
@@ -34,8 +37,7 @@
 
         <!-- FOOTER -->
 
-        
-        
+     
         <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
         <!--  Core Bootstrap Script -->
         <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/bootstrap.js"></script>

@@ -86,18 +86,20 @@ class Site extends CI_Controller {
 
     function course_list(){
 
-        $courseCode = $this->uri->segment(4);
-
-        $data['teacher_class1'] = $this->model_users->teacher_class1($courseCode);
-        $data['teacher_class2'] = $this->model_users->teacher_class2();
-        $data['teacher_class3'] = $this->model_users->teacher_class3();
-        $data['course1'] = $this->model_users->course1();
-        $data['course2'] = $this->model_users->course2();
-        $data['course3'] = $this->model_users->course3();
+        $data['select_courseList'] = $this->model_users->select_courseList();
         $data['select_SY'] = $this->model_users->select_SY();
         $data['user'] = $this->model_users->select_user();
         $data['title'] = "Outcome-based Education";
 
+        if($data['select_courseList'] == FALSE) {
+            $message = 'No courses found in record.';
+            $data['message'] = $this->model_users->notify_message('alert-info', 'glyphicon-info-sign', $message);
+        } else {
+            $data['message'] = '';
+        }
+
+
+       
         $this->load->view("teacher/header", $data);
         $this->load->view('teacher/course_list', $data);
         $this->load->view("teacher/footer");
@@ -109,8 +111,18 @@ class Site extends CI_Controller {
 
         $data['class_list'] = $this->model_users->select_class($id);
         $data['select_schedule'] = $this->model_users->select_schedule($id);
+        $data['select_programName'] = $this->model_users->select_programName($id);
+        $data['get_po'] = $this->model_users->get_po($id);
         $data['user'] = $this->model_users->select_user();
         $data['title'] = "Outcome-based Education";
+
+
+        if($data['class_list'] == FALSE) {
+            $message = 'No students found in record.';
+            $data['message'] = $this->model_users->notify_message('alert-info', 'glyphicon-info-sign', $message);
+        } else {
+            $data['message'] = '';
+        }
 
 
         $this->load->view("teacher/header", $data);
@@ -134,6 +146,7 @@ class Site extends CI_Controller {
 
     function student_list(){
 
+
         $data['student_list'] = $this->model_users->student_list();  
         $data['user'] = $this->model_users->select_user();
         $data['title'] = "Outcome-based Education";
@@ -143,4 +156,5 @@ class Site extends CI_Controller {
         $this->load->view("teacher/footer");
     }
 
+ 
 }

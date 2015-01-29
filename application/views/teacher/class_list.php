@@ -13,7 +13,7 @@
         <div class="col-sm-4">
             <ul class="list-group">
                 <?php foreach($select_schedule as $row1): ?>
-                    <li class="list-group-item list-group-item-success"><center><b><font size="3"><?php echo $row1->courseCode.' ';?></font></b>
+                    <li class="list-group-item list-group-item-success"><center><b><font size="2"><?php echo $row1->courseCode.' ';?></font></b>
                    
                         <?php echo '| Group '; echo $row1->group_num.' | ';?>
                         <?php 
@@ -32,21 +32,51 @@
         </div>
     </div>
 </div>
+ <?php
+    echo $this->session->flashdata('message');
+    if (!empty($message)) echo $message;
 
+    echo validation_errors('
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><i class="icon-remove-sign"></i></button>
+        <i class="icon-exclamation-sign" aria-hidden="true"></i> ', 
+    '</div>');
+
+    $po_count = count($get_po);
+?>
+    
     <table id="view_classlist" class="table table-striped table-hover table-bordered table-condensed">
         <thead>
             <tr>
                 <th><center>Student ID</center></th>
                 <th><center>Name</center></th>
                 <th><center>Program Name</center></th>
+                <?php for($x = 1; $x <= $po_count; $x++):?>
+                    <th><center>PO <?php echo $x;?></center></th>
+                <?php endfor; $row_num=1;?>
+                <th><center>View Scorecard</center></th>
             </tr>
         </thead>
         <tbody>
             <tr>  
                 <?php foreach($class_list as $row): ?>
-                <td><center><a href="<?php echo base_url();?>site/scorecard/<?php echo $row->student_id;?>"><?php echo $row->student_id;?></a></center></td>
-                <td><center><?php echo $row->fname; echo " ".$row->mname; echo " ".$row->lname;?></center></td>
-                <td><center><?php echo $row->effective_year;?> - <?php echo $row->effective_year;?></center></td>
+                <td><center><?php echo $row['student_id'];?></center></td>
+                <td><center><?php echo $row['fname']; echo " ".$row['mname']; echo " ".$row['lname'];?></center></td>
+                <td><center><?php foreach($select_programName as $row1): ?><?php echo $row1->programName;?><?php endforeach; ?> - <?php echo $row['effective_year'];?></center></td>
+                <?php foreach($get_po as $key2 => $row2): ?>
+                    <td>
+                        <center>
+                            <?php echo $row2['score'];?>
+                        </center>
+                    </td>
+                <?php endforeach; $row_num++; ?>
+                <td>
+                    <center>
+                        <a class="btn btn-sm btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row['student_id'];?>">
+                        <i class="icon-eye-open"></i> View Scorecard
+                        </a>
+                    </center>
+                </td>
             </tr>
             <?php endforeach; ?>        
         </tbody>

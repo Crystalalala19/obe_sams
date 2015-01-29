@@ -12,15 +12,23 @@
                 <th><center>Student ID</center></th>
                 <th><center>Name</center></th>
                 <th><center>Program</center></th>
+                <th><center>Action</center></th>
             </tr>
         </thead>
         
         <tbody>
               	<?php foreach($student_list as $row): ?>   
                 <tr>          
-                    <td><center><a href="<?php echo base_url();?>site/scorecard/<?php echo $row->studentID;?>"><?php echo $row->studentID;?></a></center></td>
+                    <td><center><?php echo $row->studentID;?></center></td>
                     <td><center><?php echo $row->fname." ".$row->mname." ".$row->lname;?></center></td>
-                    <td><center><?php echo $row->effective_year."-".$row->effective_year;?></center></td>
+                    <td><center><?php echo $row->programName;?> - <?php echo $row->effective_year;?></center></td>
+                    <td>
+                        <center>
+                            <a class="btn btn-sm btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row->studentID;?>">
+                            <i class="icon-eye-open"></i> View Scorecard
+                            </a>
+                        </center>
+                    </td>
                 </tr>
                     <?php endforeach; ?>   
 

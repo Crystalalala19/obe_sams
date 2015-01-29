@@ -1,12 +1,4 @@
-    
-<!-- For filter table -->
-<link href="shttp://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
-<link href="http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css" rel="stylesheet">
-<link href="<?php echo base_url();?>assets/css/bootstrap-editable.css" rel="stylesheet">
-<link href="<?php echo base_url();?>assets/css/bootstrap-filterable.css" rel="stylesheet">
-<link href="http://lightswitch05.github.io/filterable/stylesheets/main.css" rel="stylesheet">
 
-<!-- End filter table -->
 
 
 <section id='tools'>
@@ -22,242 +14,78 @@
         </div>
         <div class='panel-body'>   
             <div class="container">
-                <div class="form-group col-md-2">
-                    <label for="program_ajax">School Year:</label>
-                    <select name="SY" class="form-control input-sm" id='course_ajax'>
-                        <option selected="selected" value="">Select SY: </option>
-                        <?php foreach($select_SY as $row): ?>
-                        <option value="<?php echo $row->school_year;?>"><?php echo $row->school_year;?></option>
-                        <?php endforeach;?>
-                    </select>
-                    
-                    <div style='display:none;' id='business'>Business Name<br/>&nbsp;
-                        <br/>&nbsp;
-                            <input type='text' class='text' name='business' value size='20' />
-                        <br/>
-                    </div>
-                </div>
-                <div class="form-group col-md-12"></div>
-                <div class="tabbable">
-                    <div class='panel-body'>   
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="tab1">
-                       
-                                <div class="span8">
-                                    <div class="tabbable tabs-left">
-                                        <ul class="nav nav-tabs">
-                                          <li class="active"><a href="#tab3" data-toggle="tab">1st Semester</a></li>
-                                          <li><a href="#tab4" data-toggle="tab">Second Semester</a></li>
-                                          <li><a href="#tab5" data-toggle="tab">Summer</a></li>
-                                        </ul>
-                                        <div class="tab-content">
-                                            <div class="tab-pane active" id="tab3">
-                                                <div class='panel panel-default grid'>
-                                                    <table id="example-table" class="table table-striped table-hover table-condensed">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Course Code <i class="icon-filter"></i></th>
-                                                                <th style="visibility:hidden;">sdfasdf</th>
-                                                                <th style="visibility:hidden;">asdasd</th>
-                                                                <th style="visibility:hidden;">Semester</th>
-                                                                <th style="visibility:hidden;">School Year</th>
-                                                            </tr>
-                                                        </thead>
-                                                    <tbody>
-                                                            <?php $count =1; ?>
-                                                            <?php foreach($course1 as $row2): ?>
+                <table id="example" class="table table-striped dataTable no-footer">
+                 <?php
+                    echo $this->session->flashdata('message');
+                    if (!empty($message)) echo $message;
 
-                                                            <tr class="clickable" data-toggle="collapse" id="rowa<?php echo $count;?>" data-target=".rowa<?php echo $count;?>">
-                                                                <td><a href="<?php echo base_url();?>site/course_list/#sample/<?php echo $row2->courseCode;?>"><button class="btn"><i class="icon-plus-sign"></i></button></a> <?php echo $row2->courseCode." ";?> </td>
-                                                                <td style="visibility:hidden;">asdasdf</td>
-                                                                <td style="visibility:hidden;">asdfasd</td>
-                                                                <td style="visibility:hidden;">asdfasd</td>
-                                                                <td style="visibility:hidden;">asdf</td>
-                                                              
-                                                            </tr> 
-                                                
-                                                            <?php foreach($teacher_class1 as $row1): ?> 
+                    echo validation_errors('
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert"><i class="icon-remove-sign"></i></button>
+                        <i class="icon-exclamation-sign" aria-hidden="true"></i> ', 
+                    '</div>');
+                ?>
+                    <thead>
+                        <tr>
+                            <th>School Year</th>
+                            <th>Semester</th>
+                            <th>Course Code</th>
+                            <th>Group # - Schedule</th>
+                            <th><center>Action</center></th>
 
-                                                            <a name="sample"><tr class="collapse rowa<?php echo $count;?>">
-                                                                <td style="visibility:hidden;">fasdasdfasd</td>
-                                                                <td style="visibility:hidden;">erwertwert</td>
-                                                                <td><?php echo "Group: ".$row1->group_num;?></td>
-                                                                <td><?php echo "Schedule: ".$row1->start_time."-".$row1->end_time." ".$row1->days;?></td>
-                                                                <td>
-                                                                    <a class="btn btn-sm btn-info" href="<?php echo base_url();?>site/class_list/<?php echo $row1->ID;?>">
-                                                                        <i class="icon-eye-open"></i> View Class
-                                                                    </a>
-                                                                </td>
-                                                            </tr></a>      
+                        </tr>
+                    </thead>
 
-                                                            <?php endforeach; ?>   
-                                                            <?php $count++;?> 
-                                                            <?php endforeach; ?>   
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
 
-                                            <div class="tab-pane" id="tab4">
-                                                <div class='panel panel-default grid'>
-                                                    <table id="example-table1" class="table table-striped table-hover table-condensed">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Course Code <i class="icon-filter"></i></th>
-                                                                <th style="visibility:hidden;">sdfasdf</th>
-                                                                <th style="visibility:hidden;">asdasd</th>
-                                                                <th style="visibility:hidden;">Semester</th>
-                                                                <th style="visibility:hidden;">School Year</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                                <?php $count =1; ?>
-                                                                <?php foreach($course2 as $row5): ?>
+                    <tbody>
+                    <?php foreach($select_courseList as $row): ?>
+                        <tr>
+                            <td><center><?php echo $row->school_year;?></center></td>
+                            <td><center><?php echo $row->semester;?></center></td>
+                            <td><center><?php echo $row->courseCode;?></center></td>
+                            <td><center>Group <?php echo $row->group_num.": ".$row->start_time." - ".$row->end_time." ".$row->days;?></center></td>
+                            <td>
+                                <center>
+                                    <a class="btn btn-sm btn-info" href="<?php echo base_url();?>site/class_list/<?php echo $row->ID;?>">
+                                    <i class="icon-eye-open"></i> View Class
+                                    </a>
+                                </center>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
 
-                                                                <tr class="clickable" data-toggle="collapse" id="rowb<?php echo $count;?>" data-target=".rowb<?php echo $count;?>">
-                                                                    <td><?php echo $row5->courseCode." ";?><button class="btn"><i class="icon-plus-sign"></i></button></td>
-                                                                    <td style="visibility:hidden;">asdasdf</td>
-                                                                    <td style="visibility:hidden;">asdfasd</td>
-                                                                    <td style="visibility:hidden;">asdfasd</td>
-                                                                    <td style="visibility:hidden;">asdf</td>
-                                                                  
-                                                                </tr> 
-                                                 
-                                                                <?php foreach($teacher_class2 as $row6): ?> 
-
-                                                                <tr class="collapse rowb<?php echo $count;?>">
-                                                                    <td style="visibility:hidden;">fasdasdfasd</td>
-                                                                    <td style="visibility:hidden;">fasdasdfasd</td>
-                                                                    <td><?php echo "Group: ".$row6->group_num;?></td>
-                                                                    <td><?php echo "Schedule: ".$row6->start_time."-".$row6->end_time." ".$row6->days;?></td>
-                                                                    <td>
-                                                                        <a class="btn btn-sm btn-info" href="<?php echo base_url();?>site/class_list/<?php echo $row6->ID;?>">
-                                                                            <i class="icon-eye-open"></i> View Class
-                                                                        </a>
-                                                                    </td>
-                                                                </tr>      
-
-                                                                <?php endforeach; ?>   
-                                                                <?php $count++;?> 
-                                                                <?php endforeach; ?>   
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-
-                                            <div class="tab-pane" id="tab5">
-                                                <div class='panel panel-default grid'>
-                                                    <table id="example-table2" class="table table-striped table-hover table-condensed">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Course Code <i class="icon-filter"></i></th>
-                                                                <th style="visibility:hidden;">sdfasdf</th>
-                                                                <th style="visibility:hidden;">asdasd</th>
-                                                                <th style="visibility:hidden;">Semester</th>
-                                                                <th style="visibility:hidden;">School Year</th>
-                                                            </tr>
-                                                        </thead>
-                                                        
-                                                        <tbody>
-                                                            <?php $count =1; ?>
-                                                            <?php foreach($course3 as $row3): ?>
-
-                                                            <tr class="clickable" data-toggle="collapse" id="rowc<?php echo $count;?>" data-target=".rowc<?php echo $count;?>">
-                                                                <td><?php echo $row3->courseCode." ";?><button class="btn"><i class="icon-plus-sign"></i></button></td>
-                                                                <td style="visibility:hidden;">asdasdf</td>
-                                                                <td style="visibility:hidden;">asdfasd</td>
-                                                                <td style="visibility:hidden;">asdfasd</td>
-                                                                <td style="visibility:hidden;">asdf</td>
-                                                              
-                                                            </tr> 
-                                             
-                                                            <?php foreach($teacher_class3 as $row4): ?> 
-
-                                                            <tr class="collapse rowc<?php echo $count;?>">
-                                                                <td style="visibility:hidden;">fasdasdfasd</td>
-                                                                <td style="visibility:hidden;">fasdasdfasd</td>
-                                                                <td><?php echo "Group: ".$row4->group_num;?></td>
-                                                                <td><?php echo "Schedule: ".$row4->start_time."-".$row4->end_time." ".$row4->days;?></td>
-                                                                <td>
-                                                                    <a class="btn btn-sm btn-info" href="<?php echo base_url();?>site/class_list/<?php echo $row4->ID;?>">
-                                                                        <i class="icon-eye-open"></i> View Class
-                                                                    </a>
-                                                                </td>
-                                                            </tr>      
-
-                                                            <?php endforeach; ?>   
-                                                            <?php $count++;?> 
-                                                            <?php endforeach; ?>   
-                                                        
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>     
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>      
-        </div>
+            </div>
+        </div>   
     </div>
-
-    <body>
-      
-    </body>
-
-
 </div>
 
-<style>
-    table .collapse.in {
-    display:table-row;
-}
-</style>
-<!-- For filter table -->
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-<script src="<?php echo base_url();?>assets/js/bootstrap-editable.min.js"></script>
-<script src="<?php echo base_url();?>assets/js/filterable-utils.js"></script>
-<script src="<?php echo base_url();?>assets/js/filterable-cell.js"></script>
-<script src="<?php echo base_url();?>assets/js/filterable-row.js"></script>
-<script src="<?php echo base_url();?>assets/js/filterable.js"></script>
-<!-- End filter table -->
-
-<script type="text/javascript">
-    $('#example-table').filterable();
-    $('#example-table1').filterable();
-    $('#example-table2').filterable();
-</script>
 
 <script type="text/javascript" language="javascript">
+     $(document).ready(function() {
 
-    $(document).ready(function(){
+            // Setup - add a text input to each footer cell
+            $('#example thead th').not(":eq(4)")
+                                .each( function () {
+                var title = $('#example thead th').eq( $(this).index() ).text();
+                $(this).html( '<center><input type="text" placeholder="'+title+'" /></center>' );
+            } );
 
-            $('#course_ajax').on('change', function() {
+            // DataTable
+            var table = $('#example').DataTable();
 
-                var selectedValue = this.value;
-                
-                if(selectedValue == '') {
-                    alert('Empty');
-                }
+            // Apply the search
+            table.columns().eq( 0 ).each( function ( colIdx ) {
+                if (colIdx == 4) return;
+                $( 'input', table.column( colIdx ).header() ).on( 'keyup change', function () {
+                    table
+                        .column( colIdx )
+                        .search( this.value )
+                        .draw();
+                } );
+            } );
+        } );
 
-                else {
-                    $.ajax({
-                        url: '<?php echo site_url("index.php/site/course_ajax");?>',
-                        type: 'post',
-                        data: {option: selectedValue},
-                        dataType: 'json',
-                        success: function(response) {
-                          
-                        }
-                    });
-                }
-
-            });
-        });
 
 </script>
