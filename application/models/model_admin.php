@@ -274,6 +274,12 @@ class Model_admin extends CI_Model {
 
         return $this->check_query();
     }
+
+    function get_classes($id) {
+        $query = $this->db->query("SELECT * FROM teacher_class WHERE teacherID = '".$id."' ");
+
+        return $query->result_array();
+    }
     // END TEACHER
 
     function insert_classes($data) {

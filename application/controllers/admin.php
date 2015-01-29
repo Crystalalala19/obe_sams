@@ -140,8 +140,8 @@ class Admin extends CI_Controller {
     }
 
     public function add_program(){
-        $data['title'] = 'Admin - Add Program Outcome';
-        $data['header'] = 'Add Program Outcome';
+        $data['title'] = 'Admin - Add new Curriculum';
+        $data['header'] = 'Add new Curriculum';
 
         $data['program_list'] = $this->model_admin->check_rows('program');
 
@@ -269,8 +269,8 @@ class Admin extends CI_Controller {
     }
 
     public function view_programs() {
-        $data['title'] = 'Admin - View Programs';
-        $data['header'] = 'View Programs';
+        $data['title'] = 'Admin - View Curriculums';
+        $data['header'] = 'View Curriculums';
         
         $this->load->library('form_validation');
 
@@ -313,8 +313,8 @@ class Admin extends CI_Controller {
     }
 
     public function edit_program() {
-        $data['title'] = 'Admin - Edit Program';
-        $data['header'] = 'Edit Program';
+        $data['title'] = 'Admin - Edit Curriculum';
+        $data['header'] = 'Edit Curriculum';
         $data['message'] = '';
 
         $program = $this->uri->segment(4);
@@ -329,7 +329,12 @@ class Admin extends CI_Controller {
         );
 
         if(!$this->model_admin->get_year($year_data)) {
-            $data['message'] = 'Program does not exists.';
+            $message = '<strong>Program Year</strong> does not exist!';
+            $data['message'] = $this->model_admin->notify_message('alert-info', 'glyphicon-info-sign', $message);
+        }
+        elseif(!$this->model_admin->get_programID($program_data)) {
+            $message = '<strong>Program</strong> does not exist!';
+            $data['message'] = $this->model_admin->notify_message('alert-info', 'glyphicon-info-sign', $message);
         }
         else {
             $data['program'] = $this->model_admin->get_program($program_data);
@@ -344,7 +349,31 @@ class Admin extends CI_Controller {
     }
 
     public function delete_program() {
+        $program = $this->uri->segment(5);
 
+        $program_data = array(
+            'programName' => $program
+        );
+
+        if(!$this->model_admin->get_programID($program_data)) {
+            $message = '<strong>Program</strong> does not exist!';
+            $message = $this->model_admin->notify_message('alert-info', 'glyphicon-exclamation-sign', $message);
+            $this->session->set_flashdata('message', $message);
+            redirect('admin/programs/view');
+        }
+
+        $result = $this->model_admin->delete_program($program_data);
+
+        if($result['is_success'] == FALSE) {
+            $message = '<strong>Error: </strong>'. $result['db_error'];
+            $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
+        }
+        else {
+            $message = '<strong>Success!</strong> Program deleted.';
+            $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
+        }
+        $this->session->set_flashdata('message', $message);
+        redirect('admin/programs/view');
     }
 
     public function delete_programYear() {
@@ -355,28 +384,37 @@ class Admin extends CI_Controller {
             'programName' => $program
         );
 
+        $year_data = array(
+            'effective_year' => $year
+        );
+
         if(!$this->model_admin->get_year($year_data)) {
-            $data['message'] = 'Program does not exists.';
-        }
-        else {
-            $program_id = $this->model_admin->get_programID($program_data);
-
-            $result = $this->model_admin->delete_programYear($year, $program_id);
-
-            if($result['is_success'] == FALSE) {
-                $message = '<strong>Error in deleting.</strong>';
-                $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
-
-                $this->session->set_flashdata('message', $message);
-            }
-            else {
-                $message = '<strong>Success!</strong> Program Year deleted.';
-                $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
-
-                $this->session->set_flashdata('message', $message);
-            }
+            $message = '<strong>Program Year</strong> does not exist!';
+            $message = $this->model_admin->notify_message('alert-info', 'glyphicon-exclamation-sign', $message);
+            $this->session->set_flashdata('message', $message);
             redirect('admin/programs/view');
         }
+        elseif(!$this->model_admin->get_programID($program_data)) {
+            $message = '<strong>Program</strong> does not exist!';
+            $message = $this->model_admin->notify_message('alert-info', 'glyphicon-exclamation-sign', $message);
+            $this->session->set_flashdata('message', $message);
+            redirect('admin/programs/view');
+        }
+
+        $program_id = $this->model_admin->get_programID($program_data);
+
+        $result = $this->model_admin->delete_programYear($year, $program_id);
+
+        if($result['is_success'] == FALSE) {
+            $message = '<strong>Error in deleting.</strong>';
+            $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
+        }
+        else {
+            $message = '<strong>Success!</strong> Program Year deleted.';
+            $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
+        }
+        $this->session->set_flashdata('message', $message);
+        redirect('admin/programs/view');
     }
     // END PROGRAM
 
@@ -522,7 +560,7 @@ class Admin extends CI_Controller {
         }
     }
 
-        public function assign_class() {
+    public function assign_class() {
         $this->load->library('csvimport');
         $this->load->library('form_validation');
 
@@ -602,9 +640,24 @@ class Admin extends CI_Controller {
         $this->load->view('admin/assign_class', $data);
         $this->load->view('admin/footer');
     }
+
+    function view_class() {
+        $data['title'] = 'Admin - View Classes';
+        $data['header'] = 'View Classes';
+        $data['message'] = '';
+
+        $teacher_id = $this->uri->segment(4);
+
+        $data['teacher_classes'] = $this->model_admin->get_classes($teacher_id);
+
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/view_classes', $data);
+        $this->load->view('admin/footer');
+    }
+
     // END TEACHER
 
-    public function upload_students(){
+    public function upload_students() {
         $this->load->library('csvimport');
         $this->load->library('form_validation');
        

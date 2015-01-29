@@ -50,6 +50,7 @@ $route['admin/view_students/edit/(:num)'] = "admin/edit_student";
 
 //Teachers
 $route['admin/teachers/assign'] = "admin/assign_class";
+$route['admin/teachers/classes/(:num)'] = "admin/view_class";
 $route['admin/teachers/edit/(:num)'] = "admin/edit_teacher";
 $route['admin/teachers/delete/(:num)'] = "admin/delete_teacher";
 

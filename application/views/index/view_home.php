@@ -38,10 +38,10 @@
                             ?>   
                                 <?php echo form_open('site/login_validation'); ?>
                                     <div class="form-group">    
-                                        <input type="text" class="login-field form-control" name="idnum" value="<?php echo set_value('idnum'); ?>" required>
+                                        <input type="text" id="idnum" class="login-field form-control" name="idnum" value="<?php echo set_value('idnum'); ?>" required placeholder="Enter ID here">
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="login-field form-control" name="password" value="<?php echo set_value('password'); ?>" required>
+                                        <input type="password" class="login-field form-control" name="password" value="<?php echo set_value('password'); ?>" required placeholder="Password">
                                     </div>
                                     <div class="form-group">
                                         <input type="submit" class="btn btn-primary btn-block" name="login_submit" value="Login">
@@ -53,7 +53,6 @@
                 </div>
             </div>
         </div>
-
     </div>
     <!--./ HOME SECTION END -->
     <div id="about" >

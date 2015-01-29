@@ -121,11 +121,10 @@
                                 </a>
                             </div>
                         </div>
-                        -->
                     </div>
-        
+                    -->
                     <!-- /.row -->
-
+                    <!--  
                     <div id="container">
                     	<?php
                     	   echo "<pre>";
@@ -134,3 +133,4 @@
                     	?>
                     	<a href="<?php echo base_url()."site/logout" ?>">Logout</a>
                     </div>
+                    -->

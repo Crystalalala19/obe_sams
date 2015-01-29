@@ -9,7 +9,7 @@
                                     <i class="fa fa-dashboard"></i>  <a href="<?php echo base_url(); ?>admin">Dashboard</a>
                                 </li>
                                 <li class="active">
-                                    <i class="fa fa-book"></i>  <?php echo $header;?>
+                                    <i class="fa fa-university"></i>  <?php echo $header;?>
                                 </li>
                             </ol>
                         </div>
@@ -73,7 +73,7 @@
     </div>
 
     <?php if($teacher_list != FALSE):?>
-    <a href="<?php echo base_url();?>admin/teachers/assign" role="button" class="btn btn-warning"><i class="fa fa-list"></i> Assign Classes</a>
+    <a href="<?php echo base_url();?>admin/teachers/assign" role="button" class="btn btn-warning"><i class="fa fa-clock-o"></i> Assign Classes</a>
 
     <table id="view_teachers" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
@@ -92,7 +92,7 @@
                     <td><?php echo $row['lname'];?></td>
                     <td>
                         <div class="btn-group inline pull-left">
-                            <a type="button" title="View Classes" class="btn btn-warning btn-sm btn-responsive fa fa-book" href="<?php echo base_url();?>admin/teachers/classes/<?php echo $row['ID'];?>" target="_blank"></a>
+                            <a type="button" title="View Classes" class="btn btn-warning btn-sm btn-responsive fa fa-book" href="<?php echo base_url();?>admin/teachers/classes/<?php echo $row['teacher_id'];?>" target="_blank"></a>
                             <a type="button" title="Edit Teacher" class="btn btn-primary btn-sm btn-responsive fa fa-pencil-square-o" href="<?php echo base_url();?>admin/teachers/edit/<?php echo $row['ID'];?>" target="_blank"></a>
                             <a type="button" title="Delete Teacher" class="btn btn-danger btn-sm btn-responsive fa fa-trash-o" href="<?php echo base_url();?>admin/teachers/delete/<?php echo $row['ID'];?>" onclick="return confirm('Do you want to permanently delete?');"></a>
                         </div>

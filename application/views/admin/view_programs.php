@@ -29,9 +29,11 @@
     '</div>');
     ?>
 
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap-select.min.css">
+
     <div class="form-group">
         <button class="btn btn-info" data-toggle='modal' data-target='#add' title="New Program"><i class="fa fa-plus"></i> New Program</button>
-        <a id="delprogram" type="button" class="btn btn-danger" title="Delete Program"><i class="fa fa-trash"></i> Delete Program</a>
+        <a id="delprogram" type="button" class="btn btn-danger pull-right" style="display: none;" title="Delete Program" onclick="return confirm('Warning! This will delete all data associated with this program. Do you want to continue?');"><i class="fa fa-trash"></i> Delete Program</a>
     </div>
 
     <div class='modal fade' id='add' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
@@ -62,8 +64,7 @@
     <?php if($program_list != FALSE):?>
     <div class="form-group col-md-2">
         <label for="program_ajax">Program:</label>
-        <select name="program" class="form-control input-sm" id="program_ajax">
-            <option selected="selected" value="">Select program: </option>
+        <select name="program" class="selectpicker show-tick" title="Select Program" data-live-search="true" multiple data-max-options="1" data-size="auto" id="program_ajax" required>
             <?php foreach($program_list as $row): ?>
             <option value="<?php echo $row['programName'];?>"><?php echo $row['programName'];?></option>
             <?php endforeach;?>
@@ -73,7 +74,7 @@
     <table id="view_programs" class="table table-striped table-bordered">
         <thead>
             <tr>
-                <th>Year</th>
+                <th>Effective Year</th>
                 <th width="12%">Action</th>
             </tr>
         </thead>
@@ -85,11 +86,11 @@
         </tbody>
     </table>
 
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/bootstrap-select.min.js"></script>
+
     <script type="text/javascript" language="javascript">
         var d = document.getElementById("program_dropdown");
         d.className = d.className + " active";
-
-        $("#delprogram").hide();
 
         $('#program_ajax').change(function() {
             var selectedValue = this.value;
@@ -109,7 +110,7 @@
                     data: {option: selectedValue},
                     dataType: 'json',
                     success: function(response) {
-                        $("#delprogram").show().attr("href", selectedValue);
+                        $("#delprogram").show().attr("href", "delete/program/"+selectedValue);
 
                         $("#toBeRemoved td").remove();
                         if(jQuery.isEmptyObject(response)) {
@@ -121,7 +122,7 @@
                             $.each(response, function(key, value) {
                                     $("#toBeRemoved").append(
                                         $('<td>').html(value.effective_year),
-                                        $('<td>').html("<div class='btn-group inline pull-left'><a type='button' href='<?php echo base_url();?>admin/programs/outcome/"+selectedValue+"/"+value.effective_year+"' class='btn btn-warning btn-sm btn-responsive fa fa-list-alt' title='Program Outcome' target='_blank'></a><a type='button' href='<?php echo base_url();?>admin/programs/edit/"+selectedValue+"/"+value.effective_year+"' class='btn btn-primary btn-sm btn-responsive fa fa-pencil' title='Edit Program' target='_blank'></a><a type='button' href='<?php echo base_url();?>admin/programs/delete/"+selectedValue+ "/"+value.effective_year+"' class='btn btn-danger btn-sm btn-responsive fa fa-trash-o' title='Delete Program Year' onclick='return confirm(\"Do you want to permanently delete?\");'></a></div>")
+                                        $('<td>').html("<div class='btn-group inline pull-left'><a type='button' href='<?php echo base_url();?>admin/programs/outcome/"+selectedValue+"/"+value.effective_year+"' class='btn btn-warning btn-sm btn-responsive fa fa-list-alt' title='Program Outcome' target='_blank'></a><a type='button' href='<?php echo base_url();?>admin/programs/edit/"+selectedValue+"/"+value.effective_year+"' class='btn btn-primary btn-sm btn-responsive fa fa-pencil' title='Edit Curriculum' target='_blank'></a><a type='button' href='<?php echo base_url();?>admin/programs/delete/"+selectedValue+ "/"+value.effective_year+"' class='btn btn-danger btn-sm btn-responsive fa fa-trash-o' title='Delete Effective Year' onclick='return confirm(\"Do you want to permanently delete?\");'></a></div>")
                                     ).appendTo('#view_programs');
                             });
                             console.log(response);
