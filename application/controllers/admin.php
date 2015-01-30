@@ -144,6 +144,8 @@ class Admin extends CI_Controller {
         $data['header'] = 'Add new Curriculum';
 
         $data['program_list'] = $this->model_admin->check_rows('program');
+        $program = $this->input->post('program');
+        $year = $this->input->post('effective_year');
 
         $this->load->library('form_validation');
 
@@ -155,9 +157,6 @@ class Admin extends CI_Controller {
         $this->form_validation->set_rules("co_code[]", "Course Code", "required|trim");
         $this->form_validation->set_rules("co_desc[]", "Course Description", "required|trim");
         
-        $program = $this->input->post('program');
-        $year = $this->input->post('effective_year');
-
         if($this->form_validation->run() == FALSE){
             $data['message'] = '';
         }
@@ -274,7 +273,7 @@ class Admin extends CI_Controller {
         
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('program_name', 'Program Name', 'required|trim|max_length[8]');
+        $this->form_validation->set_rules('program_name', 'Program Name', 'required|trim|alpha|max_length[8]');
 
         if($this->form_validation->run() == FALSE) {
             $data['message'] = '';
