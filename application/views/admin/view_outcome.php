@@ -30,9 +30,6 @@
 
     $po_count = count($po_list);
 ?>
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap-switch.min.css">
-    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/bootstrap-switch.min.js"></script>
-
     <h3>Major Subjects</h3>
     <?php echo form_open();?>
 
@@ -75,6 +72,4 @@
     <script type="text/javascript" language="javascript">
         var d = document.getElementById("program_dropdown");
         d.className = d.className + " active";
-
-        $("[type='checkbox']").bootstrapSwitch();
     </script>

@@ -59,7 +59,7 @@ class Admin extends CI_Controller {
     }
     // END FUNCTIONS
 
-    public function program_matrix() {
+    public function program_outcome() {
         $data['title'] = 'Admin - Program Outcomes';
         $data['header'] = 'Program Outcomes';
        
@@ -135,7 +135,7 @@ class Admin extends CI_Controller {
         }
 
         $this->load->view('admin/header', $data);
-        $this->load->view('admin/program_matrix', $data);
+        $this->load->view('admin/view_outcome', $data);
         $this->load->view('admin/footer');
     }
 
@@ -184,7 +184,7 @@ class Admin extends CI_Controller {
             $this->db->trans_start();
 
             $program_result = $this->model_admin->insert_programYear($program, $year);
-            $id = $program_result;
+            $program_year = $program_result;
 
             $po_id = array();
 
@@ -193,7 +193,7 @@ class Admin extends CI_Controller {
                     'poCode' => $val,
                     'attribute' => $attribs[$key],
                     'description' => $descs[$key],
-                    'pyID' => $id
+                    'pyID' => $program_year
                 );
                 $po_result = $this->model_admin->insert_po($po_fields);
 
@@ -213,7 +213,7 @@ class Admin extends CI_Controller {
                 $course_fields = array(
                     'CourseCode' => $val,
                     'CourseDesc' => $course_desc[$key],
-                    'pyID' => $id
+                    'pyID' => $program_year
                 );
                 $course_result = $this->model_admin->insert_course($course_fields);
 
@@ -238,10 +238,10 @@ class Admin extends CI_Controller {
                     $course_equi_array[$key2]['CourseEquivalent'] = $value;
                     $course_equi_array[$key2]['courseID'] = $course_id[$key1];
                 }
+
+                $equi_result = $this->model_admin->insert_equivalents($course_equi_array);
             }
             
-            $equi_result = $this->model_admin->insert_equivalents($course_equi_array);
-
             if($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();
 
@@ -590,27 +590,41 @@ class Admin extends CI_Controller {
             $file_data = $this->upload->data();
             $file_path =  './uploads/'.$file_data['file_name'];
             
+            $nonExistingCourse = array();
+
             if ($this->csvimport->get_array($file_path)) {
                 $insert_data = array();
                 $csv_array = $this->csvimport->get_array($file_path, array('Group Number', 'Course Code', 'Start Time', 'End Time', 'Days'));
                 
-                foreach ($csv_array as $row) {                    
-                    $insert_data[] = array(
-                        'group_num'=>$row['Group Number'],
-                        'courseCode'=>$row['Course Code'],
-                        'start_time'=>$row['Start Time'],
-                        'end_time'=>$row['End Time'],
-                        'days'=>$row['Days'],
-                        'semester'=> $this->get_semester(),
-                        'school_year'=> date('Y'),
-                        'teacherID'=> $this->input->post('teacher')
-                    );
+                foreach ($csv_array as $row) {     
+                    if(!$this->model_admin->check_course($row['Course Code'])) {
+                        $nonExistingCourse[] = $row['Course Code'];
+                    }    
+                    else {
+                        $insert_data[] = array(
+                            'group_num'=>$row['Group Number'],
+                            'courseCode'=>$row['Course Code'],
+                            'start_time'=>$row['Start Time'],
+                            'end_time'=>$row['End Time'],
+                            'days'=>$row['Days'],
+                            'semester'=> $this->get_semester(),
+                            'school_year'=> date('Y'),
+                            'teacherID'=> $this->input->post('teacher')
+                        );
+                    }
                 }
-
-                $result = $this->model_admin->insert_classes($insert_data);
 
                 //Deletes uploaded file
                 unlink($file_path);
+
+                if(empty($nonExistingCourse)) {
+                    $result = $this->model_admin->insert_classes($insert_data);
+                }
+                else {
+                    $this->session->set_flashdata('non_existing', $nonExistingCourse);
+
+                    redirect(current_url());
+                }
 
                 if($result['is_success'] == FALSE) {
                     $message = '<strong>Error: </strong>'.  $result['db_error'];
@@ -646,6 +660,15 @@ class Admin extends CI_Controller {
         $data['message'] = '';
 
         $teacher_id = $this->uri->segment(4);
+
+        $result = $this->model_admin->check_teacher($teacher_id);
+        
+        if($result == FALSE) {
+            $message = '<strong>ID</strong> does not exist!';
+            $message = $this->model_admin->notify_message('alert-info', 'glyphicon-ok-sign', $message);
+
+            $data['message'] = $message;
+        }
 
         $data['teacher_classes'] = $this->model_admin->get_classes($teacher_id);
 

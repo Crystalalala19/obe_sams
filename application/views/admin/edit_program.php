@@ -22,16 +22,16 @@
     echo $this->session->flashdata('message');
     if (!empty($message)): echo $message;
 
+    else:
     echo validation_errors('
     <div class="alert alert-danger alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>', 
     '</div>');
 ?>
-    <?php else: ?>
     <div class="form-group col-xs-6 col-sm-6 col-md-6">
         <label for="program_inp">Program:</label>
-        <select class="form-control input-sm" id="program_inp" name="program">
+        <select class="form-control input-sm" id="program_inp" name="program" disabled>
             <?php foreach($program_list as $row):?>
             <option value="<?php echo $row['programName'];?>" <?php if($program == $row['programName']) echo 'selected="selected"'; ?>><?php echo $row['programName'];?></option>
             <?php endforeach;?>

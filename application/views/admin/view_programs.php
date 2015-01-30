@@ -29,6 +29,25 @@
     '</div>');
     ?>
 
+    <style type="text/css">
+        @media (max-width: 768px) {
+            .btn-responsive {
+                padding:2px 4px;
+                font-size:80%;
+                line-height: 1;
+                border-radius:3px;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 992px) {
+            .btn-responsive {
+                padding:4px 9px;
+                font-size:90%;
+                line-height: 1.2;
+            }
+        }
+    </style>
+
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap-select.min.css">
 
     <div class="form-group">
@@ -36,30 +55,30 @@
         <a id="delprogram" type="button" class="btn btn-danger pull-right" style="display: none;" title="Delete Program" onclick="return confirm('Warning! This will delete all data associated with this program. Do you want to continue?');"><i class="fa fa-trash"></i> Delete Program</a>
     </div>
 
-    <div class='modal fade' id='add' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
-        <div class='modal-dialog modal-vertical-centered'>
-            <div class='modal-content'>
-                <div class='modal-header'>
-                    <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
-                    <h4 class='modal-title' id='myModalLabel'><i class="fa fa-plus"></i> New Program</h4>
-                </div>
-                <div class='modal-body'>
-                    <?php echo form_open('admin/programs/view'); ?>
+    <?php echo form_open('admin/programs/view'); ?>
+        <div class='modal fade' id='add' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+            <div class='modal-dialog modal-vertical-centered'>
+                <div class='modal-content'>
+                    <div class='modal-header'>
+                        <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
+                        <h4 class='modal-title' id='myModalLabel'><i class="fa fa-plus"></i> New Program</h4>
+                    </div>
+                    <div class='modal-body'>
                         <div class="form-group col-xs-4 col-sm-4 col-md-4">
                             <label for="program_name">Program Name:</label>
                             <input type="text" class="form-control input-sm" name="program_name" id="program_name" value="<?php echo set_value('teacher_fname'); ?>" required>
                         </div>
                         <div class="clearfix"></div>
+                    </div>
+                    <div class='modal-footer'>
+                        <input type="submit" class="btn btn-success" name="submit" value="Submit">
+                        <input type="reset" class="btn btn-info" value="Clear">
+                        <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+                    </div>
                 </div>
-                <div class='modal-footer'>
-                    <input type="submit" class="btn btn-success" name="submit" value="Submit">
-                    <input type="reset" class="btn btn-info" value="Clear">
-                    <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
-                </div>
-                    </form>
             </div>
         </div>
-    </div>
+    </form>
 
     <?php if($program_list != FALSE):?>
     <div class="form-group col-md-2">
@@ -122,7 +141,7 @@
                             $.each(response, function(key, value) {
                                     $("#toBeRemoved").append(
                                         $('<td>').html(value.effective_year),
-                                        $('<td>').html("<div class='btn-group inline pull-left'><a type='button' href='<?php echo base_url();?>admin/programs/outcome/"+selectedValue+"/"+value.effective_year+"' class='btn btn-warning btn-sm btn-responsive fa fa-list-alt' title='Program Outcome' target='_blank'></a><a type='button' href='<?php echo base_url();?>admin/programs/edit/"+selectedValue+"/"+value.effective_year+"' class='btn btn-primary btn-sm btn-responsive fa fa-pencil' title='Edit Curriculum' target='_blank'></a><a type='button' href='<?php echo base_url();?>admin/programs/delete/"+selectedValue+ "/"+value.effective_year+"' class='btn btn-danger btn-sm btn-responsive fa fa-trash-o' title='Delete Effective Year' onclick='return confirm(\"Do you want to permanently delete?\");'></a></div>")
+                                        $('<td>').html("<div class='btn-group inline pull-left'><a type='button' href='<?php echo base_url();?>admin/programs/outcome/"+selectedValue+"/"+value.effective_year+"' class='btn btn-warning btn-sm btn-responsive' title='Program Outcome' target='_blank'><i class='fa fa-list-alt'></i></a><a type='button' href='<?php echo base_url();?>admin/programs/edit/"+selectedValue+"/"+value.effective_year+"' class='btn btn-primary btn-sm btn-responsive' title='Edit Curriculum' target='_blank'><i class='fa fa-pencil'></i></a><a type='button' href='<?php echo base_url();?>admin/programs/delete/"+selectedValue+ "/"+value.effective_year+"' class='btn btn-danger btn-sm btn-responsive' title='Delete Effective Year' onclick='return confirm(\"Do you want to permanently delete?\");'><i class='fa fa-trash-o'></i></a></div>")
                                     ).appendTo('#view_programs');
                             });
                             console.log(response);

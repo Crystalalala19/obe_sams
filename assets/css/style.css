@@ -14,8 +14,8 @@
    LOGIN SECTION
     ===================================*/
 .login-field {
-  color: white;
-  border-color: rgba(255, 255, 255, 1);
+    color: white;
+    border-color: rgba(255, 255, 255, 1);
 }
 
 /*=====================================
@@ -47,7 +47,6 @@ h2 {
 }
 h3{
     color:#4788F8;
-    
 }
  /*=====================================
   PRELOADER STYLES 
@@ -148,7 +147,7 @@ background-size: cover;
        text-align:center;
     }
     #home .overlay {
-              background:url(../img/overlays/06.png);        
+        background:url(../img/overlays/06.png);        
         min-height:700px;
     }
     #home h3 {

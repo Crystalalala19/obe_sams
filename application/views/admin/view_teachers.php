@@ -26,6 +26,25 @@
     '</div>');
     ?>
 
+    <style type="text/css">
+        @media (max-width: 768px) {
+            .btn-responsive {
+                padding:2px 4px;
+                font-size:80%;
+                line-height: 1;
+                border-radius:3px;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 992px) {
+            .btn-responsive {
+                padding:4px 9px;
+                font-size:90%;
+                line-height: 1.2;
+            }
+        }
+    </style>
+
     <button class="btn btn-info" data-toggle='modal' data-target='#add' title="Add New"><i class="fa fa-plus"></i> Add new</button>
 
     <div class='modal fade' id='add' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
@@ -92,9 +111,9 @@
                     <td><?php echo $row['lname'];?></td>
                     <td>
                         <div class="btn-group inline pull-left">
-                            <a type="button" title="View Classes" class="btn btn-warning btn-sm btn-responsive fa fa-book" href="<?php echo base_url();?>admin/teachers/classes/<?php echo $row['teacher_id'];?>" target="_blank"></a>
-                            <a type="button" title="Edit Teacher" class="btn btn-primary btn-sm btn-responsive fa fa-pencil-square-o" href="<?php echo base_url();?>admin/teachers/edit/<?php echo $row['ID'];?>" target="_blank"></a>
-                            <a type="button" title="Delete Teacher" class="btn btn-danger btn-sm btn-responsive fa fa-trash-o" href="<?php echo base_url();?>admin/teachers/delete/<?php echo $row['ID'];?>" onclick="return confirm('Do you want to permanently delete?');"></a>
+                            <a type="button" title="View Classes" class="btn btn-warning btn-sm btn-responsive" href="<?php echo base_url();?>admin/teachers/classes/<?php echo $row['teacher_id'];?>" target="_blank"><i class="fa fa-book"></i></a>
+                            <a type="button" title="Edit Teacher" class="btn btn-primary btn-sm btn-responsive" href="<?php echo base_url();?>admin/teachers/edit/<?php echo $row['ID'];?>" target="_blank"><i class="fa fa-pencil-square-o"></i></a>
+                            <a type="button" title="Delete Teacher" class="btn btn-danger btn-sm btn-responsive" href="<?php echo base_url();?>admin/teachers/delete/<?php echo $row['ID'];?>" onclick="return confirm('Do you want to permanently delete?');"><i class="fa fa-trash-o"></i></a>
                         </div>
                     </td>
                 </tr>

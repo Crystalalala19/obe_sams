@@ -20,16 +20,30 @@
                     <!-- /.row -->
 <?php
     echo $this->session->flashdata('message');
-    if (!empty($message)) echo $message;
-    
+    if (!empty($message)): echo $message;
+
+    else:
     echo validation_errors('
     <div class="alert alert-danger alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
         <span class="sr-only">Error:</span>', 
     '</div>');
-    $attributes = array('class' => 'col-md-4');
+?>
 
+<?php if(!empty($this->session->flashdata('non_existing'))): ?>
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        The following <strong>Course(s)</strong> does not exists in the Curriculum:
+        <?php foreach ($this->session->flashdata('non_existing') as $key => $value): ?>
+        <strong><?php echo $value;?>, </strong>
+        <?php endforeach;?> 
+    </div>
+<?php endif;
+
+    $attributes = array('class' => 'col-md-4');
     echo form_open_multipart('admin/assign_class', $attributes);
 ?>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap-select.min.css">
@@ -70,3 +84,4 @@
         var d = document.getElementById("teachers");
         d.className = d.className + " active";
     </script>
+    <?php endif;
