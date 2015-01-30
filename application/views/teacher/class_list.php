@@ -42,7 +42,12 @@
         <i class="icon-exclamation-sign" aria-hidden="true"></i> ', 
     '</div>');
 
-    $po_count = count($get_po);
+    //$po_count = count($row);
+
+    //$attributes = array('class' => 'col-md-4');
+
+    //echo ('site/class_list', $attributes); 
+
 ?>
     
     <table id="view_classlist" class="table table-striped table-hover table-bordered table-condensed">
@@ -51,25 +56,25 @@
                 <th><center>Student ID</center></th>
                 <th><center>Name</center></th>
                 <th><center>Program Name</center></th>
-                <?php for($x = 1; $x <= $po_count; $x++):?>
-                    <th><center>PO <?php echo $x;?></center></th>
-                <?php endfor; $row_num=1;?>
+                <?php //for($x = 1; $x <= $po_count; $x++):?>
+                    <th><center>PO <?php //echo $x;?></center></th>
+                <?php //endfor; $row_num=1;?>
                 <th><center>View Scorecard</center></th>
             </tr>
         </thead>
         <tbody>
             <tr>  
                 <?php foreach($class_list as $row): ?>
-                <td><center><?php echo $row['student_id'];?></center></td>
+                <td><center><?php echo $row['studentID'];?></center></td>
                 <td><center><?php echo $row['fname']; echo " ".$row['mname']; echo " ".$row['lname'];?></center></td>
                 <td><center><?php foreach($select_programName as $row1): ?><?php echo $row1->programName;?><?php endforeach; ?> - <?php echo $row['effective_year'];?></center></td>
-                <?php foreach($get_po as $key2 => $row2): ?>
+                <?php //foreach($row as $row2): ?>
                     <td>
                         <center>
-                            <?php echo $row2['score'];?>
+                            <?php echo $row['score'];?>
                         </center>
                     </td>
-                <?php endforeach; $row_num++; ?>
+                <?php //endforeach; $row_num++; ?>   
                 <td>
                     <center>
                         <a class="btn btn-sm btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row['student_id'];?>">
@@ -78,9 +83,20 @@
                     </center>
                 </td>
             </tr>
-            <?php endforeach; ?>        
+            <?php endforeach;?>        
         </tbody>
     </table>
+
+     <div class="form-group">
+            <label for="userfile">Upload .CSV File: </label>
+            <input type="file" name="userfile" id="userfile">
+        </div>
+
+        <div class="form-group">
+            <input type="submit" class="btn btn-success" name="submit" value="Submit">
+        </div>
+    </form>
+
 </div>
 
 

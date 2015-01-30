@@ -56,6 +56,16 @@
                                                
                                               </div>
                                               <table class='table table-condensed'>
+                                                 <?php
+                                                    echo $this->session->flashdata('message');
+                                                    if (!empty($message)) echo $message;
+
+                                                    echo validation_errors('
+                                                    <div class="alert alert-danger alert-dismissible" role="alert">
+                                                        <button type="button" class="close" data-dismiss="alert"><i class="icon-remove-sign"></i></button>
+                                                        <i class="icon-exclamation-sign" aria-hidden="true"></i> ', 
+                                                    '</div>');
+                                                ?>
                                                 <thead>
                                                   <tr>
                                                     <th style="visibility: hidden">Course Code</th>
@@ -76,7 +86,9 @@
                                                             </thead>
                                                              <tbody>
                                                                     <tr>
-                                                                        <td>CS110</td>   
+                                                                    <?php foreach($scorecard1stSem as $row): ?>
+                                                                        <td><?php echo $row->courseCode;?></td>
+                                                                    <?php endforeach;?>    
                                                                     </tr>                                                                       
                                                                 </tbody>
                                                             </table>
@@ -101,17 +113,19 @@
                                                               </tr>
                                                             </thead>
                                                             <tbody>
-                                                              <tr>
-                                                                <td>1.2</td>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-                                                              </tr>
+                                                                <tr>
+                                                                    <?php foreach($scorecard1stSem as $row): ?>
+                                                                        <td><?php echo $row->score;?></td>
+                                                                        <td><?php echo $row->score;?></td>
+                                                                        <td><?php echo $row->score;?></td>
+                                                                        <td><?php echo $row->score;?></td>
+                                                                        <td><?php echo $row->score;?></td>
+                                                                        <td><?php echo $row->score;?></td>
+                                                                        <td><?php echo $row->score;?></td>
+                                                                        <td><?php echo $row->score;?></td>
+                                                                        <td><?php echo $row->score;?></td>
+                                                                    <?php endforeach;?>    
+                                                                </tr>
                                                             </tbody>
                                                         </table>
                                                     </td>
@@ -141,6 +155,16 @@
                                                   <tr>
                                                     <td>
                                                         <table class='table table-condensed'>
+                                                        <?php
+                                                            echo $this->session->flashdata('message1');
+                                                            if (!empty($message1)) echo $message1;
+
+                                                            echo validation_errors('
+                                                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                                                <button type="button" class="close" data-dismiss="alert"><i class="icon-remove-sign"></i></button>
+                                                                <i class="icon-exclamation-sign" aria-hidden="true"></i> ', 
+                                                            '</div>');
+                                                        ?>
                                                             <thead>
                                                               <tr>
                                                                 <th><div style="visibility: hidden">Course Code</div></th>                                                               
@@ -148,7 +172,9 @@
                                                             </thead>
                                                             <tbody>
                                                               <tr>
-                                                                <td>1</td>
+                                                               <?php foreach($scorecard2ndSem as $row): ?>
+                                                                        <td><?php echo $row->courseCode;?></td>
+                                                                    <?php endforeach;?>    
                                                               </tr>
                                                             </tbody>
                                                         </table>
@@ -170,15 +196,17 @@
                                                             </thead>
                                                             <tbody>
                                                               <tr>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
+                                                                <?php foreach($scorecard2ndSem as $row): ?>
+                                                                <td><?php echo $row->score;?></td>
+                                                                <td><?php echo $row->score;?></td>
+                                                                <td><?php echo $row->score;?></td>
+                                                                <td><?php echo $row->score;?></td>
+                                                                <td><?php echo $row->score;?></td>
+                                                                <td><?php echo $row->score;?></td>
+                                                                <td><?php echo $row->score;?></td>
+                                                                <td><?php echo $row->score;?></td>
+                                                                <td><?php echo $row->score;?></td>
+                                                            <?php endforeach;?>
                                                               </tr>
                                                             </tbody>
                                                         </table>
@@ -211,6 +239,16 @@
                                                
                                               </div>
                                               <table class='table table-condensed'>
+                                              <?php
+                                                            echo $this->session->flashdata('message');
+                                                            if (!empty($message)) echo $message;
+
+                                                            echo validation_errors('
+                                                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                                                <button type="button" class="close" data-dismiss="alert"><i class="icon-remove-sign"></i></button>
+                                                                <i class="icon-exclamation-sign" aria-hidden="true"></i> ', 
+                                                            '</div>');
+                                                        ?>
                                                 <thead>
                                                   <tr>
                                                     <th>Course Code</th>
@@ -229,7 +267,7 @@
                                                             </thead>
                                                             <tbody>
                                                               <tr>
-                                                                <td>CS11</td>
+                                                                <td></td>
                                                               </tr>
                                                             </tbody>
                                                         </table>
@@ -251,15 +289,15 @@
                                                             </thead>
                                                             <tbody>
                                                               <tr>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
                                                               </tr>
                                                             </tbody>
                                                         </table>
@@ -291,6 +329,16 @@
                                                
                                               </div>
                                               <table class='table table-condensed'>
+                                              <?php
+                                                            echo $this->session->flashdata('message');
+                                                            if (!empty($message)) echo $message;
+
+                                                            echo validation_errors('
+                                                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                                                <button type="button" class="close" data-dismiss="alert"><i class="icon-remove-sign"></i></button>
+                                                                <i class="icon-exclamation-sign" aria-hidden="true"></i> ', 
+                                                            '</div>');
+                                                        ?>
                                                 <thead>
                                                   <tr>
                                                     <th>Course Code</th>
@@ -309,7 +357,7 @@
                                                             </thead>
                                                             <tbody>
                                                               <tr>
-                                                                <td>1</td>
+                                                                <td></td>
                                                               </tr>
                                                             </tbody>
                                                         </table>
@@ -331,15 +379,15 @@
                                                             </thead>
                                                             <tbody>
                                                               <tr>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
                                                               </tr>
                                                             </tbody>
                                                         </table>
@@ -358,6 +406,16 @@
                                                
                                               </div>
                                               <table class='table table-condensed'>
+                                              <?php
+                                                            echo $this->session->flashdata('message11');
+                                                            if (!empty($message1)) echo $message1;
+
+                                                            echo validation_errors('
+                                                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                                                <button type="button" class="close" data-dismiss="alert"><i class="icon-remove-sign"></i></button>
+                                                                <i class="icon-exclamation-sign" aria-hidden="true"></i> ', 
+                                                            '</div>');
+                                                        ?>
                                                 <thead>
                                                   <tr>
                                                     <th>Course Code</th>
@@ -376,7 +434,7 @@
                                                             </thead>
                                                             <tbody>
                                                               <tr>
-                                                                <td>1</td>
+                                                                <td></td>
                                                               </tr>
                                                             </tbody>
                                                         </table>
@@ -398,15 +456,15 @@
                                                             </thead>
                                                             <tbody>
                                                               <tr>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
                                                               </tr>
                                                             </tbody>
                                                         </table>
@@ -438,6 +496,16 @@
                                                
                                               </div>
                                               <table class='table table-condensed'>
+                                              <?php
+                                                            echo $this->session->flashdata('message');
+                                                            if (!empty($message)) echo $message;
+
+                                                            echo validation_errors('
+                                                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                                                <button type="button" class="close" data-dismiss="alert"><i class="icon-remove-sign"></i></button>
+                                                                <i class="icon-exclamation-sign" aria-hidden="true"></i> ', 
+                                                            '</div>');
+                                                        ?>
                                                 <thead>
                                                   <tr>
                                                     <th>Course Code</th>
@@ -456,7 +524,7 @@
                                                             </thead>
                                                             <tbody>
                                                               <tr>
-                                                                <td>1</td>
+                                                                <td></td>
                                                               </tr>
                                                             </tbody>
                                                         </table>
@@ -478,15 +546,15 @@
                                                             </thead>
                                                             <tbody>
                                                               <tr>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
                                                               </tr>
                                                             </tbody>
                                                         </table>
@@ -496,46 +564,7 @@
                                               </table>
                                             </div>
                                       </div>
-                                      <div class="tab-pane" id="tab4">
-                                        
-                                        <div class='panel panel-default grid'>
-                                          <div class='panel-heading'>
-                                            <i class='icon-table icon-large'></i>
-                                            Condensed Table
-                                          </div>
-                                          <table class='table table-condensed'>
-                                            <thead>
-                                              <tr>
-                                                <th>#</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Username</th>
-                                              </tr>
-                                            </thead>
-                                            <tbody>
-                                              <tr>
-                                                <td>1</td>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                              </tr>
-                                              <tr>
-                                                <td>2</td>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                              </tr>
-                                              <tr>
-                                                <td>3</td>
-                                                <td>Larry</td>
-                                                <td>the Bird</td>
-                                                <td>@twitter</td>
-                                              </tr>
-                                            </tbody>
-                                          </table>
-                                        </div>
-
-                                      </div>
+                                      
                                     </div>
                                 </div>
                           </div>      

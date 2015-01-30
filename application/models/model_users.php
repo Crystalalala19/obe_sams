@@ -48,9 +48,8 @@ class Model_users extends CI_Model {
 
 	function select_courseList(){
 
-        $query = $this->db->query("SELECT * FROM student_course 
-                                            INNER JOIN teacher_class ON student_course.classID = teacher_class.ID
-                                            WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' ");
+        $query = $this->db->query("SELECT * FROM teacher_class
+                                            WHERE teacherID = '".$this->session->userdata('teacher_id')."' ");
 
         return $query->result();
 
@@ -68,9 +67,9 @@ class Model_users extends CI_Model {
 
     function select_schedule($id){
 
-        $query = $this->db->query("SELECT * FROM student_course INNER JOIN student ON student_course.studentID = student.student_id
-                                                                INNER JOIN teacher_class ON student_course.classID = teacher_class.ID 
-                                                                WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' AND student_course.classID = '".$id."' 
+        $query = $this->db->query("SELECT * FROM student_course INNER JOIN teacher_class ON student_course.classID = teacher_class.ID 
+                                                                WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' 
+                                                                AND student_course.classID = '".$id."' 
                                                                 GROUP BY classID");
         return $query->result();
 
@@ -81,16 +80,23 @@ class Model_users extends CI_Model {
 		$query = $this->db->query("SELECT * FROM student_course INNER JOIN student ON student_course.studentID = student.student_id
 																INNER JOIN program_year ON student_course.pyID = program_year.ID
 																INNER JOIN teacher_class ON student_course.classID = teacher_class.ID 
+                                                                INNER JOIN po_course ON student_course.po_courseID = po_course.ID
                                                                 WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' AND student_course.classID = '".$id."' 
-                                                                ");
+                                                                GROUP BY studentID ");
 		return $query->result_array();
 
 	}
 
-    function get_po($id){
+   function get_po($id){
 
-         $query = $this->db->query("SELECT * student_course INNER JOIN po_course ON student_course.pyID = po_course.ID
-                                                            WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' AND student_course.classID = '".$id."' ");   
+        $query = $this->db->query("SELECT * FROM po_course 
+                                            INNER JOIN student_course ON po_course.ID = student_course.po_courseID
+                                            INNER JOIN teacher_class ON student_course.classID = teacher_class.ID
+                                            WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."'
+                                            ");
+
+        return $query->result_array();
+
     }
 
 
@@ -105,13 +111,30 @@ class Model_users extends CI_Model {
     }
 
 
+    function scorecard($id){
+
+        $query = $this->db->query("SELECT * FROM student_course INNER JOIN student ON student_course.studentID = student.student_id
+                                                                INNER JOIN teacher_class ON student_course.classID = teacher_class.ID 
+                                                                WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' AND student_course.classID = 1 AND student_course.studentID = '".$id."'
+                                                                GROUP BY student_course.studentID, student.lname, student.fname, student.mname ");
+        return $query->result();
+    }
+
+    function scorecard1stSem($id){
+
+        $query = $this->db->query("SELECT * FROM student_course INNER JOIN student ON student_course.studentID = student.student_id
+                                                                INNER JOIN teacher_class ON student_course.classID = teacher_class.ID 
+                                                                WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' AND teacher_class.semester = '1' AND student_course.classID = 1 AND student_course.studentID = '".$id."'
+                                                                GROUP BY student_course.studentID, student.lname, student.fname, student.mname ");
+        return $query->result();
+    }
 
 
-	function scorecard($id){
+	function scorecard2ndSem($id){
 
 		$query = $this->db->query("SELECT * FROM student_course INNER JOIN student ON student_course.studentID = student.student_id
 																INNER JOIN teacher_class ON student_course.classID = teacher_class.ID 
-                                                                WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' AND student_course.classID = 1 AND student_course.studentID = '".$id."'
+                                                                WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' AND teacher_class.semester = '2' AND student_course.classID = 1 AND student_course.studentID = '".$id."'
                                                                 GROUP BY student_course.studentID, student.lname, student.fname, student.mname ");
 		return $query->result();
 	}
@@ -144,6 +167,7 @@ class Model_users extends CI_Model {
 
         return $output;
     }
+
 
    
 }
