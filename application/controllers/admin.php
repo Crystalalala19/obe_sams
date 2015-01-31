@@ -559,46 +559,49 @@ class Admin extends CI_Controller {
         }
     }
 
-    public function assign_class() {
-        $this->load->library('csvimport');
-        $this->load->library('form_validation');
-
-        $data['title'] = 'Admin - Assign Classes';
-        $data['header'] = 'Assign Classes';
+    public function upload_class() {
+        $data['title'] = 'Admin - Upload Classes';
+        $data['header'] = 'Upload Classes';
+        $data['message'] = '';
         
-        $data['teacher_list'] = $this->model_admin->check_rows('teacher');
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/upload_class', $data);
+        $this->load->view('admin/footer');
+    }
+
+    public function upload() {
+        $this->load->library('csvimport');
 
         $config['upload_path'] = './uploads/';
         $config['allowed_types'] = 'csv';
-        $config['max_size'] = '1000';
+        $config['max_size'] = '99999';
         $this->load->library('upload', $config);
 
-        $this->form_validation->set_rules('teacher', 'Teacher', 'required|trim');
-
-        if($this->form_validation->run() == FALSE) {
-            $data['message'] = '';
-        }
-        elseif(!$this->upload->do_upload()){
-            $data['message'] = $this->upload->display_errors('
-            <div class="alert alert-danger alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                <span class="sr-only">Error:</span>',
-            '</div>');;
+        if(!$this->upload->do_upload()){
+            $message = $this->upload->display_errors('
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>',
+                '</div>');
+            $this->session->set_flashdata('message', $message);
         }
         else{
             $file_data = $this->upload->data();
             $file_path =  './uploads/'.$file_data['file_name'];
-            
-            $nonExistingCourse = array();
 
             if ($this->csvimport->get_array($file_path)) {
                 $insert_data = array();
-                $csv_array = $this->csvimport->get_array($file_path, array('Group Number', 'Course Code', 'Start Time', 'End Time', 'Days'));
+                $nonExistingCourse = array();
+                $nonExistingTeacher = array();
+                $csv_array = $this->csvimport->get_array($file_path, array('Teacher ID', 'Group Number', 'Course Code', 'Start Time', 'End Time', 'Days'));
                 
-                foreach ($csv_array as $row) {     
+                foreach ($csv_array as $row) {
                     if(!$this->model_admin->check_course($row['Course Code'])) {
                         $nonExistingCourse[] = $row['Course Code'];
+                    }
+                    elseif(!$this->model_admin->check_teacher($row['Teacher ID'])) {
+                        $nonExistingTeacher[] = $row['Teacher ID'];
                     }    
                     else {
                         $insert_data[] = array(
@@ -609,7 +612,7 @@ class Admin extends CI_Controller {
                             'days'=>$row['Days'],
                             'semester'=> $this->get_semester(),
                             'school_year'=> date('Y'),
-                            'teacherID'=> $this->input->post('teacher')
+                            'teacherID'=> $row['Teacher ID']
                         );
                     }
                 }
@@ -617,44 +620,41 @@ class Admin extends CI_Controller {
                 //Deletes uploaded file
                 unlink($file_path);
 
-                if(empty($nonExistingCourse)) {
+                if(!empty($nonExistingTeacher)) {
+                    $this->session->set_flashdata('non_existingTeacher', $nonExistingTeacher);
+                }
+                if(!empty($nonExistingCourse)) {
+                    $this->session->set_flashdata('non_existingCourse', $nonExistingCourse);
+                }
+                
+                if(empty($nonExistingCourse) AND empty($nonExistingTeacher)) {
                     $result = $this->model_admin->insert_classes($insert_data);
-                }
-                else {
-                    $this->session->set_flashdata('non_existing', $nonExistingCourse);
 
-                    redirect(current_url());
-                }
+                    if($result['is_success'] == FALSE) {
+                        $message = '<strong>Error: </strong>'.  $result['db_error'];
+                        $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
 
-                if($result['is_success'] == FALSE) {
-                    $message = '<strong>Error: </strong>'.  $result['db_error'];
-                    $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
+                        $this->session->set_flashdata('message', $message);
+                    }
+                    else {
+                        $message = '<strong>Success!</strong> Classes added.';
+                        $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
 
-                    $data['message'] = $message; 
-                }
-                else {
-                    $message = '<strong>Success!</strong> Classes added.';
-                    $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
-
-                    $this->session->set_flashdata('message', $message);
-
-                    redirect(current_url());
+                        $this->session->set_flashdata('message', $message);
+                    }
                 }
             }
             else {
                 $message = '<strong>Error:</strong> Inserting .CSV file.';
                 $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
 
-                $data['message'] = $message;
+                $this->session->set_flashdata('message', $message);
             }            
         }
-
-        $this->load->view('admin/header', $data);
-        $this->load->view('admin/assign_class', $data);
-        $this->load->view('admin/footer');
+        redirect('admin/teachers/upload');
     }
 
-    function view_class() {
+    public function view_class() {
         $data['title'] = 'Admin - View Classes';
         $data['header'] = 'View Classes';
         $data['message'] = '';

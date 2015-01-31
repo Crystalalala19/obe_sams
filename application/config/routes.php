@@ -49,7 +49,7 @@ $route['admin/programs/outcome/(:any)/(:num)'] = "admin/program_outcome";
 $route['admin/view_students/edit/(:num)'] = "admin/edit_student";
 
 //Teachers
-$route['admin/teachers/assign'] = "admin/assign_class";
+$route['admin/teachers/upload'] = "admin/upload_class";
 $route['admin/teachers/classes/(:any)'] = "admin/view_class";
 $route['admin/teachers/edit/(:num)'] = "admin/edit_teacher";
 $route['admin/teachers/delete/(:num)'] = "admin/delete_teacher";

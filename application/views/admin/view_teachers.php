@@ -92,7 +92,7 @@
     </div>
 
     <?php if($teacher_list != FALSE):?>
-    <a href="<?php echo base_url();?>admin/teachers/assign" role="button" class="btn btn-warning"><i class="fa fa-clock-o"></i> Assign Classes</a>
+    <a href="<?php echo base_url();?>admin/teachers/upload" role="button" class="btn btn-warning"><i class="fa fa-clock-o"></i> Upload Classes</a>
 
     <table id="view_teachers" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>

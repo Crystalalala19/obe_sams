@@ -23,12 +23,16 @@
     <!-- Offline files -->
     <link rel="icon" href="<?php echo base_url();?>assets/img/icon.png">
     <!--  Bootstrap Style -->
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap-admin.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/sb-admin.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/style-admin.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/dashboard.css">
+
     <!--  Font-Awesome Style -->
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/font-awesome.min.css"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/fa-admin.min.css">
     
     <!-- DataTables Style -->
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css">
@@ -36,6 +40,12 @@
     <style type="text/css">
         div.DTTT { margin-bottom: 0.5em; float: right; }
         div.dataTables_wrapper { clear: both; }
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            /* Set the fixed height of the footer here */
+        }
     </style>
 
     <!--  Jquery Core Script -->
@@ -68,101 +78,52 @@
 </head>
 
 <body>
-    <div id="wrapper">
-        <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="<?php echo base_url(); ?>admin">Computer Science Department</a>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.html">OBE - SAMS</a>
+                <div class="nav-collapse">
+                    <ul class="nav pull-right">
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon-cog"></i> Account <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="javascript:;">Settings</a></li>
+                                <li><a href="javascript:;">Help</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse --> 
             </div>
-            <!-- Top Menu Items -->
-            <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
-                    <ul class="dropdown-menu alert-dropdown">
-                        <li>
-                            <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">View All</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Admin <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="<?php echo base_url();?>site/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                    <!-- active_link() works only for controller names, not methods names -->
-                    <li <?=echoActiveClassIfRequestMatches("admin")?>>
-                        <a href="<?php echo base_url();?>admin"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-                    </li>
+            <!-- /container --> 
+        </div>
+        <!-- /navbar-inner --> 
+    </div>
+    <!-- /navbar -->
 
-                    <li id="program_dropdown" class="">
-                        <a href="javascript:;" data-toggle="collapse" data-target="#program"><i class="fa fa-briefcase"></i> Programs <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="program" class="collapse">
-                            <li>
-                                <a href="<?php echo base_url();?>admin/programs/add"><i class="fa fa-plus"></i> Add new Curriculum</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo base_url();?>admin/programs/view"><i class="fa fa-list"></i> View Curriculums</a>
-                            </li>
+    <div class="subnavbar">
+        <div class="subnavbar-inner">
+            <div class="container">
+                <ul class="mainnav">
+                    <li class="active"><a href="index.html"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
+                    <li><a href="reports.html"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
+                    <li><a href="guidely.html"><i class="icon-facetime-video"></i><span>App Tour</span> </a></li>
+                    <li><a href="charts.html"><i class="icon-bar-chart"></i><span>Charts</span> </a> </li>
+                    <li><a href="shortcodes.html"><i class="icon-code"></i><span>Shortcodes</span> </a> </li>
+                    <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Drops</span> <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="icons.html">Icons</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
+                            <li><a href="pricing.html">Pricing Plans</a></li>
+                            <li><a href="login.html">Login</a></li>
+                            <li><a href="signup.html">Signup</a></li>
+                            <li><a href="error.html">404</a></li>
                         </ul>
                     </li>
-
-                    <li <?=echoActiveClassIfRequestMatches("teachers")?> id="teachers">
-                        <a href="<?php echo base_url();?>admin/teachers"><i class="fa fa-university"></i> Teachers</a>
-                    </li>
-                    
-                    <!-- <li id="student_dropdown" class="">
-                        <a href="javascript:;" data-toggle="collapse" data-target="#student"><i class="fa fa-users"></i> Students <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="student" class="collapse">
-                            <li>
-                                <a href="<?php echo base_url();?>admin/upload_students"><i class="fa fa-plus"></i> Upload Student list</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo base_url();?>admin/view_students"><i class="fa fa-list-alt"></i> View Student list</a>
-                            </li>
-                        </ul>
-                    </li> -->
                 </ul>
             </div>
-            <!-- /.navbar-collapse -->
-        </nav>
-
-        <div id="page-wrapper">
-            <div class="container-fluid">
-            
+            <!-- /container --> 
+        </div>
+        <!-- /subnavbar-inner --> 
+    </div>
+    <!-- /subnavbar -->
