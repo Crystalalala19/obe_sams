@@ -46,20 +46,55 @@ class Model_users extends CI_Model {
 		return $query->result_array();
 	}
 
-	function select_courseList(){
+    function teacher_class1($courseCode){
 
-        $query = $this->db->query("SELECT * FROM teacher_class
-                                            WHERE teacherID = '".$this->session->userdata('teacher_id')."' ");
+        $query = $this->db->query("SELECT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND courseCode = 'ICT110' AND semester = 1 ");
+
+        return $query->result();
+    }
+
+    function teacher_class2(){
+
+        $query = $this->db->query("SELECT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 2 ");
 
         return $query->result();
 
     }
 
+    function teacher_class3(){
+
+        $query = $this->db->query("SELECT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 'summer' ");
+
+        return $query->result();
+
+    }
+
+    function course1(){
+
+        $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 1");
+
+        return $query->result();
+    }
+
+    function course2(){
+
+        $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 2");
+
+        return $query->result();
+    }
+
+    function course3(){
+
+        $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 'summer' ");
+
+        return $query->result();
+    }
+
     function select_SY(){
 
-        $query = $this->db->query("SELECT DISTINCT teacher_class.school_year, teacher_class.teacherID FROM student_course
-                                                                             INNER JOIN teacher_class ON student_course.classID = teacher_class.ID  
-                                                                             WHERE teacherID = '".$this->session->userdata('teacher_id')."' ");
+        $query = $this->db->query("SELECT DISTINCT * FROM teacher_class
+                                                                          WHERE teacherID = '".$this->session->userdata('teacher_id')."' 
+                                                                          GROUP BY school_year ");
         
         return $query->result();
 
@@ -153,9 +188,6 @@ class Model_users extends CI_Model {
    	    return $query->result();
 
    }
-
-
-
 
     function notify_message($alert_type, $glyphicon, $message){
         $output = '
