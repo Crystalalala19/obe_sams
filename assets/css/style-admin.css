@@ -49,8 +49,6 @@ textarea {
 	background:linear-gradient(top, #FAFAFA 0%,#E9E9E9 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FAFAFA', endColorstr='#E9E9E9');
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#FAFAFA', endColorstr='#E9E9E9')";
-	
-	font-size: 10px;
 	color: #444;
 	text-transform: uppercase;
 }
@@ -83,9 +81,6 @@ textarea {
 	position: static;
 }
 
-.navbar .nav a {
-	font-size: 11px;
-}
 .navbar .nav>li>a { color:#fff !important;}
 .navbar .brand {
 	font-weight: 600;

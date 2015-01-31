@@ -127,7 +127,7 @@ class Admin extends CI_Controller {
             }
 
             $message = '<strong>Success!</strong>';
-            $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
+            $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
 
             $this->session->set_flashdata('message', $message);
 
@@ -162,7 +162,7 @@ class Admin extends CI_Controller {
         }
         elseif($this->model_admin->check_programYear($program, $year)) {
             $message = '<strong>Effective Year</strong> for the <strong>Program</strong> exists.';
-            $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
+            $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
 
             $data['message'] = $message;
         }
@@ -246,7 +246,7 @@ class Admin extends CI_Controller {
                 $this->db->trans_rollback();
 
                 $message = '<strong>Error inserting data!</strong>';
-                $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
+                $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
 
                 $data['message'] = $message;
             }
@@ -254,7 +254,7 @@ class Admin extends CI_Controller {
                 $this->db->trans_complete();
 
                 $message = '<strong>Success!</strong> Program added.';
-                $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
+                $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
 
                 $this->session->set_flashdata('message', $message);
 
@@ -286,13 +286,13 @@ class Admin extends CI_Controller {
 
             if($result['is_success'] == FALSE) {
                 $message = '<strong>Error: </strong>'.  $result['db_error'];
-                $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
+                $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
 
                 $data['message'] = $message; 
             }
             else {
                 $message = '<strong>Success!</strong> Program added.';
-                $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
+                $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
 
                 $this->session->set_flashdata('message', $message);
                 redirect(current_url());
@@ -303,7 +303,7 @@ class Admin extends CI_Controller {
 
         if($data['program_list'] == FALSE) {
             $message = 'No programs found. Please consider adding.';
-            $data['message'] = $this->model_admin->notify_message('alert-info', 'glyphicon-info-sign', $message);
+            $data['message'] = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
         }
 
         $this->load->view('admin/header', $data);
@@ -329,11 +329,11 @@ class Admin extends CI_Controller {
 
         if(!$this->model_admin->get_year($year_data)) {
             $message = '<strong>Program Year</strong> does not exist!';
-            $data['message'] = $this->model_admin->notify_message('alert-info', 'glyphicon-info-sign', $message);
+            $data['message'] = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
         }
         elseif(!$this->model_admin->get_programID($program_data)) {
             $message = '<strong>Program</strong> does not exist!';
-            $data['message'] = $this->model_admin->notify_message('alert-info', 'glyphicon-info-sign', $message);
+            $data['message'] = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
         }
         else {
             $data['program'] = $this->model_admin->get_program($program_data);
@@ -356,7 +356,7 @@ class Admin extends CI_Controller {
 
         if(!$this->model_admin->get_programID($program_data)) {
             $message = '<strong>Program</strong> does not exist!';
-            $message = $this->model_admin->notify_message('alert-info', 'glyphicon-exclamation-sign', $message);
+            $message = $this->model_admin->notify_message('alert-info', 'icon-exclamation', $message);
             $this->session->set_flashdata('message', $message);
             redirect('admin/programs/view');
         }
@@ -365,11 +365,11 @@ class Admin extends CI_Controller {
 
         if($result['is_success'] == FALSE) {
             $message = '<strong>Error: </strong>'. $result['db_error'];
-            $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
+            $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
         }
         else {
             $message = '<strong>Success!</strong> Program deleted.';
-            $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
+            $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
         }
         $this->session->set_flashdata('message', $message);
         redirect('admin/programs/view');
@@ -389,13 +389,13 @@ class Admin extends CI_Controller {
 
         if(!$this->model_admin->get_year($year_data)) {
             $message = '<strong>Program Year</strong> does not exist!';
-            $message = $this->model_admin->notify_message('alert-info', 'glyphicon-exclamation-sign', $message);
+            $message = $this->model_admin->notify_message('alert-info', 'icon-exclamation', $message);
             $this->session->set_flashdata('message', $message);
             redirect('admin/programs/view');
         }
         elseif(!$this->model_admin->get_programID($program_data)) {
             $message = '<strong>Program</strong> does not exist!';
-            $message = $this->model_admin->notify_message('alert-info', 'glyphicon-exclamation-sign', $message);
+            $message = $this->model_admin->notify_message('alert-info', 'icon-exclamation', $message);
             $this->session->set_flashdata('message', $message);
             redirect('admin/programs/view');
         }
@@ -406,11 +406,11 @@ class Admin extends CI_Controller {
 
         if($result['is_success'] == FALSE) {
             $message = '<strong>Error in deleting.</strong>';
-            $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
+            $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
         }
         else {
             $message = '<strong>Success!</strong> Program Year deleted.';
-            $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
+            $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
         }
         $this->session->set_flashdata('message', $message);
         redirect('admin/programs/view');
@@ -444,13 +444,13 @@ class Admin extends CI_Controller {
 
             if($teacher_result['is_success'] == FALSE) {
                 $message = '<strong>Error: </strong>'.  $teacher_result['db_error'];
-                $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
+                $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
 
                 $data['message'] = $message; 
             }
             else {
                 $message = '<strong>Success!</strong> Teacher added.';
-                $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
+                $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
 
                 $this->session->set_flashdata('message', $message);
                 redirect(current_url());
@@ -467,7 +467,7 @@ class Admin extends CI_Controller {
         
         if($data['teacher_list'] == FALSE) {
             $message = 'No teachers found in record. Please consider adding.';
-            $data['message'] = $this->model_admin->notify_message('alert-info', 'glyphicon-info-sign', $message);
+            $data['message'] = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
         } else {
             $data['message'] = '';
         }
@@ -494,7 +494,7 @@ class Admin extends CI_Controller {
             $id = $this->uri->segment(4);
             if(!$this->model_admin->check_rowID('teacher', $id)) {
                 $message = 'ID number does not exists.';
-                $data['message'] = $this->model_admin->notify_message('alert-info', 'glyphicon-info-sign', $message);
+                $data['message'] = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
             }
             else {
                 //Teacher's Information
@@ -513,13 +513,13 @@ class Admin extends CI_Controller {
 
             if($result['is_success'] == FALSE) {
                 $message = '<strong>Error: </strong>'.  $result['db_error'];
-                $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
+                $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
 
                 $data['message'] = $message;
             }
             else {
                 $message = '<strong>Success!</strong> Teacher updated.';
-                $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
+                $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
 
                 $this->session->set_flashdata('message2', $message);
                 redirect(current_url());
@@ -536,7 +536,7 @@ class Admin extends CI_Controller {
 
         if(!$this->model_admin->check_rowID('teacher', $id)) {
             $message = 'ID number does not exists.';
-            $data['message'] = $this->model_admin->notify_message('alert-info', 'glyphicon-info-sign', $message);
+            $data['message'] = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
         }
         else {
             $delete = array('ID' => $id);
@@ -545,13 +545,13 @@ class Admin extends CI_Controller {
 
             if($result['is_success'] == FALSE) {
                 $message = '<strong>Error: </strong>'.  $result['db_error'];
-                $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
+                $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
 
                 $data['message'] = $message;
             }
             else {
                 $message = '<strong>Success!</strong> Teacher deleted.';
-                $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
+                $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
 
                 $this->session->set_flashdata('message', $message);
                 redirect('admin/teachers');
@@ -580,9 +580,9 @@ class Admin extends CI_Controller {
         if(!$this->upload->do_upload()){
             $message = $this->upload->display_errors('
                 <div class="alert alert-danger alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                    <span class="sr-only">Error:</span>',
+                    <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
+                    <i class="icon-exclamation-sign"></i>
+                    <span class="sr-only">Error: </span>',
                 '</div>');
             $this->session->set_flashdata('message', $message);
         }
@@ -632,21 +632,21 @@ class Admin extends CI_Controller {
 
                     if($result['is_success'] == FALSE) {
                         $message = '<strong>Error: </strong>'.  $result['db_error'];
-                        $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
+                        $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
 
                         $this->session->set_flashdata('message', $message);
                     }
                     else {
                         $message = '<strong>Success!</strong> Classes added.';
-                        $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
+                        $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
 
                         $this->session->set_flashdata('message', $message);
                     }
                 }
             }
             else {
-                $message = '<strong>Error:</strong> Inserting .CSV file.';
-                $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
+                $message = '<strong>Error: </strong> Inserting .CSV file.';
+                $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
 
                 $this->session->set_flashdata('message', $message);
             }            
@@ -665,7 +665,7 @@ class Admin extends CI_Controller {
         
         if($result == FALSE) {
             $message = '<strong>ID</strong> does not exist!';
-            $message = $this->model_admin->notify_message('alert-info', 'glyphicon-ok-sign', $message);
+            $message = $this->model_admin->notify_message('alert-info', 'icon-ok', $message);
 
             $data['message'] = $message;
         }
@@ -729,14 +729,14 @@ class Admin extends CI_Controller {
 
                 if($result['is_success'] == TRUE) {
                     $message = '<strong>Success!</strong> Teacher added.';
-                    $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
+                    $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
 
                     $this->session->set_flashdata('message', $message);
                     redirect(current_url());
                 }
                 else {
                     $message = '<strong>Error: </strong>'.  $account_result['db_error'];
-                    $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
+                    $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
 
                     $data['message'] = $message;
                 }
@@ -758,7 +758,7 @@ class Admin extends CI_Controller {
 
         if($data['student_list'] == FALSE) {
             $message = 'There are no currently students added.';
-            $data['message'] = $this->model_admin->notify_message('alert-info', 'glyphicon-info-sign', $message);
+            $data['message'] = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
         }
         else {
             $data['message'] = '';
@@ -787,7 +787,7 @@ class Admin extends CI_Controller {
 
             if(!$this->model_admin->check_rowID('student', $id)) {
                 $message = 'ID number does not exists.';
-                $data['message'] = $this->model_admin->notify_message('alert-info', 'glyphicon-info-sign', $message);
+                $data['message'] = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
             }
             else {
                 //Student's Information
@@ -808,13 +808,13 @@ class Admin extends CI_Controller {
 
             if($result['is_success'] == FALSE) {
                 $message = '<strong>Error: </strong>'.  $result['db_error'];
-                $message = $this->model_admin->notify_message('alert-danger', 'glyphicon-exclamation-sign', $message);
+                $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
 
                 $data['message'] = $message;
             }
             else {
                 $message = '<strong>Success!</strong> Student updated.';
-                $message = $this->model_admin->notify_message('alert-success', 'glyphicon-ok-sign', $message);
+                $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
 
                 $this->session->set_flashdata('message2', $message);
                 redirect(current_url());

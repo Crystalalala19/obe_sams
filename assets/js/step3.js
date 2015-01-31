@@ -4,11 +4,12 @@ $(document).ready(function() {
 
     var totalStepCount = 3;
 
+    $("#btnNext, #btnPrevious").attr("disabled", "disabled");
+
     $("#btnSubmit, #step-2, #step-3").hide();
 
     if(stepCounter === 1) {
-        $("#btnNext").prop('disabled', false);
-        $("#btnPrevious").prop('disabled', true);
+        $("#btnNext").removeAttr("disabled");
     }
 
     $("#btnNext").click(function(e) {
@@ -16,13 +17,12 @@ $(document).ready(function() {
         stepCounter++;
 
         if(stepCounter === totalStepCount) {
-            $("#btnNext").prop('disabled', true);
-            
+            $("#btnNext").attr("disabled", "disabled");
             $("#btnSubmit").show();
         }
 
         if(stepCounter !== 1) {
-            $("#btnPrevious").prop('disabled', false);
+            $("#btnPrevious").removeAttr("disabled");
         }
 
         $("#step-" + stepCounter).show();
@@ -33,11 +33,11 @@ $(document).ready(function() {
         stepCounter--;
 
         if(stepCounter === 1) {
-            $("#btnPrevious").prop('disabled', true);
+            $("#btnPrevious").attr("disabled");
         }
 
         if(stepCounter < totalStepCount) {
-            $("#btnNext").prop('disabled', false);
+            $("#btnNext").removeAttr("disabled");
             $("#btnSubmit").hide();
         }
 

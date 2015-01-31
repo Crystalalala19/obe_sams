@@ -1,5 +1,5 @@
 <?php
-    function echoActiveClassIfRequestMatches($requestUri)
+    function uri_match($requestUri)
     {
         $current_file_name = basename($_SERVER['REQUEST_URI']);
 
@@ -35,28 +35,48 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/fa-admin.min.css">
     
     <!-- DataTables Style -->
+    <!-- PDF works -->
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css">
+    
+    <!-- PDF works  -->
+    <!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/dataTables.bootstrap.css"> -->
+
+    <!-- PDF doesn't work -->
+    <!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/dataTables.bootstrapv3.css"> -->
+
+    <!-- End DataTables Style -->
     
     <style type="text/css">
         div.DTTT { margin-bottom: 0.5em; float: right; }
         div.dataTables_wrapper { clear: both; }
+        /*Responsive Footer*/
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+        body {
+            /* Margin bottom by footer height */
+            margin-bottom: 100px;
+        }
         .footer {
             position: absolute;
             bottom: 0;
             width: 100%;
             /* Set the fixed height of the footer here */
         }
+        /*End Responsive*/
     </style>
 
     <!--  Jquery Core Script -->
-    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/jquery-admin.min.js"></script>
     <!--  Core Bootstrap Script -->
-    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/bootstrap.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/bootstrap-admin.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/base-admin.js"></script>
 
     <!-- Datatables -->
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/dataTables.tableTools.min.js"></script>
-    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/datatables-bootstrapv3.js"></script>
 
     <!-- 
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
@@ -74,7 +94,6 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
 
 <body>
@@ -87,8 +106,7 @@
                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="icon-cog"></i> Account <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="javascript:;">Settings</a></li>
-                                <li><a href="javascript:;">Help</a></li>
+                                <li><a href="javascript:;"><i class="icon-off"></i> Logout</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -105,21 +123,14 @@
         <div class="subnavbar-inner">
             <div class="container">
                 <ul class="mainnav">
-                    <li class="active"><a href="index.html"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
-                    <li><a href="reports.html"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
-                    <li><a href="guidely.html"><i class="icon-facetime-video"></i><span>App Tour</span> </a></li>
-                    <li><a href="charts.html"><i class="icon-bar-chart"></i><span>Charts</span> </a> </li>
-                    <li><a href="shortcodes.html"><i class="icon-code"></i><span>Shortcodes</span> </a> </li>
-                    <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Drops</span> <b class="caret"></b></a>
+                    <li <?php uri_match('admin');?>><a href="<?php echo base_url('admin'); ?>"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
+                    <li class="dropdown" id="program_dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-briefcase"></i><span>Programs</span> <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="icons.html">Icons</a></li>
-                            <li><a href="faq.html">FAQ</a></li>
-                            <li><a href="pricing.html">Pricing Plans</a></li>
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href="signup.html">Signup</a></li>
-                            <li><a href="error.html">404</a></li>
+                            <li><a href="<?php echo base_url('admin/programs/add'); ?>"><i class="icon-plus"></i> Add new Curriculum</a></li>
+                            <li><a href="<?php echo base_url('admin/programs/view'); ?>"><i class="icon-briefcase"></i> View Programs</a></li>
                         </ul>
                     </li>
+                    <li <?php uri_match('teachers'); uri_match('upload')?> id="teachers_menu"><a href="<?php echo base_url('admin/teachers'); ?>"><i class="icon-sitemap"></i><span>Teachers</span> </a></li>
                 </ul>
             </div>
             <!-- /container --> 
