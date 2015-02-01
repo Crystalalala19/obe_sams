@@ -138,7 +138,7 @@
                             $.each(response, function(key, value) {
                                     $("#toBeRemoved").append(
                                         $('<td>').html(value.effective_year),
-                                        $('<td>').html("<div class='btn-group inline pull-left'><a type='button' href='<?php echo base_url();?>admin/programs/outcome/"+selectedValue+"/"+value.effective_year+"' class='btn btn-warning btn-sm btn-responsive' title='Program Outcome' target='_blank'><i class='icon-list'></i></a><a type='button' href='<?php echo base_url();?>admin/programs/edit/"+selectedValue+"/"+value.effective_year+"' class='btn btn-primary btn-sm btn-responsive' title='Edit Curriculum' target='_blank'><i class='icon-edit'></i></a><a type='button' href='<?php echo base_url();?>admin/programs/delete/"+selectedValue+"/"+value.effective_year+"' class='btn btn-danger btn-sm btn-responsive' title='Delete Effective Year' onclick='return confirm(\"Do you want to permanently delete?\");'><i class='icon-trash'></i></a></div>")
+                                        $('<td>').html("<div class='btn-group inline pull-left'><a type='button' href='<?php echo base_url();?>admin/programs/outcome/"+encodeURIComponent(selectedValue)+"/"+value.effective_year+"' class='btn btn-warning btn-sm btn-responsive' title='Program Outcome' target='_blank'><i class='icon-list'></i></a><a type='button' href='<?php echo base_url();?>admin/programs/edit/"+encodeURIComponent(selectedValue)+"/"+value.effective_year+"' class='btn btn-primary btn-sm btn-responsive' title='Edit Curriculum' target='_blank'><i class='icon-edit'></i></a><a type='button' href='<?php echo base_url();?>admin/programs/delete/"+encodeURIComponent(selectedValue)+"/"+value.effective_year+"' class='btn btn-danger btn-sm btn-responsive' title='Delete Effective Year' onclick='return confirm(\"Do you want to permanently delete?\");'><i class='icon-trash'></i></a></div>")
                                     ).appendTo('#view_programs');
                             });
                             console.log(response);
@@ -148,3 +148,4 @@
             }
         });
     </script>
+    <!-- encodeURIComponent().replace(/%20/g, "+") -->

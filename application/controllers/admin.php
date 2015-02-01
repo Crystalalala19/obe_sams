@@ -34,7 +34,7 @@ class Admin extends CI_Controller {
 
     function program_ajax() {
         $program_data = array(
-            'programName' => rawurlencode($this->input->post('option'))
+            'programName' => rawurldecode($this->input->post('option'))
         );
 
         $result = $this->model_admin->get_programYears($program_data);
@@ -67,7 +67,7 @@ class Admin extends CI_Controller {
         $year = $this->uri->segment(5);
 
         $program_data = array(
-            'programName' => $program
+            'programName' => rawurldecode($program)
         );
 
         $program_id = $this->model_admin->get_programID($program_data);
@@ -176,7 +176,7 @@ class Admin extends CI_Controller {
             $course_equi = $this->input->post('co_equi');
 
             $program = array(
-                'programName' => rawurlencode($this->input->post('program'))
+                'programName' => rawurldecode($this->input->post('program'))
             );
 
             $year = $this->input->post('effective_year');
@@ -280,7 +280,7 @@ class Admin extends CI_Controller {
         }
         else {
             $program_data = array(
-                'programName' => rawurlencode($this->input->post('program_name'))
+                'programName' => $this->input->post('program_name')
             );
             $result = $this->model_admin->insert_program($program_data);
 
@@ -320,7 +320,7 @@ class Admin extends CI_Controller {
         $year = $this->uri->segment(5);
 
         $program_data = array(
-            'programName' => $program
+            'programName' => rawurldecode($program)
         );
 
         $year_data = array(
@@ -380,7 +380,7 @@ class Admin extends CI_Controller {
         $year = $this->uri->segment(5);
 
         $program_data = array(
-            'programName' => $program
+            'programName' => rawurldecode($program)
         );
 
         $year_data = array(
@@ -409,7 +409,7 @@ class Admin extends CI_Controller {
             $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
         }
         else {
-            $message = '<strong>Success!</strong> Program Year deleted.';
+            $message = '<strong>Success!</strong> Effective Year deleted.';
             $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
         }
         $this->session->set_flashdata('message', $message);
