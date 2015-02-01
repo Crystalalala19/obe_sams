@@ -31,27 +31,30 @@
                                         <?php else:?>
                                         <select class="selectpicker show-tick" title="Select Program" data-live-search="true" multiple data-max-options="1" data-size="auto" id="program_inp" name="program" required>
                                             <?php foreach ($program_list as $row): ?>
-                                            <option value="<?php echo $row['programName']; ?>"><?php echo $row['programName']; ?></option>
+                                            <option value="<?php echo $row['programName']; ?>"><?php echo rawurldecode($row['programName']); ?></option>
                                             <?php endforeach;?>
                                         </select>
                                         <?php endif;?>
+                                    
+                                        <?php if($program_list == TRUE):?>
+                                        <label class="control-label" for="effective_year">Effective Year:</label>
+                                        <?php
+                                            function yearDropdown($startYear, $endYear, $id="year"){
+                                                //start the select tag
+                                                echo "<select class='selectpicker show-tick' title='Select Program' data-live-search='true' multiple data-max-options='1' data-size='5' id=".$id." name=".$id." required>";
+                                                    //echo each year as an option    
+                                                    for ($i=$startYear;$i<=$endYear;$i++){
+                                                    echo "<option value=".$i.">".$i."</option>n";    
+                                                    }
+                                                //close the select tag
+                                                echo "</select>";
+                                            }
+                                            yearDropdown(date('Y'), 2100, "effective_year");
+                                        ?>
+
                                     </div>
                                 </div>
-                                <?php if($program_list == TRUE):?>
-                                    <label class="control-label" for="effective_year">Effective Year:</label>
-                                    <?php
-                                        function yearDropdown($startYear, $endYear, $id="year"){
-                                            //start the select tag
-                                            echo "<select class='selectpicker show-tick' title='Select Program' data-live-search='true' multiple data-max-options='1' data-size='5' id=".$id." name=".$id." required>";
-                                                //echo each year as an option    
-                                                for ($i=$startYear;$i<=$endYear;$i++){
-                                                echo "<option value=".$i.">".$i."</option>n";    
-                                                }
-                                            //close the select tag
-                                            echo "</select>";
-                                        }
-                                        yearDropdown(date('Y'), 2100, "effective_year");
-                                    ?>
+                                
                                 <div id="step-2">
                                     <p class="pull-right">Step 2 of 3</p>
                                     <div class="form-group col-md-12">

@@ -33,11 +33,11 @@ class Admin extends CI_Controller {
     }
 
     function program_ajax() {
-        $data = array(
-            'programName' => $this->input->post('option')
+        $program_data = array(
+            'programName' => rawurlencode($this->input->post('option'))
         );
 
-        $result = $this->model_admin->get_programYears($data);
+        $result = $this->model_admin->get_programYears($program_data);
 
         echo json_encode($result);
     }
@@ -176,7 +176,7 @@ class Admin extends CI_Controller {
             $course_equi = $this->input->post('co_equi');
 
             $program = array(
-                'programName' => $this->input->post('program')
+                'programName' => rawurlencode($this->input->post('program'))
             );
 
             $year = $this->input->post('effective_year');
@@ -238,10 +238,10 @@ class Admin extends CI_Controller {
                     $course_equi_array[$key2]['CourseEquivalent'] = $value;
                     $course_equi_array[$key2]['courseID'] = $course_id[$key1];
                 }
-
-                $equi_result = $this->model_admin->insert_equivalents($course_equi_array);
             }
             
+            $equi_result = $this->model_admin->insert_equivalents($course_equi_array);
+
             if($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();
 
@@ -279,10 +279,10 @@ class Admin extends CI_Controller {
             $data['message'] = '';
         }
         else {
-            $data = array(
-                'programName' => $this->input->post('program_name')
+            $program_data = array(
+                'programName' => rawurlencode($this->input->post('program_name'))
             );
-            $result = $this->model_admin->insert_program($data);
+            $result = $this->model_admin->insert_program($program_data);
 
             if($result['is_success'] == FALSE) {
                 $message = '<strong>Error: </strong>'.  $result['db_error'];
@@ -351,7 +351,7 @@ class Admin extends CI_Controller {
         $program = $this->uri->segment(5);
 
         $program_data = array(
-            'programName' => $program
+            'programName' => rawurldecode($program)
         );
 
         if(!$this->model_admin->get_programID($program_data)) {

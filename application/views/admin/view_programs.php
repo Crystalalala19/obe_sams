@@ -75,7 +75,7 @@
                                 <label for="program_ajax">Program:</label>
                                 <select name="program" class="selectpicker show-tick" title="Select Program" data-live-search="true" multiple data-max-options="1" data-size="5" id="program_ajax">
                                     <?php foreach($program_list as $row): ?>
-                                    <option value="<?php echo $row['programName'];?>"><?php echo $row['programName'];?></option>
+                                    <option value="<?php echo $row['programName'];?>"><?php echo rawurldecode($row['programName']);?></option>
                                     <?php endforeach;?>
                                 </select>
                             </div>
@@ -126,7 +126,7 @@
                     data: {option: selectedValue},
                     dataType: 'json',
                     success: function(response) {
-                        $("#delprogram").show().attr("href", "delete/program/"+selectedValue);
+                        $("#delprogram").show().attr("href", "delete/program/"+encodeURIComponent(selectedValue));
 
                         $("#toBeRemoved td").remove();
                         if(jQuery.isEmptyObject(response)) {
@@ -138,7 +138,7 @@
                             $.each(response, function(key, value) {
                                     $("#toBeRemoved").append(
                                         $('<td>').html(value.effective_year),
-                                        $('<td>').html("<div class='btn-group inline pull-left'><a type='button' href='<?php echo base_url();?>admin/programs/outcome/"+selectedValue+"/"+value.effective_year+"' class='btn btn-warning btn-sm btn-responsive' title='Program Outcome' target='_blank'><i class='icon-list'></i></a><a type='button' href='<?php echo base_url();?>admin/programs/edit/"+selectedValue+"/"+value.effective_year+"' class='btn btn-primary btn-sm btn-responsive' title='Edit Curriculum' target='_blank'><i class='icon-edit'></i></a><a type='button' href='<?php echo base_url();?>admin/programs/delete/"+selectedValue+ "/"+value.effective_year+"' class='btn btn-danger btn-sm btn-responsive' title='Delete Effective Year' onclick='return confirm(\"Do you want to permanently delete?\");'><i class='icon-trash'></i></a></div>")
+                                        $('<td>').html("<div class='btn-group inline pull-left'><a type='button' href='<?php echo base_url();?>admin/programs/outcome/"+selectedValue+"/"+value.effective_year+"' class='btn btn-warning btn-sm btn-responsive' title='Program Outcome' target='_blank'><i class='icon-list'></i></a><a type='button' href='<?php echo base_url();?>admin/programs/edit/"+selectedValue+"/"+value.effective_year+"' class='btn btn-primary btn-sm btn-responsive' title='Edit Curriculum' target='_blank'><i class='icon-edit'></i></a><a type='button' href='<?php echo base_url();?>admin/programs/delete/"+selectedValue+"/"+value.effective_year+"' class='btn btn-danger btn-sm btn-responsive' title='Delete Effective Year' onclick='return confirm(\"Do you want to permanently delete?\");'><i class='icon-trash'></i></a></div>")
                                     ).appendTo('#view_programs');
                             });
                             console.log(response);
