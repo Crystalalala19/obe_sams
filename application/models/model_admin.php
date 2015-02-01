@@ -10,7 +10,7 @@ class Model_admin extends CI_Model {
         $output = '
         <div class="alert '.$alert_type.' alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="icon-remove"></i></button>
-            <i class="'.$glyphicon.'""></i>
+            <i class="'.$glyphicon.'"></i>
             '.$message.'
         </div>';
 

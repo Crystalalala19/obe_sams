@@ -46,6 +46,7 @@
                                 </tbody>
                             </table>
                         </div> <!-- /widget-content -->  
+                        <?php endif;?>
                     </div> <!-- /widget -->                 
                 </div> <!-- /span12 -->         
             </div> <!-- /row -->
@@ -60,5 +61,4 @@
             $('#view_classes').DataTable();
         });
     </script>
-    <?php endif;?>
 

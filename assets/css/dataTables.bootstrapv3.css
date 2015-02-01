@@ -1,3 +1,9 @@
+ @font-face {
+    font-family: 'Glyphicons Halflings';
+    src: url('../fonts/glyphicons-halflings-regular.eot');
+    src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+}
+
 html[direction='ltr'] div.dataTables_length label {
 	float: left;
 	text-align: left;
@@ -168,6 +174,10 @@ div.DTTT .btn:hover {
 
 ul.DTTT_dropdown.dropdown-menu a {
 	color: #333 !important; /* needed only when demo_page.css is included */
+}
+
+ul.DTTT_dropdown.dropdown-menu li {
+    position: relative;
 }
 
 ul.DTTT_dropdown.dropdown-menu li:hover a {

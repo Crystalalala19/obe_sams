@@ -39,51 +39,7 @@
                             ?>
 
                             <button class="btn btn-info" data-toggle='modal' data-target='#add' title="Add New"><i class="icon-plus"></i> Add new</button>
-
-                            <div class='modal fade' id='add' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
-                                <div class='modal-dialog modal-vertical-centered'>
-                                    <div class='modal-content'>
-                                        <div class='modal-header'>
-                                            <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
-                                            <h4 class='modal-title' id='myModalLabel'><i class="icon-plus"></i> Add Teacher</h4>
-                                        </div>
-                                        <div class='modal-body'>
-                                            <?php echo form_open('admin/teachers'); ?>
-                                                <div class="form-group col-xs-4 col-sm-4 col-md-4">
-                                                    <label for="teacher_fname">First Name:</label>
-                                                    <input type="text" class="form-control input-sm" name="teacher_fname" id="teacher_fname" value="<?php echo set_value('teacher_fname'); ?>" required>
-                                                    
-                                                </div>
-                                                <div class="clearfix"></div>
-
-                                                <div class="form-group col-xs-4 col-sm-4 col-md-4">
-                                                    <label for="teacher_mname">Middle Name:</label>
-                                                    <input type="text" class="form-control input-sm" name="teacher_mname" id="teacher_mname" value="<?php echo set_value('teacher_mname'); ?>" required>
-                                                </div>
-                                                <div class="clearfix"></div>
-
-                                                <div class="form-group col-xs-4 col-sm-4 col-md-4">
-                                                    <label for="teacher_lname">Last Name:</label>
-                                                    <input type="text" class="form-control input-sm" name="teacher_lname" id="teacher_lname" value="<?php echo set_value('teacher_lname'); ?>" required>
-                                                </div>
-                                                <div class="clearfix"></div>
-
-                                                <div class="form-group col-xs-4 col-sm-4 col-md-4">
-                                                    <label for="login_id">ID Login:</label>
-                                                    <input type="text" class="form-control input-sm" name="login_id" id="login_id" value="<?php echo set_value('login_id'); ?>" required>
-                                                </div>
-                                                <div class="clearfix"></div>
-                                        </div>
-                                        <div class='modal-footer'>
-                                            <input type="submit" class="btn btn-success" name="submit" value="Submit">
-                                            <input type="reset" class="btn btn-info" value="Clear">
-                                            <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
-                                        </div>
-                                            </form>
-                                    </div>
-                                </div>
-                            </div>
-
+    
                             <?php if($teacher_list != FALSE):?>
                             <a href="<?php echo base_url();?>admin/teachers/upload" role="button" class="btn btn-warning"><i class="icon-time"></i> Upload Classes</a>
                            
@@ -113,6 +69,52 @@
                                     <?php endforeach; ?>        
                                 </tbody>
                             </table>
+                            <?php endif;?>
+
+                            <?php echo form_open('admin/teachers'); ?>
+                            <div class='modal fade' id='add' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+                                <div class='modal-dialog modal-vertical-centered'>
+                                    <div class='modal-content'>
+                                        <div class='modal-header'>
+                                            <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
+                                            <h4 class='modal-title' id='myModalLabel'><i class="icon-plus"></i> Add Teacher</h4>
+                                        </div>
+                                        <div class='modal-body'>
+                                            <div class="form-group col-xs-4 col-sm-4 col-md-4">
+                                                <label for="teacher_fname">First Name:</label>
+                                                <input type="text" class="form-control input-sm" name="teacher_fname" id="teacher_fname" value="<?php echo set_value('teacher_fname'); ?>" required>
+                                                
+                                            </div>
+                                            <div class="clearfix"></div>
+
+                                            <div class="form-group col-xs-4 col-sm-4 col-md-4">
+                                                <label for="teacher_mname">Middle Name:</label>
+                                                <input type="text" class="form-control input-sm" name="teacher_mname" id="teacher_mname" value="<?php echo set_value('teacher_mname'); ?>" required>
+                                            </div>
+                                            <div class="clearfix"></div>
+
+                                            <div class="form-group col-xs-4 col-sm-4 col-md-4">
+                                                <label for="teacher_lname">Last Name:</label>
+                                                <input type="text" class="form-control input-sm" name="teacher_lname" id="teacher_lname" value="<?php echo set_value('teacher_lname'); ?>" required>
+                                            </div>
+                                            <div class="clearfix"></div>
+
+                                            <div class="form-group col-xs-4 col-sm-4 col-md-4">
+                                                <label for="login_id">ID Login:</label>
+                                                <input type="text" class="form-control input-sm" name="login_id" id="login_id" value="<?php echo set_value('login_id'); ?>" required>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class='modal-footer'>
+                                            <input type="submit" class="btn btn-success" name="submit" value="Submit">
+                                            <input type="reset" class="btn btn-info" value="Clear">
+                                            <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                            
                         </div> <!-- /widget-content -->  
                     </div> <!-- /widget -->                 
                 </div> <!-- /span12 -->         
@@ -159,6 +161,4 @@
 
         $( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
     </script>
-    <?php endif;?>
-
     

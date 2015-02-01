@@ -94,6 +94,7 @@
                                     </tr>   
                                 </tbody>
                             </table>
+                            <?php endif; ?>
                         </div> <!-- /widget-content -->  
                     </div> <!-- /widget -->                 
                 </div> <!-- /span12 -->         
@@ -147,4 +148,3 @@
             }
         });
     </script>
-    <?php endif; ?>

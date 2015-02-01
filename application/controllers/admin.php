@@ -273,7 +273,7 @@ class Admin extends CI_Controller {
         
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('program_name', 'Program Name', 'required|trim|alpha|max_length[8]');
+        $this->form_validation->set_rules('program_name', 'Program Name', 'required|trim|max_length[8]|callback_alpha_dash_space');
 
         if($this->form_validation->run() == FALSE) {
             $data['message'] = '';
