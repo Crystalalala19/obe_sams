@@ -8,7 +8,7 @@ class Site extends CI_Controller {
 	}
 
 	public function index() {
-		$data['title'] = "Outcome-based Education";
+		$data['title'] = "OBE SAMS Academic";
 
 		$this->load->view("index/header", $data);
 		$this->load->view("index/view_home");

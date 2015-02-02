@@ -59,8 +59,8 @@
                 </button>
 
                 <a class="navbar-brand" href="#">
-                    <img src="<?php echo base_url();?>assets/img/logo.png" class="navbar-brand-logo " alt="" />
-
+                    
+					<img src="<?php echo base_url();?>assets/img/obesams.png" class="navbar-brand-logo " alt="" />
                 </a>
             </div>
             <div class="navbar-collapse collapse move-me">
