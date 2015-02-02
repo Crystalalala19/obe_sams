@@ -41,7 +41,7 @@
                                     <div class="tabbable tabs-left">
                                         <ul class="nav nav-tabs">
                                           <li class="active"><a href="#tab3" data-toggle="tab">1st Semester</a></li>
-                                          <li><a href="#tab4" data-toggle="tab">Second Semester</a></li>
+                                          <li><a href="#tab4" data-toggle="tab">2nd Semester</a></li>
                                           <li><a href="#tab5" data-toggle="tab">Summer</a></li>
                                         </ul>
                                         <div class="tab-content">

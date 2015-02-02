@@ -42,9 +42,9 @@
         <i class="icon-exclamation-sign" aria-hidden="true"></i> ', 
     '</div>');
 
-    //$po_count = count($row);
+    $po_count = count($get_po);
 
-    //$attributes = array('class' => 'col-md-4');
+    $attributes = array('class' => 'col-md-4');
 
     //echo ('site/class_list', $attributes); 
 
@@ -55,10 +55,9 @@
             <tr>
                 <th><center>Student ID</center></th>
                 <th><center>Name</center></th>
-                <th><center>Program Name</center></th>
-                <?php //for($x = 1; $x <= $po_count; $x++):?>
-                    <th><center>PO <?php //echo $x;?></center></th>
-                <?php //endfor; $row_num=1;?>
+                <?php for($x = 1; $x <= $po_count; $x++):?>
+                    <th><center>PO <?php echo $x;?></center></th>
+                <?php endfor; $row_num=1;?>
                 <th><center>View Scorecard</center></th>
             </tr>
         </thead>
@@ -67,14 +66,13 @@
                 <?php foreach($class_list as $row): ?>
                 <td><center><?php echo $row['studentID'];?></center></td>
                 <td><center><?php echo $row['fname']; echo " ".$row['mname']; echo " ".$row['lname'];?></center></td>
-                <td><center><?php foreach($select_programName as $row1): ?><?php echo $row1->programName;?><?php endforeach; ?> - <?php echo $row['effective_year'];?></center></td>
-                <?php //foreach($row as $row2): ?>
+                <?php foreach($row['grade'] as $row1): ?>
                     <td>
                         <center>
-                            <?php echo $row['score'];?>
+                            <?php echo $row1;?>
                         </center>
                     </td>
-                <?php //endforeach; $row_num++; ?>   
+                <?php endforeach; $row_num++; ?>   
                 <td>
                     <center>
                         <a class="btn btn-sm btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row['student_id'];?>">
