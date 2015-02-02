@@ -18,7 +18,7 @@
                         </div>
                     </div>
                     <!-- /.row -->
-    <?php if (!empty($message)): echo $message;
+<?php if (!empty($message)): echo $message;
     
     else:
     echo $this->session->flashdata('message2');
@@ -28,7 +28,8 @@
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> ', 
     '</div>'); 
 
-    $attrib = array( 'onsubmit' => "return confirm('Do you really want to submit?');"); ?>
+    $attrib = array( 'onsubmit' => "return confirm('Do you really want to submit?');"); 
+?>
     <?php echo form_open('admin/view_students/edit/'.$row['ID'], $attrib); ?>
         <div class="col-xs-4 col-sm-4 col-md-4">
             <div class="form-group">

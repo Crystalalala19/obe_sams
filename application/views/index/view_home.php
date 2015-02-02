@@ -2,34 +2,10 @@
         <div class="overlay">
             <div class="container">
                 <div class="row ">
-                    <div class="col-lg-9 col-md-9 head-text">
-                        <h1 id="divDisp" >COMPUTER SCIENCE DEPARTMENT</h1>
-                        <span >
-                            <i class="fa fa-laptop" ></i>Be a source of information and computing expertise
-                        </span>
-                        <span >
-                            <i class="fa fa-laptop" ></i>Educate students to become well-rounded individuals 
-                        </span>
-                        <span >
-                            <i class="fa fa-laptop" ></i>Train students to become world-leading computer science specialists 
-                        </span>
-                        <span>
-                            <i class="fa fa-laptop" ></i>Perform world-class research works in selected areas in the in the 
-                            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;computing sciences
-                        </span>
-                        <span>
-                            <i class="fa fa-laptop" ></i>Provide quality, cutting-edge educational experiences
-                        </span>
-                        
-                        <span >
-                            <i class="fa fa-laptop" ></i>Provide state-of-the-art education and training in the use of 
-                            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;computers to non-CS/IT majors
-                        </span>
-                        
-                    </div>
-                    <div class="col-lg-3 col-md-3">
+                    <div class="col-lg-4 col-md-4"></div>
+                    <div class="col-lg-4 col-md-4">
                         <div class="div-trans text-center">
-                            <h3>Enter Information</h3>
+                            <h3>Login</h3>
                             <div class="col-lg-12 col-md-12 col-sm-12" > 
                             <?php 
                                 echo validation_errors('
@@ -37,11 +13,11 @@
                                 '</div>');
                             ?>   
                                 <?php echo form_open('site/login_validation'); ?>
-                                    <div class="form-group">    
-                                        <input type="text" id="idnum" class="login-field form-control" name="idnum" value="<?php echo set_value('idnum'); ?>" required placeholder="Enter ID here">
+                                    <div class="form-group">
+                                        <input type="text" id="idnum" class="login-field form-control" name="idnum" value="<?php echo set_value('idnum'); ?>" required placeholder="Username">
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="login-field form-control" name="password" value="<?php echo set_value('password'); ?>" required placeholder="Password">
+                                        <input type="password" id="pass" class="login-field form-control" name="password" value="<?php echo set_value('password'); ?>" required placeholder="Password">
                                     </div>
                                     <div class="form-group">
                                         <input type="submit" class="btn btn-primary btn-block" name="login_submit" value="Login">
@@ -50,6 +26,7 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-4 col-md-4"></div>
                 </div>
             </div>
         </div>
@@ -386,31 +363,6 @@
                     University of San Carlos – Technological Center
                     Nasipit Talamban, Cebu City, Philippines
                     </p>
-                </div>
-            </div>
-            <div class="row text-center wow fadeInUp animated" data-wow-delay="0.4s">
-                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-                    <a href="#">  <img src="<?php echo base_url();?>assets/img/Social/facebook.png" alt="" /> </a>
-                     <a href="#"> <img src="<?php echo base_url();?>assets/img/Social/google-plus.png" alt="" /></a>
-                     <a href="#"> <img src="<?php echo base_url();?>assets/img/Social/twitter.png" alt="" /></a>
-                    </div>
-                </div>
-            <div class="row pad-top-botm">
-                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-                    <form>
-                        <div class="form-group">
-                            <input type="text" class="form-control wow fadeInUp animated" data-wow-delay="0.5s" required="required" placeholder="Your Name">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control wow fadeInUp animated" required="required" data-wow-delay="0.6s" placeholder="Your Email">
-                        </div>
-                        <div class="form-group">
-                            <textarea name="message"  required="required" data-wow-delay="0.7s" class="wow fadeInUp animated form-control" style="min-height: 150px;" placeholder="Message"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-success btn-block btn-lg wow fadeInUp animated " data-wow-delay="0.8s">SUBMIT REQUEST</button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>

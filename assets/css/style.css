@@ -14,8 +14,8 @@
    LOGIN SECTION
     ===================================*/
 .login-field {
-  color: white;
-  border-color: rgba(255, 255, 255, 1);
+    color: #237923;
+    border-color: #237923;
 }
 
 /*=====================================
@@ -47,7 +47,6 @@ h2 {
 }
 h3{
     color:#4788F8;
-    
 }
  /*=====================================
   PRELOADER STYLES 
@@ -80,8 +79,8 @@ h3{
 
 /*Menu border Color*/
 .navbar-default {
-    border-color: #CAE4F1;
-    background-color:#0588BC;
+    border-color: #006600;
+    background-color:#237923;
 }
 /*Logo Image */
 .navbar-brand-logo {
@@ -90,11 +89,11 @@ h3{
 }
 /*top-menu links color*/
 .navbar-default .navbar-nav > li > a {
-    color: #FFF;
+    color: #f0bc1a;
 }
 /*top-menu links color on hover*/
     .navbar-default .navbar-nav > li > a:hover {
-        color: #fff;
+        color: #f0bc1a;
     }
 
 /*top-menu links & margin*/    
@@ -148,11 +147,11 @@ background-size: cover;
        text-align:center;
     }
     #home .overlay {
-              background:url(../img/overlays/06.png);        
+        background:url(../img/overlays/06.png);        
         min-height:700px;
     }
     #home h3 {
-        color:#CAE4F1;
+        color:#f0bc1a;
     }
     .div-trans {
         position: relative;
@@ -178,7 +177,7 @@ background-size: cover;
             background-color: #159238;
         }
 #home .form-control {
-    background-color:transparent;
+    background-color: transaparent;
 }
 
 /*=====================================

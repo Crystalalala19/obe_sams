@@ -1,5 +1,5 @@
 <?php
-    function echoActiveClassIfRequestMatches($requestUri)
+    function uri_match($requestUri)
     {
         $current_file_name = basename($_SERVER['REQUEST_URI']);
 
@@ -23,30 +23,60 @@
     <!-- Offline files -->
     <link rel="icon" href="<?php echo base_url();?>assets/img/icon.png">
     <!--  Bootstrap Style -->
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap-admin.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/sb-admin.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/style-admin.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/dashboard.css">
+
     <!--  Font-Awesome Style -->
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/font-awesome.min.css"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/fa-admin.min.css">
     
     <!-- DataTables Style -->
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css">
+    <!-- PDF works -->
+    <!-- <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css"> -->
+    
+    <!-- PDF works  -->
+    <!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/dataTables.bootstrap.css"> -->
+
+    <!-- PDF doesn't work -->
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/dataTables.bootstrapv3.css">
+
+    <!-- End DataTables Style -->
     
     <style type="text/css">
         div.DTTT { margin-bottom: 0.5em; float: right; }
         div.dataTables_wrapper { clear: both; }
+        /*Responsive Footer*/
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+        body {
+            /* Margin bottom by footer height */
+            margin-bottom: 100px;
+        }
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            /* Set the fixed height of the footer here */
+        }
+        /*End Responsive*/
     </style>
 
     <!--  Jquery Core Script -->
-    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/jquery-admin.min.js"></script>
     <!--  Core Bootstrap Script -->
-    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/bootstrap.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/bootstrap-admin.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/base-admin.js"></script>
 
     <!-- Datatables -->
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/dataTables.tableTools.min.js"></script>
-    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/datatables-bootstrapv3.js"></script>
 
     <!-- 
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
@@ -64,105 +94,47 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
 
 <body>
-    <div id="wrapper">
-        <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="<?php echo base_url(); ?>admin">Computer Science Department</a>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.html">OBE - SAMS</a>
+                <div class="nav-collapse">
+                    <ul class="nav pull-right">
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon-cog"></i> Account <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="javascript:;"><i class="icon-off"></i> Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse --> 
             </div>
-            <!-- Top Menu Items -->
-            <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
-                    <ul class="dropdown-menu alert-dropdown">
-                        <li>
-                            <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">View All</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Admin <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="<?php echo base_url();?>site/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                    <!-- active_link() works only for controller names, not methods names -->
-                    <li <?=echoActiveClassIfRequestMatches("admin")?>>
-                        <a href="<?php echo base_url();?>admin"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-                    </li>
+            <!-- /container --> 
+        </div>
+        <!-- /navbar-inner --> 
+    </div>
+    <!-- /navbar -->
 
-                    <li id="program_dropdown" class="">
-                        <a href="javascript:;" data-toggle="collapse" data-target="#program"><i class="fa fa-briefcase"></i> Programs <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="program" class="collapse">
-                            <li>
-                                <a href="<?php echo base_url();?>admin/programs/add"><i class="fa fa-plus"></i> Add new Curriculum</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo base_url();?>admin/programs/view"><i class="fa fa-list"></i> View Curriculums</a>
-                            </li>
+    <div class="subnavbar">
+        <div class="subnavbar-inner">
+            <div class="container">
+                <ul class="mainnav">
+                    <li <?php uri_match('admin');?>><a href="<?php echo base_url('admin'); ?>"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
+                    <li class="dropdown" id="program_dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-briefcase"></i><span>Programs</span> <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="<?php echo base_url('admin/programs/add'); ?>"><i class="icon-plus"></i> Add new Curriculum</a></li>
+                            <li><a href="<?php echo base_url('admin/programs/view'); ?>"><i class="icon-briefcase"></i> View Programs</a></li>
                         </ul>
                     </li>
-
-                    <li <?=echoActiveClassIfRequestMatches("teachers")?> id="teachers">
-                        <a href="<?php echo base_url();?>admin/teachers"><i class="fa fa-university"></i> Teachers</a>
-                    </li>
-                    
-                    <!-- <li id="student_dropdown" class="">
-                        <a href="javascript:;" data-toggle="collapse" data-target="#student"><i class="fa fa-users"></i> Students <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="student" class="collapse">
-                            <li>
-                                <a href="<?php echo base_url();?>admin/upload_students"><i class="fa fa-plus"></i> Upload Student list</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo base_url();?>admin/view_students"><i class="fa fa-list-alt"></i> View Student list</a>
-                            </li>
-                        </ul>
-                    </li> -->
+                    <li <?php uri_match('teachers'); uri_match('upload')?> id="teachers_menu"><a href="<?php echo base_url('admin/teachers'); ?>"><i class="icon-sitemap"></i><span>Teachers</span> </a></li>
                 </ul>
             </div>
-            <!-- /.navbar-collapse -->
-        </nav>
-
-        <div id="page-wrapper">
-            <div class="container-fluid">
-            
+            <!-- /container --> 
+        </div>
+        <!-- /subnavbar-inner --> 
+    </div>
+    <!-- /subnavbar -->

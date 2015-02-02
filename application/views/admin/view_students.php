@@ -20,8 +20,8 @@
                     <!-- /.row -->
     <?php if(!empty($message)): ?>
     <div class="alert alert-info alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>  
+        <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
+        <i class="icon-info-sign"></i>
         <span class="sr-only">Information:</span>
         <?php echo $message;?>
     </div>

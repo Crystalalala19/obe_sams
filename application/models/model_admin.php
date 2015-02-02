@@ -9,8 +9,8 @@ class Model_admin extends CI_Model {
     function notify_message($alert_type, $glyphicon, $message){
         $output = '
         <div class="alert '.$alert_type.' alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <span class="glyphicon '.$glyphicon.'" aria-hidden="true"></span>
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="icon-remove"></i></button>
+            <i class="'.$glyphicon.'"></i>
             '.$message.'
         </div>';
 
@@ -207,9 +207,18 @@ class Model_admin extends CI_Model {
         if($query->num_rows() == 1) {
             return true;
         }
-        else {
+        else
             return false;
+    }
+
+    function check_course($course) {
+        $query = $this->db->get_where('course', array('CourseCode' => $course));
+
+        if($query->num_rows() > 0) {
+            return true;
         }
+        else
+            return false;
     }
 
     function update_checks($activate, $pc_cid, $pc_pid) {
@@ -248,12 +257,11 @@ class Model_admin extends CI_Model {
     // TEACHER
      function get_teachers() {
         $query = $this->db->get_where('teacher', array('role' => 'teacher'));
-        if ($query->num_rows() > 0) {
+        if($query->num_rows() > 0) {
             return $query->result_array();
         }
-        else {
+        else 
             return FALSE;
-        }
     }
 
     function insert_teacher($data) {
@@ -279,6 +287,16 @@ class Model_admin extends CI_Model {
         $query = $this->db->query("SELECT * FROM teacher_class WHERE teacherID = '".$id."' ");
 
         return $query->result_array();
+    }
+
+    function check_teacher($id) {
+        $query = $this->db->get_where('teacher', array('teacher_id' => $id));
+
+        if($query->num_rows() == 1) {
+            return true;
+        }
+        else
+            return false; 
     }
     // END TEACHER
 
