@@ -35,7 +35,7 @@ sub {
 	bottom: -0.25em;
 }
 img {
-	height: auto;
+	height: 40px;
 	border: 0;
 	-ms-interpolation-mode: bicubic;
 	vertical-align: middle;
