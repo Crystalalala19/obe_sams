@@ -151,7 +151,7 @@
             <div class="row text-center ">
                 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
                     <h2 data-wow-delay="0.3s" class="wow fadeInUp animated"><strong>GALLERY </strong></h2>
-                    <p class="sub-head">Lorem ipsum dolor sit amet, consectetur adipiscing elit onec molestie non sem vel condimentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                    <p class="sub-head"></p>
                     
                 </div>
             </div>

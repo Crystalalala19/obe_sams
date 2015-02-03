@@ -2,7 +2,32 @@
 Bootstrap Admin Template by EGrappler.com
 ------------------------------------------------------------------*/
 
+/*------------------------------------------------------------------
+REA 
+*/
 
+.nav-tabs > .active > a, .nav-tabs > .active > a:hover {
+    color: #F0BC1A;
+    background-color: #237923;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #237923 #237923 transparent;
+    -moz-border-top-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    border-image: none;
+    cursor: default;
+}
+
+a {
+    color: #237923;
+}
+
+.nav>li>a:hover {
+	background-color:#F0BC1A;
+	color:#237923;
+}
 
 /*------------------------------------------------------------------
 [1. Global]
