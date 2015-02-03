@@ -1,37 +1,4 @@
 
-<section id='tools'>
-    <ul class='breadcrumb' id='breadcrumb'>
-        <li class='active'><a href="<?php echo base_url();?>site/home"><i class='icon-dashboard'></i> Course</a></li>
-        <li class='title'><i class='icon-table'></i> Class List</li>
-    </ul>
-</section>
-
-<div id='content'>
-
- <div class="bs-example" data-example-id="list-group-variants">
-    <div class="row">
-        <div class="col-sm-4">
-            <ul class="list-group">
-                <?php foreach($select_schedule as $row1): ?>
-                    <li class="list-group-item list-group-item-success"><center><b><font size="2"><?php echo $row1->courseCode.' ';?></font></b>
-                   
-                        <?php echo '| Group '; echo $row1->group_num.' | ';?>
-                        <?php 
-                            echo 'Schedule: ';
-                            echo $row1->start_time.' - ';
-                            echo $row1->end_time.' ';
-                            echo $row1->days;
-                        ?>
-                        </center>
-                    </li>
-                    <li class="list-group-item list-group-item-warning">
-                        Semester: <?php echo $row1->semester,' | ';?> School Year: <?php echo $row1->school_year; ?>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    </div>
-</div>
  <?php
     echo $this->session->flashdata('message');
     if (!empty($message)) echo $message;
@@ -50,40 +17,77 @@
 
 ?>
     
-    <table id="view_classlist" class="table table-striped table-hover table-bordered table-condensed">
-        <thead>
-            <tr>
-                <th><center>Student ID</center></th>
-                <th><center>Name</center></th>
-                <?php for($x = 1; $x <= $po_count; $x++):?>
-                    <th><center>PO <?php echo $x;?></center></th>
-                <?php endfor; $row_num=1;?>
-                <th><center>View Scorecard</center></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>  
-                <?php foreach($class_list as $row): ?>
-                <td><center><?php echo $row['studentID'];?></center></td>
-                <td><center><?php echo $row['fname']; echo " ".$row['mname']; echo " ".$row['lname'];?></center></td>
-                <?php foreach($row['grade'] as $row1): ?>
-                    <td>
-                        <center>
-                            <?php echo $row1;?>
-                        </center>
-                    </td>
-                <?php endforeach; $row_num++; ?>   
-                <td>
-                    <center>
-                        <a class="btn btn-sm btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row['student_id'];?>">
-                        <i class="icon-eye-open"></i> View Scorecard
-                        </a>
-                    </center>
-                </td>
-            </tr>
-            <?php endforeach;?>        
-        </tbody>
-    </table>
+<div class="main-inner">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div class="widget">
+                    <div class="widget-header">
+                        <i class="icon-table"></i>
+                        <h3>Class List</h3>
+                    </div> <!-- /widget-header -->
+
+                    <div class="widget-content">
+
+                        <div class="span3">
+                            <div class="alert alert-info">
+                            <?php foreach($select_schedule as $row1): ?>
+                                <h4>
+                                    <?php echo $row1->courseCode.' ';?><?php echo '| Group '; echo $row1->group_num.'';?>
+                                    <?php 
+                                        echo '<br> ';
+                                        echo $row1->start_time.' - ';
+                                        echo $row1->end_time.' ';
+                                        echo $row1->days;
+                                    ?>
+                                    Semester: <?php echo $row1->semester,' | ';?> School Year: <?php echo $row1->school_year; ?>
+                                </h4>
+                             <?php endforeach; ?>
+                            </div>
+                        </div>
+                        <div class="span11">
+                              <table id="view_classlist" class="table table-striped table-hover table-bordered table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th><center>Student ID</center></th>
+                                        <th><center>Name</center></th>
+                                        <?php for($x = 1; $x <= $po_count; $x++):?>
+                                            <th><center>PO <?php echo $x;?></center></th>
+                                        <?php endfor; $row_num=1;?>
+                                        <th><center>View Scorecard</center></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>  
+                                        <?php foreach($class_list as $row): ?>
+                                        <td><center><?php echo $row['studentID'];?></center></td>
+                                        <td><center><?php echo $row['fname']; echo " ".$row['mname']; echo " ".$row['lname'];?></center></td>
+                                        <?php foreach($row['grade'] as $row1): ?>
+                                            <td>
+                                                <center>
+                                                    <?php echo $row1;?>
+                                                </center>
+                                            </td>
+                                        <?php endforeach; $row_num++; ?>   
+                                        <td>
+                                            <center>
+                                                <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row['student_id'];?>">
+                                                <i class="icon-eye-open"></i> View Scorecard
+                                                </a>
+                                            </center>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach;?>        
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div> <!-- /widget -->                 
+            </div> <!-- /span12 -->         
+        </div> <!-- /row -->
+    </div> <!-- /container -->
+</div> <!-- /main-inner -->
 
      <div class="form-group">
             <label for="userfile">Upload .CSV File: </label>
@@ -95,7 +99,7 @@
         </div>
     </form>
 
-</div>
+
 
 
 <script type="text/javascript" language="javascript">
@@ -106,7 +110,7 @@
         
         var dataTableOptions = {
             //Disable sorting for column Action
-            aoColumnDefs: [{ 'bSortable': false, 'aTargets': [2] }],
+           
         };
 
         var tableToolsOptions = {

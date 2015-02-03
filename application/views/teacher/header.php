@@ -1,125 +1,153 @@
 <?php
-    function echoActiveClassIfRequestMatches($requestUri)
+    function uri_match($requestUri)
     {
         $current_file_name = basename($_SERVER['REQUEST_URI']);
 
         if ($current_file_name == $requestUri)
-            echo 'class="active launcher"';
+            echo 'class=active';
     }
 ?>
 
 <!DOCTYPE html>
-<html lang='en'>
-    <head>
-        <meta charset='utf-8'>
-   
-        <title><?php echo $title; ?></title>
+<html lang="en">
 
-        <!-- Offline files -->
-        <link href="<?php echo base_url();?>assets/img/icon.png" rel="icon" type="image/ico" />
-        <!--  Bootstrap Style -->
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.css">
-         <!-- Custom CSS -->    
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/teacher.css">
-        <!--  Font-Awesome Style -->
-        <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/3.2.0/css/font-awesome.min.css">
-        <!-- For datatable -->
-        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css">
-        <!-- end datatable -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <![endif]-->
 
-        
+    <title><?php echo $title; ?></title>
 
-        <style type="text/css">
-            div.DTTT { margin-bottom: 0.5em; float: right; }
-            div.dataTables_wrapper { clear: both; }
-        </style>
+    <!-- Offline files -->
+    <link rel="icon" href="<?php echo base_url();?>assets/img/icon.png">
+    <!--  Bootstrap Style -->
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap-admin.min.css">
 
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/style-admin.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/dashboard.css">
 
-        <!-- FOOTER -->
-
-     
-        <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
-        <!--  Core Bootstrap Script -->
-        <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/bootstrap.js"></script>
-        <!--  Custom Script -->
-        <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/teacher.js"></script>
-        
-        <!--Datatables-->
-        <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/dataTables.tableTools.min.js"></script>
-        <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/dataTables.bootstrap.js"></script>
-        <!--Datatables-->
-        
-    </head>
+    <!--  Font-Awesome Style -->
+    <!-- <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/fa-admin.min.css">
     
-    <body class='main page'>
-        <!-- Navbar -->
-        <div class='navbar navbar-default' id='navbar'>
-            <a class='navbar-brand' href='#'>
-                <i class='icon-user'></i>
-                Teacher Account
-            </a>
-            <ul class='nav navbar-nav pull-right'>
-                <li class='dropdown user'>
-                    <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
-                        <i class='icon-user'></i>
-                        <strong> <?php foreach($user as $row): ?><?php echo $row['teacher_id'];?><?php endforeach; ?></strong>
-                        <b class='caret'></b>
-                    </a>
-                    <ul class='dropdown-menu'>
-                        <li>
-                            <a href='#'>Edit Profile</a>
-                        </li>
-                        <li class='divider'></li>
-                        <li>
-                            <a href="<?php echo base_url()."site/logout" ?>">Logout</a>
+    <!-- DataTables Style -->
+    <!-- PDF works -->
+    <!-- <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css"> -->
+    
+    <!-- PDF works  -->
+    <!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/dataTables.bootstrap.css"> -->
+
+    <!-- PDF doesn't work -->
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/dataTables.bootstrapv3.css">
+
+    <!-- End DataTables Style -->
+    
+    <style type="text/css">
+        div.DTTT { margin-bottom: 0.5em; float: right; }
+        div.dataTables_wrapper { clear: both; }
+        /*Responsive Footer*/
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+        body {
+            /* Margin bottom by footer height */
+            margin-bottom: 100px;
+        }
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            /* Set the fixed height of the footer here */
+        }
+        /*End Responsive*/
+    </style>
+
+    <!--  Jquery Core Script -->
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/jquery-admin.min.js"></script>
+    <!--  Core Bootstrap Script -->
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/bootstrap-admin.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/base-admin.js"></script>
+
+    <!-- Datatables -->
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/dataTables.tableTools.min.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/datatables-bootstrapv3.js"></script>
+
+    <!-- 
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"> 
+
+    <script type="text/javascript" language="javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+    -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.html">OBE - SAMS</a>
+                <div class="nav-collapse">
+                    <ul class="nav pull-right">
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon-cog"></i> 
+                                <?php foreach($user as $row): ?><?php echo $row['teacher_id'];?><?php endforeach; ?> 
+                                <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#"><i class="icon-user"></i> Edit Profile</a></li>
+                                <li><a href="<?php echo base_url()."site/logout" ?>"><i class="icon-off"></i> Logout</a></li>
+                            </ul>
                         </li>
                     </ul>
-                </li>
-            </ul>
+                </div>
+                <!--/.nav-collapse --> 
+            </div>
+            <!-- /container --> 
         </div>
-    
+        <!-- /navbar-inner --> 
+    </div>
+    <!-- /navbar -->
 
-        <div id='wrapper'>
-            <!-- Sidebar -->
-            <section id='sidebar'>
-                <i class='icon-align-justify icon-large' id='toggle'></i>
-                <ul id='dock'>
-                    <li <?=echoActiveClassIfRequestMatches("members")?> class="launcher">
-                        <i class='icon-dashboard'></i>
-                        <a href="<?php echo base_url();?>site/members">Dashboard</a>
+    <div class="subnavbar">
+        <div class="subnavbar-inner">
+            <div class="container">
+                <ul class="mainnav">
+                    <li <?php uri_match('members');?>>
+                        <a href="<?php echo base_url();?>site/members">
+                            <i class="icon-home"></i><span>Home</span> 
+                        </a> 
                     </li>
-                    <li id="courselist" <?=echoActiveClassIfRequestMatches("course_list")?> class='launcher'>
-                        <i class='icon-table'></i>
-                        <a href="<?php echo base_url();?>site/course_list/">Course</a>
+                    <li <?php uri_match('course_list');?> id="courselist">
+                        <a href="<?php echo base_url('site/course_list'); ?>"><i class="icon-list"></i>
+                            <span>Course</span> 
+                        </a>
                     </li>
-                    <li id="studentlist" <?=echoActiveClassIfRequestMatches("student_list")?> class='launcher'>
-                        <i class='icon-user'></i>
-                        <a href="<?php echo base_url();?>site/student_list/">Student List</a>
+                    <li <?php uri_match('student_list');?> id="studentlist">
+                        <a href="<?php echo base_url('site/student_list'); ?>"><i class="icon-group"></i>
+                            <span>Students</span> 
+                        </a>
                     </li>
-                      <!--<li <?=echoActiveClassIfRequestMatches("forms")?> class="launcher">
-                        <i class='icon-file-text-alt'></i>
-                        <a href="<?php echo base_url();?>site/view_class/forms">Forms</a>
-                      </li>
-                      <li <?=echoActiveClassIfRequestMatches("forms")?> class="launcher">
-                        <i class='icon-file-text-alt'></i>
-                        <a href="<?php echo base_url();?>site/view_table/tales">Tables</a>
-                      </li>
-                      <li <?=echoActiveClassIfRequestMatches("#")?> class='launcher dropdown hover'>
-                        <i class='icon-flag'></i>
-                        <a href='#'>Reports</a>
-                        <ul class='dropdown-menu'>
-                          <li class='dropdown-header'>Launcher description</li>
-                          <li>
-                            <a href='#'>Action</a>
-                          </li>
-                          <li>
-                            <a href='#'>Another action</a>
-                          </li>
-                        </ul>
-                      </li>-->
+
+
                 </ul>
-                <div data-toggle='tooltip' id='beaker' title='Made by lab2023'></div>
-            </section>
-            <!-- Tools -->
-          
+            </div>
+            <!-- /container --> 
+        </div>
+        <!-- /subnavbar-inner --> 
+    </div>
+    <!-- /subnavbar -->

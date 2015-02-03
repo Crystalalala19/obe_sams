@@ -7,44 +7,34 @@
 
 
 <!-- End filter table -->
+<div class="main-inner">
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <div class="widget">
+                        <div class="widget-header">
+                            <i class="icon-home"></i>
+                            <h3>Assigned Classes</h3>
+                        </div> <!-- /widget-header -->
 
+                        <div class="widget-content">
+                            <div class="form-group col-md-2">
+                                <label for="academicyear_ajax">Academic Year:</label>
+                                <select name="academicyear" class="selectpicker show-tick" title="Select Academic Year" data-live-search="true" multiple data-max-options="1" data-size="auto" id='academicyear_ajax' required>
+                                    <?php foreach($select_SY as $row): ?>
+                                    <option value="<?php echo $row->school_year;?>"><?php echo $row->school_year;?></option>
+                                    <?php endforeach;?>
+                                </select>
+                            </div>
 
-<section id='tools'>
-        <ul class='breadcrumb' id='breadcrumb'>
-          <li class='title'>Course</li>
-        </ul>
-</section>
-
-<div id='content'>
-    <div class='panel panel-default grid'>
-        <div class='panel-heading'>
-            Assigned Classes
-        </div>
-        <div class='panel-body'>   
-            <div class="container">
-                <div class="form-group col-md-2">
-                    <label for="academicyear_ajax">Academic Year:</label>
-                    <select name="academicyear" class="selectpicker show-tick" title="Select Academic Year" data-live-search="true" multiple data-max-options="1" data-size="auto" id='academicyear_ajax' required>
-                        <?php foreach($select_SY as $row): ?>
-                        <option value="<?php echo $row->school_year;?>"><?php echo $row->school_year;?></option>
-                        <?php endforeach;?>
-                    </select>
-                </div>
-
-                <div class="form-group col-md-12"></div>
-                <div class="tabbable">
-                    <div class='panel-body'>   
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="tab1">
-                       
-                                <div class="span8">
-                                    <div class="tabbable tabs-left">
-                                        <ul class="nav nav-tabs">
-                                          <li class="active"><a href="#tab3" data-toggle="tab">1st Semester</a></li>
-                                          <li><a href="#tab4" data-toggle="tab">2nd Semester</a></li>
-                                          <li><a href="#tab5" data-toggle="tab">Summer</a></li>
-                                        </ul>
-                                        <div class="tab-content">
+                            <br>
+                            <div class="tabbable">
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#tab3" data-toggle="tab">1st Semester</a></li>
+                                    <li><a href="#tab4" data-toggle="tab">2nd Semester</a></li>
+                                    <li><a href="#tab5" data-toggle="tab">Summer</a></li>
+                                </ul>
+                                <div class="tab-content">
                                             <div class="tab-pane active" id="tab3">
                                                 <div class='panel panel-default grid'>
                                                     <table id="example-table" class="table table-striped table-hover table-condensed">
@@ -73,7 +63,7 @@
                                                                 <td><?php echo "Group: ".$row1->group_num;?></td>
                                                                 <td><?php echo "Schedule: ".$row1->start_time."-".$row1->end_time." ".$row1->days;?></td>
                                                                 <td>
-                                                                    <a class="btn btn-sm btn-info" href="<?php echo base_url();?>site/class_list/<?php echo $row1->ID;?>">
+                                                                    <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/class_list/<?php echo $row1->ID;?>">
                                                                         <i class="icon-eye-open"></i> View Class
                                                                     </a>
                                                                 </td>
@@ -159,30 +149,19 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>  
-
 
                             </div>
+
                         </div>
-                    </div>
-                </div>
-            </div>      
-        </div>
-    </div>
 
-    <body>
-      
-    </body>
+                       </div> <!-- /widget -->                 
+            </div> <!-- /span12 -->         
+        </div> <!-- /row -->
+    </div> <!-- /container -->
+</div> <!-- /main-inner -->
 
 
-</div>
 
-<style>
-    table .collapse.in {
-    display:table-row;
-}
-</style>
 <!-- For filter table -->
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
