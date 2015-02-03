@@ -4,8 +4,8 @@
                 <div class="span12">
                     <div class="widget">
                         <div class="widget-header">
-                            <i class="icon-dashboard"></i>
-                            <h3>Dashboard</h3>
+                            <i class="icon-home"></i>
+                            <h3>Home</h3>
                         </div> <!-- /widget-header -->
                         
                         <div class="widget-content">
