@@ -124,7 +124,7 @@
             <div class="row pad-top-botm wow fadeInUp animated" data-wow-delay="0.7s">
                 <div class="col-lg-8 col-md-8 col-sm-8 " >
 
-                    <h3><strong>Our Department Aims</strong></h3>
+                    <h2><strong>Our Department Aims</strong></h2>
                     <p>
                         To train students to become world-leading computer science 
                         specialists by considering technologies for efficient “Information” exchange; 
@@ -146,62 +146,6 @@
         </div>
     </div>
     <!--./ ABOUT SECTION END -->
-    <div class="donars-section">
-        <div class="overlay">
-            <div class="container">
-                <div class="row ">
-                    <div class="col-lg-12 col-md-12 ">
-                        <div id="testimonials" class="carousel slide" data-ride="carousel">
-
-                            <ol class="carousel-indicators">
-                                <li data-target="#testimonials" data-slide-to="0" class=""></li>
-                                <li data-target="#testimonials" data-slide-to="1" class=""></li>
-                                <li data-target="#testimonials" data-slide-to="2" class="active"></li>
-                            </ol>
-
-                            <div class="carousel-inner">
-                                <div class="item">
-                                    <div class="container center">
-                                        <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 slide-custom">
-
-                                            <h4><i class="fa fa-quote-left"></i>Lorem ipsum dolor sit amet, consectetur adipiscing elit onec molestie non sem vel condimentum. <i class="fa fa-quote-right"></i></h4>
-                                            <div class="user-img pull-right">
-                                                <img src="<?php echo base_url();?>assets/img/user2.png" alt="" class="img-circle image-responsive">
-                                            </div>
-                                            <h5 class="pull-right"><strong class="c-black">Fr. Dionisio Marcelo Miranda</strong></h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="container center">
-                                        <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 slide-custom">
-                                            <h4><i class="fa fa-quote-left"></i>Aenean faucibus luctus enim. Duis quis sem risu suspend lacinia elementum nunc. <i class="fa fa-quote-right"></i></h4>
-                                            <div class="user-img pull-right">
-                                                <img src="<?php echo base_url();?>assets/img/user.gif" alt="" class="img-circle image-responsive">
-                                            </div>
-                                            <h5 class="pull-right"><strong class="c-black">Mary Jane Sabellano</strong></h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item active">
-                                    <div class="container center">
-                                        <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 slide-custom">
-                                            <h4><i class="fa fa-quote-left"></i>Sed ultricies, libero ut adipiscing fringilla, ante elit luctus lorem, a egestas dui metus a arcu condimentum. <i class="fa fa-quote-right"></i></h4>
-                                            <div class="user-img pull-right">
-                                                <img src="<?php echo base_url();?>assets/img/user2.png" alt="" class="img-circle image-responsive">
-                                            </div>
-                                            <h5 class="pull-right"><strong class="c-black">Joan Tero</strong></h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--./ DONARS TESTIMONIALS END -->
     <div id="port-folio" class="pad-top-botm" >
         <div class="container">
             <div class="row text-center ">
@@ -310,7 +254,7 @@
             <div class="container">
                 <div class="row text-center">
                     <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-                        <h2 data-wow-delay="0.3s" class="wow fadeInUp animated"><strong>FACULTY</strong></h2>
+                        <h2 data-wow-delay="0.3s" class="wow fadeInUp animated media-title"><strong>FACULTY</strong></h2>
                         <p class="sub-head">Checkout this video, which will let you know the Head and teachers of the Department. </p>
                     </div>
                 </div>
@@ -372,7 +316,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12">
-                    &copy; 2014 yourdomian.com | by <a href="http://www.binarytheme.com/" style="color:#fff;" target="_blank" >binarytheme.com</a>
+                    &copy; 2015 OBE-SAMS | by <a href="http://www.binarytheme.com/" style="color:#F0BC1A;" target="_blank" >binarytheme.com</a>
                 </div>
             </div>
         </div>
