@@ -19,16 +19,26 @@
                                     <i class="icon-exclamation-sign"></i>', 
                                 '</div>');
                             ?>
-                            <button type="button" class="btn btn-info" onclick="history.back();"><i class="icon-angle-left"></i> Go Back</button>
+                            
+                            <a href="<?php echo base_url('admin/teachers/view');?>">
+                                <button type="button" class="btn btn-info"><i class="icon-angle-left"></i> Go Back</button>
+                            </a>
+
+                            <select>
+                                <option>2015</option>
+                                <option>2016</option>
+                                <option>2017</option>
+                            </select>
+
                             <hr>
                             <table id="view_classes" class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
                                         <th>Group #</th>
                                         <th>Course Code</th>
-                                        <th>Time</th>
+                                        <th>Schedule</th>
                                         <th>Semester</th>
-                                        <th>School Year</th>
+                                        <th>Academic Year</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -39,7 +49,7 @@
                                         <td><?php echo $row['courseCode']; ?></td>
                                         <td><?php echo $row['start_time'].' - '.$row['end_time'].' '.$row['days']; ?></td>
                                         <td><?php echo $row['semester']; ?></td>
-                                        <td><?php echo $row['school_year']; ?></td>
+                                        <td><?php echo ($row['school_year']-1). ' - '. $row['school_year']; ?></td>
                                         <td></td>
                                     </tr>
                                     <?php endforeach;?>

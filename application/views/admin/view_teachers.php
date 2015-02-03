@@ -114,7 +114,6 @@
                                 </div>
                             </div>
                             </form>
-                            
                         </div> <!-- /widget-content -->  
                     </div> <!-- /widget -->                 
                 </div> <!-- /span12 -->         

@@ -54,6 +54,10 @@ $route['admin/teachers/classes/(:any)'] = "admin/view_class";
 $route['admin/teachers/edit/(:num)'] = "admin/edit_teacher";
 $route['admin/teachers/delete/(:num)'] = "admin/delete_teacher";
 
+//Reports
+$route['admin/reports/teacher'] = "admin/report_teacher";
+$route['admin/reports/student'] = "admin/report_student";
+
 $route['default_controller'] = "site";
 $route['404_override'] = '';
 

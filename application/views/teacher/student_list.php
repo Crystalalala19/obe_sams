@@ -1,53 +1,59 @@
-<section id='tools'>
-        <ul class='breadcrumb' id='breadcrumb'>
-          <li class='title'>Student List</li>
-        </ul>
-</section>
+ <div class="main-inner">
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <div class="widget">
+                        <div class="widget-header">
+                            <i class="icon-home"></i>
+                            <h3>Home</h3>
+                        </div> <!-- /widget-header -->
 
-<div id='content'>
-      	<table id="view_studentlist" class="table table-striped table-bordered dataTable no-footer">
+                        <div class="widget-content">
+                            <div class="span11">
+                                <table id="view_studentlist" class="table table-striped table-bordered dataTable no-footer">
+                                    <thead>
+                                        <tr>
+                                            <th><center>Student ID</center></th>
+                                            <th><center>Name</center></th>
+                                            <th><center>Program</center></th>
+                                            <th><center>Action</center></th>
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody>
+                                            <?php foreach($student_list as $row): ?>   
+                                            <tr>          
+                                                <td><center><?php echo $row->studentID;?></center></td>
+                                                <td><center><?php echo $row->fname." ".$row->mname." ".$row->lname;?></center></td>
+                                                <td><center><?php echo $row->programName;?> - <?php echo $row->effective_year;?></center></td>
+                                                <td>
+                                                    <center>
+                                                        <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row->studentID;?>">
+                                                        <i class="icon-eye-open"></i> View Scorecard
+                                                        </a>
+                                                    </center>
+                                                </td>
+                                            </tr>
+                                                <?php endforeach; ?>   
 
-        <thead>
-            <tr>
-                <th><center>Student ID</center></th>
-                <th><center>Name</center></th>
-                <th><center>Program</center></th>
-                <th><center>Action</center></th>
-            </tr>
-        </thead>
-        
-        <tbody>
-              	<?php foreach($student_list as $row): ?>   
-                <tr>          
-                    <td><center><?php echo $row->studentID;?></center></td>
-                    <td><center><?php echo $row->fname." ".$row->mname." ".$row->lname;?></center></td>
-                    <td><center><?php echo $row->programName;?> - <?php echo $row->effective_year;?></center></td>
-                    <td>
-                        <center>
-                            <a class="btn btn-sm btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row->studentID;?>">
-                            <i class="icon-eye-open"></i> View Scorecard
-                            </a>
-                        </center>
-                    </td>
-                </tr>
-                    <?php endforeach; ?>   
+                                    </tbody>
 
-        </tbody>
+                                </table>
+                            </div>    
 
-    </table>
+                        </div>
 
-    
-</div>
-
-
-
+                       </div> <!-- /widget -->                 
+            </div> <!-- /span12 -->         
+        </div> <!-- /row -->
+    </div> <!-- /container -->
+</div> <!-- /main-inner -->
 
 <script type="text/javascript" language="javascript">
       
         
         var dataTableOptions = {
             //Disable sorting for column Action
-            aoColumnDefs: [{ 'bSortable': false, 'aTargets': [2] }],
         };
 
         var tableToolsOptions = {

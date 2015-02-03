@@ -825,4 +825,22 @@ class Admin extends CI_Controller {
         $this->load->view('admin/edit_student', $data);
         $this->load->view('admin/footer');
     }
+
+    public function report_teacher() {
+        $data['title'] = 'Admin - Teacher Reports';
+        $data['header'] = 'Teacher Reports';
+
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/view_report_teacher', $data);
+        $this->load->view('admin/footer');
+    }
+
+    public function report_student() {
+        $data['title'] = 'Admin - Student Reports';
+        $data['header'] = 'Student Reports';
+
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/view_report_student', $data);
+        $this->load->view('admin/footer');
+    }
 }

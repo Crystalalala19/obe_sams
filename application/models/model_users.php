@@ -46,20 +46,55 @@ class Model_users extends CI_Model {
 		return $query->result_array();
 	}
 
-	function select_courseList(){
+    function teacher_class1($courseCode){
 
-        $query = $this->db->query("SELECT * FROM teacher_class
-                                            WHERE teacherID = '".$this->session->userdata('teacher_id')."' ");
+        $query = $this->db->query("SELECT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND courseCode = 'ICT110' AND semester = 1 ");
+
+        return $query->result();
+    }
+
+    function teacher_class2(){
+
+        $query = $this->db->query("SELECT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 2 ");
 
         return $query->result();
 
     }
 
+    function teacher_class3(){
+
+        $query = $this->db->query("SELECT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 'summer' ");
+
+        return $query->result();
+
+    }
+
+    function course1(){
+
+        $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 1");
+
+        return $query->result();
+    }
+
+    function course2(){
+
+        $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 2");
+
+        return $query->result();
+    }
+
+    function course3(){
+
+        $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 'summer' ");
+
+        return $query->result();
+    }
+
     function select_SY(){
 
-        $query = $this->db->query("SELECT DISTINCT teacher_class.school_year, teacher_class.teacherID FROM student_course
-                                                                             INNER JOIN teacher_class ON student_course.classID = teacher_class.ID  
-                                                                             WHERE teacherID = '".$this->session->userdata('teacher_id')."' ");
+        $query = $this->db->query("SELECT DISTINCT * FROM teacher_class
+                                                                          WHERE teacherID = '".$this->session->userdata('teacher_id')."' 
+                                                                          GROUP BY school_year ");
         
         return $query->result();
 
@@ -77,33 +112,45 @@ class Model_users extends CI_Model {
 
 	function select_class($id){
 
-		$query = $this->db->query("SELECT * FROM student_course INNER JOIN student ON student_course.studentID = student.student_id
-																INNER JOIN program_year ON student_course.pyID = program_year.ID
-																INNER JOIN teacher_class ON student_course.classID = teacher_class.ID 
-                                                                INNER JOIN po_course ON student_course.po_courseID = po_course.ID
-                                                                WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' AND student_course.classID = '".$id."' 
-                                                                GROUP BY studentID ");
+    		$query = $this->db->query("SELECT * FROM student_course INNER JOIN student ON student_course.studentID = student.student_id
+                                                                    WHERE student_course.classID = '".$id."' 
+                                                                    GROUP BY studentID ");
 		return $query->result_array();
 
 	}
 
    function get_po($id){
 
-        $query = $this->db->query("SELECT * FROM po_course 
-                                            INNER JOIN student_course ON po_course.ID = student_course.po_courseID
-                                            INNER JOIN teacher_class ON student_course.classID = teacher_class.ID
-                                            WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."'
+        $query = $this->db->query("SELECT * FROM po_course
+                                            WHERE courseID = '".$id."'
                                             ");
 
         return $query->result_array();
 
     }
 
+    function get_student_poID($studentId) {
+        $query = $this->db->query("SELECT poID FROM student_course
+                                            WHERE studentID = '".$studentId."'");
+
+        return $query->result_array();
+    }
+
+    function get_studentPOGRADE($id){
+
+        $query = $this->db->query("SELECT * FROM student_course
+                                            WHERE studentID = '" . $id . "'");
+
+        return $query->result_array();
+
+    }
 
     function select_programName($id){
 
         $query = $this->db->query("SELECT * FROM program_year INNER JOIN program ON program_year.programID = program.ID 
-                                                              INNER JOIN student_course ON program_year.ID = student_course.pyID
+                                                              INNER JOIN po ON program_year.ID = po.pyID
+                                                              INNER JOIN po_course ON po.pyID = po_course.poID
+                                                              INNER JOIN student_course ON po_course.poID = student_course.poID
                                                               WHERE student_course.classID = '".$id."' 
                                                               GROUP BY program.programName");
 
@@ -146,16 +193,15 @@ class Model_users extends CI_Model {
                                                             FROM student_course 
                                                             INNER JOIN student ON student_course.studentID = student.student_id
    															INNER JOIN teacher_class ON student_course.classID = teacher_class.ID 
-                                                            INNER JOIN program_year ON student_course.pyID = program_year.ID
+                                                            INNER JOIN po_course ON student_course.poID = po_course.poID
+                                                            INNER JOIN po ON po_course.poID = po.ID
+                                                            INNER JOIN program_year ON po.pyID = program_year.ID
                                                             INNER JOIN program ON program_year.programID = program.ID
    															WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' ");
    	
    	    return $query->result();
 
    }
-
-
-
 
     function notify_message($alert_type, $glyphicon, $message){
         $output = '
