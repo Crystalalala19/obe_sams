@@ -6,6 +6,7 @@ class Model_admin extends CI_Model {
         parent::__construct();
     }
 
+    // General Functions
     function notify_message($alert_type, $glyphicon, $message){
         $output = '
         <div class="alert '.$alert_type.' alert-dismissible" role="alert">
@@ -69,6 +70,7 @@ class Model_admin extends CI_Model {
             return false;
         }
     }
+    // End of General Functions
 
     // PROGRAMS
     function insert_program($data) {
@@ -142,7 +144,7 @@ class Model_admin extends CI_Model {
         return $query2->result_array();
     }
 
-    function get_year($data) {
+    function get_programYear($data) {
         $query = $this->db->get_where('program_year', $data);
         
         if ($query->num_rows() > 0){
@@ -237,6 +239,13 @@ class Model_admin extends CI_Model {
         return $query->result_array();
     }
 
+    function get_po_course($courseID) {
+        $this->db->where('courseID', $courseID);
+        $query = $this->db->get('po_course');
+
+        return $query->result_array();
+    }
+
     // END PROGRAM
 
     // STUDENT
@@ -298,19 +307,14 @@ class Model_admin extends CI_Model {
         else
             return false; 
     }
-    // END TEACHER
-
+    
     function insert_classes($data) {
         $this->db->insert_batch('teacher_class', $data);
 
         return $this->check_query();
     }
+    // END TEACHER
 
-    function get_po_course($courseID) {
-        $this->db->where('courseID', $courseID);
-        $query = $this->db->get('po_course');
-
-        return $query->result_array();
-    }
+    
 }
 ?>

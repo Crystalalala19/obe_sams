@@ -51,7 +51,6 @@
                                             }
                                             yearDropdown(date('Y'), 2100, "effective_year");
                                         ?>
-
                                     </div>
                                 </div>
                                 

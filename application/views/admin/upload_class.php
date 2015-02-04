@@ -44,7 +44,9 @@
                                 <br>
                                 <div class="form-group">
                                     <input type="submit" class="btn btn-success" name="submit" value="Submit">
-                                    <button type="button" class="btn btn-info" onclick="history.back();"><i class="icon-angle-left"></i> Go Back</button>
+                                    <a href="<?php echo base_url('admin/teachers/view');?>">
+                                        <button type="button" class="btn btn-info"><i class="icon-angle-left"></i> Go Back</button>
+                                    </a>
                                 </div>
                             </form>
                         </div> <!-- /widget-content -->  
