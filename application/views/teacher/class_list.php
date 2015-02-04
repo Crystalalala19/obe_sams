@@ -1,35 +1,35 @@
+<!-- For filter table -->
+<link href="<?php echo base_url();?>assets/css/bootstrap-editable.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/css/bootstrap-filterable.css" rel="stylesheet">
 
- <?php
-    echo $this->session->flashdata('message');
-    if (!empty($message)) echo $message;
 
-    echo validation_errors('
-    <div class="alert alert-danger alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert"><i class="icon-remove-sign"></i></button>
-        <i class="icon-exclamation-sign" aria-hidden="true"></i> ', 
-    '</div>');
 
-    $po_count = count($get_po);
-
-    $attributes = array('class' => 'col-md-4');
-
-    //echo ('site/class_list', $attributes); 
-
-?>
-    
 <div class="main-inner">
-    <div class="container">
-        <div class="row">
-            <div class="span12">
-                <div class="widget">
-                    <div class="widget-header">
-                        <i class="icon-table"></i>
-                        <h3>Class List</h3>
-                    </div> <!-- /widget-header -->
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <div class="widget">
+                        <div class="widget-header">
+                            <i class="icon-group"></i>
+                            <h3>Students</h3>
+                        </div> <!-- /widget-header -->
 
-                    <div class="widget-content">
+                        <div class="widget-content">
+                        <?php
+                            echo $this->session->flashdata('message');
+                            if (!empty($message)) echo $message;
 
-                        <div class="span3">
+                            echo validation_errors('
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert"><i class="icon-remove-sign"></i></button>
+                                <i class="icon-exclamation-sign" aria-hidden="true"></i> ', 
+                            '</div>');
+
+                            $po_count = count($get_po);
+                            $attributes = array('class' => 'col-md-4');
+                        ?>
+
+                        <div class="span4">
                             <div class="alert alert-info">
                             <?php foreach($select_schedule as $row1): ?>
                                 <h4>
@@ -38,114 +38,126 @@
                                         echo '<br> ';
                                         echo $row1->start_time.' - ';
                                         echo $row1->end_time.' ';
-                                        echo $row1->days;
+                                        echo $row1->days.'<br>';
                                     ?>
                                     Semester: <?php echo $row1->semester,' | ';?> School Year: <?php echo $row1->school_year; ?>
                                 </h4>
                              <?php endforeach; ?>
                             </div>
                         </div>
-                        <div class="span11">
-                              <table id="view_classlist" class="table table-striped table-hover table-bordered table-condensed">
-                                <thead>
-                                    <tr>
-                                        <th><center>Student ID</center></th>
-                                        <th><center>Name</center></th>
-                                        <?php for($x = 1; $x <= $po_count; $x++):?>
-                                            <th><center>PO <?php echo $x;?></center></th>
-                                        <?php endfor; $row_num=1;?>
-                                        <th><center>View Scorecard</center></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>  
-                                        <?php foreach($class_list as $row): ?>
-                                        <td><center><?php echo $row['studentID'];?></center></td>
-                                        <td><center><?php echo $row['fname']; echo " ".$row['mname']; echo " ".$row['lname'];?></center></td>
-                                        <?php foreach($row['grade'] as $row1): ?>
-                                            <td>
-                                                <center>
-                                                    <?php echo $row1;?>
-                                                </center>
-                                            </td>
-                                        <?php endforeach; $row_num++; ?>   
-                                        <td>
-                                            <center>
-                                                <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row['student_id'];?>">
-                                                <i class="icon-eye-open"></i> View Scorecard
-                                                </a>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <?php endforeach;?>        
-                                </tbody>
-                            </table>
+
+                        </style>
+
+                            <div class="span11">
+                                <table id="view_classlist" class="table table-striped table-bordered dataTable no-footer">
+                                    <thead>
+                                        <tr>
+                                            <th>Student ID <i class="icon-filter"></i></th>
+                                            <th>Name <i class="icon-filter"></i></th>
+                                            <?php for($x = 1; $x <= $po_count; $x++):?>
+                                                <th>PO <?php echo $x;?> <i class="icon-filter"></i></th>
+                                            <?php endfor; $row_num=1;?>
+                                            <th>View Scorecard</th>
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody>
+                                            <?php foreach($class_list as $row): ?>   
+                                            <tr>          
+                                                <td><?php echo $row['studentID'];?></td>
+                                                <td><?php echo $row['fname']; echo " ".$row['mname']; echo " ".$row['lname'];?></td>
+                                                <?php foreach($row['grade'] as $row1): ?>
+                                                    <td><?php echo $row1;?></td>
+                                                <?php endforeach; $row_num++; ?>   
+                                                <td>
+                                                    
+                                                        <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row['student_id'];?>">
+                                                        <i class="icon-eye-open"></i> View Scorecard
+                                                        </a>
+                                                    
+                                                </td>
+                                            </tr>
+                                                <?php endforeach; ?>   
+
+                                    </tbody>
+
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="2"><center>Average</center></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tfoot>
+
+                                </table>
+                                <br>
+                                <div class="form-group">
+                                    <label for="userfile">Upload .CSV File: </label>
+                                    <input type="file" name="userfile" id="userfile">
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-success" name="submit" value="Submit">
+                                </div>
+
+                            </div>    
+
                         </div>
 
-                    </div>
-                </div> <!-- /widget -->                 
+                       </div> <!-- /widget -->                 
             </div> <!-- /span12 -->         
         </div> <!-- /row -->
     </div> <!-- /container -->
 </div> <!-- /main-inner -->
 
-     <div class="form-group">
-            <label for="userfile">Upload .CSV File: </label>
-            <input type="file" name="userfile" id="userfile">
-        </div>
-
-        <div class="form-group">
-            <input type="submit" class="btn btn-success" name="submit" value="Submit">
-        </div>
-    </form>
 
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/bootstrap-editable.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/filterable-utils.js"></script>
+<script src="<?php echo base_url();?>assets/js/filterable-cell.js"></script>
+<script src="<?php echo base_url();?>assets/js/filterable-row.js"></script>
+<script src="<?php echo base_url();?>assets/js/filterable.js"></script>
+<!-- End filter table -->
 
+<script type="text/javascript">
+var values = [],
+  table = document.getElementById('view_classlist'),
+  rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr'),
+  footer = table.getElementsByTagName('tfoot')[0];
+
+for(var i=2; i<11; i++){
+  values[i] = [];
+  for(var j=0, l=rows.length; j<l; j++){
+    values[i].push(
+      parseFloat(
+        rows[j].getElementsByTagName('td')[i]
+          .innerHTML
+      )
+    );
+  }
+
+  var score = values[i].reduce(function(pv,cv){return pv + cv;},0) / values[i].length;
+  footer.getElementsByTagName('td')[i-1].innerHTML = Math.round(score * 100) / 100;
+  
+  if( isNaN(footer.getElementsByTagName('td')[i-1].innerHTML) )
+    footer.getElementsByTagName('td')[i-1].innerHTML = " ";
+}
+</script>
 
 <script type="text/javascript" language="javascript">
-
     var d = document.getElementById('courselist');
     d.className = d.className + " active";
-        
-        
-        var dataTableOptions = {
-            //Disable sorting for column Action
-           
-        };
 
-        var tableToolsOptions = {
-            "sSwfPath": "http://cdn.datatables.net/tabletools/2.2.3/swf/copy_csv_xls_pdf.swf",
-            "aButtons": [ {
-                    "sExtends": "copy",
-                    "sButtonText": "Copy",
-                    //Columns to export as data, exluded Action column
-                    "mColumns": [ 0, 1 ],
-                }, {
-                    "sExtends": "print",
-                    "sButtonText": "Print",
-                    "bShowAll": false
-                }, {
-                    "sExtends":    "collection",
-                    "sButtonText": "Save as...",
-                    "aButtons":    [ {
-                            "sExtends": "xls",
-                            "oSelectorOpts": {
-                                page: 'current'
-                            },
-                            "mColumns": [ 0, 1 ]
-                        }, {
-                            "sExtends": "pdf",
-                            "sButtonText": "PDF",
-                            "mColumns": [ 0, 1 ]
-                        }
-                    ]
-                }
-            ]
-        };
+    $('#view_classlist').filterable();
 
-        var table = $('#view_classlist').dataTable( dataTableOptions );
-
-        var tt = new $.fn.dataTable.TableTools( table, tableToolsOptions );
-
-        $( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
-    </script>
+</script>
