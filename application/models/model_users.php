@@ -46,7 +46,7 @@ class Model_users extends CI_Model {
 		return $query->result_array();
 	}
 
-    function teacher_class1($courseCode){
+    function teacher_class1(){
 
         $query = $this->db->query("SELECT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND courseCode = 'ICT110' AND semester = 1 ");
 
@@ -102,10 +102,7 @@ class Model_users extends CI_Model {
 
     function select_schedule($id){
 
-        $query = $this->db->query("SELECT * FROM student_course INNER JOIN teacher_class ON student_course.classID = teacher_class.ID 
-                                                                WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' 
-                                                                AND student_course.classID = '".$id."' 
-                                                                GROUP BY classID");
+        $query = $this->db->query("SELECT * FROM teacher_class WHERE ID = '".$id."' ");
         return $query->result();
 
     }
@@ -206,8 +203,7 @@ class Model_users extends CI_Model {
     function notify_message($alert_type, $glyphicon, $message){
         $output = '
         <div class="alert '.$alert_type.' alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert"><i class="icon-remove-sign"></i> <span style="visibility:hidden"aria-hidden="true">&times;</span> </button>
-            <i class="icon-exclamation-sign" aria-hidden="true"></i> 
+            <button type="button" class="close" data-dismiss="alert"><i class="icon-remove-sign"></i> </button>
             '.$message.'
         </div>';
 

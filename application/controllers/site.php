@@ -86,9 +86,9 @@ class Site extends CI_Controller {
 
      function course_list(){
 
-        $courseCode = $this->uri->segment(4);
+        $year = $this->uri->segment(3);
 
-        $data['teacher_class1'] = $this->model_users->teacher_class1($courseCode);
+        $data['teacher_class1'] = $this->model_users->teacher_class1();
         $data['teacher_class2'] = $this->model_users->teacher_class2();
         $data['teacher_class3'] = $this->model_users->teacher_class3();
         $data['course1'] = $this->model_users->course1();
@@ -100,21 +100,21 @@ class Site extends CI_Controller {
 
         if($data['course1'] == FALSE) {
             $message1 = 'No classes found in record. Please contact the administrator to assign you a class.';
-            $data['message1'] = $this->model_users->notify_message('alert-info', 'glyphicon-info-sign', $message1);
+            $data['message1'] = $this->model_users->notify_message('alert-danger', 'glyphicon-info-sign', $message1);
         } else {
             $data['message1'] = '';
         }
 
         if($data['course1'] == FALSE) {
             $message2 = 'No classes found in record. Please contact the administrator to assign you a class.';
-            $data['message2'] = $this->model_users->notify_message('alert-info', 'glyphicon-info-sign', $message2);
+            $data['message2'] = $this->model_users->notify_message('alert-danger', 'glyphicon-info-sign', $message2);
         } else {
             $data['message2'] = '';
         }
 
         if($data['course3'] == FALSE) {
             $message3 = 'No classes found in record. Please contact the administrator to assign you a class.';
-            $data['message3'] = $this->model_users->notify_message('alert-info', 'glyphicon-info-sign', $message3);
+            $data['message3'] = $this->model_users->notify_message('alert-danger', 'glyphicon-info-sign', $message3);
         } else {
             $data['message3'] = '';
         }
@@ -160,8 +160,8 @@ class Site extends CI_Controller {
 
 
         if($data['class_list'] == FALSE) {
-            $message = 'No students found in record.';
-            $data['message'] = $this->model_users->notify_message('alert-info', 'glyphicon-info-sign', $message);
+            $message = 'No students found in record. Please upload students list with its PO grade.';
+            $data['message'] = $this->model_users->notify_message('alert-danger', 'glyphicon-info-sign', $message);
         } else {
             $data['message'] = '';
         }
@@ -186,14 +186,14 @@ class Site extends CI_Controller {
 
         if($data['scorecard1stSem'] == FALSE) {
             $message = 'No courses found in record.';
-            $data['message'] = $this->model_users->notify_message('alert-info', 'glyphicon-info-sign', $message);
+            $data['message'] = $this->model_users->notify_message('alert-danger', 'glyphicon-info-sign', $message);
         } else {
             $data['message'] = '';
         }
 
         if($data['scorecard2ndSem'] == FALSE) {
             $message1 = 'No courses found in record.';
-            $data['message1'] = $this->model_users->notify_message('alert-info', 'glyphicon-info-sign', $message1);
+            $data['message1'] = $this->model_users->notify_message('alert-danger', 'glyphicon-info-sign', $message1);
         } else {
             $data['message1'] = '';
         }
@@ -209,6 +209,15 @@ class Site extends CI_Controller {
         $data['student_list'] = $this->model_users->student_list();  
         $data['user'] = $this->model_users->select_user();
         $data['title'] = "Outcome-based Education";
+
+
+        if($data['student_list'] == FALSE) {
+            $message = 'No students found in record. Please add students to your assigned classes.';
+            $data['message'] = $this->model_users->notify_message('alert-danger', 'glyphicon-info-sign', $message);
+        } else {
+            $data['message'] = '';
+        }
+
 
         $this->load->view("teacher/header", $data);
         $this->load->view('teacher/student_list', $data);
