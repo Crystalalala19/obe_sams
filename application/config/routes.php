@@ -53,6 +53,7 @@ $route['admin/teachers/upload'] = "admin/upload_class";
 $route['admin/teachers/classes/(:any)'] = "admin/view_class";
 $route['admin/teachers/edit/(:num)'] = "admin/edit_teacher";
 $route['admin/teachers/delete/(:num)'] = "admin/delete_teacher";
+$route['admin/teachers/classes/(:any)/(:num)'] = "admin/view_class";
 
 //Reports
 $route['admin/reports/teacher'] = "admin/report_teacher";

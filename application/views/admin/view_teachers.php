@@ -11,19 +11,13 @@
                             <?php
                             echo $this->session->flashdata('message');
                             if (!empty($message)) echo $message;
-
-                            echo validation_errors('
-                            <div class="alert alert-danger alert-dismissible" role="alert">
-                                <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
-                                <i class="icon-exclamation-sign"></i>', 
-                            '</div>');
                             ?>
 
                             <button class="btn btn-info" data-toggle='modal' data-target='#add' title="Add New"><i class="icon-plus"></i> Add new</button>
     
                             <?php if($teacher_list != FALSE):?>
                             <a href="<?php echo base_url();?>admin/teachers/upload" role="button" class="btn btn-warning"><i class="icon-time"></i> Upload Classes</a>
-                            <div class="span11">
+
                             <table id="view_teachers" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
@@ -35,7 +29,7 @@
                                 </thead>
                                 <tbody>
                                     <?php foreach($teacher_list as $row): ?>
-                                        <tr>            
+                                        <tr>
                                             <td><?php echo $row['teacher_id'];?></td>
                                             <td><?php echo $row['fname'];?></td>
                                             <td><?php echo $row['lname'];?></td>
@@ -50,7 +44,7 @@
                                     <?php endforeach; ?>        
                                 </tbody>
                             </table>
-                            </div>
+
                             <?php endif;?>
 
                             <?php echo form_open('admin/teachers'); ?>
@@ -106,7 +100,18 @@
     <script type="text/javascript" language="javascript">
         var dataTableOptions = {
             //Auto sort column
-            aaSorting: [[1,'asc']]
+            "order": [[2,'asc']],
+
+            //Disable sorting with class no-sort
+            columnDefs: [
+              { targets: 'no-sort', orderable: false }
+            ],
+
+            "bPaginate": false,
+            "bLengthChange": false,
+            "bFilter": true,
+            "bInfo": false,
+            "bAutoWidth": false 
         };
 
         var tableToolsOptions = {

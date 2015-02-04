@@ -657,20 +657,30 @@ class Admin extends CI_Controller {
     public function view_class() {
         $data['title'] = 'Admin - View Classes';
         $data['header'] = 'View Classes';
-        $data['message'] = '';
+        $message = '';
 
         $teacher_id = $this->uri->segment(4);
+        $year = $this->uri->segment(5);
 
-        $result = $this->model_admin->check_teacher($teacher_id);
+        $check_teacher = $this->model_admin->check_teacher($teacher_id);
+        $check_class = $this->model_admin->check_teacherClass($teacher_id);
         
-        if($result == FALSE) {
+        if($check_teacher == FALSE) {
             $message = '<strong>ID</strong> does not exist!';
             $message = $this->model_admin->notify_message('alert-info', 'icon-ok', $message);
-
-            $data['message'] = $message;
+        }
+        elseif($check_class == FALSE) {
+            $message = '<strong>Teacher</strong> has no classes.';
+            $message = $this->model_admin->notify_message('alert-info', 'icon-ok', $message);
         }
 
-        $data['teacher_classes'] = $this->model_admin->get_classes($teacher_id);
+        $data['message'] = $message;
+
+        $data['academic_year'] = $year;
+        $data['year_classes'] = $this->model_admin->get_teacherClasses($teacher_id);
+        $data['first_sem'] = $this->model_admin->get_firstSem($teacher_id, $year);
+        $data['second_sem'] = $this->model_admin->get_secondSem($teacher_id, $year);
+        $data['summer'] = $this->model_admin->get_summer($teacher_id, $year);
 
         $this->load->view('admin/header', $data);
         $this->load->view('admin/view_classes', $data);

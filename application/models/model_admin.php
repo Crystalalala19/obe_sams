@@ -206,9 +206,8 @@ class Model_admin extends CI_Model {
                                   INNER JOIN program_year ON program.ID = program_year.programID 
                                   WHERE programName =  '".$program."' AND effective_year = '".$year."' ");
     
-        if($query->num_rows() == 1) {
+        if($query->num_rows() == 1)
             return true;
-        }
         else
             return false;
     }
@@ -216,9 +215,8 @@ class Model_admin extends CI_Model {
     function check_course($course) {
         $query = $this->db->get_where('course', array('CourseCode' => $course));
 
-        if($query->num_rows() > 0) {
+        if($query->num_rows() > 0)
             return true;
-        }
         else
             return false;
     }
@@ -266,9 +264,8 @@ class Model_admin extends CI_Model {
     // TEACHER
      function get_teachers() {
         $query = $this->db->get_where('teacher', array('role' => 'teacher'));
-        if($query->num_rows() > 0) {
+        if($query->num_rows() > 0)
             return $query->result_array();
-        }
         else 
             return FALSE;
     }
@@ -292,8 +289,26 @@ class Model_admin extends CI_Model {
         return $this->check_query();
     }
 
-    function get_classes($id) {
-        $query = $this->db->query("SELECT * FROM teacher_class WHERE teacherID = '".$id."' ");
+    function get_teacherClasses($teacher_id) {
+        $query = $this->db->query("SELECT DISTINCT school_year FROM teacher_class WHERE teacherID = '".$teacher_id."' ");
+    
+        return $query->result_array();
+    }
+
+    function get_firstSem($teacher_id, $year) {
+        $query = $this->db->query("SELECT * FROM teacher_class WHERE teacherID = '".$teacher_id."' AND school_year = '".$year."' AND semester = '1' ");
+
+        return $query->result_array();
+    }
+
+    function get_secondSem($teacher_id, $year) {
+        $query = $this->db->query("SELECT * FROM teacher_class WHERE teacherID = '".$teacher_id."' AND school_year = '".$year."' AND semester = '2' ");
+
+        return $query->result_array();
+    }
+
+    function get_summer($teacher_id, $year) {
+        $query = $this->db->query("SELECT * FROM teacher_class WHERE teacherID = '".$teacher_id."' AND school_year = '".$year."' AND semester = 'summer' ");
 
         return $query->result_array();
     }
@@ -301,9 +316,8 @@ class Model_admin extends CI_Model {
     function check_teacher($id) {
         $query = $this->db->get_where('teacher', array('teacher_id' => $id));
 
-        if($query->num_rows() == 1) {
+        if($query->num_rows() == 1)
             return true;
-        }
         else
             return false; 
     }
@@ -313,8 +327,15 @@ class Model_admin extends CI_Model {
 
         return $this->check_query();
     }
-    // END TEACHER
 
-    
+    function check_teacherClass($teacher_id) {
+        $query = $this->db->get_where('teacher_class', array('teacherID' => $teacher_id));
+
+        if($query->num_rows() > 0)
+            return true;
+        else
+            return false; 
+    }
+    // END TEACHER
 }
 ?>
