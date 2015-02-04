@@ -245,7 +245,7 @@ class Admin extends CI_Controller {
             if($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();
 
-                $message = '<strong>Error inserting data!</strong>';
+                $message = '<strong>Error in adding Curriculum!</strong>';
                 $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
 
                 $data['message'] = $message;
@@ -327,7 +327,7 @@ class Admin extends CI_Controller {
             'effective_year' => $year
         );
 
-        if(!$this->model_admin->get_year($year_data)) {
+        if(!$this->model_admin->get_programYear($year_data)) {
             $message = '<strong>Program Year</strong> does not exist!';
             $data['message'] = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
         }
@@ -339,7 +339,7 @@ class Admin extends CI_Controller {
             $data['program'] = $this->model_admin->get_program($program_data);
             $data['program_list'] = $this->model_admin->check_rows('program');
 
-            $data['year'] = $this->model_admin->get_year($year_data);
+            $data['year'] = $this->model_admin->get_programYear($year_data);
         }
 
         $this->load->view('admin/header', $data);
@@ -387,7 +387,7 @@ class Admin extends CI_Controller {
             'effective_year' => $year
         );
 
-        if(!$this->model_admin->get_year($year_data)) {
+        if(!$this->model_admin->get_programYear($year_data)) {
             $message = '<strong>Program Year</strong> does not exist!';
             $message = $this->model_admin->notify_message('alert-info', 'icon-exclamation', $message);
             $this->session->set_flashdata('message', $message);

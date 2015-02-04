@@ -49,6 +49,9 @@
                                     yearDropdown(date('Y'), 2100, "effective_year", $year);
                                 ?>
                             </div>
+                            <a href="<?php echo base_url('admin/programs/view');?>">
+                                <button type="button" class="btn btn-info"><i class="icon-angle-left"></i> Go Back</button>
+                            </a>
                             <?php endif;?>
                         </div> <!-- /widget-content -->  
                     </div> <!-- /widget -->                 

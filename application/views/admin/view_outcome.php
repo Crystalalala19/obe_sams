@@ -57,6 +57,9 @@
                                     </table>
                                 </div>
                                 <input type="submit" class="btn btn-success" id="btnSubmit" name="submit" value="Save">
+                                <a href="<?php echo base_url('admin/programs/view');?>">
+                                    <button type="button" class="btn btn-info"><i class="icon-angle-left"></i> Go Back</button>
+                                </a>
                             </form>
                         </div> <!-- /widget-content -->  
                     </div> <!-- /widget -->                 

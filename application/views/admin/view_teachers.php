@@ -1,22 +1,3 @@
-    <style type="text/css">
-        @media (max-width: 768px) {
-            .btn-responsive {
-                padding:2px 4px;
-                font-size:80%;
-                line-height: 1;
-                border-radius:3px;
-            }
-        }
-
-        @media (min-width: 769px) and (max-width: 992px) {
-            .btn-responsive {
-                padding:4px 9px;
-                font-size:90%;
-                line-height: 1.2;
-            }
-        }
-    </style>
-
     <div class="main-inner">
         <div class="container">
             <div class="row">
@@ -42,7 +23,7 @@
     
                             <?php if($teacher_list != FALSE):?>
                             <a href="<?php echo base_url();?>admin/teachers/upload" role="button" class="btn btn-warning"><i class="icon-time"></i> Upload Classes</a>
-                           
+                            <div class="span11">
                             <table id="view_teachers" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
@@ -60,15 +41,16 @@
                                             <td><?php echo $row['lname'];?></td>
                                             <td>
                                                 <div class="btn-group inline pull-left">
-                                                    <a type="button" title="View Classes" class="btn btn-warning btn-sm btn-responsive" href="<?php echo base_url();?>admin/teachers/classes/<?php echo $row['teacher_id'];?>"><i class="icon-book"></i></a>
-                                                    <a type="button" title="Edit Teacher" class="btn btn-primary btn-sm btn-responsive" href="<?php echo base_url();?>admin/teachers/edit/<?php echo $row['ID'];?>"><i class="icon-edit"></i></a>
-                                                    <a type="button" title="Delete Teacher" class="btn btn-danger btn-sm btn-responsive" href="<?php echo base_url();?>admin/teachers/delete/<?php echo $row['ID'];?>" onclick="return confirm('Do you want to permanently delete?');"><i class="icon-trash"></i></a>
+                                                    <a type="button" title="View Classes" class="btn btn-warning btn-small btn-responsive" href="<?php echo base_url();?>admin/teachers/classes/<?php echo $row['teacher_id'];?>"><i class="icon-book"></i></a>
+                                                    <a type="button" title="Edit Teacher" class="btn btn-primary btn-small btn-responsive" href="<?php echo base_url();?>admin/teachers/edit/<?php echo $row['ID'];?>"><i class="icon-edit"></i></a>
+                                                    <a type="button" title="Delete Teacher" class="btn btn-danger btn-small btn-responsive" href="<?php echo base_url();?>admin/teachers/delete/<?php echo $row['ID'];?>" onclick="return confirm('Do you want to permanently delete?');"><i class="icon-trash"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>        
                                 </tbody>
                             </table>
+                            </div>
                             <?php endif;?>
 
                             <?php echo form_open('admin/teachers'); ?>
