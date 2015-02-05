@@ -83,7 +83,7 @@
                             <table id="view_programs" class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>Effective Year</th>
+                                        <th>Effective Academic Year</th>
                                         <th width="12%">Action</th>
                                     </tr>
                                 </thead>
@@ -137,7 +137,7 @@
                         else {
                             $.each(response, function(key, value) {
                                     $("#toBeRemoved").append(
-                                        $('<td>').html(value.effective_year),
+                                        $('<td>').html(value.effective_year+" - "+ value.effective_year),
                                         $('<td>').html("<div class='btn-group inline pull-left'><a type='button' href='<?php echo base_url();?>admin/programs/outcome/"+encodeURIComponent(selectedValue)+"/"+value.effective_year+"' class='btn btn-warning btn-sm btn-responsive' title='Program Outcome'><i class='icon-list'></i></a><a type='button' href='<?php echo base_url();?>admin/programs/edit/"+encodeURIComponent(selectedValue)+"/"+value.effective_year+"' class='btn btn-primary btn-sm btn-responsive' title='Edit Curriculum'><i class='icon-edit'></i></a><a type='button' href='<?php echo base_url();?>admin/programs/delete/"+encodeURIComponent(selectedValue)+"/"+value.effective_year+"' class='btn btn-danger btn-sm btn-responsive' title='Delete Effective Year' onclick='return confirm(\"Do you want to permanently delete?\");'><i class='icon-trash'></i></a></div>")
                                     ).appendTo('#view_programs');
                             });

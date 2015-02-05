@@ -2,42 +2,42 @@
 
 class Site extends CI_Controller {
 
-	public function __construct() {
-		parent::__construct();
-		$this->load->model('model_users');
-	}
+    public function __construct() {
+        parent::__construct();
+        $this->load->model('model_users');
+    }
 
-	public function index() {
-		$data['title'] = "OBE SAMS Academic";
+    public function index() {
+        $data['title'] = "OBE SAMS Academic";
 
-		$this->load->view("index/header", $data);
-		$this->load->view("index/view_home");
-		$this->load->view("index/footer");
-	}	
+        $this->load->view("index/header", $data);
+        $this->load->view("index/view_home");
+        $this->load->view("index/footer");
+    }   
 
-	public function members() {
-		
-		if($this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'admin') {
-			$this->load->view('admin/index');
-		}  
-		elseif($this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'teacher') {
-			 
-			 $this->load->model("model_users");
-			 $data['user'] = $this->model_users->select_user();
-			 $data['title'] = "Outcome-based Education";
-			 
-			 $this->load->view("teacher/header", $data);
-			 $this->load->view('teacher/index', $data);
-			 $this->load->view("teacher/footer");
-		} 
-		else{  
-			redirect('site/restricted');
-		}
-	}
+    public function members() {
+        
+        if($this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'admin') {
+            $this->load->view('admin/index');
+        }  
+        elseif($this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'teacher') {
+             
+             $this->load->model("model_users");
+             $data['user'] = $this->model_users->select_user();
+             $data['title'] = "Outcome-based Education";
+             
+             $this->load->view("teacher/header", $data);
+             $this->load->view('teacher/index', $data);
+             $this->load->view("teacher/footer");
+        } 
+        else{  
+            redirect('site/restricted');
+        }
+    }
 
-	public function restricted() {
-		$this->load->view('index/restricted');
-	}
+    public function restricted() {
+        $this->load->view('index/restricted');
+    }
 
    public function login_validation() {
 
@@ -125,18 +125,16 @@ class Site extends CI_Controller {
         $this->load->view("teacher/footer");
    }
 
-   function class_list(){
-
+    function class_list(){
         $this->load->library('csvimport');
         $this->load->library('form_validation');
 
-        $id = $this->uri->segment(3);
+        $class_id = $this->uri->segment(3);
 
-
-        $data['class_list'] = $this->model_users->select_class($id);
-        $data['select_schedule'] = $this->model_users->select_schedule($id);
-        $data['select_programName'] = $this->model_users->select_programName($id);
-        $data['get_po'] = $this->model_users->get_po($id);
+        $data['class_list'] = $this->model_users->select_class($class_id);
+        $data['select_schedule'] = $this->model_users->select_schedule($class_id);
+        $data['select_programName'] = $this->model_users->select_programName($class_id);
+        $data['get_po'] = $this->model_users->get_po($class_id);
 
         foreach($data['class_list'] as $key => $val) {
             $data['class_list'][$key]['score'] = $this->model_users->get_studentPOGRADE($val['studentID']);
@@ -158,7 +156,6 @@ class Site extends CI_Controller {
         $data['user'] = $this->model_users->select_user();
         $data['title'] = "Outcome-based Education";
 
-
         if($data['class_list'] == FALSE) {
             $message = 'No students found in record. Please upload students list with its PO grade.';
             $data['message'] = $this->model_users->notify_message('alert-danger', 'glyphicon-info-sign', $message);
@@ -166,16 +163,110 @@ class Site extends CI_Controller {
             $data['message'] = '';
         }
 
+        $select_schedule = $data['select_schedule'];
+        $student_course = $select_schedule[0]->courseCode;
+        $student_courseID = $this->model_users->get_courseID($student_course);
+
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = 'csv';
+        $config['max_size'] = '99999';
+        $this->load->library('upload', $config);
+
+        if(!$this->upload->do_upload()){
+        }
+        else{
+            $file_data = $this->upload->data();
+            $file_path =  './uploads/'.$file_data['file_name'];
+
+            if ($this->csvimport->get_array($file_path)) {
+                $insert_data = array();
+                $nonExistingCourse = array();
+                $nonExistingTeacher = array();
+                $csv_array = $this->csvimport->get_array($file_path);
+                $headers = $this->csvimport->get_headers();
+
+                $po_courses = $this->model_users->get_poCourse($student_course);
+
+                foreach ($csv_array as $row) {
+                    $check_studentID = $this->model_users->check_studentRecord($row['Student ID']);
+                    if(!$check_studentID) {
+                        $insert_data = array(
+                            'student_id'=>$row['Student ID'],
+                            'lname'=>$row['Last Name'],
+                            'fname'=>$row['First Name'],
+                            'mname'=>$row['Middle Name']
+                        );
+
+                        $this->model_users->insert_student($insert_data);
+                        $insert_id = $this->model_users->get_lastId();
+                        $student_id = $this->model_users->get_newInsertStudent($insert_id);
+                    }
+                    else {
+                        $student_id = $check_studentID;
+                    }
+
+                    $studentCourse_data = array(
+                        'score' => array(),
+                        'student_id' => $student_id,
+                        'classID' => $class_id,
+                        'poID' => array(), 
+                        'courseID' => $student_courseID
+                    ); 
+
+                    for($x = 0, $index = 4; $x < count($po_courses); $x++, $index++) {
+                        if($po_courses[$x]['status'] == '1') {
+                            $studentCourse_data['score'][$x] = $row[$headers[$index]];
+
+                            $studentCourse_data['poID'][$x] = $po_courses[$x]['poID'];
+                        } else {
+                            $studentCourse_data['score'][$x] = '';
+                            $studentCourse_data['poID'][$x] = $po_courses[$x]['poID'];
+                        }
+                    }
+
+                    foreach($studentCourse_data['score'] as $key => $row2) {
+                        $student_course_data = array();
+                        $student_course_data['score'] = $row2;
+                        $student_course_data['studentID'] = $studentCourse_data['student_id'];
+                        $student_course_data['classID'] = $studentCourse_data['classID'];
+                        $student_course_data['poID'] = $studentCourse_data['poID'][$key];
+                        $student_course_data['courseID'] = $studentCourse_data['courseID'];
+                        $result = $this->model_users->insert_grades($student_course_data);
+                    }
+                }
+
+                //Deletes uploaded file
+                unlink($file_path);
+
+                if($result['is_success'] == FALSE) {
+                    $message = '<strong>Error: </strong>Uploading grades.';
+                    $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
+
+                    $this->session->set_flashdata('message', $message);
+                }
+                else {
+                    $message = '<strong>Success!</strong> Grades uploaded.';
+                    $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
+
+                    $this->session->set_flashdata('message', $message);
+                }
+                redirect(current_url());
+            }
+            else {
+                $message = '<strong>Error: </strong> Inserting .CSV file.';
+                $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
+
+                $this->session->set_flashdata('message', $message);
+                redirect(current_url());
+            }            
+        }
 
         $this->load->view("teacher/header", $data);
         $this->load->view('teacher/class_list', $data);
         $this->load->view("teacher/footer");
     }
 
-
-
     function scorecard(){
-      
         $id = $this->uri->segment(3);
 
         $data['scorecard'] = $this->model_users->scorecard($id);
@@ -198,18 +289,15 @@ class Site extends CI_Controller {
             $data['message1'] = '';
         }
 
-	    $this->load->view("teacher/header", $data);
-	    $this->load->view('teacher/scorecard', $data);
-	    $this->load->view("teacher/footer");
+        $this->load->view("teacher/header", $data);
+        $this->load->view('teacher/scorecard', $data);
+        $this->load->view("teacher/footer");
     }
 
     function student_list(){
-
-
         $data['student_list'] = $this->model_users->student_list();  
         $data['user'] = $this->model_users->select_user();
         $data['title'] = "Outcome-based Education";
-
 
         if($data['student_list'] == FALSE) {
             $message = 'No students found in record. Please add students to your assigned classes.';
@@ -218,11 +306,8 @@ class Site extends CI_Controller {
             $data['message'] = '';
         }
 
-
         $this->load->view("teacher/header", $data);
         $this->load->view('teacher/student_list', $data);
         $this->load->view("teacher/footer");
     }
-
- 
 }

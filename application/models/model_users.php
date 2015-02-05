@@ -101,10 +101,9 @@ class Model_users extends CI_Model {
     }
 
     function select_schedule($id){
-
         $query = $this->db->query("SELECT * FROM teacher_class WHERE ID = '".$id."' ");
+        
         return $query->result();
-
     }
 
 	function select_class($id){
@@ -185,7 +184,6 @@ class Model_users extends CI_Model {
 
 	
    function student_list(){
-
    	    $query = $this->db->query("SELECT DISTINCT studentID, student.lname, student.mname, student.fname, program_year.effective_year, program.programName 
                                                             FROM student_course 
                                                             INNER JOIN student ON student_course.studentID = student.student_id
@@ -197,8 +195,7 @@ class Model_users extends CI_Model {
    															WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' ");
    	
    	    return $query->result();
-
-   }
+    }
 
     function notify_message($alert_type, $glyphicon, $message){
         $output = '
@@ -210,7 +207,73 @@ class Model_users extends CI_Model {
         return $output;
     }
 
+    function insert_student($data) {
+        $this->db->insert('student', $data);
 
-   
+        return $this->check_query();
+    }
+
+    function get_lastId() {
+        if($this->db->affected_rows() > 0) {
+            return $this->db->insert_id();
+        }
+        else {
+            return FALSE;
+        }
+    }
+
+    function check_query() {
+        if($this->db->affected_rows() >= 0){
+            $data['is_success'] = TRUE;
+
+            return $data;
+        }
+        else{
+            $data['is_success'] = FALSE;
+            $data['db_error'] = $this->db->_error_message();
+
+            return $data;
+        }
+    }
+
+    function check_studentRecord($data){
+        $this->db->select('student_id');
+        $query = $this->db->get_where('student', array('student_id' => $data));
+        if($query->num_rows() == 1) {
+            $row = $query->row_array();
+
+            return $row['student_id'];
+        }
+        else {
+            return false;
+        }
+    }
+
+    function get_newInsertStudent($insert_id) {
+        $query = $this->db->get_where('student', array('ID' => $insert_id));
+        $row = $query->row_array();
+
+        return $row['student_id'];
+    }
+
+    function get_poCourse($course_code) {
+        $query = $this->db->query("SELECT status, po_course.poID, po_course.courseID FROM po_course INNER JOIN course ON course.ID = po_course.courseID WHERE course.CourseCode = '".$course_code."' ");
+        
+        return $query->result_array();
+    }
+
+    function get_courseID($course) {
+        $query = $this->db->get_where('course', array('CourseCode' => $course));
+
+        $row = $query->row_array();
+
+        return $row['ID'];
+    }
+
+    function insert_grades($grades) {
+        $this->db->insert('student_course', $grades);
+
+        return $this->check_query();
+    }
 }
 ?>
