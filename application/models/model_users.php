@@ -36,8 +36,6 @@ class Model_users extends CI_Model {
             return false;
         }
 	}
-
-
 	
 	function select_user(){		
 
@@ -46,54 +44,31 @@ class Model_users extends CI_Model {
 		return $query->result_array();
 	}
 
-    function teacher_class1(){
+  
+    function get_1stSemester($year){
 
-        $query = $this->db->query("SELECT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND courseCode = 'ICT110' AND semester = 1 ");
-
-        return $query->result();
-    }
-
-    function teacher_class2(){
-
-        $query = $this->db->query("SELECT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 2 ");
-
-        return $query->result();
-
-    }
-
-    function teacher_class3(){
-
-        $query = $this->db->query("SELECT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 'summer' ");
-
-        return $query->result();
-
-    }
-
-    function course1(){
-
-        $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 1");
+        $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 1 AND school_year = '".$year."' ");
 
         return $query->result();
     }
 
-    function course2(){
+    function get_2ndSemester($year){
 
-        $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 2");
+        $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 2 AND school_year = '".$year."' ");
 
         return $query->result();
     }
 
-    function course3(){
+    function get_summer($year){
 
-        $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 'summer' ");
+        $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 'summer' AND school_year = '".$year."' ");
 
         return $query->result();
     }
 
     function select_SY(){
 
-        $query = $this->db->query("SELECT DISTINCT * FROM teacher_class
-                                                                          WHERE teacherID = '".$this->session->userdata('teacher_id')."' 
+        $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' 
                                                                           GROUP BY school_year ");
         
         return $query->result();
@@ -210,7 +185,73 @@ class Model_users extends CI_Model {
         return $output;
     }
 
+    function insert_student($data) {
+        $this->db->insert('student', $data);
 
-   
+        return $this->check_query();
+    }
+
+    function get_lastId() {
+        if($this->db->affected_rows() > 0) {
+            return $this->db->insert_id();
+        }
+        else {
+            return FALSE;
+        }
+    }
+
+    function check_query() {
+        if($this->db->affected_rows() >= 0){
+            $data['is_success'] = TRUE;
+
+            return $data;
+        }
+        else{
+            $data['is_success'] = FALSE;
+            $data['db_error'] = $this->db->_error_message();
+
+            return $data;
+        }
+    }
+
+    function check_studentRecord($data){
+        $this->db->select('student_id');
+        $query = $this->db->get_where('student', array('student_id' => $data));
+        if($query->num_rows() == 1) {
+            $row = $query->row_array();
+
+            return $row['student_id'];
+        }
+        else {
+            return false;
+        }
+    }
+
+    function get_newInsertStudent($insert_id) {
+        $query = $this->db->get_where('student', array('ID' => $insert_id));
+        $row = $query->row_array();
+
+        return $row['student_id'];
+    }
+
+    function get_poCourse($course_code) {
+        $query = $this->db->query("SELECT status, po_course.poID, po_course.courseID FROM po_course INNER JOIN course ON course.ID = po_course.courseID WHERE course.CourseCode = '".$course_code."' ");
+        
+        return $query->result_array();
+    }
+
+    function get_courseID($course) {
+        $query = $this->db->get_where('course', array('CourseCode' => $course));
+
+        $row = $query->row_array();
+
+        return $row['ID'];
+    }
+
+    function insert_grades($grades) {
+        $this->db->insert('student_course', $grades);
+
+        return $this->check_query();
+    }
 }
 ?>

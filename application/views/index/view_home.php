@@ -100,7 +100,7 @@
                             <i class="fa fa-users fa-4x  "></i>
                         </div>
                         <div class="media-body">
-                            <h3 class="media-heading">Articulated, Expressed & Owned</h3>
+                            <h3 class="media-heading" style="font-size:20px;">Articulated, Expressed & Owned</h3>
                             <p>
                                 Subscribed to and owned by administration, faculty and students.
                             </p>
@@ -271,7 +271,7 @@
                                 <i class="fa fa-star-o fa-4x  "></i>
                             </div>
                             <div class="media-body">
-                                <h3 class="media-heading">Watch This Video</h3>
+                                <h3 class="media-headings">Watch This Video</h3>
                                 <p>
                                     Aenean faucibus luctus enim. Duis quis sem risu suspend lacinia elementum nunc. 
                                 Aenean faucibus luctus enim. 
@@ -283,7 +283,7 @@
                                 <i class="fa fa-history fa-4x  "></i>
                             </div>
                             <div class="media-body">
-                                <h3 class="media-heading">Come Visit Our Department</h3>
+                                <h3 class="media-headings">Come Visit Our Department</h3>
                                 <p>
                                     Aenean faucibus luctus enim. Duis quis sem risu suspend lacinia elementum nunc. 
                                 Aenean faucibus luctus enim. 

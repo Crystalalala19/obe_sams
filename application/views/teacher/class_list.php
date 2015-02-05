@@ -5,16 +5,16 @@
 
 
 <div class="main-inner">
-        <div class="container">
-            <div class="row">
-                <div class="span12">
-                    <div class="widget">
-                        <div class="widget-header">
-                            <i class="icon-group"></i>
-                            <h3>Students</h3>
-                        </div> <!-- /widget-header -->
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div class="widget">
+                    <div class="widget-header">
+                        <i class="icon-group"></i>
+                        <h3>Students</h3>
+                    </div> <!-- /widget-header -->
 
-                        <div class="widget-content">
+                    <div class="widget-content">
                         <?php
                             echo $this->session->flashdata('message');
                             if (!empty($message)) echo $message;
@@ -46,80 +46,73 @@
                             </div>
                         </div>
 
-                        </style>
+                        <div class="span11">
+                            <table id="view_classlist" class="table table-striped table-bordered dataTable no-footer">
+                                <thead>
+                                    <tr>
+                                        <th>Student ID <i class="icon-filter"></i></th>
+                                        <th>Name <i class="icon-filter"></i></th>
+                                        <?php for($x = 1; $x <= $po_count; $x++):?>
+                                            <th>PO <?php echo $x;?> <i class="icon-filter"></i></th>
+                                        <?php endfor; $row_num=1;?>
+                                        <th>View Scorecard</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+                                    <?php foreach($class_list as $row): ?>   
+                                    <tr>          
+                                        <td><?php echo $row['studentID'];?></td>
+                                        <td><?php echo $row['fname']; echo " ".$row['mname']; echo " ".$row['lname'];?></td>
+                                        <?php foreach($row['grade'] as $row1): ?>
+                                            <td><?php echo $row1;?></td>
+                                        <?php endforeach; $row_num++; ?>   
+                                        <td>
+                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row['student_id'];?>">
+                                                <i class="icon-eye-open"></i> View Scorecard
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>   
+                                </tbody>
 
-                            <div class="span11">
-                                <table id="view_classlist" class="table table-striped table-bordered dataTable no-footer">
-                                    <thead>
-                                        <tr>
-                                            <th>Student ID <i class="icon-filter"></i></th>
-                                            <th>Name <i class="icon-filter"></i></th>
-                                            <?php for($x = 1; $x <= $po_count; $x++):?>
-                                                <th>PO <?php echo $x;?> <i class="icon-filter"></i></th>
-                                            <?php endfor; $row_num=1;?>
-                                            <th>View Scorecard</th>
-                                        </tr>
-                                    </thead>
-                                    
-                                    <tbody>
-                                            <?php foreach($class_list as $row): ?>   
-                                            <tr>          
-                                                <td><?php echo $row['studentID'];?></td>
-                                                <td><?php echo $row['fname']; echo " ".$row['mname']; echo " ".$row['lname'];?></td>
-                                                <?php foreach($row['grade'] as $row1): ?>
-                                                    <td><?php echo $row1;?></td>
-                                                <?php endforeach; $row_num++; ?>   
-                                                <td>
-                                                    
-                                                        <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row['student_id'];?>">
-                                                        <i class="icon-eye-open"></i> View Scorecard
-                                                        </a>
-                                                    
-                                                </td>
-                                            </tr>
-                                                <?php endforeach; ?>   
-
-                                    </tbody>
-
-                                    <tfoot>
-                                        <tr>
-                                            <td colspan="2"><center>Average</center></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </tfoot>
-
-                                </table>
-                                <br>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2"><center>Average</center></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <br>
+                            <?php echo form_open_multipart();?>
                                 <div class="form-group">
                                     <label for="userfile">Upload .CSV File: </label>
-                                    <input type="file" name="userfile" id="userfile">
+                                    <input type="hidden" name="teacher_id" value="<?php echo $this->session->userdata('teacher_id');?>">
+                                    <input type="file" name="userfile" id="userfile" class="filestyle" data-buttonText="Find file" data-buttonName="btn-primary" data-iconName="icon-upload-alt">
                                 </div>
 
                                 <div class="form-group">
                                     <input type="submit" class="btn btn-success" name="submit" value="Submit">
                                 </div>
-
-                            </div>    
-
-                        </div>
-
-                       </div> <!-- /widget -->                 
+                            </form>
+                        </div>    
+                    </div>
+                </div> <!-- /widget -->                 
             </div> <!-- /span12 -->         
         </div> <!-- /row -->
     </div> <!-- /container -->
 </div> <!-- /main-inner -->
 
-
-
+<script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/bootstrap-filestyle.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/bootstrap-editable.min.js"></script>

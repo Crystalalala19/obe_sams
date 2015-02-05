@@ -76,6 +76,7 @@ class Csvimport {
                     foreach ($data as $key => $value)
                     {
                         $column_headers[$key] = trim($value);
+                        $this->column_headers[$key] = trim($value);
                     }                
                 }          
             }
@@ -93,6 +94,10 @@ class Csvimport {
         $this->_close_csv();
 
         return $result;
+    }
+
+    public function get_headers() {
+        return $this->column_headers;
     }
 
    /**

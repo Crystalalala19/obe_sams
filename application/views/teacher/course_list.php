@@ -15,20 +15,40 @@
                     <h3>Assigned Classes</h3>
                 </div> <!-- /widget-header -->
 
+                <div class="alert alert-danger">
+                    Please select an academic year to view your assigned classes.
+                </div>
+
+              
+
+                <?php
+                    echo $this->session->flashdata('message');
+                    if (!empty($message)): echo $message;
+
+                    else:
+                ?>
+
                     <div class="widget-content">
-                        <div class="span2">
-                            <label>Academic Year:</label>
-                            <?php $attrib = array('id' => 'autoSub');?>
-                            <?php echo form_open('site/course_list/'.set_value('selector'), $attrib);?>
-                            <select name="selector" id="selector">
+                    <a href="<?php echo base_url('admin/teachers/view');?>">
+                        <button type="button" class="btn btn-info"><i class="icon-angle-left"></i> Go Back</button>
+                    </a>
+                <div class="clearfix"></div><br>
+                        <div class="control-group">
+                            <select name="academic_year" id="selector" class="selectpicker show-tick" title="Select Academic Year" data-live-search="true" multiple data-max-options="1" data-size="auto">
                                 <?php foreach($select_SY as $row): ?>
-                                <option value=""> sdfsdf</option>
-                                <option value="<?php echo $row->school_year;?>"><?php echo $row->school_year;?></option>
+                                    <option value="<?php echo $row->school_year;?>"><?php echo $row->school_year.' - '.($row->school_year+1);?></option>
                                 <?php endforeach;?>
                             </select>
-                            </form>
                         </div>
-                      
+
+
+                        <hr>
+                        <?php if(!empty($this->uri->segment(3))):?>
+                        <div class="span3">
+                            <div class="alert alert-info">
+                                <h4>Academic Year: <?php echo $academic_year.' - '.($academic_year+1);?></h4>
+                            </div>
+                        </div>
                         <div class="span11"><br>
                             <div class="tabbable">
                                 <ul class="nav nav-tabs">
@@ -52,22 +72,22 @@
                                                 ?>
                                                 <thead>
                                                     <tr id="showTable">
-                                                        <th>Course Code <i class="icon-filter"></i></th>
-                                                        <th style="visibility:hidden;">Group Number</th>
-                                                        <th style="visibility:hidden;">Schedule</th>
+                                                        <th><center>Course Code <i class="icon-filter"></i></center></th>
+                                                        <th><center>Group Number <i class="icon-filter"></i></center></th>
+                                                        <th><center>Schedule <i class="icon-filter"></i></center></th>
                                                         <th style="visibility:hidden;">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php foreach($course1 as $row1): ?>
+                                                    <?php foreach($first_sem as $row1): ?>
                                                     <tr>
-                                                        <td><?php echo $row1->courseCode." ";?> </td>
-                                                        <td><?php echo "Group: ".$row1->group_num;?></td>
-                                                        <td><?php echo "Schedule: ".$row1->start_time."-".$row1->end_time." ".$row1->days;?></td>
-                                                        <td>
+                                                        <td><center><?php echo $row1->courseCode." ";?> </center></td>
+                                                        <td><center><?php echo $row1->group_num;?></center></td>
+                                                        <td><center><?php echo $row1->start_time."-".$row1->end_time." ".$row1->days;?></center></td>
+                                                        <td><center>
                                                             <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/class_list/<?php echo $row1->ID;?>">
                                                                 <i class="icon-eye-open"></i> View Class
-                                                            </a>
+                                                            </center></a>
                                                         </td>
                                                     <?php endforeach; ?>   
                                                 </tbody>
@@ -90,22 +110,22 @@
                                                 ?>
                                                 <thead>
                                                     <tr>
-                                                        <th>Course Code <i class="icon-filter"></i></th>
-                                                        <th style="visibility:hidden;">Group Number</th>
-                                                        <th style="visibility:hidden;">Schedule</th>
+                                                        <th><center>Course Code <i class="icon-filter"></i></center></th>
+                                                        <th><center>Group Number <i class="icon-filter"></i></center></th>
+                                                        <th><center>Schedule <i class="icon-filter"></i></center></th>
                                                         <th style="visibility:hidden;">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php foreach($course2 as $row2): ?>
+                                                    <?php foreach($second_sem as $row2): ?>
                                                     <tr>
-                                                        <td><?php echo $row2->courseCode." ";?> </td>
-                                                        <td><?php echo "Group: ".$row2->group_num;?></td>
-                                                        <td><?php echo "Schedule: ".$row2->start_time."-".$row2->end_time." ".$row2->days;?></td>
-                                                        <td>
+                                                        <td><center><?php echo $row2->courseCode." ";?></center> </td>
+                                                        <td><center><?php echo $row2->group_num;?></center></td>
+                                                        <td><center><?php echo $row2->start_time."-".$row2->end_time." ".$row2->days;?></center></td>
+                                                        <td><center>
                                                             <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/class_list/<?php echo $row2->ID;?>">
                                                                 <i class="icon-eye-open"></i> View Class
-                                                            </a>
+                                                            </center></a>
                                                         </td>
                                                     <?php endforeach; ?>   
                                                 </tbody>
@@ -128,36 +148,34 @@
                                                 ?>
                                                 <thead>
                                                     <tr>
-                                                        <th>Course Code <i class="icon-filter"></i></th>
-                                                        <th style="visibility:hidden;">Group Number</th>
-                                                        <th style="visibility:hidden;">Schedule</th>
-                                                        <th style="visibility:hidden;">Action</th>
+                                                        <th><center>Course Code <i class="icon-filter"></i></center></th>
+                                                        <th><center>Group Number <i class="icon-filter"></i></center></th>
+                                                        <th><center>Schedule <i class="icon-filter"></i></center></th>
+                                                        <th style="visibility:hidden;">Action <i class="icon-filter"></i></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php foreach($course3 as $row3): ?>
+                                                    <?php foreach($summer as $row3): ?>
                                                     <tr>
-                                                        <td><?php echo $row3->courseCode." ";?> </td>
-                                                        <td><?php echo "Group: ".$row3->group_num;?></td>
-                                                        <td><?php echo "Schedule: ".$row3->start_time."-".$row3->end_time." ".$row3->days;?></td>
-                                                        <td>
+                                                        <td><center><?php echo $row3->courseCode." ";?> </center></td>
+                                                        <td><center><?php echo $row3->group_num;?></center></td>
+                                                        <td><center><?php echo $row3->start_time."-".$row3->end_time." ".$row3->days;?></center></td>
+                                                        <td><center>
                                                             <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/class_list/<?php echo $row3->ID;?>">
                                                                 <i class="icon-eye-open"></i> View Class
-                                                            </a>
+                                                            </center></a>
                                                         </td>
                                                     <?php endforeach; ?>   
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
-
                                 </div>    
-                                    
                             </div>
+                            <?php endif?>
                         </div>    
-
-                </div> <!-- /widget -->         
-
+                    </div> <!-- /widget -->    
+                <?php endif?>     
             </div> <!-- /span12 -->         
         </div> <!-- /row -->
     </div> <!-- /container -->
@@ -165,15 +183,6 @@
 
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script type="text/javascript" language="javascript">
-
-
-    $('#selector').change(function()
-    {
-      $("#autoSub").submit();
-    });
-
-</script>
 <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/bootstrap-editable.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/filterable-utils.js"></script>
@@ -190,4 +199,9 @@
     $('#example-table').filterable();
     $('#example-table1').filterable();
     $('#example-table2').filterable();
+
+    $('#selector').change(function()
+    {
+        self.location = "<?php echo base_url('site/course_list');?>/"+ this.value;
+    });
 </script>
