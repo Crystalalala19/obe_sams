@@ -102,11 +102,11 @@
                                         <button type="button" class="btn btn-default btn-xs" id="btnRemoveRow" onclick="removeRow2()">Remove Row</button>
                                     </div>
                                     <br>
-                                </div>
-                                
-                                <div class="form-group pull-left">
-                                    <input type="submit" class="btn btn-success" id="btnSubmit" name="submit" value="Submit">
-                                    <div class="clearfix"></div>
+
+                                    <div class="form-group pull-left">
+                                        <input type="submit" class="btn btn-success" name="submit" value="Submit">
+                                        <div class="clearfix"></div>
+                                    </div>
                                 </div>
                                 
                                 <div class="form-group pull-right">

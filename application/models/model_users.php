@@ -38,7 +38,6 @@ class Model_users extends CI_Model {
 	}
 	
 	function select_user(){		
-
 		$query = $this->db->query("SELECT * FROM teacher WHERE teacher_id = '".$this->session->userdata('teacher_id')."'");
 
 		return $query->result_array();
@@ -46,79 +45,67 @@ class Model_users extends CI_Model {
 
   
     function get_1stSemester($year){
-
         $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 1 AND school_year = '".$year."' ");
 
         return $query->result();
     }
 
     function get_2ndSemester($year){
-
         $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 2 AND school_year = '".$year."' ");
 
         return $query->result();
     }
 
     function get_summer($year){
-
         $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 'summer' AND school_year = '".$year."' ");
 
         return $query->result();
     }
 
     function select_SY(){
-
         $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' 
                                                                           GROUP BY school_year ");
         
         return $query->result();
-
     }
 
     function select_schedule($id){
-
         $query = $this->db->query("SELECT * FROM teacher_class WHERE ID = '".$id."' ");
+        
         return $query->result();
-
     }
 
 	function select_class($id){
-
-    		$query = $this->db->query("SELECT * FROM student_course INNER JOIN student ON student_course.studentID = student.student_id
-                                                                    WHERE student_course.classID = '".$id."' 
-                                                                    GROUP BY studentID ");
-		return $query->result_array();
-
+    	$query = $this->db->query("SELECT * FROM student_course INNER JOIN student ON student_course.studentID = student.student_id
+                                    WHERE student_course.classID = '".$id."' 
+                                    GROUP BY studentID ");
+		
+        return $query->result_array();
 	}
 
    function get_po($id){
-
         $query = $this->db->query("SELECT * FROM po_course
                                             WHERE courseID = '".$id."'
                                             ");
 
         return $query->result_array();
-
     }
 
-    function get_student_poID($studentId) {
+    function get_studentPoID($student_id, $class_id) {
         $query = $this->db->query("SELECT poID FROM student_course
-                                            WHERE studentID = '".$studentId."'");
+                                WHERE studentID = '".$student_id."' AND classID = '".$class_id."' ");
 
         return $query->result_array();
     }
 
-    function get_studentPOGRADE($id){
-
-        $query = $this->db->query("SELECT * FROM student_course
-                                            WHERE studentID = '" . $id . "'");
+    function get_studentPoGrade($student_id, $class_id){
+        $query = $this->db->query("SELECT score FROM student_course
+                                WHERE studentID = '".$student_id."' AND classID = '".$class_id."' ");
 
         return $query->result_array();
-
     }
 
     function select_programName($id){
-
         $query = $this->db->query("SELECT * FROM program_year INNER JOIN program ON program_year.programID = program.ID 
                                                               INNER JOIN po ON program_year.ID = po.pyID
                                                               INNER JOIN po_course ON po.pyID = po_course.poID
@@ -131,7 +118,6 @@ class Model_users extends CI_Model {
 
 
     function scorecard($id){
-
         $query = $this->db->query("SELECT * FROM student_course INNER JOIN student ON student_course.studentID = student.student_id
                                                                 INNER JOIN teacher_class ON student_course.classID = teacher_class.ID 
                                                                 WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' AND student_course.classID = 1 AND student_course.studentID = '".$id."'
@@ -140,7 +126,6 @@ class Model_users extends CI_Model {
     }
 
     function scorecard1stSem($id){
-
         $query = $this->db->query("SELECT * FROM student_course INNER JOIN student ON student_course.studentID = student.student_id
                                                                 INNER JOIN teacher_class ON student_course.classID = teacher_class.ID 
                                                                 WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' AND teacher_class.semester = '1' AND student_course.classID = 1 AND student_course.studentID = '".$id."'
@@ -150,7 +135,6 @@ class Model_users extends CI_Model {
 
 
 	function scorecard2ndSem($id){
-
 		$query = $this->db->query("SELECT * FROM student_course INNER JOIN student ON student_course.studentID = student.student_id
 																INNER JOIN teacher_class ON student_course.classID = teacher_class.ID 
                                                                 WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' AND teacher_class.semester = '2' AND student_course.classID = 1 AND student_course.studentID = '".$id."'
@@ -160,7 +144,6 @@ class Model_users extends CI_Model {
 
 	
    function student_list(){
-
    	    $query = $this->db->query("SELECT DISTINCT studentID, student.lname, student.mname, student.fname, program_year.effective_year, program.programName 
                                                             FROM student_course 
                                                             INNER JOIN student ON student_course.studentID = student.student_id
@@ -172,13 +155,13 @@ class Model_users extends CI_Model {
    															WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' ");
    	
    	    return $query->result();
-
-   }
+    }
 
     function notify_message($alert_type, $glyphicon, $message){
         $output = '
         <div class="alert '.$alert_type.' alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert"><i class="icon-remove-sign"></i> </button>
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="icon-remove"></i></button>
+            <i class="'.$glyphicon.'"></i>
             '.$message.'
         </div>';
 

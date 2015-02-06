@@ -12,7 +12,7 @@
                                 <div class="alert alert-danger" role="alert">', 
                                 '</div>');
                             ?>   
-                                <?php echo form_open('site/login_validation'); ?>
+                                <?php echo form_open(); ?>
                                     <div class="form-group">
                                         <input type="text" id="idnum" class="login-field form-control" name="idnum" value="<?php echo set_value('idnum'); ?>" required placeholder="Username">
                                     </div>

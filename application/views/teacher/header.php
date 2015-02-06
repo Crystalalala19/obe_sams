@@ -24,7 +24,6 @@
     <link rel="icon" href="<?php echo base_url();?>assets/img/icon.png">
     <!--  Bootstrap Style -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap-admin.min.css">
-
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap-responsive.min.css">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600">
@@ -42,7 +41,7 @@
     <!-- PDF works  -->
     <!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/dataTables.bootstrap.css"> -->
 
-    <!-- PDF doesn't work -->
+    <!-- PDF doesn't work, EDIT: now fixed -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/dataTables.bootstrapv3.css">
 
     <!-- End DataTables Style -->
@@ -71,7 +70,7 @@
     <!--  Jquery Core Script -->
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/jquery-admin.min.js"></script>
     <!--  Core Bootstrap Script -->
-    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/bootstrap-admin.js"></script>
+    <script type="text/javascript" language="javascript" src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/base-admin.js"></script>
 
     <!-- Datatables -->
@@ -140,7 +139,7 @@
                     </li>
                     <li <?php uri_match('course_list');?> id="courselist">
                         <a href="<?php echo base_url('site/course_list'); ?>"><i class="icon-list"></i>
-                            <span>Course</span> 
+                            <span>Class List</span> 
                         </a>
                     </li>
                     <li <?php uri_match('student_list');?> id="studentlist">
@@ -148,8 +147,6 @@
                             <span>Students</span> 
                         </a>
                     </li>
-
-
                 </ul>
             </div>
             <!-- /container --> 

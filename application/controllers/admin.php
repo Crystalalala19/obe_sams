@@ -328,11 +328,11 @@ class Admin extends CI_Controller {
         );
 
         if(!$this->model_admin->get_programYear($year_data)) {
-            $message = '<strong>Program Year</strong> does not exist!';
+            $message = '<strong>Program Year</strong> does not exist.';
             $data['message'] = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
         }
         elseif(!$this->model_admin->get_programID($program_data)) {
-            $message = '<strong>Program</strong> does not exist!';
+            $message = '<strong>Program</strong> does not exist.';
             $data['message'] = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
         }
         else {
@@ -355,8 +355,8 @@ class Admin extends CI_Controller {
         );
 
         if(!$this->model_admin->get_programID($program_data)) {
-            $message = '<strong>Program</strong> does not exist!';
-            $message = $this->model_admin->notify_message('alert-info', 'icon-exclamation', $message);
+            $message = '<strong>Program</strong> does not exist.';
+            $message = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
             $this->session->set_flashdata('message', $message);
             redirect('admin/programs/view');
         }
@@ -388,14 +388,14 @@ class Admin extends CI_Controller {
         );
 
         if(!$this->model_admin->get_programYear($year_data)) {
-            $message = '<strong>Program Year</strong> does not exist!';
-            $message = $this->model_admin->notify_message('alert-info', 'icon-exclamation', $message);
+            $message = '<strong>Program Year</strong> does not exist.';
+            $message = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
             $this->session->set_flashdata('message', $message);
             redirect('admin/programs/view');
         }
         elseif(!$this->model_admin->get_programID($program_data)) {
-            $message = '<strong>Program</strong> does not exist!';
-            $message = $this->model_admin->notify_message('alert-info', 'icon-exclamation', $message);
+            $message = '<strong>Program</strong> does not exist.';
+            $message = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
             $this->session->set_flashdata('message', $message);
             redirect('admin/programs/view');
         }
@@ -664,17 +664,24 @@ class Admin extends CI_Controller {
 
         $check_teacher = $this->model_admin->check_teacher($teacher_id);
         $check_class = $this->model_admin->check_teacherClass($teacher_id);
+
+        if(empty($year)) {
+            $message = 'Select an Academic Year to view assigned classes.';
+            $message = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
+
+            $data['info'] = $message;
+        }
         
         if($check_teacher == FALSE) {
             $message = '<strong>ID</strong> does not exist!';
-            $message = $this->model_admin->notify_message('alert-info', 'icon-ok', $message);
+            $message = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
+            $data['message'] = $message;
         }
         elseif($check_class == FALSE) {
             $message = '<strong>Teacher</strong> has no classes.';
-            $message = $this->model_admin->notify_message('alert-info', 'icon-ok', $message);
+            $message = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
+            $data['message'] = $message;
         }
-
-        $data['message'] = $message;
 
         $data['academic_year'] = $year;
         $data['year_classes'] = $this->model_admin->get_teacherClasses($teacher_id);

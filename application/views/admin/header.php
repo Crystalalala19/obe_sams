@@ -41,7 +41,7 @@
     <!-- PDF works  -->
     <!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/dataTables.bootstrap.css"> -->
 
-    <!-- PDF doesn't work -->
+    <!-- PDF doesn't work, EDIT: now fixed -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/dataTables.bootstrapv3.css">
 
     <!-- End DataTables Style -->
@@ -70,7 +70,7 @@
     <!--  Jquery Core Script -->
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/jquery-admin.min.js"></script>
     <!--  Core Bootstrap Script -->
-    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/bootstrap-admin.js"></script>
+    <script type="text/javascript" language="javascript" src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/base-admin.js"></script>
 
     <!-- Datatables -->
@@ -102,7 +102,7 @@
             <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 
                 <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> </a>
-                <a class="brand" href="index.html">
+                <a class="brand" href="<?php echo base_url('admin');?>">
                 <img src="<?php echo base_url();?>assets/img/obesams.png" class="navbar-brand-logo " alt="" />
                 
                 </a> 

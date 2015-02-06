@@ -9,8 +9,24 @@ class Site extends CI_Controller {
 
 	public function index() {
 		$data['title'] = "OBE SAMS Academic";
-        $data['user'] = $this->model_users->select_user();
         
+        $this->load->library('form_validation');
+        $this->load->library('encrypt');
+
+        $this->form_validation->set_rules('idnum', 'ID Number', 'required|trim|callback_validate_credentials');
+        $this->form_validation->set_rules('password', 'Password', 'required|trim');
+
+        if ($this->form_validation->run()) {
+            $user_data = array(
+                'teacher_id' => $this->input->post('idnum'),
+                'is_logged_in' => 1,
+                'role' => $this->model_users->scalar('teacher','role')
+            );
+
+            $this->session->set_userdata($user_data);
+            redirect('site/members'); 
+        }
+
 		$this->load->view("index/header", $data);
 		$this->load->view("index/view_home");
 		$this->load->view("index/footer");
@@ -39,33 +55,6 @@ class Site extends CI_Controller {
 		$this->load->view('index/restricted');
 	}
 
-   public function login_validation() {
-
-        $this->load->library('form_validation');
-        $this->load->library('encrypt');
-
-        $this->form_validation->set_rules('idnum', 'ID Number', 'required|trim|callback_validate_credentials');
-        $this->form_validation->set_rules('password', 'Password', 'required|trim');
-
-        if ($this->form_validation->run()) {
-            $data = array(
-                'teacher_id' => $this->input->post('idnum'),
-                'is_logged_in' => 1,
-                'role' => $this->model_users->scalar('teacher','role')
-            );
-
-            $this->session->set_userdata($data);
-            redirect('site/members'); 
-        } 
-        else {
-            $data['title'] = "Outcome-based Education";
-
-            $this->load->view("index/header", $data);
-            $this->load->view("index/view_home");
-            $this->load->view("index/footer");
-        }
-    }
-
     public function validate_credentials($query) {
         $data = array('teacher_id' => $this->input->post('idnum'));
         $pass = $this->input->post('password');
@@ -73,7 +62,7 @@ class Site extends CI_Controller {
             return true;
         } 
         else {
-            $this->form_validation->set_message('validate_credentials', 'Incorrect ID or password.');
+            $this->form_validation->set_message('validate_credentials', 'Incorrect Username and/or Password combination.');
             return false;
         }
     }
@@ -85,42 +74,44 @@ class Site extends CI_Controller {
 
 
      function course_list(){
-
         $year = $this->uri->segment(3);
+
+        if(empty($year)) {
+            $message = 'Select an Academic Year to view assigned classes.';
+            $message = $this->model_users->notify_message('alert-info', 'icon-info-sign', $message);
+
+            $data['info'] = $message;
+        }
 
         $data['academic_year'] = $year;
         $data['first_sem'] = $this->model_users->get_1stSemester($year);
         $data['second_sem'] = $this->model_users->get_2ndSemester($year);
         $data['summer'] = $this->model_users->get_summer($year);
         $data['select_SY'] = $this->model_users->select_SY();
-        
-        //print_r($data['select_SY']);
-        //die();
 
         $data['user'] = $this->model_users->select_user();
         $data['title'] = "Outcome-based Education";
 
         if($data['first_sem'] == FALSE) {
-            $message1 = 'No classes found in record. Please contact the administrator to assign you a class.';
-            $data['message1'] = $this->model_users->notify_message('alert-danger', 'glyphicon-info-sign', $message1);
+            $message1 = 'No classes assigned for First Semester. If you think this is a problem, please contact the Chairman.';
+            $data['message1'] = $this->model_users->notify_message('alert-info', 'icon-info-sign', $message1);
         } else {
             $data['message1'] = '';
         }
 
         if($data['second_sem'] == FALSE) {
-            $message2 = 'No classes found in record. Please contact the administrator to assign you a class.';
-            $data['message2'] = $this->model_users->notify_message('alert-danger', 'glyphicon-info-sign', $message2);
+            $message2 = 'No classes assigned for Second Semester. If you think this is a problem, please contact the Chairman.';
+            $data['message2'] = $this->model_users->notify_message('alert-info', 'icon-info-sign', $message2);
         } else {
             $data['message2'] = '';
         }
 
         if($data['summer'] == FALSE) {
-            $message3 = 'No classes found in record. Please contact the administrator to assign you a class.';
-            $data['message3'] = $this->model_users->notify_message('alert-danger', 'glyphicon-info-sign', $message3);
+            $message3 = 'No classes assigned for Summer. If you think this is a problem, please contact the Chairman.';
+            $data['message3'] = $this->model_users->notify_message('alert-info', 'icon-info-sign', $message3);
         } else {
             $data['message3'] = '';
         }
-
 
         $this->load->view("teacher/header", $data);
         $this->load->view('teacher/course_list', $data);
@@ -135,13 +126,19 @@ class Site extends CI_Controller {
 
         $data['class_list'] = $this->model_users->select_class($class_id);
         $data['select_schedule'] = $this->model_users->select_schedule($class_id);
-        $data['select_programName'] = $this->model_users->select_programName($class_id);
-        $data['get_po'] = $this->model_users->get_po($class_id);
+
+        $select_schedule = $data['select_schedule'];
+        $student_course = $select_schedule[0]->courseCode;
+        $student_courseID = $this->model_users->get_courseID($student_course);
+
+        $data['select_programName'] = $this->model_users->select_programName($student_courseID);
+       
+        $data['get_po'] = $this->model_users->get_po($student_courseID);
 
         foreach($data['class_list'] as $key => $val) {
-            $data['class_list'][$key]['score'] = $this->model_users->get_studentPOGRADE($val['studentID']);
+            $data['class_list'][$key]['score'] = $this->model_users->get_studentPoGrade($val['studentID'], $class_id);
             $data['class_list'][$key]['grade'] = array();
-            $data['class_list'][$key]['poID'] = $this->model_users->get_student_poID($val['studentID']);
+            $data['class_list'][$key]['poID'] = $this->model_users->get_studentPoID($val['studentID'], $class_id);
             $i = 0;
 
             foreach($data['get_po'] as $key1 => $val1) {
@@ -159,15 +156,11 @@ class Site extends CI_Controller {
         $data['title'] = "Outcome-based Education";
 
         if($data['class_list'] == FALSE) {
-            $message = 'No students found in record. Please upload students list with its PO grade.';
-            $data['message'] = $this->model_users->notify_message('alert-danger', 'glyphicon-info-sign', $message);
+            $message = 'Your class is empty. Please upload students list with its PO grades.';
+            $data['message'] = $this->model_users->notify_message('alert-info', 'icon-info-sign', $message);
         } else {
             $data['message'] = '';
         }
-
-        $select_schedule = $data['select_schedule'];
-        $student_course = $select_schedule[0]->courseCode;
-        $student_courseID = $this->model_users->get_courseID($student_course);
 
         $config['upload_path'] = './uploads/';
         $config['allowed_types'] = 'csv';
@@ -242,13 +235,13 @@ class Site extends CI_Controller {
 
                 if($result['is_success'] == FALSE) {
                     $message = '<strong>Error: </strong>Uploading grades.';
-                    $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
+                    $message = $this->model_users->notify_message('alert-danger', 'icon-exclamation', $message);
 
                     $this->session->set_flashdata('message', $message);
                 }
                 else {
                     $message = '<strong>Success!</strong> Grades uploaded.';
-                    $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
+                    $message = $this->model_users->notify_message('alert-success', 'icon-ok', $message);
 
                     $this->session->set_flashdata('message', $message);
                 }
@@ -256,7 +249,7 @@ class Site extends CI_Controller {
             }
             else {
                 $message = '<strong>Error: </strong> Inserting .CSV file.';
-                $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
+                $message = $this->model_users->notify_message('alert-success', 'icon-ok', $message);
 
                 $this->session->set_flashdata('message', $message);
                 redirect(current_url());
@@ -279,14 +272,14 @@ class Site extends CI_Controller {
 
         if($data['scorecard1stSem'] == FALSE) {
             $message = 'No courses found in record.';
-            $data['message'] = $this->model_users->notify_message('alert-danger', 'glyphicon-info-sign', $message);
+            $data['message'] = $this->model_users->notify_message('alert-info', 'icon-info-sign', $message);
         } else {
             $data['message'] = '';
         }
 
         if($data['scorecard2ndSem'] == FALSE) {
             $message1 = 'No courses found in record.';
-            $data['message1'] = $this->model_users->notify_message('alert-danger', 'glyphicon-info-sign', $message1);
+            $data['message1'] = $this->model_users->notify_message('alert-info', 'icon-info-sign', $message1);
         } else {
             $data['message1'] = '';
         }
@@ -303,7 +296,7 @@ class Site extends CI_Controller {
 
         if($data['student_list'] == FALSE) {
             $message = 'No students found in record. Please add students to your assigned classes.';
-            $data['message'] = $this->model_users->notify_message('alert-danger', 'glyphicon-info-sign', $message);
+            $data['message'] = $this->model_users->notify_message('alert-info', 'icon-info-sign', $message);
         } else {
             $data['message'] = '';
         }

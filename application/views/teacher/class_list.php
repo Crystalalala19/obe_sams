@@ -2,8 +2,6 @@
 <link href="<?php echo base_url();?>assets/css/bootstrap-editable.css" rel="stylesheet">
 <link href="<?php echo base_url();?>assets/css/bootstrap-filterable.css" rel="stylesheet">
 
-
-
 <div class="main-inner">
     <div class="container">
         <div class="row">
@@ -79,15 +77,9 @@
                                 <tfoot>
                                     <tr>
                                         <td colspan="2"><center>Average</center></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <?php for($x = 1; $x <= $po_count; $x++):?>
+                                            <td></td>
+                                        <?php endfor;?>
                                         <td></td>
                                     </tr>
                                 </tfoot>
