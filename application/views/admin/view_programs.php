@@ -87,10 +87,9 @@
                                         <th width="12%">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr id="toBeRemoved">
-                                        <td>Please select a program.</td>
-                                        <td></td>
+                                <tbody class="toBeRemoved">
+                                    <tr>
+                                        <td colspan="2">Please select a program.</td>
                                     </tr>   
                                 </tbody>
                             </table>
@@ -114,8 +113,8 @@
             if(selectedValue == '') {
                 $("#delprogram").hide();
 
-                $("#toBeRemoved td").remove();
-                $("#toBeRemoved").append(
+                $(".toBeRemoved td").remove();
+                $(".toBeRemoved").append(
                     $("<td colspan='2'>").html("No program selected.")
                 ).appendTo('#view_programs');
             }
@@ -128,21 +127,21 @@
                     success: function(response) {
                         $("#delprogram").show().attr("href", "delete/program/"+encodeURIComponent(selectedValue));
 
-                        $("#toBeRemoved td").remove();
+                        $(".toBeRemoved td").remove();
                         if(jQuery.isEmptyObject(response)) {
-                            $("#toBeRemoved").append(
-                                $("<td colspan='2'>").html("No Effective Years found.")
+                            $(".toBeRemoved").append(
+                                $("<td colspan='2'>").html("No records found.")
                             ).appendTo('#view_programs');
                         }
                         else {
+                            var trHTML = '';
                             $.each(response, function(key, value) {
-                                    $("#toBeRemoved").append(
-                                        $('<td>').html(value.effective_year+" - "+ value.effective_year),
-                                        $('<td>').html("<div class='btn-group inline pull-left'><a type='button' href='<?php echo base_url();?>admin/programs/outcome/"+encodeURIComponent(selectedValue)+"/"+value.effective_year+"' class='btn btn-warning btn-sm btn-responsive' title='Program Outcome'><i class='icon-list'></i></a><a type='button' href='<?php echo base_url();?>admin/programs/edit/"+encodeURIComponent(selectedValue)+"/"+value.effective_year+"' class='btn btn-primary btn-sm btn-responsive' title='Edit Curriculum'><i class='icon-edit'></i></a><a type='button' href='<?php echo base_url();?>admin/programs/delete/"+encodeURIComponent(selectedValue)+"/"+value.effective_year+"' class='btn btn-danger btn-sm btn-responsive' title='Delete Effective Year' onclick='return confirm(\"Do you want to permanently delete?\");'><i class='icon-trash'></i></a></div>")
-                                    ).appendTo('#view_programs');
+                                trHTML += "<tr><td>"+value.effective_year+" - "+ (parseInt(value.effective_year, 10) + 1)+"</td><td>"+"<div class='btn-group inline pull-left'><a type='button' href='<?php echo base_url();?>admin/programs/outcome/"+encodeURIComponent(selectedValue)+"/"+value.effective_year+"' class='btn btn-warning btn-sm btn-responsive' title='Program Outcome'><i class='icon-list'></i></a><a type='button' href='<?php echo base_url();?>admin/programs/edit/"+encodeURIComponent(selectedValue)+"/"+value.effective_year+"' class='btn btn-primary btn-sm btn-responsive' title='Edit Curriculum'><i class='icon-edit'></i></a><a type='button' href='<?php echo base_url();?>admin/programs/delete/"+encodeURIComponent(selectedValue)+"/"+value.effective_year+"' class='btn btn-danger btn-sm btn-responsive' title='Delete Effective Year' onclick='return confirm(\"Do you want to permanently delete?\");'><i class='icon-trash'></i></a></div></td></tr>";
                             });
-                            console.log(response);
+
+                            $('.toBeRemoved').append(trHTML);
                         }
+                        console.log(response);
                     }
                 });
             }

@@ -36,7 +36,7 @@
 
                                 <select name="academic_year" id="selector" class="selectpicker show-tick" title="Select Academic Year" data-live-search="true" multiple data-max-options="1" data-size="auto">
                                     <?php foreach($year_classes as $row):?>
-                                    <option value='<?php echo $row['school_year'];?>'><?php echo $row['school_year'].' - '.($row['school_year']+1);?></option>
+                                    <option value='<?php echo $row['school_year'];?>' <?php if($academic_year == $row['school_year']) echo 'selected="selected"'; ?>><?php echo $row['school_year'].' - '.($row['school_year']+1);?></option>
                                     <?php endforeach;?>
                                 </select>
                             </div>

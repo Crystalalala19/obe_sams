@@ -30,7 +30,7 @@
                             <div class="control-group">
                                 <select name="academic_year" id="selector" class="selectpicker show-tick" title="Select Academic Year" data-live-search="true" multiple data-max-options="1" data-size="auto">
                                     <?php foreach($select_SY as $row): ?>
-                                        <option value="<?php echo $row->school_year;?>"><?php echo $row->school_year.' - '.($row->school_year+1);?></option>
+                                        <option value="<?php echo $row->school_year;?>" <?php if($academic_year == $row->school_year) echo 'selected="selected"'; ?>><?php echo $row->school_year.' - '.($row->school_year+1);?></option>
                                     <?php endforeach;?>
                                 </select>
                             </div>
@@ -69,7 +69,7 @@
                                                     <?php foreach($first_sem as $row1): ?>
                                                     <tr>
                                                         <td><?php echo $row1->group_num;?></td>
-                                                        <td><?php echo $row1->courseCode." ";?></td>
+                                                        <td><?php echo $row1->courseCode;?></td>
                                                         <td><?php echo $row1->start_time."-".$row1->end_time." ".$row1->days;?></td>
                                                         <td>
                                                             <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/class_list/<?php echo $row1->ID;?>">
@@ -101,7 +101,7 @@
                                                     <?php foreach($second_sem as $row2): ?>
                                                     <tr>
                                                         <td><?php echo $row2->group_num;?></td>
-                                                        <td><?php echo $row2->courseCode." ";?></td>
+                                                        <td><?php echo $row2->courseCode;?></td>
                                                         <td><?php echo $row2->start_time."-".$row2->end_time." ".$row2->days;?></td>
                                                         <td>
                                                             <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/class_list/<?php echo $row2->ID;?>">
@@ -133,7 +133,7 @@
                                                     <?php foreach($summer as $row3): ?>
                                                     <tr>
                                                         <td><?php echo $row3->group_num;?></td>
-                                                        <td><?php echo $row3->courseCode." ";?></td>
+                                                        <td><?php echo $row3->courseCode;?></td>
                                                         <td><?php echo $row3->start_time."-".$row3->end_time." ".$row3->days;?></td>
                                                         <td>
                                                             <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/class_list/<?php echo $row3->ID;?>">
