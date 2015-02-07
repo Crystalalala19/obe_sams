@@ -564,7 +564,7 @@ class Admin extends CI_Controller {
         $data['title'] = 'Admin - Upload Classes';
         $data['header'] = 'Upload Classes';
         $data['message'] = '';
-        
+
         $this->load->view('admin/header', $data);
         $this->load->view('admin/upload_class', $data);
         $this->load->view('admin/footer');
@@ -872,5 +872,20 @@ class Admin extends CI_Controller {
         $this->load->view('admin/header', $data);
         $this->load->view('admin/view_report_student', $data);
         $this->load->view('admin/footer');
+    }
+
+    public function download($file_type = '') {
+        $this->load->helper('download');
+
+        if($file_type == 'csv') {
+            $data = file_get_contents('uploads/Template Upload Class.csv');
+            $name = 'Template Upload Class.csv';
+        }
+        elseif($file_type == 'pdf') {
+            $data = file_get_contents('uploads/test.pdf');
+            $name = 'Test for PDF.pdf';
+        }
+
+        force_download($name, $data); 
     }
 }

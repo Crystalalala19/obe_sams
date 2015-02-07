@@ -33,16 +33,20 @@
                                 <?php endforeach;?> 
                             </div>
                         <?php endif;
-
                             $attributes = array('class' => 'col-md-4');
                             echo form_open_multipart('admin/upload', $attributes);
                         ?>
-                                <div class="form-group">
+                                <div class="control-group">
+                                    <div class="pull-right">
+                                        <h3><i class="icon-download-alt icon-2x"></i> Download Templates:</h3>
+                                        <a href="<?php echo base_url('admin/download/csv');?>"><img src="<?php echo base_url('assets/img/excel.png');?>"></a>
+                                        <a href="<?php echo base_url('admin/download/pdf');?>"><img src="<?php echo base_url('assets/img/pdf.png');?>"></a>
+                                    </div>
                                     <label for="userfile">Upload .CSV File: </label>
                                     <input type="file" name="userfile" id="userfile" class="filestyle" data-buttonText="Find file" data-buttonName="btn-primary" data-iconName="icon-upload-alt">
                                 </div>
                                 <br>
-                                <div class="form-group">
+                                <div class="control-group">
                                     <input type="submit" class="btn btn-success" name="submit" value="Submit">
                                     <a href="<?php echo base_url('admin/teachers/view');?>">
                                         <button type="button" class="btn btn-info"><i class="icon-angle-left"></i> Go Back</button>

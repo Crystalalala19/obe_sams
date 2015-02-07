@@ -305,4 +305,19 @@ class Site extends CI_Controller {
         $this->load->view('teacher/student_list', $data);
         $this->load->view("teacher/footer");
     }
+
+    public function download($file_type = '') {
+        $this->load->helper('download');
+        
+        if($file_type == 'class') {
+            $data = file_get_contents('uploads/Template Grades.csv');
+            $name = 'Template Grades.csv';
+        }
+        elseif($file_type == 'pdf') {
+            $data = file_get_contents('uploads/test.pdf');
+            $name = 'Test for PDF.pdf';
+        }
+
+        force_download($name, $data); 
+    }
 }

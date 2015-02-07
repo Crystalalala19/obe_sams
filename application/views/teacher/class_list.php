@@ -18,9 +18,11 @@
                         </div> <!-- /widget-header -->
 
                         <div class="widget-content">
-                            <a href="<?php echo base_url('site/course_list');?>">
-                                <button type="button" class="btn btn-info"><i class="icon-angle-left"></i> Go Back</button>
-                            </a>
+                            <div class="pull-left">
+                                <a href="<?php echo base_url('site/course_list');?>">
+                                    <button type="button" class="btn btn-info"><i class="icon-angle-left"></i> Go Back</button>
+                                </a>
+                            </div>
                             <div class="clearfix"></div><br>
 
                             <?php
@@ -95,13 +97,19 @@
                             </table>
                             <br>
                             <?php echo form_open_multipart();?>
-                                <div class="form-group">
+                                <div class="control-group">
+                                    <div class="pull-right">
+                                        <h3><i class="icon-download-alt icon-2x"></i> Download Templates:</h3>
+                                        <a href="<?php echo base_url('site/download/class');?>"><img src="<?php echo base_url('assets/img/excel.png');?>"></a>
+                                        <a href="<?php echo base_url('site/download/pdf');?>"><img src="<?php echo base_url('assets/img/pdf.png');?>"></a>
+                                    </div>
+
                                     <label for="userfile">Upload .CSV File: </label>
                                     <input type="hidden" name="teacher_id" value="<?php echo $this->session->userdata('teacher_id');?>">
                                     <input type="file" name="userfile" id="userfile" class="filestyle" data-buttonText="Find file" data-buttonName="btn-primary" data-iconName="icon-upload-alt">
                                 </div>
 
-                                <div class="form-group">
+                                <div class="control-group">
                                     <input type="submit" class="btn btn-success" name="submit" value="Submit">
                                 </div>
                             </form>  
