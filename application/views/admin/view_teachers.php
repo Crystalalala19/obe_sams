@@ -12,7 +12,6 @@
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/dataTables.tableTools.min.js"></script>
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/datatables-bootstrapv3.js"></script>
-
     <!-- End DataTables -->
 
     <div class="main-inner">
@@ -38,18 +37,16 @@
                             <table id="view_teachers" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th width="15%">ID #</th>
-                                        <th width="30%">First Name</th>
-                                        <th width="30%">Last Name</th>
-                                        <th width="10%">Action</th>
+                                        <th width="20%">ID #</th>
+                                        <th>Name</th>
+                                        <th width="10%" class="no-sort">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach($teacher_list as $row): ?>
                                         <tr>
                                             <td><?php echo $row['teacher_id'];?></td>
-                                            <td><?php echo $row['fname'];?></td>
-                                            <td><?php echo $row['lname'];?></td>
+                                            <td><?php echo $row['fname'].' '. $row['lname'];?></td>
                                             <td>
                                                 <div class="btn-group inline pull-left">
                                                     <a type="button" title="View Classes" class="btn btn-warning btn-small btn-responsive" href="<?php echo base_url();?>admin/teachers/classes/<?php echo $row['teacher_id'];?>"><i class="icon-book"></i></a>
@@ -117,11 +114,11 @@
     <script type="text/javascript" language="javascript">
         var dataTableOptions = {
             //Auto sort column
-            "order": [[2,'asc']],
+            "order": [[1,'asc']],
 
             //Disable sorting with class no-sort
-            columnDefs: [
-              { targets: 'no-sort', orderable: false }
+            "columnDefs": [
+                { targets: 'no-sort', orderable: false }
             ],
 
             "bPaginate": false,
@@ -135,9 +132,7 @@
             "sSwfPath": "http://cdn.datatables.net/tabletools/2.2.3/swf/copy_csv_xls_pdf.swf",
             "aButtons": [ {
                     "sExtends": "copy",
-                    "sButtonText": "Copy",
-                    //Columns to export as data, exluded Action column
-                    "mColumns": [ 0, 1, 2 ],
+                    "sButtonText": "Copy"
                 }, 
                 {
                     "sExtends":    "collection",
@@ -147,11 +142,13 @@
                             "oSelectorOpts": {
                                 page: 'current'
                             },
-                            "mColumns": [ 0, 1, 2 ]
+                            //Columns to export as data, exluded Action column
+                            "mColumns": [ 0, 1]
                         }, {
                             "sExtends": "pdf",
                             "sButtonText": "PDF",
-                            "mColumns": [ 0, 1, 2 ]
+                            //Columns to export as data, exluded Action column
+                            "mColumns": [ 0, 1]
                         }
                     ]
                 }

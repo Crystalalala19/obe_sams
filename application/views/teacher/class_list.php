@@ -1,146 +1,198 @@
-<!-- For filter table -->
-<link href="<?php echo base_url();?>assets/css/bootstrap-editable.css" rel="stylesheet">
-<link href="<?php echo base_url();?>assets/css/bootstrap-filterable.css" rel="stylesheet">
+    <!-- PDF doesn't work, EDIT: now fixed -->
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/dataTables.bootstrapv3.css">
 
-<div class="main-inner">
-    <div class="container">
-        <div class="row">
-            <div class="span12">
-                <div class="widget">
-                    <div class="widget-header">
-                        <i class="icon-group"></i>
-                        <h3>Students</h3>
-                    </div> <!-- /widget-header -->
+    <!-- Datatables Script -->
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/dataTables.tableTools.min.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/datatables-bootstrapv3.js"></script>
+    <!-- End DataTables -->
 
-                    <div class="widget-content">
-                        <?php
-                            echo $this->session->flashdata('message');
-                            if (!empty($message)) echo $message;
+    <div class="main-inner">
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <div class="widget">
+                        <div class="widget-header">
+                            <i class="icon-group"></i>
+                            <h3>Students</h3>
+                        </div> <!-- /widget-header -->
 
-                            echo validation_errors('
-                            <div class="alert alert-danger alert-dismissible" role="alert">
-                                <button type="button" class="close" data-dismiss="alert"><i class="icon-remove-sign"></i></button>
-                                <i class="icon-exclamation-sign" aria-hidden="true"></i> ', 
-                            '</div>');
+                        <div class="widget-content">
+                            <a href="<?php echo base_url('site/course_list');?>">
+                                <button type="button" class="btn btn-info"><i class="icon-angle-left"></i> Go Back</button>
+                            </a>
+                            <div class="clearfix"></div><br>
 
-                            $po_count = count($get_po);
-                            $attributes = array('class' => 'col-md-4');
-                        ?>
+                            <?php
+                                echo $this->session->flashdata('message');
+                                if (!empty($message)) echo $message;
 
-                        <div class="pull-left">
-                            <div class="alert alert-info">
-                            <?php foreach($select_schedule as $row1): ?>
-                                <h4>
-                                    <?php echo $row1->courseCode.' ';?><?php echo '| Group '; echo $row1->group_num.'';?>
-                                    <?php 
-                                        echo '<br> ';
-                                        echo $row1->start_time.' - ';
-                                        echo $row1->end_time.' ';
-                                        echo $row1->days.'<br>';
-                                    ?>
-                                    Semester: <?php echo $row1->semester,' | ';?> School Year: <?php echo $row1->school_year; ?>
-                                </h4>
-                             <?php endforeach; ?>
+                                echo validation_errors('
+                                <div class="alert alert-danger alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert"><i class="icon-remove-sign"></i></button>
+                                    <i class="icon-exclamation-sign" aria-hidden="true"></i> ', 
+                                '</div>');
+
+                                $po_count = count($get_po);
+                                $attributes = array('class' => 'col-md-4');
+                            ?>
+
+                            <div class="pull-left">
+                                <div class="alert alert-info">
+                                <?php foreach($select_schedule as $row1): ?>
+                                    <h4>
+                                        <?php echo $row1->courseCode.' ';?><?php echo '| Group '; echo $row1->group_num.'';?>
+                                        <?php 
+                                            echo '<br> ';
+                                            echo $row1->start_time.' - ';
+                                            echo $row1->end_time.' ';
+                                            echo $row1->days.'<br>';
+                                        ?>
+                                        Semester: <?php echo $row1->semester,' | ';?> School Year: <?php echo $row1->school_year; ?>
+                                    </h4>
+                                 <?php endforeach; ?>
+                                </div>
                             </div>
-                        </div>
 
-                        <table id="view_classlist" class="table table-striped table-bordered dataTable no-footer">
-                            <thead>
-                                <tr>
-                                    <th>Student ID <i class="icon-filter"></i></th>
-                                    <th>Name <i class="icon-filter"></i></th>
-                                    <?php for($x = 1; $x <= $po_count; $x++):?>
-                                        <th>PO <?php echo $x;?> <i class="icon-filter"></i></th>
-                                    <?php endfor; $row_num=1;?>
-                                    <th>View Scorecard</th>
-                                </tr>
-                            </thead>
-                            
-                            <tbody>
-                                <?php foreach($class_list as $row): ?>   
-                                <tr>          
-                                    <td><?php echo $row['studentID'];?></td>
-                                    <td><?php echo $row['fname']; echo " ".$row['mname']; echo " ".$row['lname'];?></td>
-                                    <?php foreach($row['grade'] as $row1): ?>
-                                        <td><?php echo $row1;?></td>
-                                    <?php endforeach; $row_num++; ?>   
-                                    <td>
-                                        <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row['student_id'];?>">
-                                            <i class="icon-eye-open"></i> View Scorecard
-                                        </a>
-                                    </td>
-                                </tr>
-                                <?php endforeach; ?>   
-                            </tbody>
+                            <table id="view_classlist" class="table table-striped table-bordered dataTable no-footer">
+                                <thead>
+                                    <tr>
+                                        <th width="10%">Student ID</i></th>
+                                        <th>Name</i></th>
+                                        <?php for($x = 1; $x <= $po_count; $x++):?>
+                                            <th>PO <?php echo $x;?></i></th>
+                                        <?php endfor; $row_num=1;?>
+                                        <th width="5%" class="no-sort text-center">Scorecard</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+                                    <?php foreach($class_list as $row): ?>   
+                                    <tr>          
+                                        <td><?php echo $row['studentID'];?></td>
+                                        <td><?php echo $row['fname']." ".$row['lname'];?></td>
+                                        <?php foreach($row['grade'] as $row1): ?>
+                                            <td><?php echo $row1;?></td>
+                                        <?php endforeach; $row_num++; ?>   
+                                        <td>
+                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row['student_id'];?>">
+                                                <i class="icon-eye-open"></i> View
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>   
+                                </tbody>
 
-                            <tfoot>
-                                <tr>
-                                    <td colspan="2"><center>Average</center></td>
-                                    <?php for($x = 1; $x <= $po_count; $x++):?>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2"><center>Average</center></td>
+                                        <?php for($x = 1; $x <= $po_count; $x++):?>
+                                            <td></td>
+                                        <?php endfor;?>
                                         <td></td>
-                                    <?php endfor;?>
-                                    <td></td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                        <br>
-                        <?php echo form_open_multipart();?>
-                            <div class="form-group">
-                                <label for="userfile">Upload .CSV File: </label>
-                                <input type="hidden" name="teacher_id" value="<?php echo $this->session->userdata('teacher_id');?>">
-                                <input type="file" name="userfile" id="userfile" class="filestyle" data-buttonText="Find file" data-buttonName="btn-primary" data-iconName="icon-upload-alt">
-                            </div>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <br>
+                            <?php echo form_open_multipart();?>
+                                <div class="form-group">
+                                    <label for="userfile">Upload .CSV File: </label>
+                                    <input type="hidden" name="teacher_id" value="<?php echo $this->session->userdata('teacher_id');?>">
+                                    <input type="file" name="userfile" id="userfile" class="filestyle" data-buttonText="Find file" data-buttonName="btn-primary" data-iconName="icon-upload-alt">
+                                </div>
 
-                            <div class="form-group">
-                                <input type="submit" class="btn btn-success" name="submit" value="Submit">
-                            </div>
-                        </form>  
-                    </div>
-                </div> <!-- /widget -->                 
-            </div> <!-- /span12 -->         
-        </div> <!-- /row -->
-    </div> <!-- /container -->
-</div> <!-- /main-inner -->
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-success" name="submit" value="Submit">
+                                </div>
+                            </form>  
+                        </div>
+                    </div> <!-- /widget -->                 
+                </div> <!-- /span12 -->         
+            </div> <!-- /row -->
+        </div> <!-- /container -->
+    </div> <!-- /main-inner -->
 
-<script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/bootstrap-filestyle.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-<script src="<?php echo base_url();?>assets/js/bootstrap-editable.min.js"></script>
-<script src="<?php echo base_url();?>assets/js/filterable-utils.js"></script>
-<script src="<?php echo base_url();?>assets/js/filterable-cell.js"></script>
-<script src="<?php echo base_url();?>assets/js/filterable-row.js"></script>
-<script src="<?php echo base_url();?>assets/js/filterable.js"></script>
-<!-- End filter table -->
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/bootstrap-filestyle.min.js"></script>
+    
+    <script type="text/javascript">
+        var values = [],
+            table = document.getElementById('view_classlist'),
+            rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr'),
+            footer = table.getElementsByTagName('tfoot')[0];
 
-<script type="text/javascript">
-var values = [],
-  table = document.getElementById('view_classlist'),
-  rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr'),
-  footer = table.getElementsByTagName('tfoot')[0];
+        for(var i=2; i<11; i++){
+            values[i] = [];
+            for(var j=0, l=rows.length; j<l; j++){
+                values[i].push(
+                    parseFloat(
+                        rows[j].getElementsByTagName('td')[i]
+                      .innerHTML
+                    )
+                );
+            }
 
-for(var i=2; i<11; i++){
-  values[i] = [];
-  for(var j=0, l=rows.length; j<l; j++){
-    values[i].push(
-      parseFloat(
-        rows[j].getElementsByTagName('td')[i]
-          .innerHTML
-      )
-    );
-  }
+            var score = values[i].reduce(function(pv,cv){return pv + cv;},0) / values[i].length;
+            footer.getElementsByTagName('td')[i-1].innerHTML = Math.round(score * 100) / 100;
+          
+            if( isNaN(footer.getElementsByTagName('td')[i-1].innerHTML) )
+                footer.getElementsByTagName('td')[i-1].innerHTML = " ";
+        }
+    </script>
 
-  var score = values[i].reduce(function(pv,cv){return pv + cv;},0) / values[i].length;
-  footer.getElementsByTagName('td')[i-1].innerHTML = Math.round(score * 100) / 100;
-  
-  if( isNaN(footer.getElementsByTagName('td')[i-1].innerHTML) )
-    footer.getElementsByTagName('td')[i-1].innerHTML = " ";
-}
-</script>
+    <script type="text/javascript" language="javascript">
+        var d = document.getElementById('courselist');
+        d.className = d.className + " active";
 
-<script type="text/javascript" language="javascript">
-    var d = document.getElementById('courselist');
-    d.className = d.className + " active";
+        $('#view_classlist').filterable();
+    </script>
 
-    $('#view_classlist').filterable();
+    <script type="text/javascript" language="javascript">
+        var dataTableOptions = {
+            //Auto sort column
+            "order": [[1,'asc']],
 
-</script>
+            //Disable sorting with class no-sort
+            "columnDefs": [
+                { targets: 'no-sort', orderable: false }
+            ],
+
+            "bPaginate": false,
+            "bLengthChange": false,
+            "bFilter": true,
+            "bInfo": false,
+            "bAutoWidth": false 
+        };
+
+        var tableToolsOptions = {
+            "sSwfPath": "http://cdn.datatables.net/tabletools/2.2.3/swf/copy_csv_xls_pdf.swf",
+            "aButtons": [ {
+                    "sExtends": "copy",
+                    "sButtonText": "Copy"
+                }, 
+                {
+                    "sExtends":    "collection",
+                    "sButtonText": "Save as...",
+                    "aButtons":    [ {
+                            "sExtends": "xls",
+                            "oSelectorOpts": {
+                                page: 'current'
+                            },
+                            //Columns to export as data, exluded Action column
+                            "mColumns": "visible"
+                        }, {
+                            "sExtends": "pdf",
+                            "sButtonText": "PDF",
+                            //Columns to export as data, exluded Action column
+                            "mColumns": "visible"
+                        }
+                    ]
+                }
+            ]
+        };
+
+        var table = $('#view_classlist').dataTable( dataTableOptions );
+
+        var tt = new $.fn.dataTable.TableTools( table, tableToolsOptions );
+
+        $( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
+    </script>
