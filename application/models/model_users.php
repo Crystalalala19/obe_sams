@@ -6,7 +6,7 @@ class Model_users extends CI_Model {
 		parent::__construct();
 	}
 
-	public function scalar($teacher, $role){
+	function scalar($teacher, $role){
 		$this->db->where('teacher_id', $this->input->post('idnum'));
 		$this->db->select($role);                                                                                                                     
 
@@ -15,7 +15,7 @@ class Model_users extends CI_Model {
 		return $row['role'];
 	}
 
-	public function can_log_in($data, $pass){
+	function can_log_in($data, $pass){
         $this->load->library('encrypt');
 
 		$query = $this->db->get_where('teacher', $data);

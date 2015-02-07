@@ -73,7 +73,7 @@ class Site extends CI_Controller {
     }
 
 
-     function course_list(){
+    public function course_list(){
         $year = $this->uri->segment(3);
 
         if(empty($year)) {
@@ -118,7 +118,7 @@ class Site extends CI_Controller {
         $this->load->view("teacher/footer");
    }
 
-    function class_list(){
+    public function class_list(){
         $this->load->library('csvimport');
         $this->load->library('form_validation');
 
@@ -261,7 +261,7 @@ class Site extends CI_Controller {
         $this->load->view("teacher/footer");
     }
 
-    function scorecard(){
+    public function scorecard(){
         $id = $this->uri->segment(3);
 
         $data['scorecard'] = $this->model_users->scorecard($id);
@@ -289,7 +289,7 @@ class Site extends CI_Controller {
 	    $this->load->view("teacher/footer");
     }
 
-    function student_list(){
+    public function student_list(){
         $data['student_list'] = $this->model_users->student_list();  
         $data['user'] = $this->model_users->select_user();
         $data['title'] = "Outcome-based Education";

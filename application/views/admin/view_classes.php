@@ -44,7 +44,7 @@
                             <hr>
                             
                             <?php if(!empty($this->uri->segment(5))):?>                            
-                            <div class="span3">
+                            <div class="pull-left">
                                 <div class="alert alert-info">
                                     <h4>Academic Year: <?php echo $academic_year.' - '.($academic_year+1);?></h4>
                                 </div>
@@ -59,6 +59,7 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="tab1">
                                         <div class='panel panel-default grid'>
+                                            <?php if (!empty($message1)) echo $message1; ?>
                                             <table id="first_sem" class="table table-striped table-bordered">
                                                 <thead>
                                                     <tr>
@@ -84,6 +85,7 @@
 
                                     <div class="tab-pane" id="tab2">
                                         <div class='panel panel-default grid'>
+                                            <?php if (!empty($message2)) echo $message2; ?>
                                             <table id="second_sem" class="table table-striped table-bordered">
                                                 <thead>
                                                     <tr>
@@ -109,6 +111,7 @@
 
                                     <div class="tab-pane" id="tab3">
                                         <div class='panel panel-default grid'>
+                                            <?php if (!empty($message3)) echo $message3; ?>
                                             <table id="summer" class="table table-striped table-bordered">
                                                 <thead>
                                                     <tr>

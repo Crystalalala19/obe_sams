@@ -77,6 +77,7 @@ class Admin extends CI_Controller {
             'pyID' => $year_id
         );
 
+        $data['academic_year'] = $year;
         $data['course_list'] = $this->model_admin->get_courses($year_data);
         $data['po_list'] = $this->model_admin->get_pos($year_data);
         $data['year_id'] = $year_id;
@@ -688,6 +689,18 @@ class Admin extends CI_Controller {
         $data['first_sem'] = $this->model_admin->get_firstSem($teacher_id, $year);
         $data['second_sem'] = $this->model_admin->get_secondSem($teacher_id, $year);
         $data['summer'] = $this->model_admin->get_summer($teacher_id, $year);
+
+        if($data['first_sem'] == FALSE) {
+            $message1 = 'No classes assigned for First Semester.';
+            $data['message1'] = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message1);
+        }
+        if($data['second_sem'] == FALSE) {
+            $message2 = 'No classes assigned for Second Semester.';
+            $data['message2'] = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message2);
+        }if($data['summer'] == FALSE) {
+            $message3 = 'No classes assigned for Summer.';
+            $data['message3'] = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message3);
+        }
 
         $this->load->view('admin/header', $data);
         $this->load->view('admin/view_classes', $data);

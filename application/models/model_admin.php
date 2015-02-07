@@ -323,7 +323,8 @@ class Model_admin extends CI_Model {
     }
     
     function insert_classes($data) {
-        $this->db->insert_batch('teacher_class', $data);
+        $this->db->insert_on_duplicate_update_batch('teacher_class',$data);  
+        // $this->db->insert_batch('teacher_class', $data);
 
         return $this->check_query();
     }

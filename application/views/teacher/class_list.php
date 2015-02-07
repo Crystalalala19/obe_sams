@@ -27,7 +27,7 @@
                             $attributes = array('class' => 'col-md-4');
                         ?>
 
-                        <div class="span4">
+                        <div class="pull-left">
                             <div class="alert alert-info">
                             <?php foreach($select_schedule as $row1): ?>
                                 <h4>
@@ -44,59 +44,57 @@
                             </div>
                         </div>
 
-                        <div class="span11">
-                            <table id="view_classlist" class="table table-striped table-bordered dataTable no-footer">
-                                <thead>
-                                    <tr>
-                                        <th>Student ID <i class="icon-filter"></i></th>
-                                        <th>Name <i class="icon-filter"></i></th>
-                                        <?php for($x = 1; $x <= $po_count; $x++):?>
-                                            <th>PO <?php echo $x;?> <i class="icon-filter"></i></th>
-                                        <?php endfor; $row_num=1;?>
-                                        <th>View Scorecard</th>
-                                    </tr>
-                                </thead>
-                                
-                                <tbody>
-                                    <?php foreach($class_list as $row): ?>   
-                                    <tr>          
-                                        <td><?php echo $row['studentID'];?></td>
-                                        <td><?php echo $row['fname']; echo " ".$row['mname']; echo " ".$row['lname'];?></td>
-                                        <?php foreach($row['grade'] as $row1): ?>
-                                            <td><?php echo $row1;?></td>
-                                        <?php endforeach; $row_num++; ?>   
-                                        <td>
-                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row['student_id'];?>">
-                                                <i class="icon-eye-open"></i> View Scorecard
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <?php endforeach; ?>   
-                                </tbody>
+                        <table id="view_classlist" class="table table-striped table-bordered dataTable no-footer">
+                            <thead>
+                                <tr>
+                                    <th>Student ID <i class="icon-filter"></i></th>
+                                    <th>Name <i class="icon-filter"></i></th>
+                                    <?php for($x = 1; $x <= $po_count; $x++):?>
+                                        <th>PO <?php echo $x;?> <i class="icon-filter"></i></th>
+                                    <?php endfor; $row_num=1;?>
+                                    <th>View Scorecard</th>
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                <?php foreach($class_list as $row): ?>   
+                                <tr>          
+                                    <td><?php echo $row['studentID'];?></td>
+                                    <td><?php echo $row['fname']; echo " ".$row['mname']; echo " ".$row['lname'];?></td>
+                                    <?php foreach($row['grade'] as $row1): ?>
+                                        <td><?php echo $row1;?></td>
+                                    <?php endforeach; $row_num++; ?>   
+                                    <td>
+                                        <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row['student_id'];?>">
+                                            <i class="icon-eye-open"></i> View Scorecard
+                                        </a>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>   
+                            </tbody>
 
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="2"><center>Average</center></td>
-                                        <?php for($x = 1; $x <= $po_count; $x++):?>
-                                            <td></td>
-                                        <?php endfor;?>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2"><center>Average</center></td>
+                                    <?php for($x = 1; $x <= $po_count; $x++):?>
                                         <td></td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                            <br>
-                            <?php echo form_open_multipart();?>
-                                <div class="form-group">
-                                    <label for="userfile">Upload .CSV File: </label>
-                                    <input type="hidden" name="teacher_id" value="<?php echo $this->session->userdata('teacher_id');?>">
-                                    <input type="file" name="userfile" id="userfile" class="filestyle" data-buttonText="Find file" data-buttonName="btn-primary" data-iconName="icon-upload-alt">
-                                </div>
+                                    <?php endfor;?>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <br>
+                        <?php echo form_open_multipart();?>
+                            <div class="form-group">
+                                <label for="userfile">Upload .CSV File: </label>
+                                <input type="hidden" name="teacher_id" value="<?php echo $this->session->userdata('teacher_id');?>">
+                                <input type="file" name="userfile" id="userfile" class="filestyle" data-buttonText="Find file" data-buttonName="btn-primary" data-iconName="icon-upload-alt">
+                            </div>
 
-                                <div class="form-group">
-                                    <input type="submit" class="btn btn-success" name="submit" value="Submit">
-                                </div>
-                            </form>
-                        </div>    
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-success" name="submit" value="Submit">
+                            </div>
+                        </form>  
                     </div>
                 </div> <!-- /widget -->                 
             </div> <!-- /span12 -->         
