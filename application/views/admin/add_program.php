@@ -22,10 +22,11 @@
                                 '</div>');
                             ?>
                             <?php echo form_open('admin/programs/add'); ?>
+                                <p class="pull-left"><pre>Fields with <span class="red-req">*</span> are required.</pre></p>
                                 <div id="step-1">
                                     <p class="pull-right">Step 1 of 3</p>
                                     <div class="form-group col-md-6">
-                                        <label class="control-label" for="program_inp">Program:</label>
+                                        <label class="control-label" for="program_inp">Program: <span class="red-req">*</span></label>
                                         <?php if($program_list == FALSE):?>
                                             <div class="alert alert-info"><strong>Notice:</strong> No programs to list. <a href="<?php echo base_url(); ?>admin/programs/view">Click here to add.</a></div>
                                         <?php else:?>
@@ -37,11 +38,11 @@
                                         <?php endif;?>
                                     
                                         <?php if($program_list == TRUE):?>
-                                        <label class="control-label" for="effective_year">Effective Year:</label>
+                                        <label class="control-label" for="effective_year">Effective Year: <span class="red-req">*</span></label>
                                         <?php
                                             function yearDropdown($startYear, $endYear, $id="year"){
                                                 //start the select tag
-                                                echo "<select class='selectpicker show-tick' title='Select Program' data-live-search='true' multiple data-max-options='1' data-size='5' id=".$id." name=".$id." required>";
+                                                echo "<select class='selectpicker show-tick' title='Select Effective Year' data-live-search='true' multiple data-max-options='1' data-size='5' id=".$id." name=".$id." required>";
                                                     //echo each year as an option    
                                                     for ($i=$startYear;$i<=$endYear;$i++){
                                                     echo "<option value=".$i.">".$i."</option>n";    
@@ -57,7 +58,7 @@
                                 <div id="step-2">
                                     <p class="pull-right">Step 2 of 3</p>
                                     <div class="form-group col-md-12">
-                                        <table class="table table-striped table-bordered dataTable no-footer text-center" id="po-table">
+                                        <table class="table table-striped table-bordered no-footer text-center" id="po-table">
                                             <tbody>
                                                 <tr>
                                                     <th></th>
@@ -67,9 +68,9 @@
                                                 </tr>
                                                 <tr>
                                                     <td><p style="margin:4px 2px;">1.</p></td>
-                                                    <td><input type="text" class="form-control input-sm" name="po_code[]" required></td>
-                                                    <td><input type="text" class="form-control input-sm" name="po_attrib[]" required></td>
-                                                    <td><textarea class="form-control span6" name="po_desc[]" rows="5" required></textarea></td>
+                                                    <td><input type="text" class="form-control input-sm" name="po_code[]" required><span class="red-req">*</span></td>
+                                                    <td><input type="text" class="form-control input-sm" name="po_attrib[]" required><span class="red-req">*</span></td>
+                                                    <td><textarea class="form-control span6" name="po_desc[]" rows="5" required></textarea><span class="red-req">*</span></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -80,20 +81,20 @@
                                 <div id="step-3">
                                     <p class="pull-right">Step 3 of 3</p>
                                     <div class="form-group col-md-12">
-                                        <table class="table table-striped table-bordered dataTable no-footer text-center" id="course-table">
+                                        <table class="table table-striped table-bordered no-footer text-center" id="course-table">
                                             <tbody>
                                                 <tr>
                                                     <th></th>
                                                     <th>Course Code</th>
                                                     <th>Course Description</th>
                                                     <th>Course Equivalents 
-                                                        <a href="#" data-toggle="popover" data-content="Separate by comma. <br>Ex: <b>IT110, CS110, ICT110</b>"><i class="icon-info-sign icon-large"></i></a>
+                                                        <a href="#" data-toggle="popover" data-html="true" data-content="Separate by comma. <br>Ex: IT110, CS110, ICT110"><i class="icon-info-sign icon-large"></i></a>
                                                     </th>
                                                 </tr>
                                                 <tr>
                                                     <td><p style="margin:4px 2px;">1.</p></td>
-                                                    <td><input type="text" class="form-control input-sm" name="co_code[]" required></td>
-                                                    <td><textarea class="form-control input-sm span6" name="co_desc[]" rows="3" required></textarea></td>
+                                                    <td><input type="text" class="form-control input-sm" name="co_code[]" required><span class="red-req">*</span></td>
+                                                    <td><textarea class="form-control input-sm span6" name="co_desc[]" rows="3" required></textarea><span class="red-req">*</span></td>
                                                     <td><input type="text" class="form-control input-sm" name="co_equi[]"></td>
                                                 </tr>
                                             </tbody>
@@ -126,7 +127,7 @@
 
     <!-- <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script> -->
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/bootstrap-select.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/step2.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/step.js"></script>
 
     <script type="text/javascript" language="javascript">
         var d = document.getElementById("program_dropdown");
@@ -134,7 +135,7 @@
 
         $('[data-toggle="popover"]').popover({
             trigger: 'hover',
-                'placement': 'top'
+            placement: 'top'
         });
 
         var table = document.getElementById("po-table");
@@ -146,11 +147,11 @@
             var cellcol0 = row.insertCell(0);
             cellcol0.innerHTML = "<p style='margin:4px 2px;'>"+lastrow+".</p>";
             var cellcol1 = row.insertCell(1);
-            cellcol1.innerHTML = "<input type='text' class='form-control input-sm' name='po_code[]' required></input>";
+            cellcol1.innerHTML = "<input type='text' class='form-control input-sm' name='po_code[]' required><span class='red-req'>*</span>";
             var cellcol2 = row.insertCell(2);
-            cellcol2.innerHTML = "<input type='text' class='form-control input-sm' name='po_attrib[]' required></input>";
+            cellcol2.innerHTML = "<input type='text' class='form-control input-sm' name='po_attrib[]' required><span class='red-req'>*</span>";
             var cellcol3 = row.insertCell(3);
-            cellcol3.innerHTML = "<textarea class='form-control input-sm span6' name='po_desc[]' rows='3' required></textarea>";
+            cellcol3.innerHTML = "<textarea class='form-control input-sm span6' name='po_desc[]' rows='3' required></textarea><span class='red-req'>*</span>";
         }
 
         function removeRow(){
@@ -171,11 +172,11 @@
             var cellcol0 = row.insertCell(0);
             cellcol0.innerHTML = "<p style='margin:4px 2px;'>"+lastrow+".</p>";
             var cellcol1 = row.insertCell(1);
-            cellcol1.innerHTML = "<input type='text' class='form-control input-sm' name='co_code[]' required></input>";
+            cellcol1.innerHTML = "<input type='text' class='form-control input-sm' name='co_code[]' required><span class='red-req'>*</span>";
             var cellcol2 = row.insertCell(2);
-            cellcol2.innerHTML = "<textarea class='form-control input-sm span6' name='co_desc[]' rows='3'></textarea>";
+            cellcol2.innerHTML = "<textarea class='form-control input-sm span6' name='co_desc[]' rows='3'></textarea><span class='red-req'>*</span>";
             var cellcol3 = row.insertCell(3);
-            cellcol3.innerHTML = "<input type='text' class='form-control input-sm' name='co_equi[]'></input>";
+            cellcol3.innerHTML = "<input type='text' class='form-control input-sm' name='co_equi[]'>";
         }
         
         function removeRow2(){

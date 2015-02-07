@@ -4,7 +4,7 @@
                 <div class="span12">
                     <div class="widget">
                         <div class="widget-header">
-                            <i class="icon-user"></i>
+                            <i class="icon-user-md"></i>
                             <h3><?php echo $header;?></h3>
                         </div> <!-- /widget-header -->
                         <div class="widget-content">

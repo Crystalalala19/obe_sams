@@ -226,7 +226,7 @@ class Site extends CI_Controller {
                         $student_course_data['classID'] = $studentCourse_data['classID'];
                         $student_course_data['poID'] = $studentCourse_data['poID'][$key];
                         $student_course_data['courseID'] = $studentCourse_data['courseID'];
-                        $result = $this->model_users->insert_grades($student_course_data);
+                        $result = $this->model_users->insert_grades($student_course_data, $row2);
                     }
                 }
 

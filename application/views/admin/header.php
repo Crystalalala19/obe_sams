@@ -64,6 +64,11 @@
             width: 100%;
             /* Set the fixed height of the footer here */
         }
+
+        .red-req {
+            color: red;
+            padding-left: 5px;
+        }
         /*End Responsive*/
     </style>
 

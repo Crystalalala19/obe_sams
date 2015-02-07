@@ -10,7 +10,7 @@
         <div class="container">
             <div class="row">
                 <div class="span12">
-                    <div class="widget">
+                    <div class="widget" style="overflow: visible;">
                         <div class="widget-header">
                             <i class="icon-book"></i>
                             <h3><?php echo $header;?></h3>
