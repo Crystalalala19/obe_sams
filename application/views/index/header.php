@@ -61,7 +61,8 @@
 
                 <a class="navbar-brand" href="#">
                     
-					<img src="<?php echo base_url();?>assets/img/obesams.png" class="navbar-brand-logo " alt="" />
+					<img src="<?php echo base_url();?>assets/img/obesams.png" class="navbar-brand-logo " style="max-width:100%;height:auto;"/>
+                   
                 </a>
             </div>
             <div class="navbar-collapse collapse move-me">
