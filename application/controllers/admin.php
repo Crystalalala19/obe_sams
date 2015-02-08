@@ -860,6 +860,8 @@ class Admin extends CI_Controller {
         $data['title'] = 'Admin - Teacher Reports';
         $data['header'] = 'Teacher Reports';
 
+        $data['teacher_list'] = $this->model_admin->get_allTeachersClasses();
+
         $this->load->view('admin/header', $data);
         $this->load->view('admin/view_report_teacher', $data);
         $this->load->view('admin/footer');

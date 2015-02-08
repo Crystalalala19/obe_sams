@@ -289,6 +289,14 @@ class Model_admin extends CI_Model {
         return $this->check_query();
     }
 
+    function get_allTeachersClasses() {
+        $query = $this->db->query("SELECT teacher.teacher_id, fname, mname, lname, group_num, start_time, end_time, days, semester, school_year, courseCode FROM teacher
+                                  INNER JOIN teacher_class ON teacher.teacher_id = teacher_class.teacherID WHERE role = 'teacher'
+                                  ");
+
+        return $query->result_array();
+    }
+
     function get_teacherClasses($teacher_id) {
         $query = $this->db->query("SELECT DISTINCT school_year FROM teacher_class WHERE teacherID = '".$teacher_id."' ");
     
