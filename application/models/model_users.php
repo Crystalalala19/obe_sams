@@ -90,7 +90,7 @@ class Model_users extends CI_Model {
 
         return $query->result_array();
     }
-
+    
     function get_studentPoID($student_id, $class_id) {
         $query = $this->db->query("SELECT poID FROM student_course
                                 WHERE studentID = '".$student_id."' AND classID = '".$class_id."' ");
@@ -114,47 +114,6 @@ class Model_users extends CI_Model {
                                                               GROUP BY program.programName");
 
         return $query->result(); 
-    }
-
-
-    function scorecard($id){
-        $query = $this->db->query("SELECT * FROM student_course INNER JOIN student ON student_course.studentID = student.student_id
-                                                                INNER JOIN teacher_class ON student_course.classID = teacher_class.ID 
-                                                                WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' AND student_course.classID = 1 AND student_course.studentID = '".$id."'
-                                                                GROUP BY student_course.studentID, student.lname, student.fname, student.mname ");
-        return $query->result();
-    }
-
-    function scorecard1stSem($id){
-        $query = $this->db->query("SELECT * FROM student_course INNER JOIN student ON student_course.studentID = student.student_id
-                                                                INNER JOIN teacher_class ON student_course.classID = teacher_class.ID 
-                                                                WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' AND teacher_class.semester = '1' AND student_course.classID = 1 AND student_course.studentID = '".$id."'
-                                                                GROUP BY student_course.studentID, student.lname, student.fname, student.mname ");
-        return $query->result();
-    }
-
-
-	function scorecard2ndSem($id){
-		$query = $this->db->query("SELECT * FROM student_course INNER JOIN student ON student_course.studentID = student.student_id
-																INNER JOIN teacher_class ON student_course.classID = teacher_class.ID 
-                                                                WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' AND teacher_class.semester = '2' AND student_course.classID = 1 AND student_course.studentID = '".$id."'
-                                                                GROUP BY student_course.studentID, student.lname, student.fname, student.mname ");
-		return $query->result();
-	}
-
-	
-   function student_list(){
-   	    $query = $this->db->query("SELECT DISTINCT studentID, student.lname, student.mname, student.fname, program_year.effective_year, program.programName 
-                                                            FROM student_course 
-                                                            INNER JOIN student ON student_course.studentID = student.student_id
-   															INNER JOIN teacher_class ON student_course.classID = teacher_class.ID 
-                                                            INNER JOIN po_course ON student_course.poID = po_course.poID
-                                                            INNER JOIN po ON po_course.poID = po.ID
-                                                            INNER JOIN program_year ON po.pyID = program_year.ID
-                                                            INNER JOIN program ON program_year.programID = program.ID
-   															WHERE teacher_class.teacherID = '".$this->session->userdata('teacher_id')."' ");
-   	
-   	    return $query->result();
     }
 
     function notify_message($alert_type, $glyphicon, $message){
@@ -231,11 +190,58 @@ class Model_users extends CI_Model {
         return $row['ID'];
     }
 
-    function insert_grades($grades, $grade) {
-        $sql = $this->db->insert_string('student_course', $grades). "ON DUPLICATE KEY UPDATE score = '".$grade."' "; 
-        $this->db->query($sql);
+    function insert_grades($data) {
+        $this->db->insert_on_duplicate_update_batch('student_course', $data);
         
         return $this->check_query();
     }
+
+    function get_scoreEY($student_id) {
+
+        $query = $this->db->query("SELECT * FROM student_effectiveyear INNER JOIN program_year ON student_effectiveyear.pyID = program_year.ID
+                                                        INNER JOIN program ON program_year.programID = program.ID
+                                                        WHERE student_id = '".$student_id."' ");
+        
+        return $query->result();
+    }
+
+    function get_studentName($student_id) {
+
+        $query = $this->db->query("SELECt * FROM student WHERE student_id = '".$student_id."' ");
+        return $query->result();
+    }
+
+    function get_class($student_id) {
+
+        $query = $this->db->query("SELECT DISTINCT semester, school_year FROM student_course 
+                                    INNER JOIN teacher_class ON student_course.classID = teacher_class.ID
+                                    WHERE studentID = '".$student_id."' ");
+        return $query->result();
+    }
+
+    function scorecard_course($student_id) {
+
+        $query = $this->db->query("SELECT * FROM student_course 
+                                                    INNER JOIN teacher_class ON student_course.classID = teacher_class.ID
+                                                    WHERE student_course.studentID = '".$student_id."' 
+                                                    GROUP BY courseCode");
+        return $query->result();
+    }
+   
+
+    function student_list($session_id) {
+
+        $query = $this->db->query("SELECT DISTINCT * FROM student_course 
+                                                    INNER JOIN teacher_class ON student_course.classID = teacher_class.ID
+                                                    INNER JOIN student ON student_course.studentID = student.student_id
+                                                    INNER JOIN student_effectiveyear ON student.student_id = student_effectiveyear.student_id
+                                                    INNER JOIN program_year ON student_effectiveyear.pyID = program_year.ID
+                                                    INNER JOIN program ON program_year.programID = program.ID
+                                                    WHERE teacher_class.teacherID = '".$session_id."' 
+                                                    GROUP BY student_course.studentID");
+      return $query->result();
+    }
+
+
 }
 ?>

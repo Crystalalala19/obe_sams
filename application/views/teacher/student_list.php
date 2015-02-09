@@ -61,10 +61,10 @@
 </div> <!-- /main-inner -->
 
 <script type="text/javascript" language="javascript">
-      
+     
         
         var dataTableOptions = {
-            //Disable sorting for column Action
+           "bLengthChange": false
         };
 
         var tableToolsOptions = {

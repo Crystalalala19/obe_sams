@@ -38,7 +38,7 @@
                                 $po_count = count($get_po);
                                 $attributes = array('class' => 'col-md-4');
                             ?>
-
+                            
                             <div class="pull-left">
                                 <div class="alert alert-info">
                                 <?php foreach($select_schedule as $row1): ?>
@@ -55,7 +55,7 @@
                                  <?php endforeach; ?>
                                 </div>
                             </div>
-
+                            <div class="clearfix"></div><br>
                             <table id="view_classlist" class="table table-striped table-bordered dataTable no-footer">
                                 <thead>
                                     <tr>

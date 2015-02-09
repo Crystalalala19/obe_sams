@@ -213,10 +213,11 @@ class Site extends CI_Controller {
                             $studentCourse_data['score'][$x] = $row[$headers[$index]];
 
                             $studentCourse_data['poID'][$x] = $po_courses[$x]['poID'];
-                        } else {
+                        } else{
                             $studentCourse_data['score'][$x] = '';
                             $studentCourse_data['poID'][$x] = $po_courses[$x]['poID'];
                         }
+                        error_reporting(E_ALL ^ E_NOTICE);
                     }
 
                     foreach($studentCourse_data['score'] as $key => $row2) {
@@ -226,9 +227,10 @@ class Site extends CI_Controller {
                         $student_course_data['classID'] = $studentCourse_data['classID'];
                         $student_course_data['poID'] = $studentCourse_data['poID'][$key];
                         $student_course_data['courseID'] = $studentCourse_data['courseID'];
-                        $result = $this->model_users->insert_grades($student_course_data, $row2);
+                        $to_insert_grade[] = $student_course_data;
                     }
                 }
+                $result = $this->model_users->insert_grades($to_insert_grade);
 
                 //Deletes uploaded file
                 unlink($file_path);
@@ -262,27 +264,16 @@ class Site extends CI_Controller {
     }
 
     public function scorecard(){
-        $id = $this->uri->segment(3);
+        $student_id = $this->uri->segment(3);
 
-        $data['scorecard'] = $this->model_users->scorecard($id);
-        $data['scorecard1stSem'] = $this->model_users->scorecard1stSem($id);
-        $data['scorecard2ndSem'] = $this->model_users->scorecard2ndSem($id);
+        $data['get_studentName'] = $this->model_users->get_studentName($student_id);
+        $data['get_EY'] = $this->model_users->get_scoreEY($student_id);
+        $data['get_class'] = $this->model_users->get_class($student_id);
+        
+        $data['get_course'] = $this->model_users->scorecard_course($student_id);
+
         $data['user'] = $this->model_users->select_user();
         $data['title'] = "Outcome-based Education";
-
-        if($data['scorecard1stSem'] == FALSE) {
-            $message = 'No courses found in record.';
-            $data['message'] = $this->model_users->notify_message('alert-info', 'icon-info-sign', $message);
-        } else {
-            $data['message'] = '';
-        }
-
-        if($data['scorecard2ndSem'] == FALSE) {
-            $message1 = 'No courses found in record.';
-            $data['message1'] = $this->model_users->notify_message('alert-info', 'icon-info-sign', $message1);
-        } else {
-            $data['message1'] = '';
-        }
 
 	    $this->load->view("teacher/header", $data);
 	    $this->load->view('teacher/scorecard', $data);
@@ -290,7 +281,11 @@ class Site extends CI_Controller {
     }
 
     public function student_list(){
-        $data['student_list'] = $this->model_users->student_list();  
+        $session_id = $this->session->userdata('teacher_id');
+        $data['student_list'] = $this->model_users->student_list($session_id);  
+        
+
+
         $data['user'] = $this->model_users->select_user();
         $data['title'] = "Outcome-based Education";
 

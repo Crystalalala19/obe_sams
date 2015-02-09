@@ -73,7 +73,8 @@
                                                                 <i class="icon-eye-open"></i> View Class
                                                             </a>
                                                         </td>
-                                                    <?php endforeach; ?>   
+                                                    </tr>  
+                                                    <?php endforeach; ?> 
                                                 </tbody>
                                             </table>
                                         </div>

@@ -15,122 +15,58 @@
                 <div class="widget">
                     <div class="widget-header">
                         <i class="icon-users"></i>
-                        <h3>Students</h3>
+                        <h3>Student Scorecard</h3>
                     </div> <!-- /widget-header -->
 
                     <div class="widget-content">
 
-                        <div class="span4">
-                            <div class="alert alert-success">
-                            <?php foreach($scorecard as $row1): ?>
-                                <h4>
-                                    <?php foreach($scorecard as $row): ?> 
-                                    <?php echo '[ '.$row->studentID.' ]  ';?>
-                                    <?php echo $row->lname.', '.$row->fname.' '.$row->mname; ?>
-                                    <?php endforeach; ?>
-                                </h4>
-                             <?php endforeach; ?>
-                            </div>
+                        <div class="span11">
+                            <h4><center>
+                            <?php foreach($get_EY as $row): ?>
+                                <?php echo $row->programFullName;?><br>
+                                <?php echo '(Effective SY: '.$row->effective_year.' - '.($row->effective_year+1).')';?>                                
+                            <?php endforeach; ?>  
+                            </center></h4>  
+                            <h4>
+                                <?php foreach($get_studentName as $row1): ?> 
+                                <?php echo '[ '.$row1->student_id.' ]  ';?>
+                                <?php echo $row1->lname.', '.$row1->fname.' '.$row1->mname; ?>
+                                <?php endforeach; ?>
+                            </h4> <hr>
                         </div>
 
                         <div class="span11"><br>
-                            <div class="tabbable">
-                                <ul class="nav nav-tabs">
-                                    <li class="active"><a href="#tab1" data-toggle="tab">1st Year</a></li>
-                                    <li><a href="#tab2" data-toggle="tab">2nd Year</a></li>
-                                    <li><a href="#tab3" data-toggle="tab">3rd Year</a></li>
-                                    <li><a href="#tab4" data-toggle="tab">4th Year</a></li>
-
-                                </ul>
-                                <div class="tab-content">
-                                    <div class="tab-pane active" id="tab1">
-                                        <div class='panel panel-default grid'>
-                                            
-                                            <div class="tabbable">
-                                                <ul class="nav nav-tabs">
-                                                    <li class="active"><a href="#tab1" data-toggle="tab">1st Semester</a></li>
-                                                    <li><a href="#tab5" data-toggle="tab">2nd Semester</a></li>
-                                                    <li><a href="#tab6" data-toggle="tab">Summer</a></li>
-
-                                                </ul>
-                                                <div class="tab-content">
-                                                    <div class="tab-pane active" id="tab5">
-                                                        <div class='panel panel-default grid'>
-                                                            <table id="example-table" class="table table-striped table-hover table-condensed">
-                                                                <?php
-                                                                    echo $this->session->flashdata('message1');
-                                                                    if (!empty($message1)) echo $message1;
-
-                                                                    echo validation_errors('
-                                                                    <div class="alert alert-danger alert-dismissible" role="alert">
-                                                                        <button type="button" class="close" data-dismiss="alert"><i class="icon-remove-sign"></i></button>
-                                                                        <i class="icon-exclamation-sign" aria-hidden="true"></i> ', 
-                                                                    '</div>');
-
-                                                                    $po_count = count($get_po);
-                                                                    $attributes = array('class' => 'col-md-4');
-                                                                ?>
-                                                                <thead>
-                                                                    <tr id="showTable">
-                                                                        <th>Course Code <i class="icon-filter"></i></th>
-                                                                        <?php for($x = 1; $x <= $po_count; $x++):?>
-                                                                            <th><center>PO <?php echo $x;?></center></th>
-                                                                        <?php endfor; $row_num=1;?>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <?php foreach($course1 as $row1): ?>
-                                                                    <tr>
-                                                                        <td><center><?php echo $row['courseCode'];?></center></td>
-                                                                        <?php foreach($row['grade'] as $row1): ?>
-                                                                            <td>
-                                                                                <center>
-                                                                                    <?php echo $row1;?>
-                                                                                </center>
-                                                                            </td>
-                                                                        <?php endforeach; $row_num++; ?>   
-                                                                    <?php endforeach; ?>   
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="tab-pane" id="tab6">
-                                                        <div class='panel panel-default grid'>
-                                                            
-                                                        </div>
-                                                    </div>
-                                                </div>    
-                                                    
-                                            </div>
-
-
-
-                                        </div>
-                                    </div>
-
-                                    <div class="tab-pane" id="tab2">
-                                        <div class='panel panel-default grid'>
-                                            
-                                        </div>
-                                    </div>
-
-                                    <div class="tab-pane" id="tab3">
-                                        <div class='panel panel-default grid'>
-                                            
-                                        </div>
-                                    </div>
-
-                                    <div class="tab-pane" id="tab4">
-                                        <div class='panel panel-default grid'>
-                                            
-                                        </div>
-                                    </div>
-
-
-                                </div>    
-                                    
-                            </div>
+                                <h4>
+                                    <?php foreach($get_class as $row2): ?> 
+                                        <?php 
+                                            if($row2->semester == '1st'){
+                                                echo 'First Semester'; 
+                                            } elseif ($row2->semester == '2nd' ) {
+                                                echo 'Second Semester';
+                                            } else {
+                                                echo 'Summer';
+                                            }                        
+                                        ?>
+                                      
+                                        <?php echo ' | SY: '.$row2->school_year.' - '.($row2->school_year+1);?>
+                                    <?php endforeach; ?>
+                                </h4>   
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                  <tr>
+                                    <th> Code </th>
+                                    <th> PO Score</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <?php foreach($get_course as $row3): ?>
+                                        <td><?php echo $row3->courseCode; ?></td>
+                                        <td></td>
+                                    <?php endforeach; ?>
+                                  </tr>
+                                </tbody>
+                            </table>
                         </div>
 
 
