@@ -55,7 +55,7 @@
                                  <?php endforeach; ?>
                                 </div>
                             </div>
-
+                            <div class="clearfix"></div>
                             <table id="view_classlist" class="table table-striped table-bordered dataTable no-footer">
                                 <thead>
                                     <tr>
@@ -99,9 +99,8 @@
                             <?php echo form_open_multipart();?>
                                 <div class="control-group">
                                     <div class="pull-right">
-                                        <h3><i class="icon-download-alt icon-2x"></i> Download Templates:</h3>
+                                        <h3><i class="icon-download-alt icon-2x"></i> Download Template:</h3>
                                         <a href="<?php echo base_url('site/download/class');?>"><img src="<?php echo base_url('assets/img/excel.png');?>"></a>
-                                        <a href="<?php echo base_url('site/download/pdf');?>"><img src="<?php echo base_url('assets/img/pdf.png');?>"></a>
                                     </div>
 
                                     <label for="userfile">Upload .CSV File: </label>

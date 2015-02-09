@@ -231,9 +231,8 @@ class Model_users extends CI_Model {
         return $row['ID'];
     }
 
-    function insert_grades($grades, $grade) {
-        $sql = $this->db->insert_string('student_course', $grades). "ON DUPLICATE KEY UPDATE score = '".$grade."' "; 
-        $this->db->query($sql);
+    function insert_grades($data) {
+        $this->db->insert_on_duplicate_update_batch('student_course', $data);  
         
         return $this->check_query();
     }
