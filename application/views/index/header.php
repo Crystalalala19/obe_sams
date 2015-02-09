@@ -61,7 +61,7 @@
 
                 <a class="navbar-brand" href="#">
                     
-					<img src="<?php echo base_url();?>assets/img/obesams.png" class="navbar-brand-logo " style="max-width:100%;height:auto;"/>
+					<img src="<?php echo base_url();?>assets/img/obesams.png" class="navbar-brand-logo " title="OBE SAMS Academic" alt="OBE SAMS Academic" style="padding-bottom: 30px"/>
                    
                 </a>
             </div>

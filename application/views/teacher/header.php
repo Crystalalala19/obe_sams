@@ -103,8 +103,7 @@
 
                 <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> </a>
                 <a class="brand" href="index.html">
-                <img src="<?php echo base_url();?>assets/img/obesams.png" class="navbar-brand-logo " alt="" />
-                
+                    <img src="<?php echo base_url();?>assets/img/obesams.png" class="navbar-brand-logo " title="OBE SAMS Academic" alt="OBE SAMS Academic"/>
                 </a> 
 
                 <div class="nav-collapse">
