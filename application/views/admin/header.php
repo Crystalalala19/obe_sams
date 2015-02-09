@@ -91,7 +91,7 @@
 
                 <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> </a>
                 <a class="brand" href="<?php echo base_url('admin');?>">
-                <img src="<?php echo base_url();?>assets/img/obesams.png" class="navbar-brand-logo " alt="" />
+                <img src="<?php echo base_url();?>assets/img/obesams.png" class="navbar-brand-logo " />
                 
                 </a> 
 

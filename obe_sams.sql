@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 07, 2015 at 07:28 AM
+-- Generation Time: Feb 09, 2015 at 11:44 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -31,88 +31,97 @@ CREATE TABLE IF NOT EXISTS `course` (
   `CourseCode` varchar(9) NOT NULL,
   `CourseDesc` varchar(255) NOT NULL,
   `pyID` int(3) NOT NULL,
-  `year_level` enum('1st year','2nd year','3rd year','4th year') NOT NULL,
-  `semester` enum('1st semester','2nd semester') NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=latin1;
+  `year_level` enum('1','2','3','4') NOT NULL,
+  `semester` enum('1','2') NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `course`
 --
 
 INSERT INTO `course` (`ID`, `CourseCode`, `CourseDesc`, `pyID`, `year_level`, `semester`) VALUES
-(8, 'ICT110', 'Intro to Computer Science and Programming', 5, '1st year', '1st semester'),
-(9, 'ICT111', 'ICT Fundamentals', 5, '1st year', '1st semester'),
-(10, 'ICT116', 'Advanced Programming A', 5, '1st year', '1st semester'),
-(11, 'ICT117', 'Software Application', 5, '1st year', '1st semester'),
-(12, 'ICT118', 'Web Page Design', 5, '1st year', '1st semester'),
-(13, 'ICT121', 'Advanced Programming B', 5, '1st year', '1st semester'),
-(14, 'ICT122', 'Multimedia Basics with Image Processing', 5, '1st year', '1st semester'),
-(15, 'ICT123', 'Introduction to Management', 5, '1st year', '1st semester'),
-(16, 'ICT126', 'Multimedia Production', 5, '1st year', '1st semester'),
-(17, 'ICT127', 'Lab Technician''s Course', 5, '1st year', '1st semester'),
-(18, 'ICT128', 'Business Processes', 5, '1st year', '1st semester'),
-(19, 'ICT131', 'Database Systems I', 5, '1st year', '1st semester'),
-(20, 'ICT132', 'Data Communication and Networking', 5, '1st year', '1st semester'),
-(21, 'ICT133', 'Presentation Skills', 5, '1st year', '1st semester'),
-(22, 'ICT134', 'Oral Communications for ICT I', 5, '1st year', '1st semester'),
-(23, 'ICT135', 'Oral Communications for ICT II', 5, '1st year', '1st semester'),
-(24, 'ICT136', 'Database Systems II', 5, '1st year', '1st semester'),
-(25, 'ICT137', 'Quality Assurance', 5, '1st year', '1st semester'),
-(26, 'ICT138', 'Network Management and Security', 5, '1st year', '1st semester'),
-(27, 'ICT139', 'Professional Ethics for ICT', 5, '1st year', '1st semester'),
-(28, 'ICT141', 'Web Applications Development', 5, '1st year', '1st semester'),
-(29, 'ICT142', 'Internship/OJT/Practicum', 5, '1st year', '1st semester'),
-(30, 'ICT146', 'Capstone Project', 5, '1st year', '1st semester'),
-(31, 'IT110', 'Introduction to Computer Science and Programming', 6, '1st year', '1st semester'),
-(32, 'IT11', 'Computer Operations', 6, '1st year', '1st semester'),
-(33, 'IT116', 'Advanced Programming', 6, '1st year', '1st semester'),
-(34, 'IT121', 'Data Structures I', 6, '1st year', '1st semester'),
-(35, 'IT126', 'Data Structures II', 6, '1st year', '1st semester'),
-(36, 'IT127', 'File Org and Processing', 6, '1st year', '1st semester'),
-(37, 'IT128', 'Multimedia Systems', 6, '1st year', '1st semester'),
-(38, 'IT130', 'Database Management Systems I', 6, '1st year', '1st semester'),
-(39, 'IT131', 'Personal Computer Technology', 6, '1st year', '1st semester'),
-(40, 'IT132', 'Presentation Skills in IT', 6, '1st year', '1st semester'),
-(41, 'IT133', 'Introduction to Accounting for IT', 6, '1st year', '1st semester'),
-(42, 'IT134', 'Object-oriented Technology', 6, '1st year', '1st semester'),
-(43, 'IT135', 'Introduction to Management', 6, '1st year', '1st semester'),
-(44, 'IT136', 'Database Management Systems II', 6, '1st year', '1st semester'),
-(45, 'IT137', 'Comp. Sys. Org. with Assembly Language', 6, '1st year', '1st semester'),
-(46, 'IT138', 'Data Communication and Networking', 6, '1st year', '1st semester'),
-(47, 'IT139', 'Web Application Development', 6, '1st year', '1st semester'),
-(48, 'IT140', 'Software Engineering I', 6, '1st year', '1st semester'),
-(49, 'IT141', 'Operating Systems', 6, '1st year', '1st semester'),
-(50, 'IT142', 'Ethics for the IT Profession', 6, '1st year', '1st semester'),
-(51, 'IT143', 'Quality Consciousness, Habits and Processes', 6, '1st year', '1st semester'),
-(52, 'IT144', 'Systems Resource Management', 6, '1st year', '1st semester'),
-(53, 'IT145', 'Software Engineering II', 6, '1st year', '1st semester'),
-(54, 'IT146', 'Management Information System', 6, '1st year', '1st semester'),
-(55, 'IT147', 'Quality Management and Processes', 6, '1st year', '1st semester'),
-(62, 'CS110', 'Intro to Comp Sci and Programming', 10, '1st year', '1st semester'),
-(63, 'CS11', 'Computer Operations', 10, '1st year', '1st semester'),
-(64, 'CS116', 'Advanced Programming', 10, '1st year', '1st semester'),
-(65, 'CS121', 'Data Structures I', 10, '1st year', '1st semester'),
-(66, 'CS126', 'Data Structures II', 10, '1st year', '1st semester'),
-(67, 'CS127', 'File Org and Processing', 10, '1st year', '1st semester'),
-(68, 'CS130', 'Database Systems I', 10, '1st year', '1st semester'),
-(69, 'CS131', 'Object-oriented Concepts', 10, '1st year', '1st semester'),
-(70, 'CS132', 'Numerical Methods', 10, '1st year', '1st semester'),
-(71, 'CS133', 'Computer Systems Organization with Assembly Language', 10, '1st year', '1st semester'),
-(72, 'CS134', 'Database Systems II', 10, '1st year', '1st semester'),
-(73, 'CS135', 'Operating Systems', 10, '1st year', '1st semester'),
-(74, 'CS136', 'Data Communication and Networking', 10, '1st year', '1st semester'),
-(75, 'CS137', 'Research Methods', 10, '1st year', '1st semester'),
-(76, 'CS138', 'Web Applications Development', 10, '1st year', '1st semester'),
-(77, 'CS140', 'Software Engineering I', 10, '1st year', '1st semester'),
-(78, 'CS141', 'Automata and Formal Languages', 10, '1st year', '1st semester'),
-(79, 'CS142', 'Structure of Programming Language', 10, '1st year', '1st semester'),
-(80, 'CS143', 'Research Project', 10, '1st year', '1st semester'),
-(81, 'CS144', 'CS Practicum', 10, '1st year', '1st semester'),
-(82, 'CS145', 'Software Engineering II', 10, '1st year', '1st semester'),
-(83, 'CS146', 'Management Info System', 10, '1st year', '1st semester'),
-(84, 'CS147', 'Quality Management and Processes', 10, '1st year', '1st semester'),
-(85, 'CS148', 'Compiler Design', 10, '1st year', '1st semester'),
-(86, 'CS148A', 'Compiler Design Project', 10, '1st year', '1st semester');
+(8, 'ICT110', 'Intro to Computer Science and Programming', 5, '', ''),
+(9, 'ICT111', 'ICT Fundamentals', 5, '', ''),
+(10, 'ICT116', 'Advanced Programming A', 5, '', ''),
+(11, 'ICT117', 'Software Application', 5, '', ''),
+(12, 'ICT118', 'Web Page Design', 5, '', ''),
+(13, 'ICT121', 'Advanced Programming B', 5, '', ''),
+(14, 'ICT122', 'Multimedia Basics with Image Processing', 5, '', ''),
+(15, 'ICT123', 'Introduction to Management', 5, '', ''),
+(16, 'ICT126', 'Multimedia Production', 5, '', ''),
+(17, 'ICT127', 'Lab Technician''s Course', 5, '', ''),
+(18, 'ICT128', 'Business Processes', 5, '', ''),
+(19, 'ICT131', 'Database Systems I', 5, '', ''),
+(20, 'ICT132', 'Data Communication and Networking', 5, '', ''),
+(21, 'ICT133', 'Presentation Skills', 5, '', ''),
+(22, 'ICT134', 'Oral Communications for ICT I', 5, '', ''),
+(23, 'ICT135', 'Oral Communications for ICT II', 5, '', ''),
+(24, 'ICT136', 'Database Systems II', 5, '', ''),
+(25, 'ICT137', 'Quality Assurance', 5, '', ''),
+(26, 'ICT138', 'Network Management and Security', 5, '', ''),
+(27, 'ICT139', 'Professional Ethics for ICT', 5, '', ''),
+(28, 'ICT141', 'Web Applications Development', 5, '', ''),
+(29, 'ICT142', 'Internship/OJT/Practicum', 5, '', ''),
+(30, 'ICT146', 'Capstone Project', 5, '', ''),
+(31, 'IT110', 'Introduction to Computer Science and Programming', 6, '', ''),
+(32, 'IT11', 'Computer Operations', 6, '', ''),
+(33, 'IT116', 'Advanced Programming', 6, '', ''),
+(34, 'IT121', 'Data Structures I', 6, '', ''),
+(35, 'IT126', 'Data Structures II', 6, '', ''),
+(36, 'IT127', 'File Org and Processing', 6, '', ''),
+(37, 'IT128', 'Multimedia Systems', 6, '', ''),
+(38, 'IT130', 'Database Management Systems I', 6, '', ''),
+(39, 'IT131', 'Personal Computer Technology', 6, '', ''),
+(40, 'IT132', 'Presentation Skills in IT', 6, '', ''),
+(41, 'IT133', 'Introduction to Accounting for IT', 6, '', ''),
+(42, 'IT134', 'Object-oriented Technology', 6, '', ''),
+(43, 'IT135', 'Introduction to Management', 6, '', ''),
+(44, 'IT136', 'Database Management Systems II', 6, '', ''),
+(45, 'IT137', 'Comp. Sys. Org. with Assembly Language', 6, '', ''),
+(46, 'IT138', 'Data Communication and Networking', 6, '', ''),
+(47, 'IT139', 'Web Application Development', 6, '', ''),
+(48, 'IT140', 'Software Engineering I', 6, '', ''),
+(49, 'IT141', 'Operating Systems', 6, '', ''),
+(50, 'IT142', 'Ethics for the IT Profession', 6, '', ''),
+(51, 'IT143', 'Quality Consciousness, Habits and Processes', 6, '', ''),
+(52, 'IT144', 'Systems Resource Management', 6, '', ''),
+(53, 'IT145', 'Software Engineering II', 6, '', ''),
+(54, 'IT146', 'Management Information System', 6, '', ''),
+(55, 'IT147', 'Quality Management and Processes', 6, '', ''),
+(62, 'CS110', 'Intro to Comp Sci and Programming', 10, '', ''),
+(63, 'CS11', 'Computer Operations', 10, '', ''),
+(64, 'CS116', 'Advanced Programming', 10, '', ''),
+(65, 'CS121', 'Data Structures I', 10, '', ''),
+(66, 'CS126', 'Data Structures II', 10, '', ''),
+(67, 'CS127', 'File Org and Processing', 10, '', ''),
+(68, 'CS130', 'Database Systems I', 10, '', ''),
+(69, 'CS131', 'Object-oriented Concepts', 10, '', ''),
+(70, 'CS132', 'Numerical Methods', 10, '', ''),
+(71, 'CS133', 'Computer Systems Organization with Assembly Language', 10, '', ''),
+(72, 'CS134', 'Database Systems II', 10, '', ''),
+(73, 'CS135', 'Operating Systems', 10, '', ''),
+(74, 'CS136', 'Data Communication and Networking', 10, '', ''),
+(75, 'CS137', 'Research Methods', 10, '', ''),
+(76, 'CS138', 'Web Applications Development', 10, '', ''),
+(77, 'CS140', 'Software Engineering I', 10, '', ''),
+(78, 'CS141', 'Automata and Formal Languages', 10, '', ''),
+(79, 'CS142', 'Structure of Programming Language', 10, '', ''),
+(80, 'CS143', 'Research Project', 10, '', ''),
+(81, 'CS144', 'CS Practicum', 10, '', ''),
+(82, 'CS145', 'Software Engineering II', 10, '', ''),
+(83, 'CS146', 'Management Info System', 10, '', ''),
+(84, 'CS147', 'Quality Management and Processes', 10, '', ''),
+(85, 'CS148', 'Compiler Design', 10, '', ''),
+(86, 'CS148A', 'Compiler Design Project', 10, '', ''),
+(87, 'ICT110', 'Intro to Computer Science and Programming', 11, '', ''),
+(88, 'ICT111', 'ICT Fundamentals', 11, '', ''),
+(89, 'ICT116', 'Advanced Programming A', 11, '', ''),
+(90, 'ICT117', 'Software Application', 11, '', ''),
+(91, 'ICT118', 'Web Page Design', 11, '', ''),
+(92, 'ICT121', 'Advanced Programming B', 11, '', ''),
+(93, 'ICT122', 'Multimedia Basics with Image Processing', 11, '', ''),
+(94, 'ICT123', 'Introduction to Management', 11, '', ''),
+(95, 'ICT126', 'Multimedia Production', 11, '', '');
 
 -- --------------------------------------------------------
 
@@ -132,7 +141,8 @@ CREATE TABLE IF NOT EXISTS `equivalent` (
 INSERT INTO `equivalent` (`CourseEquivalent`, `courseID`) VALUES
 ('', 30),
 ('', 55),
-('', 86);
+('', 86),
+('', 95);
 
 -- --------------------------------------------------------
 
@@ -146,7 +156,7 @@ CREATE TABLE IF NOT EXISTS `po` (
   `poCode` varchar(10) NOT NULL,
   `description` text NOT NULL,
   `pyID` int(3) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `po`
@@ -180,7 +190,16 @@ INSERT INTO `po` (`ID`, `attribute`, `poCode`, `description`, `pyID`) VALUES
 (39, 'Communication', 'CS06', '...', 10),
 (40, 'Computing Professionalism and Society', 'CS07', '...', 10),
 (41, 'Ethics', 'CS08', '...', 10),
-(42, 'Life-long Learning', 'CS09', '...', 10);
+(42, 'Life-long Learning', 'CS09', '...', 10),
+(43, 'Knowledge for Solving Computing Problems', 'ICT01', 'sdfsdfsdfsdfsdfsdf', 11),
+(44, 'Problem Analysis', 'ICT02', 'sdfsdfsdfsdfsdfsdf', 11),
+(45, 'Design/Development of Solutions', 'ICT03', 'sdfsdfsdfsdfsdfsdf', 11),
+(46, 'Modern Tool Usage', 'ICT04', 'sdfsdfsdfsdfsdfsdf', 11),
+(47, 'Individual and teamwork', 'ICT05', 'sdfsdfsdfsdfsdfsdf', 11),
+(48, 'Communication', 'ICT06', 'sdfsdfsdfsdfsdfsdf', 11),
+(49, 'Computing professionalism and society', 'ICT07', 'sdfsdfsdfsdfsdfsdf', 11),
+(50, 'Ethics', 'ICT08', 'sdfsdfsdfsdfsdfsdf', 11),
+(51, 'Life-long learning', 'ICT09', 'sdfsdfsdfsdfsdfsdf', 11);
 
 -- --------------------------------------------------------
 
@@ -880,7 +899,88 @@ INSERT INTO `po_course` (`status`, `poID`, `courseID`) VALUES
 ('0', 39, 86),
 ('0', 40, 86),
 ('0', 41, 86),
-('0', 42, 86);
+('0', 42, 86),
+('1', 43, 87),
+('0', 44, 87),
+('0', 45, 87),
+('0', 46, 87),
+('0', 47, 87),
+('1', 48, 87),
+('0', 49, 87),
+('0', 50, 87),
+('0', 51, 87),
+('0', 43, 88),
+('0', 44, 88),
+('0', 45, 88),
+('1', 46, 88),
+('1', 47, 88),
+('1', 48, 88),
+('1', 49, 88),
+('0', 50, 88),
+('0', 51, 88),
+('1', 43, 89),
+('0', 44, 89),
+('0', 45, 89),
+('0', 46, 89),
+('0', 47, 89),
+('0', 48, 89),
+('0', 49, 89),
+('0', 50, 89),
+('0', 51, 89),
+('0', 43, 90),
+('0', 44, 90),
+('0', 45, 90),
+('1', 46, 90),
+('0', 47, 90),
+('1', 48, 90),
+('0', 49, 90),
+('0', 50, 90),
+('1', 51, 90),
+('0', 43, 91),
+('0', 44, 91),
+('1', 45, 91),
+('1', 46, 91),
+('0', 47, 91),
+('0', 48, 91),
+('0', 49, 91),
+('1', 50, 91),
+('1', 51, 91),
+('1', 43, 92),
+('1', 44, 92),
+('0', 45, 92),
+('0', 46, 92),
+('1', 47, 92),
+('1', 48, 92),
+('0', 49, 92),
+('0', 50, 92),
+('0', 51, 92),
+('0', 43, 93),
+('0', 44, 93),
+('1', 45, 93),
+('1', 46, 93),
+('0', 47, 93),
+('1', 48, 93),
+('0', 49, 93),
+('1', 50, 93),
+('0', 51, 93),
+('0', 43, 94),
+('0', 44, 94),
+('1', 45, 94),
+('0', 46, 94),
+('1', 47, 94),
+('1', 48, 94),
+('0', 49, 94),
+('0', 50, 94),
+('1', 51, 94),
+('0', 43, 95),
+('0', 44, 95),
+('1', 45, 95),
+('1', 46, 95),
+('1', 47, 95),
+('0', 48, 95),
+('1', 49, 95),
+('0', 50, 95),
+('1', 51, 95);
 
 -- --------------------------------------------------------
 
@@ -890,17 +990,18 @@ INSERT INTO `po_course` (`status`, `poID`, `courseID`) VALUES
 
 CREATE TABLE IF NOT EXISTS `program` (
 `ID` int(3) NOT NULL,
-  `programName` char(8) NOT NULL
+  `programName` char(8) NOT NULL,
+  `programFullName` varchar(255) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `program`
 --
 
-INSERT INTO `program` (`ID`, `programName`) VALUES
-(4, 'BSICT'),
-(5, 'BSIT'),
-(7, 'BSCS');
+INSERT INTO `program` (`ID`, `programName`, `programFullName`) VALUES
+(4, 'BSICT', 'BACHELOR OF SCIENCE IN INFORMATION AND COMMUNICATIONS TECHNOLOGY'),
+(5, 'BSIT', 'BACHELOR OF SCIENCE IN INFORMATION TECHNOLOGY'),
+(7, 'BSCS', 'BACHELOR OF SCIENCE IN COMPUTER SCIENCE');
 
 -- --------------------------------------------------------
 
@@ -912,7 +1013,7 @@ CREATE TABLE IF NOT EXISTS `program_year` (
 `ID` int(3) NOT NULL,
   `effective_year` year(4) NOT NULL,
   `programID` int(3) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `program_year`
@@ -921,7 +1022,8 @@ CREATE TABLE IF NOT EXISTS `program_year` (
 INSERT INTO `program_year` (`ID`, `effective_year`, `programID`) VALUES
 (5, 2015, 4),
 (6, 2015, 5),
-(10, 2016, 7);
+(10, 2016, 7),
+(11, 2016, 4);
 
 -- --------------------------------------------------------
 
@@ -935,55 +1037,57 @@ CREATE TABLE IF NOT EXISTS `student` (
   `fname` varchar(20) NOT NULL,
   `mname` varchar(20) NOT NULL,
   `lname` varchar(20) NOT NULL,
-  `year_level` char(100) NOT NULL,
   `password` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `student`
 --
 
-INSERT INTO `student` (`ID`, `student_id`, `fname`, `mname`, `lname`, `year_level`, `password`) VALUES
-(1, 9304897, 'Glenn', 'A', 'Arcilla', '1', '9304897'),
-(2, 7302661, 'Ralph', 'D', 'Arco', '1', '7302661'),
-(3, 7306872, 'Ludwig Dan', 'F', 'Beltran', '1', '7306872'),
-(4, 11102316, 'Jeah Ann', 'R', 'Bercede', '1', '11102316'),
-(5, 11104305, 'Paul Jess', 'T', 'Bolotaolo', '1', '11104305'),
-(6, 11102611, 'Lynnlie Faye', 'H', 'Borja', '1', '11102611'),
-(7, 10305841, 'Christian', 'F', 'Bracero', '1', '10305841'),
-(8, 10306267, 'Rhezzil Gay', 'V', 'Calinawan', '1', '10306267'),
-(9, 11100533, 'Christine Rea', 'B', 'Carin', '1', '11100533'),
-(10, 11104402, 'Crystal Jean', 'L', 'Cartalla', '1', '11104402'),
-(11, 11103578, 'Rina', 'B', 'Da?o', '2', '11103578'),
-(12, 7307923, 'Gellie Mae', 'S', 'De Guia', '2', '7307923'),
-(13, 11102404, 'Tracy', 'C', 'Diagon', '2', '11102404'),
-(14, 11104551, 'Jovanne', 'V', 'Erida', '2', '11104551'),
-(15, 11102158, 'Shaira Mae', 'B', 'Estan', '2', '11102158'),
-(16, 10304548, 'Mark', 'R', 'Galolo', '2', '10304548'),
-(17, 6303058, 'Joseph Alan', 'E', 'Genson', '2', '6303058'),
-(18, 11103450, 'Theneelyn Claire', 'D', 'Haw', '2', '11103450'),
-(19, 11106976, 'Jay Anthony', 'A', 'Jamilo', '2', '11106976'),
-(20, 11102210, 'Ken', 'D', 'Kudo', '2', '11102210'),
-(21, 6302012, 'Alvin', 'U', 'Lanceta', '3', '6302012'),
-(22, 10303145, 'Darryl', 'H', 'Menina', '3', '10303145'),
-(23, 10303496, 'Kate', 'A', 'Miranda', '3', '10303496'),
-(24, 10306807, 'Freo', 'J', 'Montecillo', '3', '10306807'),
-(25, 9307082, 'Jose Enjamemar', 'J', 'Moraga', '3', '9307082'),
-(26, 11106019, 'John Ray-An', 'L', 'Noel', '3', '11106019'),
-(27, 11102951, 'Antonette', 'Y', 'Ong', '3', '11102951'),
-(28, 11101091, 'Mary Angeleque', 'Y', 'Padon', '3', '11101091'),
-(29, 11102306, 'Merry Charlene', 'A', 'Pastor', '3', '11102306'),
-(30, 10302946, 'Jesse Rhi', 'R', 'Pilota', '3', '10302946'),
-(31, 8305919, 'Hubert', 'U', 'Plasencia', '4', '8305919'),
-(32, 11103625, 'Jassem Jake', 'P', 'Poncardas', '4', '11103625'),
-(33, 11100971, 'Mitzie Dane', 'Q', 'Pono', '4', '11100971'),
-(34, 11104516, 'Dan Jose', 'E', 'Quijano', '4', '11104516'),
-(35, 11100258, 'Lalaine Dawn', 'A', 'Sabandal', '4', '11100258'),
-(36, 11100252, 'Michelle Anne', 'T', 'Sanchez', '4', '11100252'),
-(37, 11102574, 'Rose Ann', 'T', 'Sescon', '4', '11102574'),
-(38, 11102070, 'Fritz Geraldine', 'E', 'Siembra', '4', '11102070'),
-(39, 11104504, 'Karanvir', 'A', 'Singh', '4', '11104504'),
-(40, 11102063, 'Marjo', 'W', 'Sobrecaray', '4', '11102063');
+INSERT INTO `student` (`ID`, `student_id`, `fname`, `mname`, `lname`, `password`) VALUES
+(1, 9304897, 'Glenn', 'A', 'Arcilla', '9304897'),
+(2, 7302661, 'Ralph', 'D', 'Arco', '7302661'),
+(3, 7306872, 'Ludwig Dan', 'F', 'Beltran', '7306872'),
+(4, 11102316, 'Jeah Ann', 'R', 'Bercede', '11102316'),
+(5, 11104305, 'Paul Jess', 'T', 'Bolotaolo', '11104305'),
+(6, 11102611, 'Lynnlie Faye', 'H', 'Borja', '11102611'),
+(7, 10305841, 'Christian', 'F', 'Bracero', '10305841'),
+(8, 10306267, 'Rhezzil Gay', 'V', 'Calinawan', '10306267'),
+(9, 11100533, 'Christine Rea', 'B', 'Carin', '11100533'),
+(10, 11104402, 'Crystal Jean', 'L', 'Cartalla', '11104402'),
+(11, 11103578, 'Rina', 'B', 'Da?o', '11103578'),
+(12, 7307923, 'Gellie Mae', 'S', 'De Guia', '7307923'),
+(13, 11102404, 'Tracy', 'C', 'Diagon', '11102404'),
+(14, 11104551, 'Jovanne', 'V', 'Erida', '11104551'),
+(15, 11102158, 'Shaira Mae', 'B', 'Estan', '11102158'),
+(16, 10304548, 'Mark', 'R', 'Galolo', '10304548'),
+(17, 6303058, 'Joseph Alan', 'E', 'Genson', '6303058'),
+(18, 11103450, 'Theneelyn Claire', 'D', 'Haw', '11103450'),
+(19, 11106976, 'Jay Anthony', 'A', 'Jamilo', '11106976'),
+(20, 11102210, 'Ken', 'D', 'Kudo', '11102210'),
+(21, 6302012, 'Alvin', 'U', 'Lanceta', '6302012'),
+(22, 10303145, 'Darryl', 'H', 'Menina', '10303145'),
+(23, 10303496, 'Kate', 'A', 'Miranda', '10303496'),
+(24, 10306807, 'Freo', 'J', 'Montecillo', '10306807'),
+(25, 9307082, 'Jose Enjamemar', 'J', 'Moraga', '9307082'),
+(26, 11106019, 'John Ray-An', 'L', 'Noel', '11106019'),
+(27, 11102951, 'Antonette', 'Y', 'Ong', '11102951'),
+(28, 11101091, 'Mary Angeleque', 'Y', 'Padon', '11101091'),
+(29, 11102306, 'Merry Charlene', 'A', 'Pastor', '11102306'),
+(30, 10302946, 'Jesse Rhi', 'R', 'Pilota', '10302946'),
+(31, 8305919, 'Hubert', 'U', 'Plasencia', '8305919'),
+(32, 11103625, 'Jassem Jake', 'P', 'Poncardas', '11103625'),
+(33, 11100971, 'Mitzie Dane', 'Q', 'Pono', '11100971'),
+(34, 11104516, 'Dan Jose', 'E', 'Quijano', '11104516'),
+(35, 11100258, 'Lalaine Dawn', 'A', 'Sabandal', '11100258'),
+(36, 11100252, 'Michelle Anne', 'T', 'Sanchez', '11100252'),
+(37, 11102574, 'Rose Ann', 'T', 'Sescon', '11102574'),
+(38, 11102070, 'Fritz Geraldine', 'E', 'Siembra', '11102070'),
+(39, 11104504, 'Karanvir', 'A', 'Singh', '11104504'),
+(40, 11102063, 'Marjo', 'W', 'Sobrecaray', '11102063'),
+(41, 11104403, 'John', 'F', 'Doe', ''),
+(42, 11104404, 'Mae', 'G', 'Doe', ''),
+(43, 11104405, 'Smith', 'D', 'Doe', '');
 
 -- --------------------------------------------------------
 
@@ -998,6 +1102,243 @@ CREATE TABLE IF NOT EXISTS `student_course` (
   `classID` int(5) NOT NULL,
   `score` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `student_course`
+--
+
+INSERT INTO `student_course` (`poID`, `courseID`, `studentID`, `classID`, `score`) VALUES
+(10, 10, 7302661, 1, 1),
+(10, 10, 7306872, 1, 2),
+(10, 10, 9304897, 1, 1.5),
+(10, 10, 10305841, 1, 1.5),
+(10, 10, 10306267, 1, 1),
+(10, 10, 11100533, 1, 2),
+(10, 10, 11102316, 1, 3),
+(10, 10, 11102611, 1, 2),
+(10, 10, 11104305, 1, 5),
+(10, 10, 11104402, 1, 3),
+(11, 10, 7302661, 1, 1.5),
+(11, 10, 7306872, 1, 3),
+(11, 10, 9304897, 1, 2),
+(11, 10, 10305841, 1, 2),
+(11, 10, 10306267, 1, 1.5),
+(11, 10, 11100533, 1, 3),
+(11, 10, 11102316, 1, 2),
+(11, 10, 11102611, 1, 3),
+(11, 10, 11104305, 1, 3),
+(11, 10, 11104402, 1, 2),
+(12, 10, 7302661, 1, 0),
+(12, 10, 7306872, 1, 0),
+(12, 10, 9304897, 1, 0),
+(12, 10, 10305841, 1, 0),
+(12, 10, 10306267, 1, 0),
+(12, 10, 11100533, 1, 0),
+(12, 10, 11102316, 1, 0),
+(12, 10, 11102611, 1, 0),
+(12, 10, 11104305, 1, 0),
+(12, 10, 11104402, 1, 0),
+(13, 10, 7302661, 1, 0),
+(13, 10, 7306872, 1, 0),
+(13, 10, 9304897, 1, 0),
+(13, 10, 10305841, 1, 0),
+(13, 10, 10306267, 1, 0),
+(13, 10, 11100533, 1, 0),
+(13, 10, 11102316, 1, 0),
+(13, 10, 11102611, 1, 0),
+(13, 10, 11104305, 1, 0),
+(13, 10, 11104402, 1, 0),
+(14, 10, 7302661, 1, 0),
+(14, 10, 7306872, 1, 0),
+(14, 10, 9304897, 1, 0),
+(14, 10, 10305841, 1, 0),
+(14, 10, 10306267, 1, 0),
+(14, 10, 11100533, 1, 0),
+(14, 10, 11102316, 1, 0),
+(14, 10, 11102611, 1, 0),
+(14, 10, 11104305, 1, 0),
+(14, 10, 11104402, 1, 0),
+(15, 10, 7302661, 1, 2),
+(15, 10, 7306872, 1, 1),
+(15, 10, 9304897, 1, 3),
+(15, 10, 10305841, 1, 3),
+(15, 10, 10306267, 1, 2),
+(15, 10, 11100533, 1, 1),
+(15, 10, 11102316, 1, 1.5),
+(15, 10, 11102611, 1, 5),
+(15, 10, 11104305, 1, 3),
+(15, 10, 11104402, 1, 1.5),
+(16, 10, 7302661, 1, 0),
+(16, 10, 7306872, 1, 0),
+(16, 10, 9304897, 1, 0),
+(16, 10, 10305841, 1, 0),
+(16, 10, 10306267, 1, 0),
+(16, 10, 11100533, 1, 0),
+(16, 10, 11102316, 1, 0),
+(16, 10, 11102611, 1, 0),
+(16, 10, 11104305, 1, 0),
+(16, 10, 11104402, 1, 0),
+(17, 10, 7302661, 1, 0),
+(17, 10, 7306872, 1, 0),
+(17, 10, 9304897, 1, 0),
+(17, 10, 10305841, 1, 0),
+(17, 10, 10306267, 1, 0),
+(17, 10, 11100533, 1, 0),
+(17, 10, 11102316, 1, 0),
+(17, 10, 11102611, 1, 0),
+(17, 10, 11104305, 1, 0),
+(17, 10, 11104402, 1, 0),
+(18, 10, 7302661, 1, 0),
+(18, 10, 7306872, 1, 0),
+(18, 10, 9304897, 1, 0),
+(18, 10, 10305841, 1, 0),
+(18, 10, 10306267, 1, 0),
+(18, 10, 11100533, 1, 0),
+(18, 10, 11102316, 1, 0),
+(18, 10, 11102611, 1, 0),
+(18, 10, 11104305, 1, 0),
+(18, 10, 11104402, 1, 0),
+(44, 10, 7302661, 1, 0),
+(44, 10, 7306872, 1, 0),
+(44, 10, 9304897, 1, 0),
+(44, 10, 10305841, 1, 0),
+(44, 10, 10306267, 1, 0),
+(44, 10, 11100533, 1, 0),
+(44, 10, 11102316, 1, 0),
+(44, 10, 11102611, 1, 0),
+(44, 10, 11104305, 1, 0),
+(44, 10, 11104402, 1, 0),
+(45, 10, 7302661, 1, 0),
+(45, 10, 7306872, 1, 0),
+(45, 10, 9304897, 1, 0),
+(45, 10, 10305841, 1, 0),
+(45, 10, 10306267, 1, 0),
+(45, 10, 11100533, 1, 0),
+(45, 10, 11102316, 1, 0),
+(45, 10, 11102611, 1, 0),
+(45, 10, 11104305, 1, 0),
+(45, 10, 11104402, 1, 0),
+(46, 10, 7302661, 1, 0),
+(46, 10, 7306872, 1, 0),
+(46, 10, 9304897, 1, 0),
+(46, 10, 10305841, 1, 0),
+(46, 10, 10306267, 1, 0),
+(46, 10, 11100533, 1, 0),
+(46, 10, 11102316, 1, 0),
+(46, 10, 11102611, 1, 0),
+(46, 10, 11104305, 1, 0),
+(46, 10, 11104402, 1, 0),
+(47, 10, 7302661, 1, 0),
+(47, 10, 7306872, 1, 0),
+(47, 10, 9304897, 1, 0),
+(47, 10, 10305841, 1, 0),
+(47, 10, 10306267, 1, 0),
+(47, 10, 11100533, 1, 0),
+(47, 10, 11102316, 1, 0),
+(47, 10, 11102611, 1, 0),
+(47, 10, 11104305, 1, 0),
+(47, 10, 11104402, 1, 0),
+(48, 10, 7302661, 1, 0),
+(48, 10, 7306872, 1, 0),
+(48, 10, 9304897, 1, 0),
+(48, 10, 10305841, 1, 0),
+(48, 10, 10306267, 1, 0),
+(48, 10, 11100533, 1, 0),
+(48, 10, 11102316, 1, 0),
+(48, 10, 11102611, 1, 0),
+(48, 10, 11104305, 1, 0),
+(48, 10, 11104402, 1, 0),
+(49, 10, 7302661, 1, 0),
+(49, 10, 7306872, 1, 0),
+(49, 10, 9304897, 1, 0),
+(49, 10, 10305841, 1, 0),
+(49, 10, 10306267, 1, 0),
+(49, 10, 11100533, 1, 0),
+(49, 10, 11102316, 1, 0),
+(49, 10, 11102611, 1, 0),
+(49, 10, 11104305, 1, 0),
+(49, 10, 11104402, 1, 0),
+(50, 10, 7302661, 1, 0),
+(50, 10, 7306872, 1, 0),
+(50, 10, 9304897, 1, 0),
+(50, 10, 10305841, 1, 0),
+(50, 10, 10306267, 1, 0),
+(50, 10, 11100533, 1, 0),
+(50, 10, 11102316, 1, 0),
+(50, 10, 11102611, 1, 0),
+(50, 10, 11104305, 1, 0),
+(50, 10, 11104402, 1, 0),
+(51, 10, 7302661, 1, 0),
+(51, 10, 7306872, 1, 0),
+(51, 10, 9304897, 1, 0),
+(51, 10, 10305841, 1, 0),
+(51, 10, 10306267, 1, 0),
+(51, 10, 11100533, 1, 0),
+(51, 10, 11102316, 1, 0),
+(51, 10, 11102611, 1, 0),
+(51, 10, 11104305, 1, 0),
+(51, 10, 11104402, 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_effectiveyear`
+--
+
+CREATE TABLE IF NOT EXISTS `student_effectiveyear` (
+`ID` int(10) NOT NULL,
+  `student_id` int(10) NOT NULL,
+  `pyID` int(3) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `student_effectiveyear`
+--
+
+INSERT INTO `student_effectiveyear` (`ID`, `student_id`, `pyID`) VALUES
+(21, 6302012, 11),
+(17, 6303058, 5),
+(2, 7302661, 5),
+(3, 7306872, 5),
+(12, 7307923, 5),
+(31, 8305919, 11),
+(1, 9304897, 5),
+(25, 9307082, 11),
+(30, 10302946, 11),
+(22, 10303145, 11),
+(23, 10303496, 11),
+(16, 10304548, 5),
+(7, 10305841, 5),
+(8, 10306267, 5),
+(24, 10306807, 11),
+(36, 11100252, 11),
+(35, 11100258, 11),
+(9, 11100533, 5),
+(33, 11100971, 11),
+(28, 11101091, 11),
+(40, 11102063, 11),
+(38, 11102070, 11),
+(15, 11102158, 5),
+(20, 11102210, 11),
+(29, 11102306, 11),
+(4, 11102316, 5),
+(13, 11102404, 5),
+(37, 11102574, 11),
+(6, 11102611, 5),
+(27, 11102951, 11),
+(18, 11103450, 5),
+(11, 11103578, 5),
+(32, 11103625, 11),
+(5, 11104305, 5),
+(10, 11104402, 5),
+(41, 11104403, 11),
+(42, 11104404, 11),
+(43, 11104405, 11),
+(39, 11104504, 11),
+(34, 11104516, 11),
+(14, 11104551, 5),
+(26, 11106019, 11),
+(19, 11106976, 5);
 
 -- --------------------------------------------------------
 
@@ -1040,7 +1381,23 @@ CREATE TABLE IF NOT EXISTS `teacher_class` (
   `school_year` year(4) NOT NULL,
   `courseCode` varchar(9) NOT NULL,
   `teacherID` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `teacher_class`
+--
+
+INSERT INTO `teacher_class` (`ID`, `group_num`, `start_time`, `end_time`, `days`, `semester`, `school_year`, `courseCode`, `teacherID`) VALUES
+(1, 1, '7:30 AM', '9:00 AM', 'TTH', '2', 2015, 'ICT116', '1111111111'),
+(2, 2, '9:00 AM', '10:30 AM', 'TTH', '2', 2015, 'ICT116', '1111111111'),
+(3, 3, '1:30 PM', '3:00 PM', 'TTH', '1', 2015, 'ICT117', '1111111111'),
+(4, 4, '3:00 PM', '4:30 PM', 'TTH', '1', 2015, 'ICT117', '1111111111'),
+(5, 5, '9:00 AM', '10:30 AM', 'MW', '1', 2015, 'ICT118', '1111111111'),
+(6, 3, '10:30 AM', '12:00 NN', 'TTH', '2', 2015, 'ICT116', '1111111122'),
+(7, 4, '12:00 NN', '1:30 PM', 'TTH', '2', 2015, 'ICT116', '1111111122'),
+(8, 1, '12:00 PM', '1:30 PM', 'TTH', '2', 2015, 'ICT117', '1111111122'),
+(9, 2, '10:30 PM', '12:00 PM', 'TTH', '2', 2015, 'ICT117', '1111111122'),
+(10, 3, '10:30 AM', '12:00 AM', 'MW', '2', 2015, 'ICT118', '1111111122');
 
 --
 -- Indexes for dumped tables
@@ -1092,7 +1449,13 @@ ALTER TABLE `student`
 -- Indexes for table `student_course`
 --
 ALTER TABLE `student_course`
- ADD KEY `courseID` (`poID`,`studentID`), ADD KEY `studentID` (`studentID`), ADD KEY `classID` (`classID`), ADD KEY `pyID` (`courseID`);
+ ADD UNIQUE KEY `unique_index` (`poID`,`studentID`), ADD KEY `courseID` (`poID`,`studentID`), ADD KEY `studentID` (`studentID`), ADD KEY `classID` (`classID`), ADD KEY `pyID` (`courseID`);
+
+--
+-- Indexes for table `student_effectiveyear`
+--
+ALTER TABLE `student_effectiveyear`
+ ADD PRIMARY KEY (`ID`), ADD KEY `student_id` (`student_id`,`pyID`), ADD KEY `pyID` (`pyID`);
 
 --
 -- Indexes for table `teacher`
@@ -1104,7 +1467,7 @@ ALTER TABLE `teacher`
 -- Indexes for table `teacher_class`
 --
 ALTER TABLE `teacher_class`
- ADD PRIMARY KEY (`ID`), ADD KEY `courseID` (`courseCode`,`teacherID`), ADD KEY `teacherID` (`teacherID`), ADD KEY `courseCode` (`courseCode`);
+ ADD PRIMARY KEY (`ID`), ADD UNIQUE KEY `unique_index` (`group_num`,`courseCode`), ADD KEY `courseID` (`courseCode`,`teacherID`), ADD KEY `teacherID` (`teacherID`), ADD KEY `courseCode` (`courseCode`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -1114,12 +1477,12 @@ ALTER TABLE `teacher_class`
 -- AUTO_INCREMENT for table `course`
 --
 ALTER TABLE `course`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=87;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=96;
 --
 -- AUTO_INCREMENT for table `po`
 --
 ALTER TABLE `po`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=43;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=52;
 --
 -- AUTO_INCREMENT for table `program`
 --
@@ -1129,12 +1492,17 @@ MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 -- AUTO_INCREMENT for table `program_year`
 --
 ALTER TABLE `program_year`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=41;
+MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=44;
+--
+-- AUTO_INCREMENT for table `student_effectiveyear`
+--
+ALTER TABLE `student_effectiveyear`
+MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=44;
 --
 -- AUTO_INCREMENT for table `teacher`
 --
@@ -1144,7 +1512,7 @@ MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 -- AUTO_INCREMENT for table `teacher_class`
 --
 ALTER TABLE `teacher_class`
-MODIFY `ID` int(5) NOT NULL AUTO_INCREMENT;
+MODIFY `ID` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- Constraints for dumped tables
 --
@@ -1188,6 +1556,13 @@ ADD CONSTRAINT `student_course_ibfk_3` FOREIGN KEY (`studentID`) REFERENCES `stu
 ADD CONSTRAINT `student_course_ibfk_4` FOREIGN KEY (`classID`) REFERENCES `teacher_class` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `student_course_ibfk_5` FOREIGN KEY (`poID`) REFERENCES `po_course` (`poID`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `student_course_ibfk_6` FOREIGN KEY (`courseID`) REFERENCES `po_course` (`courseID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `student_effectiveyear`
+--
+ALTER TABLE `student_effectiveyear`
+ADD CONSTRAINT `student_effectiveyear_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `student_effectiveyear_ibfk_2` FOREIGN KEY (`pyID`) REFERENCES `program_year` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `teacher_class`

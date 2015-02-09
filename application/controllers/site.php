@@ -211,7 +211,6 @@ class Site extends CI_Controller {
                     for($x = 0, $index = 4; $x < count($po_courses); $x++, $index++) {
                         if($po_courses[$x]['status'] == '1') {
                             $studentCourse_data['score'][$x] = $row[$headers[$index]];
-
                             $studentCourse_data['poID'][$x] = $po_courses[$x]['poID'];
                         } else{
                             $studentCourse_data['score'][$x] = '';
@@ -227,9 +226,11 @@ class Site extends CI_Controller {
                         $student_course_data['classID'] = $studentCourse_data['classID'];
                         $student_course_data['poID'] = $studentCourse_data['poID'][$key];
                         $student_course_data['courseID'] = $studentCourse_data['courseID'];
+
                         $to_insert_grade[] = $student_course_data;
                     }
                 }
+                
                 $result = $this->model_users->insert_grades($to_insert_grade);
 
                 //Deletes uploaded file
