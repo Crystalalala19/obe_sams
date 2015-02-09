@@ -108,13 +108,13 @@
 
                 <div class="nav-collapse">
                     <ul class="nav pull-right">
-                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Account">
                             <i class="icon-cog"></i> 
                                 <?php foreach($user as $row): ?><?php echo $row['teacher_id'];?><?php endforeach; ?> 
                                 <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><i class="icon-user"></i> Edit Profile</a></li>
-                                <li><a href="<?php echo base_url()."site/logout" ?>"><i class="icon-off"></i> Logout</a></li>
+                                <li><a href="#"><i class="icon-user" title="Edit Profile"></i> Edit Profile</a></li>
+                                <li><a href="<?php echo base_url()."site/logout" ?>" title="Logout"><i class="icon-off"></i> Logout</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -132,17 +132,17 @@
             <div class="container">
                 <ul class="mainnav">
                     <li <?php uri_match('members');?>>
-                        <a href="<?php echo base_url();?>site/members">
+                        <a href="<?php echo base_url();?>site/members" title="Home">
                             <i class="icon-home"></i><span>Home</span> 
                         </a> 
                     </li>
                     <li <?php uri_match('course_list');?> id="courselist">
-                        <a href="<?php echo base_url('site/course_list'); ?>"><i class="icon-list"></i>
+                        <a href="<?php echo base_url('site/course_list'); ?>" title="Class List"><i class="icon-list"></i>
                             <span>Class List</span> 
                         </a>
                     </li>
                     <li <?php uri_match('student_list');?> id="studentlist">
-                        <a href="<?php echo base_url('site/student_list'); ?>"><i class="icon-group"></i>
+                        <a href="<?php echo base_url('site/student_list'); ?>" title="View Students"><i class="icon-group"></i>
                             <span>Students</span> 
                         </a>
                     </li>

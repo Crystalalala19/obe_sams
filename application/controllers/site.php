@@ -40,7 +40,7 @@ class Site extends CI_Controller {
 		elseif($this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'teacher') {
 			 
 			 $data['user'] = $this->model_users->select_user();
-			 $data['title'] = "Outcome-based Education";
+			 $data['title'] = "OBE SAMS Academic";
 			 
 			 $this->load->view("teacher/header", $data);
 			 $this->load->view('teacher/index', $data);
@@ -90,7 +90,7 @@ class Site extends CI_Controller {
         $data['select_SY'] = $this->model_users->select_SY();
 
         $data['user'] = $this->model_users->select_user();
-        $data['title'] = "Outcome-based Education";
+        $data['title'] = "OBE SAMS Academic";
 
         if($data['first_sem'] == FALSE) {
             $message1 = 'No classes assigned for First Semester. If you think this is a problem, please contact the Chairman.';
@@ -153,7 +153,7 @@ class Site extends CI_Controller {
         }
 
         $data['user'] = $this->model_users->select_user();
-        $data['title'] = "Outcome-based Education";
+        $data['title'] = "OBE SAMS Academic";
 
         if($data['class_list'] == FALSE) {
             $message = 'Your class is empty. Please upload students list with its PO grades.';
@@ -274,7 +274,7 @@ class Site extends CI_Controller {
         $data['get_course'] = $this->model_users->scorecard_course($student_id);
 
         $data['user'] = $this->model_users->select_user();
-        $data['title'] = "Outcome-based Education";
+        $data['title'] = "OBE SAMS Academic";
 
 	    $this->load->view("teacher/header", $data);
 	    $this->load->view('teacher/scorecard', $data);
@@ -288,7 +288,7 @@ class Site extends CI_Controller {
 
 
         $data['user'] = $this->model_users->select_user();
-        $data['title'] = "Outcome-based Education";
+        $data['title'] = "OBE SAMS Academic";
 
         if($data['student_list'] == FALSE) {
             $message = 'No students found in record. Please add students to your assigned classes.';

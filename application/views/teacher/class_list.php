@@ -19,7 +19,7 @@
 
                         <div class="widget-content">
                             <div class="pull-left">
-                                <a href="<?php echo base_url('site/course_list');?>">
+                                <a href="<?php echo base_url('site/course_list');?>" title="Go Back">
                                     <button type="button" class="btn btn-info"><i class="icon-angle-left"></i> Go Back</button>
                                 </a>
                             </div>
@@ -77,7 +77,7 @@
                                             <td><?php echo $row1;?></td>
                                         <?php endforeach; $row_num++; ?>   
                                         <td>
-                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row['student_id'];?>">
+                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row['student_id'];?>" title="View Scorecard">
                                                 <i class="icon-eye-open"></i> View
                                             </a>
                                         </td>
