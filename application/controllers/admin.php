@@ -437,11 +437,15 @@ class Admin extends CI_Controller {
                 'fname' => $this->input->post('teacher_fname'),
                 'mname' => $this->input->post('teacher_mname'),
                 'lname' => $this->input->post('teacher_lname'),
+            );
+
+            $user_account = array(
+                'idnum' => $this->input->post('login_id'),
                 'role' => 'teacher',
                 'password' => $this->encrypt->sha1($this->input->post('login_id'))
             );
 
-            $teacher_result = $this->model_admin->insert_teacher($teacher_data);
+            $teacher_result = $this->model_admin->insert_teacher($teacher_data, $user_account);
 
             if($teacher_result['is_success'] == FALSE) {
                 $message = '<strong>Error: </strong>'.  $teacher_result['db_error'];
@@ -685,6 +689,7 @@ class Admin extends CI_Controller {
         }
 
         $data['academic_year'] = $year;
+        $data['teacher_id'] = $teacher_id;
         $data['year_classes'] = $this->model_admin->get_teacherClasses($teacher_id);
         $data['first_sem'] = $this->model_admin->get_firstSem($teacher_id, $year);
         $data['second_sem'] = $this->model_admin->get_secondSem($teacher_id, $year);
@@ -704,6 +709,52 @@ class Admin extends CI_Controller {
 
         $this->load->view('admin/header', $data);
         $this->load->view('admin/view_classes', $data);
+        $this->load->view('admin/footer');
+    }
+
+    public function view_class_scorecard() {
+        $data['title'] = 'OBE SAMS Academic';
+        $data['header'] = 'View Classes';
+
+        $teacher_id = $this->uri->segment(4);
+        $class_id = $this->uri->segment(6);
+
+        $data['class_list'] = $this->model_admin->select_class($class_id);
+        $data['select_schedule'] = $this->model_admin->select_schedule($class_id);
+        $data['academic_year'] = $this->uri->segment(5);
+
+        $select_schedule = $data['select_schedule'];
+        $student_course = $select_schedule[0]['courseCode'];
+        $student_courseID = $this->model_admin->get_courseID($student_course);
+       
+        $data['get_po'] = $this->model_admin->get_po($student_courseID);
+
+        foreach($data['class_list'] as $key => $val) {
+            $data['class_list'][$key]['score'] = $this->model_admin->get_studentPoGrade($val['studentID'], $class_id);
+            $data['class_list'][$key]['grade'] = array();
+            $data['class_list'][$key]['poID'] = $this->model_admin->get_studentPoID($val['studentID'], $class_id);
+            $i = 0;
+
+            foreach($data['get_po'] as $key1 => $val1) {
+                if($val1['status'] == "1" && isset($data['class_list'][$key]['score'][$i])) {
+                    $data['class_list'][$key]['grade'][$i] =  $data['class_list'][$key]['score'][$i]['score'];
+                } else {
+                    $data['class_list'][$key]['grade'][$i] = "";
+                }
+
+                $i++;
+            }
+        }
+
+        if($data['class_list'] == FALSE) {
+            $message = 'The assigned teacher has not yet uploaded his/her class.';
+            $data['message'] = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
+        } else {
+            $data['message'] = '';
+        }
+
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/view_classes_scorecard', $data);
         $this->load->view('admin/footer');
     }
 

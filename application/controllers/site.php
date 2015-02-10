@@ -123,7 +123,6 @@ class Site extends CI_Controller {
 
     public function class_list(){
         $this->load->library('csvimport');
-        $this->load->library('form_validation');
 
         $class_id = $this->uri->segment(3);
 
@@ -183,7 +182,7 @@ class Site extends CI_Controller {
                 $csv_array = $this->csvimport->get_array($file_path);
                 $headers = $this->csvimport->get_headers();
 
-                $po_courses = $this->model_users->get_poCourse($student_course);
+                $po_courses = $this->model_users->get_poCourse($student_courseID);
 
                 foreach ($csv_array as $row) {
                     $check_studentID = $this->model_users->check_studentRecord($row['Student ID']);
@@ -213,6 +212,14 @@ class Site extends CI_Controller {
 
                     for($x = 0, $index = 4; $x < count($po_courses); $x++, $index++) {
                         if($po_courses[$x]['status'] == '1') {
+                            if($row[$headers[$index]] == NULL) {
+                                $message = '<strong>Error: </strong>There\'s an empty score found. Please check your .CSV file.';
+                                $message = $this->model_users->notify_message('alert-danger', 'icon-exclamation', $message);
+
+                                $this->session->set_flashdata('message', $message);
+
+                                redirect(current_url());
+                            };
                             $studentCourse_data['score'][$x] = $row[$headers[$index]];
                             $studentCourse_data['poID'][$x] = $po_courses[$x]['poID'];
                         } else{

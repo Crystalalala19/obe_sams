@@ -174,8 +174,8 @@ class Model_users extends CI_Model {
         return $row['student_id'];
     }
 
-    function get_poCourse($course_code) {
-        $query = $this->db->query("SELECT status, po_course.poID, po_course.courseID FROM po_course INNER JOIN course ON course.ID = po_course.courseID WHERE course.CourseCode = '".$course_code."' ");
+    function get_poCourse($course_id) {
+        $query = $this->db->query("SELECT status, po_course.poID, po_course.courseID FROM po_course INNER JOIN course ON course.ID = po_course.courseID WHERE po_course.courseID='".$course_id."' ");
         
         return $query->result_array();
     }

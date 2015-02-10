@@ -20,20 +20,27 @@
                                 <thead>
                                     <tr>
                                         <th>S.Y</th>
+                                        <th class="filter-select" data-placeholder="Select a Semester">Semester</th>
                                         <th>Teacher</th>
                                         <th>Group #</th>
                                         <th>Subject</th>
                                         <th>Schedule</th>
+                                        <th data-sorter="false">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach($teacher_list as $row):?>
                                     <tr>
                                         <td><?php echo $row['school_year'];?></td>
+                                        <td><?php echo $row['semester'];?></td>
                                         <td><?php echo $row['fname'].' '.$row['lname']; ?></td>
                                         <td><?php echo $row['group_num'];?></td>
                                         <td><?php echo $row['courseCode'];?></td>
                                         <td><?php echo $row['start_time'].' - '. $row['end_time'].' '. $row['days'];?></td>
+                                        <td>
+                                            <a type="button" title="View Classes" class="btn btn-warning btn-small btn-responsive" href="<?php echo base_url();?>admin/teachers/classes/<?php echo $row['teacher_id'].'/'.$row['school_year'];?>"><i class="icon-book"></i></a>
+
+                                        </td>
                                     </tr>
                                     <?php endforeach;?>
                                 </tbody>
@@ -55,7 +62,11 @@
 
                 // hidden filter input/selects will resize the columns, so try to minimize the change
                 widthFixed : true,
-                widgets: ["zebra", "filter"]
+                widgets : ["zebra", "filter"],
+
+                widgetOptions : {
+                    filter_searchDelay : 400
+                } 
             });
         });
     </script>
