@@ -41,26 +41,28 @@ class Model_student extends CI_Model {
         return $query->result_array();
     }
 
-    function get_po_courseSC($courseID) {
-        $query = $this->db->query("SELECT * FROM po_course WHERE courseID = '".$courseID."' ");
+    function get_poGeneral($student_id, $classID) { 
+        $query = $this->db->query("SELECT * FROM student_course 
+                                            INNER JOIN po_course ON student_course.poID = po_course.poID
+                                            WHERE student_course.studentID = '".$student_id."' AND student_course.classID = '".$classID."' 
+                                            GROUP BY po_course.poID");
         
         return $query->result_array();
     }
 
-    function get_po_score($class_id, $student_id){
+    function get_studentPoGrade($student_id, $class_id){
         $query = $this->db->query("SELECT score FROM student_course
                                 WHERE studentID = '".$student_id."' AND classID = '".$class_id."' ");
 
         return $query->result_array();
     }
-    
-    function get_student_POID($class_id, $student_id) {
+
+    function get_studentPoID($student_id, $class_id) {
         $query = $this->db->query("SELECT poID FROM student_course
                                 WHERE studentID = '".$student_id."' AND classID = '".$class_id."' ");
 
         return $query->result_array();
     }
-
 
 }
 ?>    

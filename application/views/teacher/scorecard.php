@@ -31,7 +31,8 @@
                                 <?php echo '[ '.$row1->student_id.' ]  ';?>
                                 <?php echo $row1->lname.', '.$row1->fname.' '.$row1->mname; ?>
                                 <?php endforeach; ?>
-                            </h4> <hr>
+                            </h4> 
+                            <hr>
 
                             <table id="scorecard" class="table table-striped table-bordered">
                                 <thead>
@@ -96,6 +97,6 @@
 </script>
 
 <script type="text/javascript" language="javascript" class="init">
-    var d = document.getElementById('studentlist');
+    var d = document.getElementById('scorecard');
     d.className = d.className + " active";
 </script>

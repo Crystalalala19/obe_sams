@@ -17,39 +17,47 @@ class Student extends CI_Controller {
         $data['get_studentName'] = $this->model_student->get_studentName($student_id);
         $data['get_EY'] = $this->model_student->get_scoreEY($student_id);
         $data['get_class'] = $this->model_student->get_class($student_id);
-        
-        $data['class_list'] = $this->model_student->select_classSC($student_id);
-        $multi_array = array();
-        $i = 0;
-
-        foreach ($data['class_list'] as $key2 => $val2) {
-            $multi_array[$i++] = $this->model_student->get_po_courseSC($val2['courseID']);
-        }
-
-        $data['m_array'] = $multi_array[0];
-        foreach($data['class_list'] as $key => $val) {
-            $data['class_list'][$key]['score'] = $this->model_student->get_po_score($val['classID'], $student_id);
-            $data['class_list'][$key]['grade'] = array();
-            $data['class_list'][$key]['poID'] = $this->model_student->get_student_POID($val['classID'], $student_id);
-            $i = 0;
-
-            foreach($data['m_array'] as $key1 => $val1) {
-                if($val1['status'] == "1"  && isset($data['class_list'][$key]['score'][$i])) {
-                    $data['class_list'][$key]['grade'][$i] =  $data['class_list'][$key]['score'][$i]['score'];
-                } else {
-                    $data['class_list'][$key]['grade'][$i] = "";
-                }
-
-                $i++;
-            }
-        }
-
 
         $this->load->view('student/header', $data);
         $this->load->view('student/index', $data);
         $this->load->view('student/footer');
+    }
+
+    function scorecard(){
+
+        $data['user'] = $this->model_student->select_user();
+        $data['title'] = 'OBE SAMS Academic';
+
+        $student_id = $this->session->userdata('idnum');
 
 
+        $data['get_studentName'] = $this->model_student->get_studentName($student_id);
+        $data['get_EY'] = $this->model_student->get_scoreEY($student_id);
+        $data['get_class'] = $this->model_student->get_class($student_id);
+        
+        $data['class_list'] = $this->model_student->select_classSC($student_id);
+
+        $class_list = $data['class_list'];
+
+        $student_class = $data['class_list'];
+
+        foreach($data['class_list'] as $key => $val) {
+            $data['get_po'] = $this->model_student->get_poGeneral($student_id, $class_list[$key]['ID']);
+            $data['class_list'][$key]['score'] = $this->model_student->get_studentPoGrade($val['studentID'], $student_class[$key]['ID']);
+            $data['class_list'][$key]['poID'] = $this->model_student->get_studentPoID($val['studentID'], $student_class[$key]['ID']);
+            
+            $i = 0;
+            foreach($data['class_list'][$key]['score'] as $key1 => $val1) {
+                if($val1['score'] == "0") {
+                    $data['class_list'][$key]['score'][$key1]['score'] = "";
+                }
+            }
+            $i++;
+        }
+
+        $this->load->view('student/header', $data);
+        $this->load->view('student/scorecard', $data);
+        $this->load->view('student/footer');
     }
     
 }

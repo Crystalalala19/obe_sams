@@ -47,7 +47,7 @@ class Site extends CI_Controller {
 			$this->load->view("teacher/footer");
 		} 
         elseif($this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'student') {
-            redirect('student/index');
+            redirect('student');
         } 
 		else{  
 			redirect('site/restricted');

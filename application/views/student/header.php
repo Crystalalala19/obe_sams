@@ -103,7 +103,16 @@
         <div class="subnavbar-inner">
             <div class="container">
                 <ul class="mainnav">
-                    <li class="active"><a href="<?php echo base_url('student'); ?>" title="Home"><i class="icon-home"></i><span>Home</span> </a> </li>
+                     <li <?php uri_match('student');?>>
+                        <a href="<?php echo base_url('student');?>" title="Home">
+                            <i class="icon-home"></i><span>Home</span> 
+                        </a> 
+                    </li>
+                    <li <?php uri_match('scorecard');?> id="scorecard">
+                        <a href="<?php echo base_url('student/scorecard'); ?>" title="Class List"><i class="icon-list"></i>
+                            <span>Scorecard</span> 
+                        </a>
+                    </li>
                 </ul>
             </div>
             <!-- /container --> 
