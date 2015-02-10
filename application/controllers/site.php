@@ -18,9 +18,9 @@ class Site extends CI_Controller {
 
         if ($this->form_validation->run()) {
             $user_data = array(
-                'teacher_id' => $this->input->post('idnum'),
+                'idnum' => $this->input->post('idnum'),
                 'is_logged_in' => 1,
-                'role' => $this->model_users->scalar('teacher','role')
+                'role' => $this->model_users->scalar('user_account','role')
             );
 
             $this->session->set_userdata($user_data);
@@ -39,13 +39,16 @@ class Site extends CI_Controller {
 		}  
 		elseif($this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'teacher') {
 			 
-			 $data['user'] = $this->model_users->select_user();
-			 $data['title'] = "OBE SAMS Academic";
+			$data['user'] = $this->model_users->select_user();
+			$data['title'] = "OBE SAMS Academic";
 			 
-			 $this->load->view("teacher/header", $data);
-			 $this->load->view('teacher/index', $data);
-			 $this->load->view("teacher/footer");
+			$this->load->view("teacher/header", $data);
+			$this->load->view('teacher/index', $data);
+			$this->load->view("teacher/footer");
 		} 
+        elseif($this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'student') {
+            redirect('student/index');
+        } 
 		else{  
 			redirect('site/restricted');
 		}
@@ -56,7 +59,7 @@ class Site extends CI_Controller {
 	}
 
     public function validate_credentials($query) {
-        $data = array('teacher_id' => $this->input->post('idnum'));
+        $data = array('idnum' => $this->input->post('idnum'));
         $pass = $this->input->post('password');
         if($this->model_users->can_log_in($data, $pass)) {
             return true;
@@ -310,7 +313,7 @@ class Site extends CI_Controller {
     }
 
     public function student_list(){
-        $session_id = $this->session->userdata('teacher_id');
+        $session_id = $this->session->userdata('idnum');
         $data['student_list'] = $this->model_users->student_list($session_id);  
         
 

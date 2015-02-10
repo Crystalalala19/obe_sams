@@ -6,11 +6,11 @@ class Model_users extends CI_Model {
 		parent::__construct();
 	}
 
-	function scalar($teacher, $role){
-		$this->db->where('teacher_id', $this->input->post('idnum'));
+	function scalar($user_account, $role){
+		$this->db->where('idnum', $this->input->post('idnum'));
 		$this->db->select($role);                                                                                                                     
 
-		$query = $this->db->get($teacher);
+		$query = $this->db->get($user_account);
 		$row = $query->row_array();
 		return $row['role'];
 	}
@@ -18,7 +18,7 @@ class Model_users extends CI_Model {
 	function can_log_in($data, $pass){
         $this->load->library('encrypt');
 
-		$query = $this->db->get_where('teacher', $data);
+		$query = $this->db->get_where('user_account', $data);
         if($query->num_rows() == 1) {
 
             $row = $query->row_array();
@@ -38,32 +38,32 @@ class Model_users extends CI_Model {
 	}
 	
 	function select_user(){		
-		$query = $this->db->query("SELECT * FROM teacher WHERE teacher_id = '".$this->session->userdata('teacher_id')."'");
+		$query = $this->db->query("SELECT * FROM teacher WHERE teacher_id = '".$this->session->userdata('idnum')."'");
 
 		return $query->result_array();
 	}
 
   
     function get_1stSemester($year){
-        $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 1 AND school_year = '".$year."' ");
+        $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('idnum')."' AND semester = 1 AND school_year = '".$year."' ");
 
         return $query->result();
     }
 
     function get_2ndSemester($year){
-        $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 2 AND school_year = '".$year."' ");
+        $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('idnum')."' AND semester = 2 AND school_year = '".$year."' ");
 
         return $query->result();
     }
 
     function get_summer($year){
-        $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' AND semester = 'summer' AND school_year = '".$year."' ");
+        $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('idnum')."' AND semester = 'summer' AND school_year = '".$year."' ");
 
         return $query->result();
     }
 
     function select_SY(){
-        $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('teacher_id')."' 
+        $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('idnum')."' 
                                                                           GROUP BY school_year ");
         
         return $query->result();
