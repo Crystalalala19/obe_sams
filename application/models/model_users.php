@@ -26,8 +26,6 @@ class Model_users extends CI_Model {
 
             $hashed = $this->encrypt->sha1($pass);
 
-            echo $hashed;
-
             if($db_pass == $hashed) {
                return true;
             }
