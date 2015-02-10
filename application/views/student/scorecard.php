@@ -1,3 +1,12 @@
+ <!-- Datatables -->
+
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/dataTables.bootstrapv3.css">
+
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/dataTables.tableTools.min.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/datatables-bootstrapv3.js"></script>
+
+
 <div class="main-inner">
     <div class="container">
         <div class="row">
@@ -82,6 +91,46 @@
             if( isNaN(footer.getElementsByTagName('td')[i].innerHTML) )
                 footer.getElementsByTagName('td')[i].innerHTML = " ";
         }
-    </script>
+
+   var dataTableOptions = {
+            "bPaginate": false,
+            "bLengthChange": false,
+            "bFilter": true,
+            "bInfo": false,
+            "bAutoWidth": false 
+        };
+
+        var tableToolsOptions = {
+            "sSwfPath": "http://cdn.datatables.net/tabletools/2.2.3/swf/copy_csv_xls_pdf.swf",
+            "aButtons": [ {
+                    "sExtends": "print",
+                    "sButtonText": "Print",
+                    "bShowAll": false
+                }, {
+                    "sExtends":    "collection",
+                    "sButtonText": "Save as...",
+                    "aButtons":    [ {
+                            "sExtends": "xls",
+                            "oSelectorOpts": {
+                                page: 'current'
+                            },
+                            "mColumns": [ 0, 1 ]
+                        }, {
+                            "sExtends": "pdf",
+                            "sButtonText": "PDF",
+                            "mColumns": [ 0, 1 ]
+                        }
+                    ]
+                }
+            ]
+        };
+
+        var table = $('#scorecard1').dataTable( dataTableOptions );
+
+        var tt = new $.fn.dataTable.TableTools( table, tableToolsOptions );
+
+        $( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
+
+
 </script>
 

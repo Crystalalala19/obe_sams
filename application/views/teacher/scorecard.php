@@ -93,7 +93,46 @@
             if( isNaN(footer.getElementsByTagName('td')[i].innerHTML) )
                 footer.getElementsByTagName('td')[i].innerHTML = " ";
         }
-    </script>
+
+        var dataTableOptions = {
+            "bPaginate": false,
+            "bLengthChange": false,
+            "bFilter": true,
+            "bInfo": false,
+            "bAutoWidth": false 
+        };
+
+        var tableToolsOptions = {
+            "sSwfPath": "http://cdn.datatables.net/tabletools/2.2.3/swf/copy_csv_xls_pdf.swf",
+            "aButtons": [{
+                    "sExtends": "print",
+                    "sButtonText": "Print",
+                    "bShowAll": false
+                }, {
+                    "sExtends":    "collection",
+                    "sButtonText": "Save as...",
+                    "aButtons":    [ {
+                            "sExtends": "xls",
+                            "oSelectorOpts": {
+                                page: 'current'
+                            },
+                            "mColumns": [ 0, 1 ]
+                        }, {
+                            "sExtends": "pdf",
+                            "sButtonText": "PDF",
+                            "mColumns": [ 0, 1 ]
+                        }
+                    ]
+                }
+            ]
+        };
+
+        var table = $('#scorecard').dataTable( dataTableOptions );
+
+        var tt = new $.fn.dataTable.TableTools( table, tableToolsOptions );
+
+        $( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
+
 </script>
 
 <script type="text/javascript" language="javascript" class="init">

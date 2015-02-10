@@ -8,6 +8,9 @@ class Student extends CI_Controller {
     }
 
     public function index(){
+        if(!$this->session->userdata('is_logged_in')){
+            redirect('site');
+        }
 
         $data['user'] = $this->model_student->select_user();
         $data['title'] = 'OBE SAMS Academic';
@@ -24,6 +27,9 @@ class Student extends CI_Controller {
     }
 
     function scorecard(){
+        if(!$this->session->userdata('is_logged_in')){
+            redirect('site');
+        }
 
         $data['user'] = $this->model_student->select_user();
         $data['title'] = 'OBE SAMS Academic';

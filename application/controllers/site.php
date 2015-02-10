@@ -77,6 +77,10 @@ class Site extends CI_Controller {
 
 
     public function course_list(){
+        if(!$this->session->userdata('is_logged_in')){
+            redirect('site');
+        }
+
         $year = $this->uri->segment(3);
 
         if(empty($year)) {
@@ -122,6 +126,10 @@ class Site extends CI_Controller {
    }
 
     public function class_list(){
+        if(!$this->session->userdata('is_logged_in')){
+            redirect('site');
+        }
+
         $this->load->library('csvimport');
 
         $class_id = $this->uri->segment(3);
@@ -275,6 +283,10 @@ class Site extends CI_Controller {
     }
 
     public function scorecard(){
+        if(!$this->session->userdata('is_logged_in')){
+            redirect('site');
+        }
+
         $student_id = $this->uri->segment(3);
 
         $data['get_studentName'] = $this->model_users->get_studentName($student_id);
@@ -310,6 +322,10 @@ class Site extends CI_Controller {
     }
 
     public function student_list(){
+        if(!$this->session->userdata('is_logged_in')){
+            redirect('site');
+        }
+        
         $session_id = $this->session->userdata('idnum');
         $data['student_list'] = $this->model_users->student_list($session_id);  
         
