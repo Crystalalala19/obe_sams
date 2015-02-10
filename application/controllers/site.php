@@ -271,7 +271,35 @@ class Site extends CI_Controller {
         $data['get_EY'] = $this->model_users->get_scoreEY($student_id);
         $data['get_class'] = $this->model_users->get_class($student_id);
         
-        $data['get_course'] = $this->model_users->scorecard_course($student_id);
+        $data['class_list'] = $this->model_users->select_classSC($student_id);
+        $multi_array = array();
+        $i = 0;
+
+        foreach ($data['class_list'] as $key2 => $val2) {
+            $multi_array[$i++] = $this->model_users->get_po_courseSC($val2['courseID']);
+        }
+
+        $data['m_array'] = $multi_array[0];
+        foreach($data['class_list'] as $key => $val) {
+            $data['class_list'][$key]['score'] = $this->model_users->get_po_score($val['classID'], $student_id);
+            $data['class_list'][$key]['grade'] = array();
+            $data['class_list'][$key]['poID'] = $this->model_users->get_student_POID($val['classID'], $student_id);
+            $i = 0;
+
+            foreach($data['m_array'] as $key1 => $val1) {
+                if($val1['status'] == "1"  && isset($data['class_list'][$key]['score'][$i])) {
+                    $data['class_list'][$key]['grade'][$i] =  $data['class_list'][$key]['score'][$i]['score'];
+                } else {
+                    $data['class_list'][$key]['grade'][$i] = "";
+                }
+
+                $i++;
+            }
+        }
+
+        //print_r($data['m_array']);
+        //die();
+        
 
         $data['user'] = $this->model_users->select_user();
         $data['title'] = "Outcome-based Education";

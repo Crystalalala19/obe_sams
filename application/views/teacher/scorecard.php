@@ -1,14 +1,4 @@
-<!-- For filter table -->
-<link href="shttp://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
-<link href="http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css" rel="stylesheet">
-<link href="<?php echo base_url();?>assets/css/bootstrap-editable.css" rel="stylesheet">
-<link href="<?php echo base_url();?>assets/css/bootstrap-filterable.css" rel="stylesheet">
-<link href="http://lightswitch05.github.io/filterable/stylesheets/main.css" rel="stylesheet">
-
-<!-- End filter table -->
-
-
- <div class="main-inner">
+<div class="main-inner">
     <div class="container">
         <div class="row">
             <div class="span12">
@@ -19,6 +9,16 @@
                     </div> <!-- /widget-header -->
 
                     <div class="widget-content">
+                        <div class="pull-left">
+                            <a href="javascript:window.history.go(-1);">
+                                <button type="button" class="btn btn-info"><i class="icon-angle-left"></i> Go Back</button>
+                            </a>
+                        </div>
+                        <div class="clearfix"></div><br>
+                        <?php 
+                            $po_count = count($m_array);
+                            $attributes = array('class' => 'col-md-4');
+                        ?>
 
                         <div class="span11">
                             <h4><center>
@@ -39,33 +39,45 @@
                                 <h4>
                                     <?php foreach($get_class as $row2): ?> 
                                         <?php 
-                                            if($row2->semester == '1st'){
-                                                echo 'First Semester'; 
-                                            } elseif ($row2->semester == '2nd' ) {
-                                                echo 'Second Semester';
+                                            if($row2->semester == '1'){
+                                                echo 'FIRST SEMESTER'; 
+                                            } elseif ($row2->semester == '2' ) {
+                                                echo 'SECOND SEMESTER';
                                             } else {
-                                                echo 'Summer';
+                                                echo 'SUMMER';
                                             }                        
                                         ?>
                                       
-                                        <?php echo ' | SY: '.$row2->school_year.' - '.($row2->school_year+1);?>
+                                        <?php echo $row2->school_year.' - '.($row2->school_year+1);?>
                                     <?php endforeach; ?>
                                 </h4>   
                             <table class="table table-striped table-bordered">
                                 <thead>
                                   <tr>
-                                    <th> Code </th>
-                                    <th> PO Score</th>
+                                    <th> Course Code </th>
+                                     <?php for($x = 1; $x <= $po_count; $x++):?>
+                                        <th>PO <?php echo $x;?></i></th>
+                                    <?php endfor; $row_num=1;?>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <?php foreach($get_course as $row3): ?>
-                                        <td><?php echo $row3->courseCode; ?></td>
-                                        <td></td>
+                                    <?php foreach($class_list as $row3): ?>
+                                    <tr>
+                                        <td><?php echo $row3['courseCode']; ?></td>
+                                        <?php foreach($row3['grade'] as $row4): ?>
+                                            <td><?php echo $row4;?></td>
+                                        <?php endforeach; $row_num++; ?>   
+                                    </tr>
                                     <?php endforeach; ?>
-                                  </tr>
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td><center>Average</center></td>
+                                        <?php for($x = 1; $x <= $po_count; $x++):?>
+                                            <td></td>
+                                        <?php endfor;?>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
 
@@ -79,35 +91,33 @@
 </div> <!-- /main-inner -->
 
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-<script src="<?php echo base_url();?>assets/js/bootstrap-editable.min.js"></script>
-<script src="<?php echo base_url();?>assets/js/filterable-utils.js"></script>
-<script src="<?php echo base_url();?>assets/js/filterable-cell.js"></script>
-<script src="<?php echo base_url();?>assets/js/filterable-row.js"></script>
-<script src="<?php echo base_url();?>assets/js/filterable.js"></script>
+<script type="text/javascript">
+        var values = [],
+            table = document.getElementById('view_classlist'),
+            rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr'),
+            footer = table.getElementsByTagName('tfoot')[0];
 
+        for(var i=2; i<11; i++){
+            values[i] = [];
+            for(var j=0, l=rows.length; j<l; j++){
+                values[i].push(
+                    parseFloat(
+                        rows[j].getElementsByTagName('td')[i]
+                      .innerHTML
+                    )
+                );
+            }
 
-<script>
-  $('#myTab a').click(function (e) {
-  e.preventDefault()
-  $(this).tab('show')
-})
-
-$('#myTab1 a').click(function (e) {
-  e.preventDefault()
-  $(this).tab('show')
-})
-
-
+            var score = values[i].reduce(function(pv,cv){return pv + cv;},0) / values[i].length;
+            footer.getElementsByTagName('td')[i-1].innerHTML = Math.round(score * 100) / 100;
+          
+            if( isNaN(footer.getElementsByTagName('td')[i-1].innerHTML) )
+                footer.getElementsByTagName('td')[i-1].innerHTML = " ";
+        }
+    </script>
 </script>
 
 <script type="text/javascript" language="javascript" class="init">
     var d = document.getElementById('studentlist');
     d.className = d.className + " active";
 </script>
-
-<script type="text/javascript">
-   $('#example-table').filterable();
-</script>
-
