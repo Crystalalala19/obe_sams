@@ -123,7 +123,6 @@ class Site extends CI_Controller {
 
     public function class_list(){
         $this->load->library('csvimport');
-        $this->load->library('form_validation');
 
         $class_id = $this->uri->segment(3);
 
@@ -183,7 +182,7 @@ class Site extends CI_Controller {
                 $csv_array = $this->csvimport->get_array($file_path);
                 $headers = $this->csvimport->get_headers();
 
-                $po_courses = $this->model_users->get_poCourse($student_course);
+                $po_courses = $this->model_users->get_poCourse($student_courseID);
 
                 foreach ($csv_array as $row) {
                     $check_studentID = $this->model_users->check_studentRecord($row['Student ID']);
@@ -213,6 +212,14 @@ class Site extends CI_Controller {
 
                     for($x = 0, $index = 4; $x < count($po_courses); $x++, $index++) {
                         if($po_courses[$x]['status'] == '1') {
+                            if($row[$headers[$index]] == NULL) { 
+                                $message = '<strong>Error: </strong>There\'s an empty score found. Please check your .CSV file.'; 
+                                $message = $this->model_users->notify_message('alert-danger', 'icon-exclamation', $message);
+                            
+                                $this->session->set_flashdata('message', $message);
+                            
+                                redirect(current_url()); 
+                            };
                             $studentCourse_data['score'][$x] = $row[$headers[$index]];
                             $studentCourse_data['poID'][$x] = $po_courses[$x]['poID'];
                         } else{
@@ -275,34 +282,24 @@ class Site extends CI_Controller {
         $data['get_class'] = $this->model_users->get_class($student_id);
         
         $data['class_list'] = $this->model_users->select_classSC($student_id);
-        $multi_array = array();
-        $i = 0;
 
-        foreach ($data['class_list'] as $key2 => $val2) {
-            $multi_array[$i++] = $this->model_users->get_po_courseSC($val2['courseID']);
-        }
+        $class_list = $data['class_list'];
 
-        $data['m_array'] = $multi_array[0];
+        $student_class = $data['class_list'];
+
         foreach($data['class_list'] as $key => $val) {
-            $data['class_list'][$key]['score'] = $this->model_users->get_po_score($val['classID'], $student_id);
-            $data['class_list'][$key]['grade'] = array();
-            $data['class_list'][$key]['poID'] = $this->model_users->get_student_POID($val['classID'], $student_id);
+            $data['get_po'] = $this->model_users->get_poGeneral($student_id, $class_list[$key]['ID']);
+            $data['class_list'][$key]['score'] = $this->model_users->get_studentPoGrade($val['studentID'], $student_class[$key]['ID']);
+            $data['class_list'][$key]['poID'] = $this->model_users->get_studentPoID($val['studentID'], $student_class[$key]['ID']);
+            
             $i = 0;
-
-            foreach($data['m_array'] as $key1 => $val1) {
-                if($val1['status'] == "1"  && isset($data['class_list'][$key]['score'][$i])) {
-                    $data['class_list'][$key]['grade'][$i] =  $data['class_list'][$key]['score'][$i]['score'];
-                } else {
-                    $data['class_list'][$key]['grade'][$i] = "";
+            foreach($data['class_list'][$key]['score'] as $key1 => $val1) {
+                if($val1['score'] == "0") {
+                    $data['class_list'][$key]['score'][$key1]['score'] = "";
                 }
-
-                $i++;
             }
+            $i++;
         }
-
-        //print_r($data['m_array']);
-        //die();
-        
 
         $data['user'] = $this->model_users->select_user();
         $data['title'] = "OBE SAMS Academic";

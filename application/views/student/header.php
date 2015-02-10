@@ -1,3 +1,13 @@
+<?php
+    function uri_match($requestUri)
+    {
+        $current_file_name = basename($_SERVER['REQUEST_URI']);
+
+        if ($current_file_name == $requestUri)
+            echo 'class=active';
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

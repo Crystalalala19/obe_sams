@@ -112,7 +112,7 @@
                                     <input type="submit" class="btn btn-success" name="submit" value="Submit">
                                 </div>
                             </form>  
-                        </div>
+                        </div> <!-- /widget-content --> 
                     </div> <!-- /widget -->                 
                 </div> <!-- /span12 -->         
             </div> <!-- /row -->
@@ -127,7 +127,7 @@
             rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr'),
             footer = table.getElementsByTagName('tfoot')[0];
 
-        for(var i=2; i<11; i++){
+        for(var i=2; i<<?php echo $po_count;?>; i++){
             values[i] = [];
             for(var j=0, l=rows.length; j<l; j++){
                 values[i].push(
