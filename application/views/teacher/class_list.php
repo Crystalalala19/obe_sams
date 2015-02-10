@@ -19,7 +19,7 @@
 
                         <div class="widget-content">
                             <div class="pull-left">
-                                <a href="<?php echo base_url('site/course_list');?>" title="Go Back">
+                                <a href="javascript:window.history.go(-1);">
                                     <button type="button" class="btn btn-info"><i class="icon-angle-left"></i> Go Back</button>
                                 </a>
                             </div>
