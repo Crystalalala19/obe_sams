@@ -69,7 +69,7 @@
                                                         <td><?php echo $row1->courseCode;?></td>
                                                         <td><?php echo $row1->start_time."-".$row1->end_time." ".$row1->days;?></td>
                                                         <td>
-                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/class_list/<?php echo $row1->ID;?>">
+                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/class_list/<?php echo $row1->ID;?>" title="View Class">
                                                                 <i class="icon-eye-open"></i> View Class
                                                             </a>
                                                         </td>
@@ -99,7 +99,7 @@
                                                         <td><?php echo $row2->courseCode;?></td>
                                                         <td><?php echo $row2->start_time."-".$row2->end_time." ".$row2->days;?></td>
                                                         <td>
-                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/class_list/<?php echo $row2->ID;?>">
+                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/class_list/<?php echo $row2->ID;?>" title="View Class">
                                                                 <i class="icon-eye-open"></i> View Class
                                                             </a>
                                                         </td>
@@ -128,7 +128,7 @@
                                                         <td><?php echo $row3->courseCode;?></td>
                                                         <td><?php echo $row3->start_time."-".$row3->end_time." ".$row3->days;?></td>
                                                         <td>
-                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/class_list/<?php echo $row3->ID;?>">
+                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/class_list/<?php echo $row3->ID;?>" title="View Class">
                                                                 <i class="icon-eye-open"></i> View Class
                                                             </a>
                                                         </td>

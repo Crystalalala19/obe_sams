@@ -97,10 +97,10 @@
 
                 <div class="nav-collapse">
                     <ul class="nav pull-right">
-                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Account">
                             <i class="icon-cog"></i> Account <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="<?php echo base_url('site/logout');?>"><i class="icon-off"></i> Logout</a></li>
+                                <li><a href="<?php echo base_url('site/logout');?>" title="Logout"><i class="icon-off"></i> Logout</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -117,15 +117,15 @@
         <div class="subnavbar-inner">
             <div class="container">
                 <ul class="mainnav">
-                    <li <?php uri_match('admin');?>><a href="<?php echo base_url('admin'); ?>"><i class="icon-home"></i><span>Home</span> </a> </li>
-                    <li class="dropdown" id="program_dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-briefcase"></i><span>Programs</span> <b class="caret"></b></a>
+                    <li <?php uri_match('admin');?>><a href="<?php echo base_url('admin'); ?>" title="Home"><i class="icon-home"></i><span>Home</span> </a> </li>
+                    <li class="dropdown" id="program_dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" title="Programs"> <i class="icon-briefcase"></i><span>Programs</span> <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="<?php echo base_url('admin/programs/add'); ?>"><i class="icon-plus"></i> Add new Curriculum</a></li>
-                            <li><a href="<?php echo base_url('admin/programs/view'); ?>"><i class="icon-briefcase"></i> View Programs</a></li>
+                            <li><a href="<?php echo base_url('admin/programs/add'); ?>" title="Add new Curriculum"><i class="icon-plus"></i> Add new Curriculum</a></li>
+                            <li><a href="<?php echo base_url('admin/programs/view'); ?>" title="View Programs"><i class="icon-briefcase"></i> View Programs</a></li>
                         </ul>
                     </li>
-                    <li <?php uri_match('teachers'); uri_match('upload')?> id="teachers_menu"><a href="<?php echo base_url('admin/teachers'); ?>"><i class="icon-sitemap"></i><span>Teachers</span> </a></li>
-                    <li class="dropdown" id="report_dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-list-alt"></i><span>Reports</span> <b class="caret"></b></a>
+                    <li <?php uri_match('teachers'); uri_match('upload')?> id="teachers_menu"><a href="<?php echo base_url('admin/teachers'); ?>" title="View Teachers"><i class="icon-sitemap"></i><span>Teachers</span> </a></li>
+                    <li class="dropdown" id="report_dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" title="Reports"> <i class="icon-list-alt"></i><span>Reports</span> <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="<?php echo base_url('admin/reports/teacher'); ?>"><i class="icon-user-md"></i> Teacher</a></li>
                             <li><a href="<?php echo base_url('admin/reports/student'); ?>"><i class="icon-user"></i> Student</a></li>

@@ -39,7 +39,7 @@
                                                 <td><center><?php echo $row->programName;?> - <?php echo $row->effective_year;?></center></td>
                                                 <td>
                                                     <center>
-                                                        <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row->studentID;?>">
+                                                        <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row->studentID;?>" title="View Scorecard">
                                                         <i class="icon-eye-open"></i> View Scorecard
                                                         </a>
                                                     </center>

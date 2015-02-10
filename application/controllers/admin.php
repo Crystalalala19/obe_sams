@@ -14,7 +14,7 @@ class Admin extends CI_Controller {
     // "detect_indentation": false
 
     public function index(){
-        $data['title'] = 'Admin - Dashboard';
+        $data['title'] = 'OBE SAMS Academic';
 
         $this->load->view('admin/header', $data);
         $this->load->view('admin/index');
@@ -60,7 +60,7 @@ class Admin extends CI_Controller {
     // END FUNCTIONS
 
     public function program_outcome() {
-        $data['title'] = 'Admin - Program Outcomes';
+        $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Program Outcomes';
        
         $program = $this->uri->segment(4);
@@ -141,7 +141,7 @@ class Admin extends CI_Controller {
     }
 
     public function add_program(){
-        $data['title'] = 'Admin - Add new Curriculum';
+        $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Add new Curriculum';
 
         $data['program_list'] = $this->model_admin->check_rows('program');
@@ -269,7 +269,7 @@ class Admin extends CI_Controller {
     }
 
     public function view_programs() {
-        $data['title'] = 'Admin - View Curriculums';
+        $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'View Curriculums';
         
         $this->load->library('form_validation');
@@ -313,7 +313,7 @@ class Admin extends CI_Controller {
     }
 
     public function edit_program() {
-        $data['title'] = 'Admin - Edit Curriculum';
+        $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Edit Curriculum';
         $data['message'] = '';
 
@@ -462,7 +462,7 @@ class Admin extends CI_Controller {
     }
 
     public function view_teachers() {
-        $data['title'] = 'Admin - Teachers';
+        $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Teachers';
         $data['teacher_list'] = $this->model_admin->get_teachers();
         
@@ -479,7 +479,7 @@ class Admin extends CI_Controller {
     }
 
     public function edit_teacher(){
-        $data['title'] = 'Admin - Edit Teacher Information';
+        $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Edit Teacher Information';
         $data['message'] = '';
 
@@ -561,7 +561,7 @@ class Admin extends CI_Controller {
     }
 
     public function upload_class() {
-        $data['title'] = 'Admin - Upload Classes';
+        $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Upload Classes';
         $data['message'] = '';
 
@@ -656,7 +656,7 @@ class Admin extends CI_Controller {
     }
 
     public function view_class() {
-        $data['title'] = 'Admin - View Classes';
+        $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'View Classes';
         $message = '';
 
@@ -713,7 +713,7 @@ class Admin extends CI_Controller {
         $this->load->library('csvimport');
         $this->load->library('form_validation');
        
-        $data['title'] = 'Admin - Upload Student List';
+        $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Upload Student List';
         
         $data['programs'] = $this->model_admin->check_rows('program');
@@ -782,7 +782,7 @@ class Admin extends CI_Controller {
     }
 
     public function view_students(){
-        $data['title'] = 'Admin - Students List';
+        $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'View Student List';
         $data['student_list'] = $this->model_admin->check_rows('student');
 
@@ -800,7 +800,7 @@ class Admin extends CI_Controller {
     }
 
     public function edit_student() {
-        $data['title'] = 'Admin - Edit Student Information';
+        $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Edit Student Information';
         $data['message'] = '';
 
@@ -857,7 +857,7 @@ class Admin extends CI_Controller {
     }
 
     public function report_teacher() {
-        $data['title'] = 'Admin - Teacher Reports';
+        $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Teacher Reports';
 
         $data['teacher_list'] = $this->model_admin->get_allTeachersClasses();
@@ -868,7 +868,7 @@ class Admin extends CI_Controller {
     }
 
     public function report_student() {
-        $data['title'] = 'Admin - Student Reports';
+        $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Student Reports';
 
         $this->load->view('admin/header', $data);
