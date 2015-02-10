@@ -81,7 +81,7 @@ class Model_users extends CI_Model {
         return $query->result_array();
 	}
 
-   function get_po($id){
+    function get_po($id){
         $query = $this->db->query("SELECT * FROM po_course
                                             WHERE courseID = '".$id."'
                                             ");
@@ -223,26 +223,6 @@ class Model_users extends CI_Model {
         return $query->result_array();
     }
 
-    function get_po_courseSC($courseID) {
-        $query = $this->db->query("SELECT * FROM po_course WHERE courseID = '".$courseID."' ");
-        
-        return $query->result_array();
-    }
-
-    function get_po_score($class_id, $student_id){
-        $query = $this->db->query("SELECT score FROM student_course
-                                WHERE studentID = '".$student_id."' AND classID = '".$class_id."' ");
-
-        return $query->result_array();
-    }
-    
-    function get_student_POID($class_id, $student_id) {
-        $query = $this->db->query("SELECT poID FROM student_course
-                                WHERE studentID = '".$student_id."' AND classID = '".$class_id."' ");
-
-        return $query->result_array();
-    }
-
     function student_list($session_id) {
         $query = $this->db->query("SELECT DISTINCT * FROM student_course 
                                                     INNER JOIN teacher_class ON student_course.classID = teacher_class.ID
@@ -254,5 +234,6 @@ class Model_users extends CI_Model {
                                                     GROUP BY student_course.studentID");
       return $query->result();
     }
+
 }
 ?>
