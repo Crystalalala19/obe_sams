@@ -63,7 +63,7 @@
                                         <th>Name</i></th>
                                         <?php for($x = 1; $x <= $po_count; $x++):?>
                                             <th>PO <?php echo $x;?></i></th>
-                                        <?php endfor; $row_num=1;?>
+                                        <?php endfor; ?>
                                         <th width="5%" class="no-sort text-center">Scorecard</th>
                                     </tr>
                                 </thead>
@@ -73,9 +73,9 @@
                                     <tr>          
                                         <td><?php echo $row['studentID'];?></td>
                                         <td><?php echo $row['fname']." ".$row['lname'];?></td>
-                                        <?php foreach($row['grade'] as $row1): ?>
+                                        <?php foreach($row['score'] as $row1): ?>
                                             <td><?php echo $row1;?></td>
-                                        <?php endforeach; $row_num++; ?>   
+                                        <?php endforeach; ?>   
                                         <td>
                                             <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row['student_id'];?>" title="View Scorecard">
                                                 <i class="icon-eye-open"></i> View

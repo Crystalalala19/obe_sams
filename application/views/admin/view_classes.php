@@ -17,7 +17,7 @@
                         </div> <!-- /widget-header -->
                         <div class="widget-content">
                             <button onclick="javascript:window.history.back();" type="button" class="btn btn-info"><i class="icon-angle-left"></i> Go Back</button>
-                            <div class="clearfix"></div>
+                            <div class="clearfix"></div><br>
 
                             <?php
                             echo $this->session->flashdata('message');

@@ -125,7 +125,8 @@ class Model_users extends CI_Model {
         return $output;
     }
 
-    function insert_student($data) {
+    function insert_student($data, $data2) {
+        $this->db->insert('user_account', $data2);
         $this->db->insert('student', $data);
 
         return $this->check_query();

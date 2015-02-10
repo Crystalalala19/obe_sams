@@ -147,15 +147,14 @@ class Site extends CI_Controller {
 
         foreach($data['class_list'] as $key => $val) {
             $data['class_list'][$key]['score'] = $this->model_users->get_studentPoGrade($val['studentID'], $class_id);
-            $data['class_list'][$key]['grade'] = array();
             $data['class_list'][$key]['poID'] = $this->model_users->get_studentPoID($val['studentID'], $class_id);
             $i = 0;
 
             foreach($data['get_po'] as $key1 => $val1) {
                 if($val1['status'] == "1" && isset($data['class_list'][$key]['score'][$i])) {
-                    $data['class_list'][$key]['grade'][$i] =  $data['class_list'][$key]['score'][$i]['score'];
+                    $data['class_list'][$key]['score'][$i] =  $data['class_list'][$key]['score'][$i]['score'];
                 } else {
-                    $data['class_list'][$key]['grade'][$i] = "";
+                    $data['class_list'][$key]['score'][$i] = "";
                 }
 
                 $i++;
@@ -195,6 +194,8 @@ class Site extends CI_Controller {
                 foreach ($csv_array as $row) {
                     $check_studentID = $this->model_users->check_studentRecord($row['Student ID']);
                     if(!$check_studentID) {
+                        $this->load->library('encrypt');
+
                         $insert_data = array(
                             'student_id'=>$row['Student ID'],
                             'lname'=>$row['Last Name'],
@@ -202,7 +203,14 @@ class Site extends CI_Controller {
                             'mname'=>$row['Middle Name']
                         );
 
-                        $this->model_users->insert_student($insert_data);
+                        $account_data = array(
+                            'idnum'=>$row['Student ID'],
+                            'role' => 'student',
+                            'password' => $this->encrypt->sha1($row['Student ID'])
+                        );
+
+                        $this->model_users->insert_student($insert_data, $account_data);
+
                         $insert_id = $this->model_users->get_lastId();
                         $student_id = $this->model_users->get_newInsertStudent($insert_id);
                     }

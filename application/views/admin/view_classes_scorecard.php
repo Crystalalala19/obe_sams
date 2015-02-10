@@ -96,8 +96,6 @@
             </div> <!-- /row -->
         </div> <!-- /container -->
     </div> <!-- /main-inner -->
-
-    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/bootstrap-filestyle.min.js"></script>
     
     <script type="text/javascript">
         var values = [],
@@ -127,8 +125,6 @@
     <script type="text/javascript" language="javascript">
         var d = document.getElementById('courselist');
         d.className = d.className + " active";
-
-        $('#view_classlist').filterable();
     </script>
 
     <script type="text/javascript" language="javascript">

@@ -291,7 +291,7 @@ class Model_admin extends CI_Model {
     }
 
     function get_allTeachersClasses() {
-        $query = $this->db->query("SELECT teacher.teacher_id, fname, mname, lname, group_num, start_time, end_time, days, semester, school_year, courseCode FROM teacher
+        $query = $this->db->query("SELECT teacher_class.ID, teacher.teacher_id, fname, mname, lname, group_num, start_time, end_time, days, semester, school_year, courseCode FROM teacher
                                   INNER JOIN teacher_class ON teacher.teacher_id = teacher_class.teacherID
                                   ");
 

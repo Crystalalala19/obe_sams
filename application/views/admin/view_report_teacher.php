@@ -38,7 +38,7 @@
                                         <td><?php echo $row['courseCode'];?></td>
                                         <td><?php echo $row['start_time'].' - '. $row['end_time'].' '. $row['days'];?></td>
                                         <td>
-                                            <a type="button" title="View Classes" class="btn btn-warning btn-small btn-responsive" href="<?php echo base_url();?>admin/teachers/classes/<?php echo $row['teacher_id'].'/'.$row['school_year'];?>"><i class="icon-book"></i></a>
+                                            <a type="button" title="View Classes" class="btn btn-warning btn-small btn-responsive" href="<?php echo base_url();?>admin/teachers/scorecard/<?php echo $row['teacher_id'].'/'.$row['school_year'].'/'.$row['ID'];?>"><i class="icon-book"></i></a>
 
                                         </td>
                                     </tr>
