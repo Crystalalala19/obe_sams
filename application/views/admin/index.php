@@ -35,7 +35,8 @@
                                     <span class="shortcut-label">Student Reports</span> 
                                 </a>
 
-                                <!-- <a href="javascript:;" class="shortcut">
+                                <span style="visibility: hidden;">
+                                <a href="javascript:;" class="shortcut">
                                     <i class="shortcut-icon icon-user"></i>
                                     <span class="shortcut-label">Users</span> 
                                 </a>
@@ -53,7 +54,8 @@
                                 <a href="javascript:;" class="shortcut"> 
                                     <i class="shortcut-icon icon-tag"></i>
                                     <span class="shortcut-label">Tags</span> 
-                                </a>  -->
+                                </a> 
+                                </span>
                             </div>
                             <!-- /shortcuts --> 
                         </div> <!-- /widget-content --> 

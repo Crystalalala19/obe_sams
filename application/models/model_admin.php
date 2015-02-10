@@ -270,8 +270,9 @@ class Model_admin extends CI_Model {
             return FALSE;
     }
 
-    function insert_teacher($data) {
+    function insert_teacher($data, $data2) {
         $this->db->insert('teacher', $data);
+        $this->db->insert('user_account', $data2);
 
         return $this->check_query();
     }
@@ -291,7 +292,7 @@ class Model_admin extends CI_Model {
 
     function get_allTeachersClasses() {
         $query = $this->db->query("SELECT teacher.teacher_id, fname, mname, lname, group_num, start_time, end_time, days, semester, school_year, courseCode FROM teacher
-                                  INNER JOIN teacher_class ON teacher.teacher_id = teacher_class.teacherID WHERE role = 'teacher'
+                                  INNER JOIN teacher_class ON teacher.teacher_id = teacher_class.teacherID
                                   ");
 
         return $query->result_array();
@@ -344,6 +345,50 @@ class Model_admin extends CI_Model {
             return true;
         else
             return false; 
+    }
+
+    function select_schedule($id){
+        $query = $this->db->query("SELECT * FROM teacher_class WHERE ID = '".$id."' ");
+        
+        return $query->result_array();
+    }
+
+    function select_class($id){
+        $query = $this->db->query("SELECT * FROM student_course INNER JOIN student ON student_course.studentID = student.student_id
+                                    WHERE student_course.classID = '".$id."' 
+                                    GROUP BY studentID ");
+        
+        return $query->result_array();
+    }
+
+    function get_courseID($course) {
+        $query = $this->db->get_where('course', array('CourseCode' => $course));
+
+        $row = $query->row_array();
+
+        return $row['ID'];
+    }
+
+    function get_po($id){
+        $query = $this->db->query("SELECT * FROM po_course
+                                            WHERE courseID = '".$id."'
+                                            ");
+
+        return $query->result_array();
+    }
+
+    function get_studentPoGrade($student_id, $class_id){
+        $query = $this->db->query("SELECT score FROM student_course
+                                WHERE studentID = '".$student_id."' AND classID = '".$class_id."' ");
+
+        return $query->result_array();
+    }
+    
+    function get_studentPoID($student_id, $class_id) {
+        $query = $this->db->query("SELECT poID FROM student_course
+                                WHERE studentID = '".$student_id."' AND classID = '".$class_id."' ");
+
+        return $query->result_array();
     }
     // END TEACHER
 }

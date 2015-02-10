@@ -54,6 +54,7 @@ $route['admin/teachers/classes/(:any)'] = "admin/view_class";
 $route['admin/teachers/edit/(:num)'] = "admin/edit_teacher";
 $route['admin/teachers/delete/(:num)'] = "admin/delete_teacher";
 $route['admin/teachers/classes/(:any)/(:num)'] = "admin/view_class";
+$route['admin/teachers/scorecard/(:any)/(:num)/(:num)'] = "admin/view_class_scorecard";
 
 //Reports
 $route['admin/reports/teacher'] = "admin/report_teacher";

@@ -63,7 +63,7 @@
     <!--  Jquery Core Script -->
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/jquery-admin.min.js"></script>
     <!--  Core Bootstrap Script -->
-    <script type="text/javascript" language="javascript" src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/base-admin.js"></script>
 </head>
 

@@ -16,10 +16,8 @@
                             <h3><?php echo $header;?></h3>
                         </div> <!-- /widget-header -->
                         <div class="widget-content">
-                            <a href="<?php echo base_url('admin/teachers/view');?>">
-                                <button type="button" class="btn btn-info"><i class="icon-angle-left"></i> Go Back</button>
-                            </a>
-                            <div class="clearfix"></div><br>
+                            <button onclick="javascript:window.history.back();" type="button" class="btn btn-info"><i class="icon-angle-left"></i> Go Back</button>
+                            <div class="clearfix"></div>
 
                             <?php
                             echo $this->session->flashdata('message');
@@ -75,7 +73,11 @@
                                                         <td><?php echo $row['group_num']; ?></td>
                                                         <td><?php echo $row['courseCode']; ?></td>
                                                         <td><?php echo $row['start_time'].' - '.$row['end_time'].' '.$row['days']; ?></td>
-                                                        <td></td>
+                                                        <td>
+                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>admin/teachers/scorecard/<?php echo $teacher_id.'/'.$academic_year.'/'.$row['ID'];?>" title="View Scorecard">
+                                                                <i class="icon-eye-open"></i> View Class
+                                                            </a>
+                                                        </td>
                                                     </tr>
                                                     <?php endforeach;?>
                                                 </tbody>
@@ -101,7 +103,11 @@
                                                         <td><?php echo $row['group_num']; ?></td>
                                                         <td><?php echo $row['courseCode']; ?></td>
                                                         <td><?php echo $row['start_time'].' - '.$row['end_time'].' '.$row['days']; ?></td>
-                                                        <td></td>
+                                                        <td>
+                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>admin/teachers/scorecard/<?php echo $teacher_id.'/'.$academic_year.'/'.$row['ID'];?>" title="View Scorecard">
+                                                                <i class="icon-eye-open"></i> View Class
+                                                            </a>
+                                                        </td>
                                                     </tr>
                                                     <?php endforeach;?>
                                                 </tbody>
@@ -127,7 +133,11 @@
                                                         <td><?php echo $row['group_num']; ?></td>
                                                         <td><?php echo $row['courseCode']; ?></td>
                                                         <td><?php echo $row['start_time'].' - '.$row['end_time'].' '.$row['days']; ?></td>
-                                                        <td></td>
+                                                        <td>
+                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>admin/teachers/scorecard/<?php echo $teacher_id.'/'.$academic_year.'/'.$row['ID'];?>" title="View Scorecard">
+                                                                <i class="icon-eye-open"></i> View Class
+                                                            </a>
+                                                        </td>
                                                     </tr>
                                                     <?php endforeach;?>
                                                 </tbody>

@@ -13,16 +13,11 @@
                 <div class="span12">
                     <div class="widget">
                         <div class="widget-header">
-                            <i class="icon-group"></i>
-                            <h3>Students</h3>
+                            <i class="icon-book"></i>
+                            <h3><?php echo $header;?></h3>
                         </div> <!-- /widget-header -->
-
                         <div class="widget-content">
-                            <div class="pull-left">
-                                <a onclick="javascript:window.history.back();">
-                                    <button type="button" class="btn btn-info"><i class="icon-angle-left"></i> Go Back</button>
-                                </a>
-                            </div>
+                            <button onclick="javascript:window.history.back();" type="button" class="btn btn-info"><i class="icon-angle-left"></i> Go Back</button>
                             <div class="clearfix"></div><br>
 
                             <?php
@@ -43,14 +38,14 @@
                                 <div class="alert alert-info">
                                 <?php foreach($select_schedule as $row1): ?>
                                     <h4>
-                                        <?php echo $row1->courseCode.' ';?><?php echo '| Group '; echo $row1->group_num.'';?>
+                                        <?php echo $row1['courseCode'].' ';?><?php echo '| Group '; echo $row1['group_num'].'';?>
                                         <?php 
                                             echo '<br> ';
-                                            echo $row1->start_time.' - ';
-                                            echo $row1->end_time.' ';
-                                            echo $row1->days.'<br>';
+                                            echo $row1['start_time'].' - ';
+                                            echo $row1['end_time'].' ';
+                                            echo $row1['days'].'<br>';
                                         ?>
-                                        Semester: <?php echo $row1->semester,' | ';?> School Year: <?php echo $row1->school_year; ?>
+                                        Semester: <?php echo $row1['semester'].' | ';?> School Year: <?php echo $row1['school_year']; ?>
                                     </h4>
                                  <?php endforeach; ?>
                                 </div>
@@ -95,24 +90,7 @@
                                     </tr>
                                 </tfoot>
                             </table>
-                            <br>
-                            <?php echo form_open_multipart();?>
-                                <div class="control-group">
-                                    <div class="pull-right">
-                                        <h3><i class="icon-download-alt icon-2x"></i> Download Template:</h3>
-                                        <a href="<?php echo base_url('site/download/class');?>"><img src="<?php echo base_url('assets/img/excel.png');?>"></a>
-                                    </div>
-
-                                    <label for="userfile">Upload .CSV File: </label>
-                                    <input type="hidden" name="teacher_id" value="<?php echo $this->session->userdata('teacher_id');?>">
-                                    <input type="file" name="userfile" id="userfile" class="filestyle" data-buttonText="Find file" data-buttonName="btn-primary" data-iconName="icon-upload-alt">
-                                </div>
-
-                                <div class="control-group">
-                                    <input type="submit" class="btn btn-success" name="submit" value="Submit">
-                                </div>
-                            </form>  
-                        </div> <!-- /widget-content --> 
+                        </div>
                     </div> <!-- /widget -->                 
                 </div> <!-- /span12 -->         
             </div> <!-- /row -->
