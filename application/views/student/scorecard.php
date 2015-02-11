@@ -32,7 +32,7 @@
                         </center></h4>  
                         <hr>
 
-                         <table id="scorecard1" class="table table-striped table-bordered">
+                         <table id="scorecard_student" class="table table-striped table-bordered">
                             <thead>
                               <tr>
                                 <th> Course Code </th>
@@ -70,7 +70,7 @@
 
 <script type="text/javascript">
         var values = [],
-            table = document.getElementById('scorecard1'),
+            table = document.getElementById('scorecard_student'),
             rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr'),
             footer = table.getElementsByTagName('tfoot')[0];
 
@@ -125,7 +125,7 @@
             ]
         };
 
-        var table = $('#scorecard1').dataTable( dataTableOptions );
+        var table = $('#scorecard_student').dataTable( dataTableOptions );
 
         var tt = new $.fn.dataTable.TableTools( table, tableToolsOptions );
 

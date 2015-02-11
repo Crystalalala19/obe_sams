@@ -59,7 +59,7 @@
                             <table id="view_classlist" class="table table-striped table-bordered dataTable no-footer">
                                 <thead>
                                     <tr>
-                                        <th width="10%">Student ID</i></th>
+                                        <th width="15%">Student ID</i></th>
                                         <th>Name</i></th>
                                         <?php for($x = 1; $x <= $po_count; $x++):?>
                                             <th>PO <?php echo $x;?></i></th>
@@ -179,14 +179,7 @@
                 {
                     "sExtends":    "collection",
                     "sButtonText": "Save as...",
-                    "aButtons":    [ {
-                            "sExtends": "xls",
-                            "oSelectorOpts": {
-                                page: 'current'
-                            },
-                            //Columns to export as data, exluded Action column
-                            "mColumns": "visible"
-                        }, {
+                    "aButtons":    [{
                             "sExtends": "pdf",
                             "sButtonText": "PDF",
                             //Columns to export as data, exluded Action column

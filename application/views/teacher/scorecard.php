@@ -34,7 +34,7 @@
                             </h4> 
                             <hr>
 
-                            <table id="scorecard" class="table table-striped table-bordered">
+                            <table id="scorecard_teacher" class="table table-striped table-bordered">
                                 <thead>
                                   <tr>
                                     <th> Course Code </th>
@@ -57,6 +57,12 @@
                                     <tr>
                                         <td><center>Average</center></td>
                                         <?php for($x = 1; $x <= $po_count; $x++):?>
+                                        <?php 
+                                            $sum = 0; 
+                                            foreach ($class_list as $key1 => $value) {
+                                                # code...
+                                            }
+                                        ?>    
                                         <td></td>
                                         <?php endfor;?>
                                     </tr>
@@ -71,28 +77,29 @@
 
 
 <script type="text/javascript">
-        var values = [],
-            table = document.getElementById('scorecard'),
-            rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr'),
-            footer = table.getElementsByTagName('tfoot')[0];
+       /* var table = document.getElementById('scorecard_teacher'),
+          rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr'),
+          footer = table.getElementsByTagName('tfoot')[0];
 
-        for(var i=1; i<=<?php echo $po_count;?>; i++){
-            values[i] = [];
-            for(var j=0, l=rows.length; j<l; j++){
-                values[i].push(
-                    parseFloat(
-                        rows[j].getElementsByTagName('td')[i]
-                      .innerHTML
-                    )
-                );
-            }
+        // for each column that must be treated
+        for(var i=1; i<=<?php echo $po_count?>; i++){
+          var sum = numOfValues = 0;
+          // add each row's value
+          for(numOfValues=0, l=rows.length; numOfValues<l; numOfValues++){
+            sum += parseFloat(
+                rows[numOfValues].getElementsByTagName('td')[i]
+                  .innerHTML
+              );
+          }
 
-            var score = values[i].reduce(function(pv,cv){return pv + cv;},0) / values[i].length;
-            footer.getElementsByTagName('td')[i].innerHTML = Math.round(score * 100) / 100;
-          
-            if( isNaN(footer.getElementsByTagName('td')[i].innerHTML) )
-                footer.getElementsByTagName('td')[i].innerHTML = " ";
-        }
+          // calculate the average
+          var avg = sum / numOfValues;
+          // insert it in the corresponding TD (rounded to 2 decimals)
+          footer.getElementsByTagName('td')[i].innerHTML = Math.round(avg * 100) / 100;
+
+          if( isNaN(footer.getElementsByTagName('td')[i].innerHTML) )
+                footer.getElementsByTagName('td')[i].innerHTML = "";
+        }*/
 
         var dataTableOptions = {
             "bPaginate": false,
@@ -116,18 +123,18 @@
                             "oSelectorOpts": {
                                 page: 'current'
                             },
-                            "mColumns": [ 0, 1 ]
+                            "mColumns": "visible"
                         }, {
                             "sExtends": "pdf",
                             "sButtonText": "PDF",
-                            "mColumns": [ 0, 1 ]
+                            "mColumns": "visible" 
                         }
                     ]
                 }
             ]
         };
 
-        var table = $('#scorecard').dataTable( dataTableOptions );
+        var table = $('#scorecard_teacher').dataTable( dataTableOptions );
 
         var tt = new $.fn.dataTable.TableTools( table, tableToolsOptions );
 
@@ -136,6 +143,6 @@
 </script>
 
 <script type="text/javascript" language="javascript" class="init">
-    var d = document.getElementById('scorecard');
+    var d = document.getElementById('studentlist');
     d.className = d.className + " active";
 </script>

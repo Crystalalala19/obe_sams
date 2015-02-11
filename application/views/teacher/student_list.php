@@ -69,11 +69,11 @@
                             "oSelectorOpts": {
                                 page: 'current'
                             },
-                            "mColumns": [ 0, 1 ]
+                            "mColumns": [ 0, 1, 2 ]
                         }, {
                             "sExtends": "pdf",
                             "sButtonText": "PDF",
-                            "mColumns": [ 0, 1 ]
+                            "mColumns": [ 0, 1, 2 ]
                         }
                     ]
                 }
