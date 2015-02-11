@@ -28,7 +28,7 @@
 
                             <div class="pull-left">
                                 <div class="alert alert-info">
-                                    <h4>Academic Year: <?php echo $academic_year.' - '.($academic_year+1);?></h4>
+                                    <h4>Effective School Year: <?php echo $academic_year.' - '.($academic_year+1);?></h4>
                                 </div>
                             </div>
                             <div class="clearfix"></div>

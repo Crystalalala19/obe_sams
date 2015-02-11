@@ -221,12 +221,8 @@ class Model_admin extends CI_Model {
             return false;
     }
 
-    function update_checks($activate, $pc_cid, $pc_pid) {
-        $query = $this->db->query("
-        UPDATE po_course
-        SET status = '".$activate."'
-        WHERE (po_course.courseID = '".$pc_cid."' AND po_course.poID = '".$pc_pid."') 
-        ");
+    function update_checks($data) {
+        $query = $this->db->insert_on_duplicate_update_batch('po_course', $data);
 
         return $this->check_query();
     }

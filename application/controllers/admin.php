@@ -117,22 +117,42 @@ class Admin extends CI_Controller {
                                 $activate = 1;
                             }
 
-                            $result = $this->model_admin->update_checks($activate, $val, $pos_id[$x]);
+                            $po_data = array(
+                                'status' => $activate,
+                                'poID' => $pos_id[$x],
+                                'courseID' => $val
+                            );
+
+                            $to_insert[] = $po_data;
                         }
                     }
-                } else {
+                } 
+                else {
                     foreach($pos_id as $value) {
-                        $result = $this->model_admin->update_checks(0, $val, $value);
+                        $po_data = array(
+                                'status' => 0,
+                                'poID' => $value,
+                                'courseID' => $val
+                            );
+                        $to_insert[] = $po_data;
                     }
                 }
             }
 
-            $message = '<strong>Success!</strong>';
-            $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
+            $result = $this->model_admin->update_checks($to_insert);
 
-            $this->session->set_flashdata('message', $message);
+            if($result['is_success'] == FALSE) {
+                $message = '<strong>Error in updating.</strong>';
+                $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
+            }
+            else {
+                $message = '<strong>Success!</strong> Program Outcomes updated.';
+                $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
 
-            redirect(current_url());
+                $this->session->set_flashdata('message', $message);
+
+                redirect(current_url());
+            }
         }
 
         $this->load->view('admin/header', $data);
