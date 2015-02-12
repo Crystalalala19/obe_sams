@@ -94,7 +94,7 @@
             ]
         };
 
-        var table = $('#view_students').dataTable( dataTableOptions );
+        var table = $('#view_students').DataTable( dataTableOptions );
 
         var tt = new $.fn.dataTable.TableTools( table, tableToolsOptions );
 

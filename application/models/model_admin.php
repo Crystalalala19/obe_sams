@@ -386,6 +386,12 @@ class Model_admin extends CI_Model {
 
         return $query->result_array();
     }
+
+    function get_teacherReport() {
+        $query = $this->db->query("SELECT DISTINCT school_year FROM teacher_class");
+    
+        return $query->result_array();
+    }
     // END TEACHER
 }
 ?>

@@ -233,6 +233,9 @@ class Site extends CI_Controller {
                                 $message = $this->model_users->notify_message('alert-danger', 'icon-exclamation', $message);
 
                                 $this->session->set_flashdata('message', $message);
+                                
+                                //Deletes uploaded file
+                                unlink($file_path);
 
                                 redirect(current_url());
                             };
@@ -324,9 +327,9 @@ class Site extends CI_Controller {
         $data['user'] = $this->model_users->select_user();
         $data['title'] = "OBE SAMS Academic";
 
-	    $this->load->view("teacher/header", $data);
+	    $this->load->view('teacher/header', $data);
 	    $this->load->view('teacher/scorecard', $data);
-	    $this->load->view("teacher/footer");
+	    $this->load->view('teacher/footer');
     }
 
     public function student_list(){
@@ -337,8 +340,6 @@ class Site extends CI_Controller {
         $session_id = $this->session->userdata('idnum');
         $data['student_list'] = $this->model_users->student_list($session_id);  
         
-
-
         $data['user'] = $this->model_users->select_user();
         $data['title'] = "OBE SAMS Academic";
 
@@ -349,9 +350,9 @@ class Site extends CI_Controller {
             $data['message'] = '';
         }
 
-        $this->load->view("teacher/header", $data);
+        $this->load->view('teacher/header', $data);
         $this->load->view('teacher/student_list', $data);
-        $this->load->view("teacher/footer");
+        $this->load->view('teacher/footer');
     }
 
     public function download($file_type = '') {
@@ -367,5 +368,10 @@ class Site extends CI_Controller {
         }
 
         force_download($name, $data); 
+    }
+
+    public function error_404() {
+        $data['title'] = 'Error 404';
+        $this->load->view('error/error', $data);
     }
 }

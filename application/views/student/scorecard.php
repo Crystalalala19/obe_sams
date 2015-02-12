@@ -125,7 +125,7 @@
             ]
         };
 
-        var table = $('#scorecard_student').dataTable( dataTableOptions );
+        var table = $('#scorecard_student').DataTable( dataTableOptions );
 
         var tt = new $.fn.dataTable.TableTools( table, tableToolsOptions );
 

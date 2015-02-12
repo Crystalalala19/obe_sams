@@ -80,7 +80,7 @@
             ]
         };
 
-        var table = $('#view_studentlist').dataTable( dataTableOptions );
+        var table = $('#view_studentlist').DataTable( dataTableOptions );
 
         var tt = new $.fn.dataTable.TableTools( table, tableToolsOptions );
 

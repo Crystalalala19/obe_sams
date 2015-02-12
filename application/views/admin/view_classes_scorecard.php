@@ -171,7 +171,7 @@
             ]
         };
 
-        var table = $('#view_classlist').dataTable( dataTableOptions );
+        var table = $('#view_classlist').DataTable( dataTableOptions );
 
         var tt = new $.fn.dataTable.TableTools( table, tableToolsOptions );
 

@@ -931,6 +931,8 @@ class Admin extends CI_Controller {
         $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Teacher Reports';
 
+        $data['academic_year'] = $this->uri->segment(4);
+        $data['year_classes'] = $this->model_admin->get_teacherReport();
         $data['teacher_list'] = $this->model_admin->get_allTeachersClasses();
 
         $this->load->view('admin/header', $data);

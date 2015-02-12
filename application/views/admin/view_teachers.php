@@ -155,7 +155,7 @@
             ]
         };
 
-        var table = $('#view_teachers').dataTable( dataTableOptions );
+        var table = $('#view_teachers').DataTable( dataTableOptions );
 
         var tt = new $.fn.dataTable.TableTools( table, tableToolsOptions );
 

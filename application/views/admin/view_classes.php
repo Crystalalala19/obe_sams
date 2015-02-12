@@ -20,7 +20,6 @@
                             <div class="clearfix"></div><br>
 
                             <?php
-                            echo $this->session->flashdata('message');
                             if (!empty($message)): echo $message;
 
                             else:
@@ -30,8 +29,8 @@
                             ?>
 
                             <input type="hidden" name="teacher_id" value="<?php echo $this->uri->segment(4);?>" id="teacher_id">
+                            
                             <div class="control-group">
-
                                 <select name="academic_year" id="selector" class="selectpicker show-tick" title="Select Academic Year" data-live-search="true" multiple data-max-options="1" data-size="auto">
                                     <?php foreach($year_classes as $row):?>
                                     <option value='<?php echo $row['school_year'];?>' <?php if($academic_year == $row['school_year']) echo 'selected="selected"'; ?>><?php echo $row['school_year'].' - '.($row['school_year']+1);?></option>

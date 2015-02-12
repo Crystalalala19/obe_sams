@@ -58,12 +58,11 @@ $route['admin/teachers/scorecard/(:any)/(:num)/(:num)'] = "admin/view_class_scor
 
 //Reports
 $route['admin/reports/teacher'] = "admin/report_teacher";
+$route['admin/reports/teacher/(:num)'] = "admin/report_teacher";
 $route['admin/reports/student'] = "admin/report_student";
 
 $route['default_controller'] = "site";
-$route['404_override'] = '';
-
-
+$route['404_override'] = 'site/error_404';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

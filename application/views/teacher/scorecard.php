@@ -134,7 +134,7 @@
             ]
         };
 
-        var table = $('#scorecard_teacher').dataTable( dataTableOptions );
+        var table = $('#scorecard_teacher').DataTable( dataTableOptions );
 
         var tt = new $.fn.dataTable.TableTools( table, tableToolsOptions );
 

@@ -133,7 +133,7 @@
     <!-- <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script> -->
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/bootstrap-select.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/step.js"></script>
-    <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/program-validation.js"></script>
+    <!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/program-validation.js"></script> -->
 
     <script type="text/javascript" language="javascript">
         var d = document.getElementById("program_dropdown");
