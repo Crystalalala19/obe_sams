@@ -64,5 +64,52 @@ class Model_student extends CI_Model {
         return $query->result_array();
     }
 
+    function notify_message($alert_type, $glyphicon, $message){
+        $output = '
+        <div class="alert '.$alert_type.' alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="icon-remove"></i></button>
+            <i class="'.$glyphicon.'"></i>
+            '.$message.'
+        </div>';
+
+        return $output;
+    }
+
+    function check_password($data, $pass) {
+        $query = $this->db->get_where('user_account', array('idnum'=>$data));
+        if($query->num_rows() == 1) {
+
+            $row = $query->row_array();
+            $db_pass= $row['password'];
+
+            $hashed = $this->encrypt->sha1($pass);
+
+            if($db_pass == $hashed)
+                return true;
+            else
+                return false;
+        }
+    }
+
+    function change_pass($data, $teacher_id) {
+        $this->db->where('idnum', $teacher_id);
+        $query = $this->db->update('user_account', $data);
+
+        return $this->check_query();
+    }
+
+    function check_query() {
+        if($this->db->affected_rows() >= 0){
+            $data['is_success'] = TRUE;
+
+            return $data;
+        }
+        else{
+            $data['is_success'] = FALSE;
+            $data['db_error'] = $this->db->_error_message();
+
+            return $data;
+        }
+    }
 }
 ?>    

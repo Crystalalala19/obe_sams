@@ -368,4 +368,60 @@ class Site extends CI_Controller {
 
         force_download($name, $data); 
     }
+
+    public function error_404() {
+        $data['title'] = 'Error 404';
+        $this->load->view('error', $data);
+    }
+
+    public function account() {
+        $this->load->library('encrypt');
+        $this->load->library('form_validation');
+
+        $data['title'] = "OBE SAMS Academic";
+        $data['user'] = $this->model_users->select_user();
+
+        $teacher_id = $this->session->userdata('idnum');
+
+        $this->form_validation->set_rules('cur_pass', 'Current Password', 'required|trim|min_length[6]|max_length[15]');
+        $this->form_validation->set_rules('new_pass', 'New Password', 'required|trim|min_length[6]|max_length[15]|alpha_numeric');
+        $this->form_validation->set_rules('con_pass', 'Confirm Password', 'required|trim|min_length[6]|max_length[15]|alpha_numeric|matches[new_pass]');
+
+        if($this->form_validation->run() == FALSE) {
+            $data['message'] = '';
+        }
+        elseif(!$this->model_users->check_password($teacher_id, $this->input->post('cur_pass'))) {
+            $message = "<strong>Error:</strong> Invalid entered current password.";
+            $message = $this->model_users->notify_message('alert-danger', 'icon-exclamation', $message);
+
+            $data['message'] = $message;
+        }
+        else {
+            $new_pass = $this->input->post('new_pass');
+
+            $change_data = array(
+                'password' => $this->encrypt->sha1($this->input->post('new_pass'))
+            );
+
+            $result = $this->model_users->change_pass($change_data, $teacher_id);
+
+            if($result['is_success'] == FALSE) {
+                $message = '<strong>Error: </strong>'.  $result['db_error'];
+                $message = $this->model_users->notify_message('alert-danger', 'icon-exclamation', $message);
+
+                $data['message'] = $message; 
+            }
+            else {
+                $message = '<strong>Success!</strong> Password changed.';
+                $message = $this->model_users->notify_message('alert-success', 'icon-ok', $message);
+
+                $this->session->set_flashdata('message', $message);
+                redirect(current_url());
+            }
+        }
+
+        $this->load->view('teacher/header', $data);
+        $this->load->view('teacher/account', $data);
+        $this->load->view('teacher/footer');
+    }
 }
