@@ -84,8 +84,10 @@ class Model_student extends CI_Model {
 
             $hashed = $this->encrypt->sha1($pass);
 
-            if($db_pass != $hashed)
+            if($db_pass == $hashed)
                 return true;
+            else
+                return false;
         }
     }
 

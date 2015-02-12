@@ -50,7 +50,7 @@
                                     <div class="control-group">                                         
                                         <label class="control-label" for="cur_pass">Current Password</label>
                                         <div class="controls">
-                                            <input type="password" class="span4" id="cur_pass" name="cur_pass">
+                                            <input type="password" class="span4" id="cur_pass" name="cur_pass" value="<?php echo set_value('cur_pass'); ?>">
                                         </div> <!-- /controls -->               
                                     </div> <!-- /control-group -->
 
@@ -69,7 +69,6 @@
                                     </div> <!-- /control-group -->
 
                                     <input type="submit" name="submit" value="Change Password" class="btn btn-success">
-
                                 </fieldset>
                             </form>
                         </div> <!-- /widget-content --> 
