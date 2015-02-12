@@ -37,18 +37,18 @@
                             <table id="scorecard_teacher" class="table table-striped table-bordered">
                                 <thead>
                                   <tr>
-                                    <th> Course Code </th>
-                                     <?php for($x = 1; $x <= $po_count; $x++):?>
-                                        <th>PO <?php echo $x;?></i></th>
-                                    <?php endfor;?>
+                                    <th>Course Code</th>
+                                     <?php for($x = 1; $x <= $po_count; $x++):?><th>PO <?php echo $x;?></th><?php endfor;?>
                                   </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach($class_list as $key => $row3): ?>
                                     <tr>
-                                        <td><?php echo $row3['courseCode']; ?></td>
+                                        <td><center><?php echo $row3['courseCode']; ?></center></td>
                                         <?php for($x=0; $x < $po_count; $x++): ?>
-                                            <td><?php echo $row3['score'][$x]['score'];?></td>
+                                            <td><center>
+                                                <?php echo $row3['score'][$x]['score'];?>
+                                            </center></td>
                                         <?php endfor;?>   
                                     </tr>
                                     <?php endforeach; ?>
@@ -57,13 +57,7 @@
                                     <tr>
                                         <td><center>Average</center></td>
                                         <?php for($x = 1; $x <= $po_count; $x++):?>
-                                        <?php 
-                                            $sum = 0; 
-                                            foreach ($class_list as $key1 => $value) {
-                                                # code...
-                                            }
-                                        ?>    
-                                        <td></td>
+                                            <td><center></center></td>
                                         <?php endfor;?>
                                     </tr>
                                 </tfoot>
@@ -77,29 +71,29 @@
 
 
 <script type="text/javascript">
-       /* var table = document.getElementById('scorecard_teacher'),
-          rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr'),
-          footer = table.getElementsByTagName('tfoot')[0];
 
-        // for each column that must be treated
-        for(var i=1; i<=<?php echo $po_count?>; i++){
-          var sum = numOfValues = 0;
-          // add each row's value
-          for(numOfValues=0, l=rows.length; numOfValues<l; numOfValues++){
-            sum += parseFloat(
-                rows[numOfValues].getElementsByTagName('td')[i]
-                  .innerHTML
-              );
-          }
+        var table = document.getElementById('scorecard_teacher'),
+            rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr'),
+            footer = table.getElementsByTagName('tfoot')[0];
 
-          // calculate the average
-          var avg = sum / numOfValues;
-          // insert it in the corresponding TD (rounded to 2 decimals)
-          footer.getElementsByTagName('td')[i].innerHTML = Math.round(avg * 100) / 100;
+        for (var i = 1; i <= <?php echo $po_count; ?>; i++) {
+            var sum = numOfValues = 0;
+            for (var j = 0, l = rows.length; j < l; j++) {
+                try {
+                    sum += parseFloat(
+                        rows[j].getElementsByTagName('td')[i]
+                        .getElementsByTagName('center')[0]
+                        .innerHTML
+                    );
+                    numOfValues++;
+                } catch (e) {}
+            }
 
-          if( isNaN(footer.getElementsByTagName('td')[i].innerHTML) )
-                footer.getElementsByTagName('td')[i].innerHTML = "";
-        }*/
+            var avg = sum / numOfValues;
+            footer.getElementsByTagName('td')[i]
+            .getElementsByTagName('center')[0]
+            .innerHTML = Math.round(avg * 100) / 100;
+        }
 
         var dataTableOptions = {
             "bPaginate": false,
@@ -127,14 +121,14 @@
                         }, {
                             "sExtends": "pdf",
                             "sButtonText": "PDF",
-                            "mColumns": "visible" 
+                            "mColumns": "visible"
                         }
                     ]
                 }
             ]
         };
 
-        var table = $('#scorecard_teacher').DataTable( dataTableOptions );
+        var table = $('#scorecard_teacher').dataTable( dataTableOptions );
 
         var tt = new $.fn.dataTable.TableTools( table, tableToolsOptions );
 
