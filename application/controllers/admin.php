@@ -182,7 +182,7 @@ class Admin extends CI_Controller {
             $data['message'] = '';
         }
         elseif($this->model_admin->check_programYear($program, $year)) {
-            $message = '<strong>Effective Year</strong> for the <strong>Program</strong> exists.';
+            $message = '<strong>Effectivity Year</strong> for the <strong>Program</strong> already exists.';
             $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
 
             $data['message'] = $message;
@@ -931,9 +931,11 @@ class Admin extends CI_Controller {
         $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Teacher Reports';
 
-        $data['academic_year'] = $this->uri->segment(4);
+        $year = $this->uri->segment(4);
+
+        $data['academic_year'] = $year;
         $data['year_classes'] = $this->model_admin->get_teacherReport();
-        $data['teacher_list'] = $this->model_admin->get_allTeachersClasses();
+        $data['teacher_list'] = $this->model_admin->get_allTeachersClasses($year);
 
         $this->load->view('admin/header', $data);
         $this->load->view('admin/view_report_teacher', $data);

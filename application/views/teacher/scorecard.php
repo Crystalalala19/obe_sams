@@ -4,7 +4,7 @@
                 <div class="span12">
                     <div class="widget">
                         <div class="widget-header">
-                            <i class="icon-users"></i>
+                            <i class="icon-user"></i>
                             <h3>Student Scorecard</h3>
                         </div> <!-- /widget-header -->
 

@@ -113,8 +113,8 @@
                                 <?php foreach($user as $row): ?><?php echo $row['teacher_id'];?><?php endforeach; ?> 
                                 <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><i class="icon-user" title="Edit Profile"></i> Edit Profile</a></li>
-                                <li><a href="<?php echo base_url()."site/logout" ?>" title="Logout"><i class="icon-off"></i> Logout</a></li>
+                                <li><a href="<?php echo base_url('site/account');?>"><i class="icon-key" title="Change Password"></i> Change Password</a></li>
+                                <li><a href="<?php echo base_url('site/logout');?>" title="Logout"><i class="icon-off"></i> Logout</a></li>
                             </ul>
                         </li>
                     </ul>
