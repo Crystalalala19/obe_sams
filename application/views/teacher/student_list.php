@@ -51,7 +51,10 @@
      
         
         var dataTableOptions = {
-           "bLengthChange": false
+            "bLengthChange": false,
+            "bFilter": true,
+            "bInfo": false,
+            "bAutoWidth": false 
         };
 
         var tableToolsOptions = {

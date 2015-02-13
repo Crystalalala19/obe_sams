@@ -18,9 +18,9 @@ class Student extends CI_Controller {
         $student_id = $this->session->userdata('idnum');
 
         $data['get_studentName'] = $this->model_student->get_studentName($student_id);
-        $data['get_EY'] = $this->model_student->get_scoreEY($student_id);
+        $data['student_year'] = $this->model_student->student_year($student_id);
         $data['get_class'] = $this->model_student->get_class($student_id);
-        $data['view_po'] = $this->model_student->view_po($student_id);
+        $data['get_courses'] = $this->model_student->get_courses($student_id);
 
         $this->load->view('student/header', $data);
         $this->load->view('student/index', $data);
@@ -37,12 +37,11 @@ class Student extends CI_Controller {
 
         $student_id = $this->session->userdata('idnum');
 
+        $data['student_year'] = $this->model_student->student_year($student_id);
         $data['get_studentName'] = $this->model_student->get_studentName($student_id);
-        $data['get_EY'] = $this->model_student->get_scoreEY($student_id);
         $data['get_class'] = $this->model_student->get_class($student_id);
         
         $data['class_list'] = $this->model_student->select_classSC($student_id);
-        $data['class_list1'] = $this->model_student->select_class($student_id);
         $data['select_teacher'] = $this->model_student->select_teacher($student_id);
 
         $class_list = $data['class_list'];
@@ -61,6 +60,10 @@ class Student extends CI_Controller {
                 }
             }
             $i++;
+
+            //print_r($data['class_list']);
+            //die();
+
         }
 
         $this->load->view('student/header', $data);
@@ -79,7 +82,6 @@ class Student extends CI_Controller {
 
         $this->form_validation->set_rules('cur_pass', 'Current Password', 'required|trim|min_length[6]|max_length[15]');
         $this->form_validation->set_rules('new_pass', 'New Password', 'required|trim|min_length[6]|max_length[15]|alpha_numeric');
-        $this->form_validation->set_rules('con_pass', 'Confirm Password', 'required|trim|min_length[6]|max_length[15]|alpha_numeric|matches[new_pass]');
 
         if($this->form_validation->run() == FALSE) {
             $data['message'] = '';
@@ -116,6 +118,24 @@ class Student extends CI_Controller {
 
         $this->load->view('student/header', $data);
         $this->load->view('student/account', $data);
+        $this->load->view('student/footer');
+    }
+
+    function po_legend() {
+        if(!$this->session->userdata('is_logged_in')){
+            redirect('site');
+        }
+
+        $data['user'] = $this->model_student->select_user();
+        $data['title'] = 'OBE SAMS Academic';
+
+        $student_id = $this->session->userdata('idnum');
+        $data['view_po'] = $this->model_student->view_po($student_id);
+        $data['student_year'] = $this->model_student->student_year($student_id);
+
+
+        $this->load->view('student/header', $data);
+        $this->load->view('student/po_legend', $data);
         $this->load->view('student/footer');
     }
 }

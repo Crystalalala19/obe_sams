@@ -21,9 +21,9 @@
                             ?>
 
                             <h4><center>
-                            <?php foreach($get_EY as $row): ?>
-                                <?php echo $row->programFullName;?><br>
-                                <?php echo '(Effective SY: '.$row->effective_year.' - '.($row->effective_year+1).')';?>                                
+                            <?php foreach($get_scoreEY as $row): ?>
+                                <?php echo $row['programFullName'];?><br>
+                                <?php echo '(Effective SY: '.$row['effective_year'].' - '.($row['effective_year']+1).')';?>                                
                             <?php endforeach; ?>  
                             </center></h4>  
                             <h4>

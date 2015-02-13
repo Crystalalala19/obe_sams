@@ -196,11 +196,15 @@ class Model_users extends CI_Model {
     }
 
     function get_scoreEY($student_id) {
-        $query = $this->db->query("SELECT * FROM student_effectiveyear INNER JOIN program_year ON student_effectiveyear.pyID = program_year.ID
-                                                        INNER JOIN program ON program_year.programID = program.ID
-                                                        WHERE student_id = '".$student_id."' ");
+        $query = $this->db->query("SELECT * FROM student_course
+                                            INNER JOIN po_course ON student_course.courseID = po_course.courseID
+                                            INNER JOIN course ON po_course.courseID = course.ID
+                                            INNER JOIN program_year ON course.pyID = program_year.ID
+                                            INNER JOIN program ON program_year.programID = program.ID
+                                            WHERE student_course.studentID = '".$student_id."' 
+                                            GROUP BY student_course.studentID ");
         
-        return $query->result();
+        return $query->result_array();
     }
 
     function get_studentName($student_id) {
@@ -228,8 +232,9 @@ class Model_users extends CI_Model {
         $query = $this->db->query("SELECT DISTINCT * FROM student_course 
                                                     INNER JOIN teacher_class ON student_course.classID = teacher_class.ID
                                                     INNER JOIN student ON student_course.studentID = student.student_id
-                                                    INNER JOIN student_effectiveyear ON student.student_id = student_effectiveyear.student_id
-                                                    INNER JOIN program_year ON student_effectiveyear.pyID = program_year.ID
+                                                    INNER JOIN po_course ON student_course.courseID = po_course.courseID
+                                                    INNER JOIN course ON po_course.courseID = course.ID
+                                                    INNER JOIN program_year ON course.pyID = program_year.ID
                                                     INNER JOIN program ON program_year.programID = program.ID
                                                     WHERE teacher_class.teacherID = '".$session_id."' 
                                                     GROUP BY student_course.studentID");

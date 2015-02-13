@@ -35,12 +35,12 @@
                                     <span class="shortcut-label">Student Reports</span> 
                                 </a>
 
-                                <span style="visibility: hidden;">
-                                <a href="javascript:;" class="shortcut">
-                                    <i class="shortcut-icon icon-user"></i>
-                                    <span class="shortcut-label">Users</span> 
+                                <a href="<?php echo base_url('admin/activity_log');?>" class="shortcut">
+                                    <i class="shortcut-icon icon-file"></i>
+                                    <span class="shortcut-label">Activity Log</span> 
                                 </a>
 
+                                <span style="visibility: hidden;">
                                 <a href="javascript:;" class="shortcut">
                                     <i class="shortcut-icon icon-file"></i>
                                     <span class="shortcut-label">Notes</span> 

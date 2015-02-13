@@ -392,6 +392,18 @@ class Model_admin extends CI_Model {
     
         return $query->result_array();
     }
+
+    function activity_log() {
+        $query = $this->db->query("SELECT * FROM teacher_class GROUP BY date");
+
+        return $query->result_array();
+    }
+
+    function show_courses() {
+        $query = $this->db->query("SELECT * FROM teacher_class");
+
+        return $query->result_array();
+    }
     // END TEACHER
 }
 ?>
