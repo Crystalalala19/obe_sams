@@ -399,8 +399,17 @@ class Model_admin extends CI_Model {
         return $query->result_array();
     }
 
-    function show_courses() {
-        $query = $this->db->query("SELECT * FROM teacher_class");
+    function teacher_log() {
+        $query = $this->db->query("SELECT student_course.date, teacher.fname, teacher.mname, teacher.lname, 
+                                        teacher_class.group_num, teacher_class.courseCode, teacher_class.start_time,
+                                        teacher_class.end_time, teacher_class.days, teacher_class.ID,
+                                        teacher.teacher_id, teacher_class.school_year
+                                        -- teacher.teacher_id, teacher_class.school_year
+                                        FROM student_course
+                                        INNER JOIN teacher_class ON student_course.classID = teacher_class.ID
+                                        INNER JOIN teacher ON teacher_class.teacherID = teacher.teacher_id
+                                        GROUP BY teacher_class.ID 
+                                        ORDER BY student_course.date DESC");
 
         return $query->result_array();
     }

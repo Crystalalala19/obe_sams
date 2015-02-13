@@ -59,6 +59,9 @@ $route['admin/reports/teacher'] = "admin/report_teacher";
 $route['admin/reports/teacher/(:num)'] = "admin/report_teacher";
 $route['admin/reports/student'] = "admin/report_student";
 
+//Activity_Log
+$route['admin/class_list/'] = "admin/class_list";
+
 $route['default_controller'] = "site";
 $route['404_override'] = 'site/error_404';
 
