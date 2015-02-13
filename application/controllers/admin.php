@@ -316,7 +316,7 @@ class Admin extends CI_Controller {
                 $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
 
                 $this->session->set_flashdata('message', $message);
-                redirect(current_url());
+                redirect(base_url('admin/programs/add'));
             }
         }
         
@@ -366,34 +366,6 @@ class Admin extends CI_Controller {
         $this->load->view('admin/header', $data);
         $this->load->view('admin/edit_program', $data);
         $this->load->view('admin/footer');
-    }
-
-    public function delete_program() {
-        $program = $this->uri->segment(5);
-
-        $program_data = array(
-            'programName' => rawurldecode($program)
-        );
-
-        if(!$this->model_admin->get_programID($program_data)) {
-            $message = '<strong>Program</strong> does not exist.';
-            $message = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
-            $this->session->set_flashdata('message', $message);
-            redirect('admin/programs/view');
-        }
-
-        $result = $this->model_admin->delete_program($program_data);
-
-        if($result['is_success'] == FALSE) {
-            $message = '<strong>Error: </strong>'. $result['db_error'];
-            $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
-        }
-        else {
-            $message = '<strong>Success!</strong> Program deleted.';
-            $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
-        }
-        $this->session->set_flashdata('message', $message);
-        redirect('admin/programs/view');
     }
 
     public function delete_programYear() {
@@ -554,34 +526,6 @@ class Admin extends CI_Controller {
         $this->load->view('admin/header', $data);
         $this->load->view('admin/edit_teacher', $data);
         $this->load->view('admin/footer');
-    }
-
-    public function delete_teacher() {
-        $id = $this->uri->segment(4);
-
-        if(!$this->model_admin->check_rowID('teacher', $id)) {
-            $message = 'ID number does not exists.';
-            $data['message'] = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
-        }
-        else {
-            $delete = array('ID' => $id);
-
-            $result = $this->model_admin->delete_teacher($delete);
-
-            if($result['is_success'] == FALSE) {
-                $message = '<strong>Error: </strong>'.  $result['db_error'];
-                $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
-
-                $data['message'] = $message;
-            }
-            else {
-                $message = '<strong>Success!</strong> Teacher deleted.';
-                $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
-
-                $this->session->set_flashdata('message', $message);
-                redirect('admin/teachers');
-            }
-        }
     }
 
     public function upload_class() {
@@ -943,8 +887,25 @@ class Admin extends CI_Controller {
     }
 
     public function report_student() {
+        $this->load->library('form_validation');
+
         $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Student Reports';
+
+        $data['program_list'] = $this->model_admin->check_rows('program');
+        $data['year_classes'] = $this->model_admin->get_teacherReport();
+
+        $this->form_validation->set_rules('program', 'Program', 'trim');
+        $this->form_validation->set_rules('year_level', 'Year Level', 'trim|numeric');
+        $this->form_validation->set_rules('semester', 'Semester', 'trim');
+        $this->form_validation->set_rules('academic_year', 'Academic Year', 'trim|numeric');
+
+
+        if($this->form_validation->run() == FALSE) {
+            $data['message'] = '';
+        }else{
+            print_r($this->input->post());die();
+        }
 
         $this->load->view('admin/header', $data);
         $this->load->view('admin/view_report_student', $data);

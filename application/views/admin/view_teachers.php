@@ -51,7 +51,6 @@
                                                 <div class="btn-group inline pull-left">
                                                     <a type="button" title="View Classes" class="btn btn-warning btn-small btn-responsive" href="<?php echo base_url();?>admin/teachers/classes/<?php echo $row['teacher_id'];?>"><i class="icon-book"></i></a>
                                                     <a type="button" title="Edit Teacher" class="btn btn-primary btn-small btn-responsive" href="<?php echo base_url();?>admin/teachers/edit/<?php echo $row['ID'];?>"><i class="icon-edit"></i></a>
-                                                    <a type="button" title="Delete Teacher" class="btn btn-danger btn-small btn-responsive" href="<?php echo base_url();?>admin/teachers/delete/<?php echo $row['ID'];?>" onclick="return confirm('Do you want to permanently delete?');"><i class="icon-trash"></i></a>
                                                 </div>
                                             </td>
                                         </tr>

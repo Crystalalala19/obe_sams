@@ -26,13 +26,8 @@
                                 $po_count = count($po_list);
                             ?>
 
-                            <div class="pull-left">
-                                <div class="alert alert-info">
-                                    <h4>Effective School Year: <?php echo $academic_year.' - '.($academic_year+1);?></h4>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                            <h2>Major Subjects</h2>
+                            <h2>Effective School Year: <?php echo $academic_year.' - '.($academic_year+1);?></h2>
+                            
                             <?php echo form_open();?>
 
                                 <?php foreach($po_list as $key => $row): ?>

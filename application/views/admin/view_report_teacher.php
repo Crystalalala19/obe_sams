@@ -43,12 +43,12 @@
                             <table id="teacher_report" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th class="filter-select" data-placeholder="Select a Semester">Semester</th>
+                                        <th width="10%">Semester</th>
                                         <th>Teacher</th>
-                                        <th>Group #</th>
-                                        <th>Subject</th>
-                                        <th>Schedule</th>
-                                        <th data-sorter="false">Action</th>
+                                        <th width="10%">Group #</th>
+                                        <th width="10%">Subject</th>
+                                        <th width="20%">Schedule</th>
+                                        <th width="10%" class="no-sort">Action</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
