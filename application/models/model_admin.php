@@ -392,6 +392,49 @@ class Model_admin extends CI_Model {
     
         return $query->result_array();
     }
+
+    function generate_studentReport($program, $year_level, $semester, $academic_year, $po_num) {
+        $custom = "SELECT * FROM program  
+                    INNER JOIN program_year ON program.ID = program_year.programID
+                    INNER JOIN po ON program_year.ID = po.pyID
+                    INNER JOIN po_course ON po.ID = po_course.poID 
+                    INNER JOIN student_course ON po_course.poID = student_course.poID
+                    INNER JOIN teacher_class ON student_course.classID = teacher_class.ID
+                    WHERE 1
+        ";
+
+        if(!empty($program)) {
+            $custom .= " AND programName = '".$program."' ";
+        }
+
+        if(!empty($year_level)) {
+            if($year_level != "all")
+                $custom .= " AND student_course.year_level = '".$year_level."' ";
+        }
+
+        if(!empty($semester)) {
+            if($semester != "all")
+                $custom .= " AND semester = '".$semester."' ";
+        }
+
+        if(!empty($academic_year)) {
+            $custom .= " AND school_year = '".$academic_year."' ";
+        }
+
+        if(!empty($po_num)) {
+            if($po_num != "all")
+                $custom .= " AND poCode LIKE '%".$po_num."' ";
+        }
+
+        $custom .= " GROUP BY studentID;";
+
+        $query = $this->db->query($custom);
+
+        if($query->num_rows() > 0) 
+            return $query->result_array();
+        else
+            return false;
+    }
     // END TEACHER
 }
 ?>

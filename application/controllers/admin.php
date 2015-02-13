@@ -295,13 +295,15 @@ class Admin extends CI_Controller {
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('program_name', 'Program Name', 'required|trim|max_length[8]|callback_alpha_dash_space');
+        $this->form_validation->set_rules('full_name', 'Full Program Name', 'required|trim|alpha');
 
         if($this->form_validation->run() == FALSE) {
             $data['message'] = '';
         }
         else {
             $program_data = array(
-                'programName' => $this->input->post('program_name')
+                'programName' => $this->input->post('program_name'),
+                'programFullName' => $this->input->post('full_name')
             );
             $result = $this->model_admin->insert_program($program_data);
 
@@ -895,16 +897,39 @@ class Admin extends CI_Controller {
         $data['program_list'] = $this->model_admin->check_rows('program');
         $data['year_classes'] = $this->model_admin->get_teacherReport();
 
-        $this->form_validation->set_rules('program', 'Program', 'trim');
-        $this->form_validation->set_rules('year_level', 'Year Level', 'trim|numeric');
-        $this->form_validation->set_rules('semester', 'Semester', 'trim');
-        $this->form_validation->set_rules('academic_year', 'Academic Year', 'trim|numeric');
+        $this->form_validation->set_rules('program', 'Program', 'trim|required');
+        $this->form_validation->set_rules('year_level', 'Year Level', 'trim|required');
+        $this->form_validation->set_rules('semester', 'Semester', 'trim|required');
+        $this->form_validation->set_rules('academic_year', 'Academic Year', 'trim|required');
 
 
         if($this->form_validation->run() == FALSE) {
             $data['message'] = '';
-        }else{
-            print_r($this->input->post());die();
+            $data['result'] = '';
+        }
+        else{
+            $program = $this->input->post('program');
+            $year_level = $this->input->post('year_level');
+            $semester = $this->input->post('semester');
+            $academic_year = $this->input->post('academic_year');
+            $po_num = $this->input->post('po_num');
+
+            $result = $this->model_admin->generate_studentReport($program, $year_level, $semester, $academic_year, $po_num);
+            $data['result'] = $result;
+            
+            // print_r($result);die();
+            if($result == FALSE) {
+                $message = 'No results found. Try refining your search.';
+                $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
+
+                $data['message'] = $message; 
+            }
+            else {
+                $message = '<strong>Success!</strong>';
+                $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
+
+                $data['message'] = $message; 
+            }
         }
 
         $this->load->view('admin/header', $data);

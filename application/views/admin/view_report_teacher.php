@@ -29,8 +29,7 @@
                             <h3><?php echo $header;?></h3>
                         </div> <!-- /widget-header -->
                         <div class="widget-content">
-                            <button onclick="javascript:window.history.back();" type="button" class="btn btn-info"><i class="icon-angle-left"></i> Go Back</button>
-                            <div class="clearfix"></div><br>
+                            <label for="selector">Select Academic Year:</label>
                             <select name="academic_year" id="selector" class="selectpicker show-tick" title="Select Academic Year" data-live-search="true" multiple data-max-options="1" data-size="auto">
                                 <?php foreach($year_classes as $row):?>
                                 <option value='<?php echo $row['school_year'];?>' <?php if($this->uri->segment(4) == $row['school_year']) echo 'selected="selected"'; ?>><?php echo $row['school_year'].' - '.($row['school_year']+1);?></option>
@@ -113,7 +112,7 @@
 
         var table = $('#teacher_report').DataTable( dataTableOptions );
 
-        $('#teacher_report tfoot th:not(:eq(6))').each( function () {
+        $('#teacher_report tfoot th:not(:eq(5))').each( function () {
             var title = $('#teacher_report thead th').eq( $(this).index() ).text();
             $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
         } );

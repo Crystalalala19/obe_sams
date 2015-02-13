@@ -36,8 +36,12 @@
                                             </div>
                                             <div class='modal-body'>
                                                 <div class="form-group col-xs-4 col-sm-4 col-md-4">
-                                                    <label for="program_name">Program Name:</label>
+                                                    <label for="program_name">Program Code:</label>
                                                     <input type="text" class="form-control input-sm" name="program_name" id="program_name" value="<?php echo set_value('teacher_fname'); ?>" required>
+                                                </div>
+                                                <div class="form-group col-xs-4 col-sm-4 col-md-4">
+                                                    <label for="full_name">Full Program Name:</label>
+                                                    <input type="text" class="form-control input-sm" name="full_name" id="full_name" value="<?php echo set_value('teacher_fname'); ?>" required>
                                                 </div>
                                                 <div class="clearfix"></div>
                                             </div>
