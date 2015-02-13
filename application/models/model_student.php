@@ -117,13 +117,13 @@ class Model_student extends CI_Model {
     }
 
     function student_year($student_id) {
-        $query = $this->db->query("SELECT program.programFullName, program_year.effective_year, program.programName FROM student_course 
+        $query = $this->db->query("SELECT program.programFullName, program_year.effective_year, program.programName, program_year.programID FROM student_course 
                                             INNER JOIN po_course ON student_course.courseID = po_course.courseID
                                             INNER JOIN course ON po_course.courseID = course.ID
                                             INNER JOIN program_year ON course.pyID = program_year.ID
                                             INNER JOIN program ON program_year.programID = program.ID
                                             WHERE student_course.studentID = '".$student_id."'
-                                            GROUP BY po_course.courseID ");
+                                            GROUP BY program_year.programID ");
 
         return $query->result_array();
     }

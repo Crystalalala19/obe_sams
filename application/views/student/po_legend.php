@@ -22,7 +22,7 @@
                             <thead>
                                 <tr>
                                     <th>PO Code</th>
-                                    <th>PO Attribute</th>
+                                    <th width="35%">PO Attribute</th>
                                     <th>Program Outcomes</th>
                                 </tr>
                             </thead>
@@ -31,7 +31,7 @@
                                 <?php foreach($view_po as $row): ?>   
                                 <tr>
                                     <td><?php echo $row['poCode']; ?></td>          
-                                    <td><?php echo $row['attribute']; ?></td>
+                                    <td width="35%"><?php echo $row['attribute']; ?></td>
                                     <td><?php echo $row['description']; ?></td>
                                 </tr>
                                 <?php endforeach; ?>
@@ -44,5 +44,4 @@
         </div> <!-- /row -->
     </div> <!-- /container -->
 </div> <!-- /main-inner -->
-
 

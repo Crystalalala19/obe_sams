@@ -42,18 +42,22 @@
                                                         <span class="news-item-day"><?php echo "".date('jS', strtotime($row1['date']));?></span> 
                                                         <span class="news-item-month"><?php echo "".date('M Y', strtotime($row1['date']));?></span> 
                                                     </div>
-                                                    <div class="news-item-detail">
+                                                    
+                                                    <div class="pull-right">
                                                         <?php echo "".date('h:i A', strtotime($row1['date']));?>
-                                                         <p class="news-item-preview">Uploaded by: 
-                                                            <?php echo $row1['fname'].' '.$row1['mname'].' '.$row1['lname'];?>
-                                                            <p class="news-item-preview"><?php echo 'Group #: '.$row1['group_num'].' '.$row1['courseCode'].' '.$row1['start_time'].' - '.$row1['end_time'].' '.$row['days'];?>
+                                                        <p class="news-item-preview">
+                                                            <p>
+                                                                <?php echo 'Group #: '.$row1['group_num'].' '.$row1['courseCode'].' '.$row1['start_time'].' - '.$row1['end_time'].' '.$row['days'];?>
                                                             </p>
                                                             <p> 
                                                                 <a class="btn btn-mini btn-info" href="<?php echo base_url();?>admin/teachers/scorecard/<?php echo $row1['teacher_id'].'/'.$row1['school_year'].'/'.$row1['ID'];?>" title="View Class">
                                                                     <i class="icon-eye-open"></i> View Class
                                                                 </a>
                                                             </p>
-                                                         </p>
+                                                            <p>Uploaded by: 
+                                                                <?php echo $row1['fname'].' '.$row1['mname'].' '.$row1['lname'];?>
+                                                            </p>
+                                                        </p>
                                                     </div>
                                                 </li>
                                             <?php endforeach; ?>     
