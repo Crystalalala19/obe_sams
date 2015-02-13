@@ -44,11 +44,11 @@
                                 <tbody>
                                     <?php foreach($class_list as $key => $row3): ?>
                                     <tr>
-                                        <td><center><?php echo $row3['courseCode']; ?></center></td>
+                                        <td><?php echo $row3['courseCode']; ?></td>
                                         <?php for($x=0; $x < $po_count; $x++): ?>
-                                            <td><center>
+                                            <td>
                                                 <?php echo $row3['score'][$x]['score'];?>
-                                            </center></td>
+                                            </td>
                                         <?php endfor;?>   
                                     </tr>
                                     <?php endforeach; ?>
@@ -57,7 +57,7 @@
                                     <tr>
                                         <td><center>Average</center></td>
                                         <?php for($x = 1; $x <= $po_count; $x++):?>
-                                            <td><center></center></td>
+                                            <td></td>
                                         <?php endfor;?>
                                     </tr>
                                 </tfoot>
@@ -72,6 +72,29 @@
 
 <script type="text/javascript">
 
+        // var values = [],
+        //     table = document.getElementById('scorecard_teacher'),
+        //     rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr'),
+        //     footer = table.getElementsByTagName('tfoot')[0];
+
+        // for(var i=1; i<<?php echo $po_count;?>; i++){
+        //     values[i] = [];
+        //     for(var j=0, l=rows.length; j<l; j++){
+        //         values[i].push(
+        //             parseFloat(
+        //                 rows[j].getElementsByTagName('td')[i]
+        //               .innerHTML
+        //             )
+        //         );
+        //     }
+
+        //     var score = values[i].reduce(function(pv,cv){return pv + cv;},0) / values[i].length;
+        //     footer.getElementsByTagName('td')[i].innerHTML = Math.round(score * 100) / 100;
+          
+        //     if( isNaN(footer.getElementsByTagName('td')[i].innerHTML) )
+        //         footer.getElementsByTagName('td')[i].innerHTML = " ";
+
+
         var table = document.getElementById('scorecard_teacher'),
             rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr'),
             footer = table.getElementsByTagName('tfoot')[0];
@@ -82,7 +105,6 @@
                 try {
                     sum += parseFloat(
                         rows[j].getElementsByTagName('td')[i]
-                        .getElementsByTagName('center')[0]
                         .innerHTML
                     );
                     numOfValues++;
@@ -91,7 +113,6 @@
 
             var avg = sum / numOfValues;
             footer.getElementsByTagName('td')[i]
-            .getElementsByTagName('center')[0]
             .innerHTML = Math.round(avg * 100) / 100;
         }
 

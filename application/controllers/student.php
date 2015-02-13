@@ -20,6 +20,7 @@ class Student extends CI_Controller {
         $data['get_studentName'] = $this->model_student->get_studentName($student_id);
         $data['get_EY'] = $this->model_student->get_scoreEY($student_id);
         $data['get_class'] = $this->model_student->get_class($student_id);
+        $data['view_po'] = $this->model_student->view_po($student_id);
 
         $this->load->view('student/header', $data);
         $this->load->view('student/index', $data);
@@ -41,6 +42,8 @@ class Student extends CI_Controller {
         $data['get_class'] = $this->model_student->get_class($student_id);
         
         $data['class_list'] = $this->model_student->select_classSC($student_id);
+        $data['class_list1'] = $this->model_student->select_class($student_id);
+        $data['select_teacher'] = $this->model_student->select_teacher($student_id);
 
         $class_list = $data['class_list'];
 

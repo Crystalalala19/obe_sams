@@ -30,12 +30,32 @@
                                 </div>
                                     Student ID: <?php echo $row['student_id'];?><br><?php endforeach; ?>
                                     <?php foreach($get_EY as $row1): ?>
-                                        Program: <?php echo $row1->programFullName;?><br>
+                                        Program: <?php echo $row1->programName;?><br>
                                         Effective Year: <?php echo $row1->effective_year.' - '.($row1->effective_year+1);?><br>
                                     <?php endforeach; ?>     
                                 </div>
                             </li>
                         </ul>
+
+                        <table id="view_classlist" class="table table-striped table-bordered dataTable no-footer">
+                            <thead>
+                                <tr>
+                                    <th>PO Code</th>
+                                    <th>PO Attribute</th>
+                                    <th>Program Outcomes</th>
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                <?php foreach($view_po as $row): ?>   
+                                <tr>
+                                    <td><?php echo $row['poCode']; ?></td>          
+                                    <td><?php echo $row['attribute']; ?></td>
+                                    <td><?php echo $row['description']; ?></td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
                     </div> <!-- /widget-content -->
                 </div> <!-- /widget -->                 
             </div> <!-- /span12 -->         

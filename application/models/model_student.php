@@ -35,8 +35,9 @@ class Model_student extends CI_Model {
     function select_classSC($student_id) {
         $query = $this->db->query("SELECT * FROM student_course 
                                             INNER JOIN teacher_class ON student_course.classID = teacher_class.ID
-                                            WHERE studentID = '".$student_id."' 
-                                            GROUP BY classID");
+                                            -- INNER JOIN course ON teacher_class.courseCode = course.CourseCode
+                                            WHERE student_course.studentID = '".$student_id."' 
+                                            GROUP BY student_course.classID");
 
         return $query->result_array();
     }
@@ -110,6 +111,37 @@ class Model_student extends CI_Model {
 
             return $data;
         }
+    }
+
+    function view_po($student_id) {
+        $query = $this->db->query("SELECT * FROM student_course 
+                                            INNER JOIN po_course ON student_course.poID = po_course.poID
+                                            INNER JOIN po ON po_course.poID = po.ID
+                                            WHERE student_course.studentID = '".$student_id."'
+                                            GROUP BY po.ID ");
+
+        return $query->result_array();
+    }
+
+    function select_teacher($student_id) {
+        $query = $this->db->query("SELECT teacher.fname, teacher.mname, teacher.lname, student_course.studentID 
+                                            FROM student_course 
+                                            INNER JOIN teacher_class ON student_course.classID = teacher_class.ID
+                                            INNER JOIN teacher ON teacher_class.teacherID = teacher.teacher_id
+                                            WHERE studentID = '".$student_id."' 
+                                            GROUP BY teacher.teacher_id ");
+
+        return $query->result_array();
+    }
+
+    function select_class($student_id) {
+        $query = $this->db->query("SELECT * FROM student_course 
+                                            INNER JOIN teacher_class ON student_course.classID = teacher_class.ID
+                                            INNER JOIN course ON teacher_class.courseCode = course.CourseCode
+                                            WHERE student_course.studentID = '".$student_id."' 
+                                            GROUP BY student_course.classID");
+
+        return $query->result_array();
     }
 }
 ?>    
