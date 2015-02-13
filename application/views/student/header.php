@@ -113,6 +113,11 @@
                             <span>Scorecard</span> 
                         </a>
                     </li>
+                     <li <?php uri_match('po_legend');?> id="po_legend">
+                        <a href="<?php echo base_url('student/po_legend'); ?>" title="PO List"><i class="icon-list"></i>
+                            <span>PO List</span> 
+                        </a>
+                    </li>
                 </ul>
             </div>
             <!-- /container --> 

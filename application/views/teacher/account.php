@@ -43,7 +43,7 @@
                                     <i class="icon-exclamation-sign"></i> ', 
                                 '</div>');
                             
-                            $attrib = array( 'onsubmit' => "return confirm('Are you sure?');"); 
+                            $attrib = array( 'onsubmit' => "return confirm('Are you sure you want to change password?');"); 
 
                             echo form_open('site/account', $attrib);?>
                                 <fieldset>

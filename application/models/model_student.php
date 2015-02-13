@@ -12,14 +12,6 @@ class Model_student extends CI_Model {
         return $query->result_array();
     }
 
-     function get_scoreEY($student_id) {
-        $query = $this->db->query("SELECT * FROM student_effectiveyear INNER JOIN program_year ON student_effectiveyear.pyID = program_year.ID
-                                                        INNER JOIN program ON program_year.programID = program.ID
-                                                        WHERE student_id = '".$student_id."' ");
-        
-        return $query->result();
-    }
-
     function get_studentName($student_id) {
         $query = $this->db->query("SELECt * FROM student WHERE student_id = '".$student_id."' ");
         return $query->result();
@@ -35,7 +27,6 @@ class Model_student extends CI_Model {
     function select_classSC($student_id) {
         $query = $this->db->query("SELECT * FROM student_course 
                                             INNER JOIN teacher_class ON student_course.classID = teacher_class.ID
-                                            -- INNER JOIN course ON teacher_class.courseCode = course.CourseCode
                                             WHERE student_course.studentID = '".$student_id."' 
                                             GROUP BY student_course.classID");
 
@@ -117,8 +108,22 @@ class Model_student extends CI_Model {
         $query = $this->db->query("SELECT * FROM student_course 
                                             INNER JOIN po_course ON student_course.poID = po_course.poID
                                             INNER JOIN po ON po_course.poID = po.ID
+                                            INNER JOIN program_year ON po.pyID = program_year.ID
+                                            INNER JOIN program ON program_year.programID = program.ID
                                             WHERE student_course.studentID = '".$student_id."'
                                             GROUP BY po.ID ");
+
+        return $query->result_array();
+    }
+
+    function student_year($student_id) {
+        $query = $this->db->query("SELECT program.programFullName, program_year.effective_year, program.programName FROM student_course 
+                                            INNER JOIN po_course ON student_course.courseID = po_course.courseID
+                                            INNER JOIN course ON po_course.courseID = course.ID
+                                            INNER JOIN program_year ON course.pyID = program_year.ID
+                                            INNER JOIN program ON program_year.programID = program.ID
+                                            WHERE student_course.studentID = '".$student_id."'
+                                            GROUP BY po_course.courseID ");
 
         return $query->result_array();
     }
@@ -134,12 +139,13 @@ class Model_student extends CI_Model {
         return $query->result_array();
     }
 
-    function select_class($student_id) {
+    function get_courses($student_id) {
         $query = $this->db->query("SELECT * FROM student_course 
-                                            INNER JOIN teacher_class ON student_course.classID = teacher_class.ID
-                                            INNER JOIN course ON teacher_class.courseCode = course.CourseCode
-                                            WHERE student_course.studentID = '".$student_id."' 
-                                            GROUP BY student_course.classID");
+                                    INNER JOIN teacher_class ON student_course.classID = teacher_class.ID 
+                                    INNER JOIN course ON teacher_class.courseCode = course.CourseCode
+                                    INNER JOIN teacher ON teacher_class.teacherID = teacher.teacher_id
+                                    WHERE student_course.studentID  = '".$student_id."' 
+                                    GROUP BY teacher_class.ID ");
 
         return $query->result_array();
     }

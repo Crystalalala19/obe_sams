@@ -18,16 +18,16 @@
                     </div> <!-- /widget-header -->
 
                     <div class="widget-content">
-                         <div class="clearfix"></div><br>
+                        <div class="clearfix"></div><br>
                         <?php 
                             $po_count = count($get_po);
                             $attributes = array('class' => 'col-md-4');
                         ?>
 
                         <h4><center>
-                        <?php foreach($get_EY as $row): ?>
-                            <?php echo $row->programFullName;?><br>
-                            <?php echo '(Effective SY: '.$row->effective_year.' - '.($row->effective_year+1).')';?>                                
+                        <?php foreach($student_year as $row): ?>
+                            <?php echo $row['programFullName'];?><br>
+                            <?php echo '(Effective SY: '.$row['effective_year'].' - '.($row['effective_year']+1).')';?>                                
                         <?php endforeach; ?>  
                         </center></h4>  
                         <hr>
@@ -36,8 +36,6 @@
                             <thead>
                               <tr>
                                 <th> Course Code </th>
-                                <th> Course Description </th>
-                                <th> Teacher </th>
                                  <?php for($x = 1; $x <= $po_count; $x++):?>
                                     <th>PO <?php echo $x;?></i></th>
                                 <?php endfor;?>
@@ -47,11 +45,6 @@
                                 <?php foreach($class_list as $key => $row3): ?>
                                 <tr>
                                     <td><?php echo $row3['courseCode']; ?></td>
-                                    <td><?php echo $row3['courseCode']; ?></td>
-                                    <?php foreach($select_teacher as $row4): ?>   
-                                        <td><?php echo $row4['fname'].' '.$row4['mname'].' '.$row4['lname']; ?></td>
-                                    <?php endforeach; ?>
-                                    
                                     <?php for($x=0; $x < $po_count; $x++): ?>
                                         <td><?php echo $row3['score'][$x]['score'];?></td>
                                     <?php endfor;?>   
@@ -60,7 +53,7 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan="3" ><center>Average</center></td>
+                                    <td><center>Average</center></td>
                                     <?php for($x = 1; $x <= $po_count; $x++):?>
                                     <td></td>
                                     <?php endfor;?>

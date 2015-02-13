@@ -29,29 +29,34 @@
                                     </a> 
                                 </div>
                                     Student ID: <?php echo $row['student_id'];?><br><?php endforeach; ?>
-                                    <?php foreach($get_EY as $row1): ?>
-                                        Program: <?php echo $row1->programName;?><br>
-                                        Effective Year: <?php echo $row1->effective_year.' - '.($row1->effective_year+1);?><br>
+                                    <?php foreach($student_year as $row1): ?>
+                                        Program: <?php echo $row1['programName'];?><br>
+                                        Effective Year: <?php echo $row1['effective_year'].' - '.($row1['effective_year']+1);?><br>
                                     <?php endforeach; ?>     
                                 </div>
                             </li>
                         </ul>
+                        <div class="clearfix"></div><br>
 
                         <table id="view_classlist" class="table table-striped table-bordered dataTable no-footer">
                             <thead>
                                 <tr>
-                                    <th>PO Code</th>
-                                    <th>PO Attribute</th>
-                                    <th>Program Outcomes</th>
+                                    <th>Group Number</th>
+                                    <th>Subject</th>
+                                    <th>Course Description</th>
+                                    <th>Schedule</th>
+                                    <th>Teacher</th>
                                 </tr>
                             </thead>
                             
                             <tbody>
-                                <?php foreach($view_po as $row): ?>   
+                                <?php foreach($get_courses as $row): ?>   
                                 <tr>
-                                    <td><?php echo $row['poCode']; ?></td>          
-                                    <td><?php echo $row['attribute']; ?></td>
-                                    <td><?php echo $row['description']; ?></td>
+                                    <td><?php echo $row['group_num']; ?></td>          
+                                    <td><?php echo $row['courseCode']; ?></td>
+                                    <td><?php echo $row['CourseDesc']; ?></td>
+                                    <td><?php echo $row['start_time'].' - '.$row['end_time'].' '.$row['days']; ?></td> 
+                                    <td><?php echo $row['fname'].' '.$row['mname'].' '.$row['lname']; ?></td> 
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>

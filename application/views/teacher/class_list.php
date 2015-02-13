@@ -38,24 +38,34 @@
                                 $po_count = count($get_po);
                                 $attributes = array('class' => 'col-md-4');
                             ?>
-                            
-                            <div class="pull-left">
-                                <div class="alert alert-info">
-                                <?php foreach($select_schedule as $row1): ?>
-                                    <h4>
-                                        <?php echo $row1->courseCode.' ';?><?php echo '| Group '; echo $row1->group_num.'';?>
-                                        <?php 
-                                            echo '<br> ';
-                                            echo $row1->start_time.' - ';
-                                            echo $row1->end_time.' ';
-                                            echo $row1->days.'<br>';
-                                        ?>
-                                        Semester: <?php echo $row1->semester,' | ';?> School Year: <?php echo $row1->school_year; ?>
-                                    </h4>
-                                 <?php endforeach; ?>
+
+                            <div class="control-group">
+                                <div class="pull-left">
+                                    <div class="">
+                                    <?php foreach($select_schedule as $row1): ?>
+                                        <h4>
+                                            <?php echo $row1->courseCode.' ';?><?php echo '| Group '; echo $row1->group_num.'';?>
+                                            <?php 
+                                                echo '<br> ';
+                                                echo $row1->start_time.' - ';
+                                                echo $row1->end_time.' ';
+                                                echo $row1->days.'<br>';
+                                            ?>
+                                            Semester: <?php echo $row1->semester,' | ';?> School Year: <?php echo $row1->school_year; ?>
+                                        </h4>
+                                     <?php endforeach; ?>
+                                    </div>
                                 </div>
-                            </div>
+
+                                <div class="pull-right">
+                                    <h4><i class="icon-download-alt icon-2x"></i> Download Template:</h4>
+                                    <a href="<?php echo base_url('site/download/class');?>"><img src="<?php echo base_url('assets/img/excel.png');?>"></a>
+                                </div>
+
+                            </div>   
+                             
                             <div class="clearfix"></div>
+                            <hr>
                             <table id="view_classlist" class="table table-striped table-bordered dataTable no-footer">
                                 <thead>
                                     <tr>
@@ -98,11 +108,6 @@
                             <br>
                             <?php echo form_open_multipart();?>
                                 <div class="control-group">
-                                    <div class="pull-right">
-                                        <h3><i class="icon-download-alt icon-2x"></i> Download Template:</h3>
-                                        <a href="<?php echo base_url('site/download/class');?>"><img src="<?php echo base_url('assets/img/excel.png');?>"></a>
-                                    </div>
-
                                     <label for="userfile">Upload .CSV File: </label>
                                     <input type="hidden" name="teacher_id" value="<?php echo $this->session->userdata('teacher_id');?>">
                                     <input type="file" name="userfile" id="userfile" class="filestyle" data-buttonText="Find file" data-buttonName="btn-primary" data-iconName="icon-upload-alt">

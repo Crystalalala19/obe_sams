@@ -10,7 +10,7 @@
         <div class="container">
             <div class="row">
                 <div class="span12">
-                    <div class="widget">
+                    <div class="widget" style="overflow: visible;">
                         <div class="widget-header">
                             <i class="icon-list"></i>
                             <h3>Assigned Classes</h3>
@@ -35,13 +35,12 @@
                                 </select>
                             </div>
 
-                            <hr>
+                           
                             <?php if(!empty($this->uri->segment(3))):?>
-                            <div class="pull-left">
-                                <div class="alert alert-info">
-                                    <h4>Academic Year: <?php echo $academic_year.' - '.($academic_year+1);?></h4>
-                                </div>
+                            <div class="info"> 
+                                <h4>Academic Year: <?php echo $academic_year.' - '.($academic_year+1);?></h4>                                   
                             </div>
+                            <hr>
                             <div class="clearfix"></div>
                             <div class="tabbable">
                                 <ul class="nav nav-tabs">
