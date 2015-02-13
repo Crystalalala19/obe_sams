@@ -420,6 +420,7 @@ class Model_admin extends CI_Model {
                     INNER JOIN po ON program_year.ID = po.pyID
                     INNER JOIN po_course ON po.ID = po_course.poID 
                     INNER JOIN student_course ON po_course.poID = student_course.poID
+                    INNER JOIN student ON student_course.studentID = student.student_id
                     INNER JOIN teacher_class ON student_course.classID = teacher_class.ID
                     WHERE 1
         ";

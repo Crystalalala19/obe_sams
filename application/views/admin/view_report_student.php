@@ -1,15 +1,19 @@
+    <!-- For filter table -->
+    <link href="<?php echo base_url();?>assets/css/bootstrap-editable.css" rel="stylesheet">
+    <link href="<?php echo base_url();?>assets/css/bootstrap-filterable.css" rel="stylesheet">
+    <!-- End filter table -->
+
     <div class="main-inner">
         <div class="container">
             <div class="row">
                 <div class="span12">
-                    <div class="widget">
+                    <div class="widget" style="overflow: visible;">
                         <div class="widget-header">
                             <i class="icon-user"></i>
                             <h3><?php echo $header;?></h3>
                         </div> <!-- /widget-header -->
                         <div class="widget-content">
                             <?php 
-                                echo $this->session->flashdata('message');
                                 if (!empty($message)) echo $message;
 
                                 echo validation_errors('
@@ -21,42 +25,42 @@
 
                             <?php echo form_open('admin/report_student');?>
                                 <label class="control-label" for="program">Program:</label>
-                                <select class="span2" id="program" name="program" required>
+                                <select class="span2" id="program" name="program">
                                     <option value="">Program:</option>
                                     <?php foreach ($program_list as $row): ?>
-                                    <option value="<?php echo $row['programName']; ?>"><?php echo rawurldecode($row['programName']); ?></option>
+                                    <option value="<?php echo $row['programName'];?>" <?php echo set_select('program', $row['programName']);?>><?php echo rawurldecode($row['programName']); ?></option>
                                     <?php endforeach;?>
                                 </select>
 
-                                <select class="span2" id="year_level" name="year_level" required>
+                                <select class="span2" id="year_level" name="year_level">
                                     <option value="">Year level:</option>
-                                    <option value="all">All</option>
-                                    <option value="1">First Year</option>
-                                    <option value="2">Second Year</option>
-                                    <option value="3">Third Year</option>
-                                    <option value="4">Fourth Year</option>
+                                    <option value="all" <?php echo set_select('year_level', 'all');?>>All</option>
+                                    <option value="1" <?php echo set_select('year_level', '1');?>>First Year</option>
+                                    <option value="2" <?php echo set_select('year_level', '2');?>>Second Year</option>
+                                    <option value="3" <?php echo set_select('year_level', '3');?>>Third Year</option>
+                                    <option value="4" <?php echo set_select('year_level', '4');?>>Fourth Year</option>
                                 </select>
                                 
-                                <select class="span2" name="semester" required>
+                                <select class="span2" name="semester">
                                     <option value="">Semester:</option>
-                                    <option value="all">All</option>
-                                    <option value="1">First</option>
-                                    <option value="2">Second</option>
-                                    <option value="summer">Summer</option>
+                                    <option value="all" <?php echo set_select('semester', 'all');?>>All</option>
+                                    <option value="1" <?php echo set_select('semester', '1');?>>First</option>
+                                    <option value="2" <?php echo set_select('semester', '2');?>>Second</option>
+                                    <option value="summer" <?php echo set_select('semester', 'summer');?>>Summer</option>
                                 </select>
 
-                                <select class="span2" name="academic_year" required>
+                                <select class="span2" name="academic_year">
                                     <option value="">Academic Year:</option>
                                     <?php foreach ($year_classes as $row): ?>
-                                    <option value="<?php echo $row['school_year']; ?>"><?php echo $row['school_year'].' - '. ($row['school_year']+1); ?></option>
+                                    <option value="<?php echo $row['school_year'];?>" <?php echo set_select('academic_year', $row['school_year']);?>><?php echo $row['school_year'].' - '. ($row['school_year']+1); ?></option>
                                     <?php endforeach;?>
                                 </select>
 
-                                <select class="span2" name="po_num" required>
+                                <select class="span2" name="po_num">
                                     <option value="">PO #:</option>
-                                    <option value="all">All</option>
+                                    <option value="all" <?php echo set_select('po_num', 'all');?>>All</option>
                                     <?php for($x = 1; $x <= 10; $x++):?>
-                                    <option value="0<?php echo $x;?>">PO <?php echo $x;?></option>
+                                    <option value="0<?php echo $x;?>" <?php echo set_select('po_num', '0'.$x);?>>PO <?php echo $x;?></option>
                                     <?php endfor; ?>
                                 </select>
 
@@ -67,18 +71,18 @@
                             <hr>
 
                             <?php if(!empty($result)): ?>
-                            <table class="table table-striped table-bordered">
+                            <table class="table table-striped table-bordered" id="filterme">
                                 <thead>
                                     <tr>
-                                        <th>Student ID</th>
+                                        <th>Student ID <i class="icon-filter"></th>
+                                        <th>Name <i class="icon-filter"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach($result as $key => $row): ?>
                                         <tr>
-                                            <td>
-                                                <?php echo $row['studentID'];?>
-                                            </td>
+                                            <td><?php echo $row['studentID'];?></td>
+                                            <td><?php echo $row['fname'].' '.$row['lname'];?></td>
                                         </tr>
                                     <?php endforeach;?>
                                 </tbody>
@@ -93,7 +97,17 @@
         </div> <!-- /container -->
     </div> <!-- /main-inner -->
 
+    <!-- Filter table -->
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/bootstrap-editable.min.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/filterable-utils.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/filterable-cell.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/filterable-row.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/filterable.js"></script>
+    <!-- End filter table -->
+
     <script type="text/javascript" language="javascript">
         var d = document.getElementById("report_dropdown");
         d.className = d.className + " active";
+
+        $('#filterme').filterable();
     </script>

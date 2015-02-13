@@ -901,7 +901,7 @@ class Admin extends CI_Controller {
         $this->form_validation->set_rules('year_level', 'Year Level', 'trim|required');
         $this->form_validation->set_rules('semester', 'Semester', 'trim|required');
         $this->form_validation->set_rules('academic_year', 'Academic Year', 'trim|required');
-
+        $this->form_validation->set_rules('po_num', 'PO Number', 'trim|required');
 
         if($this->form_validation->run() == FALSE) {
             $data['message'] = '';
@@ -915,6 +915,7 @@ class Admin extends CI_Controller {
             $po_num = $this->input->post('po_num');
 
             $result = $this->model_admin->generate_studentReport($program, $year_level, $semester, $academic_year, $po_num);
+            
             $data['result'] = $result;
             
             // print_r($result);die();
@@ -951,16 +952,4 @@ class Admin extends CI_Controller {
 
         force_download($name, $data); 
     }
-
-    public function activity_log() {
-        $data['title'] = 'OBE SAMS Academic';
-        $data['header'] = 'Activity Log';
-
-        $data['activity_log'] = $this->model_admin->activity_log();
-        $data['teacher_log'] = $this->model_admin->teacher_log();
-
-        $this->load->view('admin/header', $data);
-        $this->load->view('admin/activity_log', $data);
-        $this->load->view('admin/footer');
-    } 
 }
