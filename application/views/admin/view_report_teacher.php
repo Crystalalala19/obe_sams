@@ -63,7 +63,7 @@
                                 <tbody>
                                     <?php foreach($teacher_list as $row):?>
                                     <tr>
-                                        <td><?php echo $row['semester'];?></td>
+                                        <td><?php echo ucfirst($row['semester']);?></td>
                                         <td><?php echo $row['fname'].' '.$row['lname']; ?></td>
                                         <td><?php echo $row['group_num'];?></td>
                                         <td><?php echo $row['courseCode'];?></td>

@@ -7,7 +7,6 @@
             echo 'class=active';
     }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -102,9 +101,9 @@
             <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 
                 <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> </a>
-                <a class="brand" href="index.html">
+                <a class="brand" href="<?php echo base_url('site/members');?>">
                     <img src="<?php echo base_url();?>assets/img/obesams.png" class="navbar-brand-logo " title="OBE SAMS Academic" alt="OBE SAMS Academic"/>
-                </a> 
+                </a>
 
                 <div class="nav-collapse">
                     <ul class="nav pull-right">

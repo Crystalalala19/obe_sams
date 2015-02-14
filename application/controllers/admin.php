@@ -347,6 +347,9 @@ class Admin extends CI_Controller {
             'programName' => rawurldecode($program)
         );
 
+        $program_id = $this->model_admin->get_programID($program_data);
+        $year_id = $this->model_admin->get_programYearID($program_id ,$year);
+
         $year_data = array(
             'effective_year' => $year
         );
@@ -362,6 +365,13 @@ class Admin extends CI_Controller {
         else {
             $data['program'] = $this->model_admin->get_program($program_data);
             $data['program_list'] = $this->model_admin->check_rows('program');
+
+            $year_data2 = array(
+                'pyID' => $year_id
+            );
+
+            $data['course_list'] = $this->model_admin->get_courses($year_data2);
+            $data['program_data'] = $this->model_admin->get_curriculum($program, $year);
 
             $data['year'] = $this->model_admin->get_programYear($year_data);
         }

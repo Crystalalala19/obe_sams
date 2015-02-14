@@ -131,7 +131,8 @@
             "sSwfPath": "http://cdn.datatables.net/tabletools/2.2.3/swf/copy_csv_xls_pdf.swf",
             "aButtons": [ {
                     "sExtends": "copy",
-                    "sButtonText": "Copy"
+                    "sButtonText": "Copy",
+                    "mColumns": [ 0, 1]
                 }, 
                 {
                     "sExtends":    "collection",

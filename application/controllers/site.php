@@ -186,7 +186,7 @@ class Site extends CI_Controller {
                 $insert_data = array();
                 $nonExistingCourse = array();
                 $nonExistingTeacher = array();
-                $to_insert_grade[] = array();
+                $to_insert_grade = array();
                 $csv_array = $this->csvimport->get_array($file_path);
                 $headers = $this->csvimport->get_headers();
                 // print_r($csv_array);die();

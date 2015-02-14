@@ -7,7 +7,6 @@
             echo 'class=active';
     }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 

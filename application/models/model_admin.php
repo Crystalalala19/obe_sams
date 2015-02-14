@@ -240,6 +240,17 @@ class Model_admin extends CI_Model {
         return $query->result_array();
     }
 
+    function get_curriculum($program, $year) {
+        $query = $this->db->query("SELECT * FROM program 
+                                  INNER JOIN program_year ON program.ID = program_year.programID
+                                  INNER JOIN po ON program_year.ID = po.pyID
+                                  WHERE program.programName = '".$program."' AND program_year.effective_year = '".$year."'
+                                  GROUP BY poCode;
+                                  ");
+
+        return $query->result_array();
+    }
+
     // END PROGRAM
 
     // STUDENT
