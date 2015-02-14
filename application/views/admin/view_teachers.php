@@ -32,7 +32,7 @@
                             <button class="btn btn-info" data-toggle='modal' data-target='#add' title="Add New"><i class="icon-plus"></i> Add new</button>
     
                             <?php if($teacher_list != FALSE):?>
-                            <a href="<?php echo base_url();?>admin/teachers/upload" role="button" class="btn btn-warning" title="Upload Classes"><i class="icon-time"></i> Upload Classes</a>
+                            <a href="<?php echo base_url();?>admin/teachers/upload" role="button" class="btn btn-warning" title="Assign Classes"><i class="icon-time"></i> Assign Classes</a>
 
                             <table id="view_teachers" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
@@ -155,6 +155,8 @@
         };
 
         var table = $('#view_teachers').DataTable( dataTableOptions );
+
+        $('.dataTables_filter input').attr("placeholder", " Enter keyword");
 
         var tt = new $.fn.dataTable.TableTools( table, tableToolsOptions );
 

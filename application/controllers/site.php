@@ -186,9 +186,10 @@ class Site extends CI_Controller {
                 $insert_data = array();
                 $nonExistingCourse = array();
                 $nonExistingTeacher = array();
+                $to_insert_grade[] = array();
                 $csv_array = $this->csvimport->get_array($file_path);
                 $headers = $this->csvimport->get_headers();
-
+                // print_r($csv_array);die();
                 $po_courses = $this->model_users->get_poCourse($student_courseID);
 
                 foreach ($csv_array as $row) {
@@ -226,7 +227,7 @@ class Site extends CI_Controller {
                         'courseID' => $student_courseID
                     ); 
 
-                    for($x = 0, $index = 4; $x < count($po_courses); $x++, $index++) {
+                    for($x = 0, $index = 5; $x < count($po_courses); $x++, $index++) {
                         if($po_courses[$x]['status'] == '1') {
                             if($row[$headers[$index]] == NULL) {
                                 $message = '<strong>Error: </strong>There\'s an empty score found. Please check your .CSV file.';
@@ -252,6 +253,7 @@ class Site extends CI_Controller {
                         $student_course_data['classID'] = $studentCourse_data['classID'];
                         $student_course_data['poID'] = $studentCourse_data['poID'][$key];
                         $student_course_data['courseID'] = $studentCourse_data['courseID'];
+                        $student_course_data['year_level'] = $row['Year Level'];
 
                         $to_insert_grade[] = $student_course_data;
                     }

@@ -27,7 +27,8 @@
                             <?php endforeach; ?>  
                             </center></h4>  
                             <h4>
-                                <?php foreach($get_studentName as $row1): ?> 
+                                <?php foreach($get_studentName as $row1): ?>
+                                <?php $stud_id = $row1->student_id; $stud_name = $row1->lname.', '.$row1->fname;?> 
                                 <?php echo '[ '.$row1->student_id.' ]  ';?>
                                 <?php echo $row1->lname.', '.$row1->fname.' '.$row1->mname; ?>
                                 <?php endforeach; ?>
@@ -135,12 +136,14 @@
                     "sButtonText": "Save as...",
                     "aButtons":    [ {
                             "sExtends": "xls",
+                            "sTitle": "<?php echo $stud_name.' '.$stud_id; ?>",
                             "oSelectorOpts": {
                                 page: 'current'
                             },
                             "mColumns": "visible"
                         }, {
                             "sExtends": "pdf",
+                            "sTitle": "<?php echo $stud_name.' '.$stud_id; ?>",
                             "sButtonText": "PDF",
                             "mColumns": "visible"
                         }

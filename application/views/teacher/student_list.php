@@ -47,9 +47,7 @@
         </div> <!-- /container -->
     </div> <!-- /main-inner -->
 
-<script type="text/javascript" language="javascript">
-     
-        
+    <script type="text/javascript" language="javascript">
         var dataTableOptions = {
             "bLengthChange": false,
             "bFilter": true,
@@ -57,35 +55,7 @@
             "bAutoWidth": false 
         };
 
-        var tableToolsOptions = {
-            "sSwfPath": "http://cdn.datatables.net/tabletools/2.2.3/swf/copy_csv_xls_pdf.swf",
-            "aButtons": [ {
-                    "sExtends": "copy",
-                    "sButtonText": "Copy",
-                    //Columns to export as data, exluded Action column
-                    "mColumns": [ 0, 1 ],
-                },{
-                    "sExtends":    "collection",
-                    "sButtonText": "Save as...",
-                    "aButtons":    [ {
-                            "sExtends": "xls",
-                            "oSelectorOpts": {
-                                page: 'current'
-                            },
-                            "mColumns": [ 0, 1, 2 ]
-                        }, {
-                            "sExtends": "pdf",
-                            "sButtonText": "PDF",
-                            "mColumns": [ 0, 1, 2 ]
-                        }
-                    ]
-                }
-            ]
-        };
+        var table = $('#view_studentlist').DataTable(dataTableOptions);
 
-        var table = $('#view_studentlist').DataTable( dataTableOptions );
-
-        var tt = new $.fn.dataTable.TableTools( table, tableToolsOptions );
-
-        $( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
+        $('.dataTables_filter input').attr("placeholder", " Enter keyword");
     </script>

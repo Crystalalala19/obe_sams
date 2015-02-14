@@ -42,9 +42,9 @@
                             <table id="teacher_report" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th width="10%">Semester</th>
+                                        <th width="12%">Semester</th>
                                         <th>Teacher</th>
-                                        <th width="10%">Group #</th>
+                                        <th width="12%">Group #</th>
                                         <th width="10%">Subject</th>
                                         <th width="20%">Schedule</th>
                                         <th width="10%" class="no-sort">Action</th>
@@ -111,6 +111,8 @@
         };
 
         var table = $('#teacher_report').DataTable( dataTableOptions );
+
+        $('.dataTables_filter input').attr("placeholder", " Enter keyword");
 
         $('#teacher_report tfoot th:not(:eq(5))').each( function () {
             var title = $('#teacher_report thead th').eq( $(this).index() ).text();

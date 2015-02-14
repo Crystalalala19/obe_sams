@@ -136,7 +136,7 @@
                             <i class="icon-home"></i><span>Home</span> 
                         </a> 
                     </li>
-                    <li <?php uri_match('course_list');?> id="courselist">
+                    <li id="courselist">
                         <a href="<?php echo base_url('site/course_list'); ?>" title="Class List"><i class="icon-list"></i>
                             <span>Class List</span> 
                         </a>

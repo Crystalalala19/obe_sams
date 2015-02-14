@@ -35,11 +35,12 @@
                             ?>
                             
                             <div class="pull-left">
-                                <div class="alert alert-info">
                                 <?php foreach($select_schedule as $row1): ?>
                                     <h4>
                                         <?php echo $row1['courseCode'].' ';?><?php echo '| Group '; echo $row1['group_num'].'';?>
                                         <?php 
+                                            $co_code = $row1['courseCode'];
+                                            $grp = $row1['group_num'];
                                             echo '<br> ';
                                             echo $row1['start_time'].' - ';
                                             echo $row1['end_time'].' ';
@@ -47,8 +48,7 @@
                                         ?>
                                         Semester: <?php echo $row1['semester'].' | ';?> School Year: <?php echo $row1['school_year']; ?>
                                     </h4>
-                                 <?php endforeach; ?>
-                                </div>
+                                <?php endforeach; ?>
                             </div>
                             <div class="clearfix"></div>
                             <table id="view_classlist" class="table table-striped table-bordered dataTable no-footer">
@@ -155,6 +155,7 @@
                     "sButtonText": "Save as...",
                     "aButtons":    [ {
                             "sExtends": "xls",
+                            "sTitle": "<?php echo $co_code.' Group No. '.$grp;?>",
                             "oSelectorOpts": {
                                 page: 'current'
                             },
@@ -162,6 +163,7 @@
                             "mColumns": "visible"
                         }, {
                             "sExtends": "pdf",
+                            "sTitle": "<?php echo $co_code.' Group No. '.$grp;?>",
                             "sButtonText": "PDF",
                             //Columns to export as data, exluded Action column
                             "mColumns": "visible"

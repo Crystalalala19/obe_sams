@@ -295,15 +295,15 @@ class Admin extends CI_Controller {
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('program_name', 'Program Name', 'required|trim|max_length[8]|callback_alpha_dash_space');
-        $this->form_validation->set_rules('full_name', 'Full Program Name', 'required|trim|alpha');
+        $this->form_validation->set_rules('full_name', 'Full Program Name', 'required|trim|callback_alpha_dash_space');
 
         if($this->form_validation->run() == FALSE) {
             $data['message'] = '';
         }
         else {
             $program_data = array(
-                'programName' => $this->input->post('program_name'),
-                'programFullName' => $this->input->post('full_name')
+                'programName' => strtoupper($this->input->post('program_name')),
+                'programFullName' => ucwords($this->input->post('full_name'))
             );
             $result = $this->model_admin->insert_program($program_data);
 
@@ -311,7 +311,8 @@ class Admin extends CI_Controller {
                 $message = '<strong>Error: </strong>'.  $result['db_error'];
                 $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
 
-                $data['message'] = $message; 
+                $this->session->set_flashdata('message', $message);
+                redirect(base_url('admin/programs/add'));
             }
             else {
                 $message = '<strong>Success!</strong> Program added.';
@@ -532,7 +533,7 @@ class Admin extends CI_Controller {
 
     public function upload_class() {
         $data['title'] = 'OBE SAMS Academic';
-        $data['header'] = 'Upload Classes';
+        $data['header'] = 'Assign Classes';
         $data['message'] = '';
 
         $this->load->view('admin/header', $data);

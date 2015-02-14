@@ -34,12 +34,8 @@
                                     <?php endforeach;?>
                                 </select>
                             </div>
-
-                           
                             <?php if(!empty($this->uri->segment(3))):?>
-                            <div class="info"> 
-                                <h4>Academic Year: <?php echo $academic_year.' - '.($academic_year+1);?></h4>                                   
-                            </div>
+                            <h4>Academic Year: <?php echo $academic_year.' - '.($academic_year+1);?></h4>                                   
                             <hr>
                             <div class="clearfix"></div>
                             <div class="tabbable">
@@ -159,6 +155,9 @@
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/bootstrap-select.min.js"></script>
 
     <script type="text/javascript">
+        var d = document.getElementById('courselist');
+        d.className = d.className + " active";
+
         $('#first_sem').filterable({ignoreColumns: [3]});
         $('#second_sem').filterable({ignoreColumns: [3]});
         $('#summer').filterable({ignoreColumns: [3]});

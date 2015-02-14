@@ -37,15 +37,10 @@
                                     <?php endforeach;?>
                                 </select>
                             </div>
-
-                            <hr>
                             
                             <?php if(!empty($this->uri->segment(5))):?>                            
-                            <div class="pull-left">
-                                <div class="alert alert-info">
-                                    <h4>Academic Year: <?php echo $academic_year.' - '.($academic_year+1);?></h4>
-                                </div>
-                            </div>
+                            <h4>Academic Year: <?php echo $academic_year.' - '.($academic_year+1);?></h4>                                   
+                            <hr>
                             <div class="clearfix"></div>
                             <div class="tabbable">
                                 <ul class="nav nav-tabs">

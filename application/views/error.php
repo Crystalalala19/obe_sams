@@ -51,9 +51,9 @@
                     
                     <div class="error-actions">
                         <a href="<?php echo base_url();?>" class="btn btn-large btn-primary">
-                            <i class="icon-chevron-left"></i>
+                            <i class="icon-home"></i>
                             &nbsp;
-                            Go Back                     
+                            Homepage                     
                         </a>
                     </div> <!-- /error-actions -->
                 </div> <!-- /error-container -->            
