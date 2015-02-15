@@ -55,7 +55,6 @@
         .red-req {
             position: absolute;
             color: red;
-            padding-left: 5px;
         }
         /*End Responsive*/
     </style>

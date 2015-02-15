@@ -58,7 +58,7 @@
                                 <div class="alert alert-info"><strong>Notice:</strong> No programs to list. <a href="<?php echo base_url(); ?>admin/programs/view">Click here to add.</a></div>
                             <?php else:?>
 
-                            <pre>Fields with <span class="red-req">*</span> are required.</pre>
+                            <pre>Fields with <span class="red-req">*</span> &nbsp;are required.</pre>
 
                             <?php echo form_open('admin/programs/add', $attrib); ?>
                             <div>

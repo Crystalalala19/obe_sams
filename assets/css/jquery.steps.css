@@ -204,6 +204,13 @@
     color: #8a1f11;
 }
 
+.wizard > .content > .body textarea.error
+{
+    background: rgb(251, 227, 228);
+    border: 1px solid #fbc2c4;
+    color: #8a1f11;
+}
+
 .wizard > .content > .body label
 {
     display: inline-block;
