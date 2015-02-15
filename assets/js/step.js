@@ -1,43 +1,25 @@
-$(document).ready(function() {
-    // Initializiation
-    var stepCounter = 1;
+var form = $("#step-form");
 
-    var totalStepCount = 3;
-
-    $("#step-2, #step-3").hide();
-
-    if(stepCounter === 1) {
-        $("#btnNext").prop('disabled', false);
-        $("#btnPrevious").prop('disabled', true);
+form.validate({
+    errorPlacement: function errorPlacement(error, element) {
+        element.before(error);
     }
+});
 
-    $("#btnNext").click(function(e) {
-        $("#step-" + stepCounter).hide();
-        stepCounter++;
-
-        if(stepCounter === totalStepCount) {
-            $("#btnNext").prop('disabled', true);
-        }
-
-        if(stepCounter !== 1) {
-            $("#btnPrevious").prop('disabled', false);
-        }
-
-        $("#step-" + stepCounter).show();
-    });
-
-    $("#btnPrevious").click(function(e){
-        $("#step-" + stepCounter).hide();
-        stepCounter--;
-
-        if(stepCounter === 1) {
-            $("#btnPrevious").prop('disabled', true);
-        }
-
-        if(stepCounter < totalStepCount) {
-            $("#btnNext").prop('disabled', false);
-        }
-
-        $("#step-" + stepCounter).show();
-    });
+form.children("div").steps({
+    headerTag: "h2",
+    bodyTag: "section",
+    autoFocus: true,
+    onStepChanging: function(event, currentIndex, newIndex) {
+        form.validate().settings.ignore = ":disabled,:hidden";
+        return form.valid();
+    },
+    onFinishing: function(event, currentIndex) {
+        form.validate().settings.ignore = ":disabled";
+        return form.valid();
+    },
+    onFinished: function(event, currentIndex) {
+        form.submit();
+        // alert("Submitted!");
+    }
 });

@@ -274,7 +274,7 @@ class Admin extends CI_Controller {
             else{
                 $this->db->trans_complete();
 
-                $message = '<strong>Success!</strong> Program added.';
+                $message = '<strong>Success!</strong> Curriculum added.';
                 $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
 
                 $this->session->set_flashdata('message', $message);
