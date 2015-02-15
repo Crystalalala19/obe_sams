@@ -74,15 +74,21 @@
                             <table class="table table-striped table-bordered" id="filterme">
                                 <thead>
                                     <tr>
-                                        <th>Student ID <i class="icon-filter"></th>
-                                        <th>Name <i class="icon-filter"></th>
+                                        <th width="10%">Student ID <i class="icon-filter"></th>
+                                        <th width="15%">Name <i class="icon-filter"></th>
+                                        <th width="10%">Subject <i class="icon-filter"></th>
+                                        <th width="15%">Teacher <i class="icon-filter"></th>
+                                        <th width="10%">PO <i class="icon-filter"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach($result as $key => $row): ?>
                                         <tr>
                                             <td><?php echo $row['studentID'];?></td>
-                                            <td><?php echo $row['fname'].' '.$row['lname'];?></td>
+                                            <td><?php echo $row['sfname'].' '.$row['slname'];?></td>
+                                            <td><?php echo $row['courseCode'].' Grp. '.$row['group_num'];?></td>
+                                            <td><?php echo $row['tfname'].' '.$row['tlname'];?></td>
+                                            <td><?php echo $row['score'];?></td>
                                         </tr>
                                     <?php endforeach;?>
                                 </tbody>

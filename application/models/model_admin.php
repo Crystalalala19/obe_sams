@@ -426,13 +426,17 @@ class Model_admin extends CI_Model {
     }
 
     function generate_studentReport($program, $year_level, $semester, $academic_year, $po_num) {
-        $custom = "SELECT * FROM program  
+        $custom = "SELECT *, 
+                    teacher.fname as tfname, teacher.lname as tlname, teacher.mname as tmname,
+                    student.fname as sfname, student.lname as slname, student.mname as smname 
+                    FROM program  
                     INNER JOIN program_year ON program.ID = program_year.programID
                     INNER JOIN po ON program_year.ID = po.pyID
                     INNER JOIN po_course ON po.ID = po_course.poID 
                     INNER JOIN student_course ON po_course.poID = student_course.poID
                     INNER JOIN student ON student_course.studentID = student.student_id
                     INNER JOIN teacher_class ON student_course.classID = teacher_class.ID
+                    INNER JOIN teacher ON teacher_class.teacherID = teacher.teacher_id
                     WHERE 1
         ";
 

@@ -222,7 +222,6 @@ class Admin extends CI_Controller {
             }
 
             $exploded = array();
-            $course_equi_array = array();
 
             foreach($course_equi as $key => $val) {
                 $exploded[$key] = explode(", ", $val);                        
@@ -259,10 +258,9 @@ class Admin extends CI_Controller {
                     $course_equi_array[$key2]['CourseEquivalent'] = $value;
                     $course_equi_array[$key2]['courseID'] = $course_id[$key1];
                 }
+                $equi_result = $this->model_admin->insert_equivalents($course_equi_array);
             }
             
-            $equi_result = $this->model_admin->insert_equivalents($course_equi_array);
-
             if($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();
 
