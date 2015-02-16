@@ -77,6 +77,7 @@ class Admin extends CI_Controller {
             'pyID' => $year_id
         );
 
+        $data['program_info'] = $this->model_admin->get_programFull($program_data);
         $data['academic_year'] = $year;
         $data['course_list'] = $this->model_admin->get_courses($year_data);
         $data['po_list'] = $this->model_admin->get_pos($year_data);
@@ -369,8 +370,7 @@ class Admin extends CI_Controller {
             $data['message'] = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
         }
         elseif($this->form_validation->run() == FALSE){
-            $data['program'] = $this->model_admin->get_program($program_data);
-            $data['program_list'] = $this->model_admin->check_rows('program');
+            $data['program'] = $program;
 
             $year_data2 = array(
                 'pyID' => $year_id

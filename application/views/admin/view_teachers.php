@@ -39,7 +39,7 @@
                                     <tr>
                                         <th width="20%">ID #</th>
                                         <th>Name</th>
-                                        <th width="10%" class="no-sort">Action</th>
+                                        <th width="12%" class="no-sort">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -49,8 +49,8 @@
                                             <td><?php echo $row['fname'].' '. $row['lname'];?></td>
                                             <td>
                                                 <div class="btn-group inline pull-left">
-                                                    <a type="button" title="View Classes" class="btn btn-warning btn-small btn-responsive" href="<?php echo base_url();?>admin/teachers/classes/<?php echo $row['teacher_id'];?>"><i class="icon-book"></i></a>
-                                                    <a type="button" title="Edit Teacher" class="btn btn-primary btn-small btn-responsive" href="<?php echo base_url();?>admin/teachers/edit/<?php echo $row['ID'];?>"><i class="icon-edit"></i></a>
+                                                    <a type="button" title="View Classes" class="btn btn-warning btn-small btn-responsive" href="<?php echo base_url();?>admin/teachers/classes/<?php echo $row['teacher_id'];?>">View Class</a>
+                                                    <a type="button" title="Edit Teacher" class="btn btn-primary btn-small btn-responsive" href="<?php echo base_url();?>admin/teachers/edit/<?php echo $row['ID'];?>">Edit</a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -139,6 +139,7 @@
                     "sButtonText": "Save as...",
                     "aButtons":    [ {
                             "sExtends": "xls",
+                            "sTitle": "Teacher List",
                             "oSelectorOpts": {
                                 page: 'current'
                             },
@@ -146,6 +147,7 @@
                             "mColumns": [ 0, 1]
                         }, {
                             "sExtends": "pdf",
+                            "sTitle": "Teacher List",
                             "sButtonText": "PDF",
                             //Columns to export as data, exluded Action column
                             "mColumns": [ 0, 1]

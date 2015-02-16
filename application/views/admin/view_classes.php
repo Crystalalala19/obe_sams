@@ -68,9 +68,7 @@
                                                         <td><?php echo $row['courseCode']; ?></td>
                                                         <td><?php echo $row['start_time'].' - '.$row['end_time'].' '.$row['days']; ?></td>
                                                         <td>
-                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>admin/teachers/scorecard/<?php echo $teacher_id.'/'.$academic_year.'/'.$row['ID'];?>" title="View Scorecard">
-                                                                <i class="icon-eye-open"></i> View Class
-                                                            </a>
+                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>admin/teachers/scorecard/<?php echo $teacher_id.'/'.$academic_year.'/'.$row['ID'];?>" title="View Class">View Class</a>
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>
@@ -98,9 +96,7 @@
                                                         <td><?php echo $row['courseCode']; ?></td>
                                                         <td><?php echo $row['start_time'].' - '.$row['end_time'].' '.$row['days']; ?></td>
                                                         <td>
-                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>admin/teachers/scorecard/<?php echo $teacher_id.'/'.$academic_year.'/'.$row['ID'];?>" title="View Scorecard">
-                                                                <i class="icon-eye-open"></i> View Class
-                                                            </a>
+                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>admin/teachers/scorecard/<?php echo $teacher_id.'/'.$academic_year.'/'.$row['ID'];?>" title="View Class">View Class</a>
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>
@@ -128,9 +124,7 @@
                                                         <td><?php echo $row['courseCode']; ?></td>
                                                         <td><?php echo $row['start_time'].' - '.$row['end_time'].' '.$row['days']; ?></td>
                                                         <td>
-                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>admin/teachers/scorecard/<?php echo $teacher_id.'/'.$academic_year.'/'.$row['ID'];?>" title="View Scorecard">
-                                                                <i class="icon-eye-open"></i> View Class
-                                                            </a>
+                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>admin/teachers/scorecard/<?php echo $teacher_id.'/'.$academic_year.'/'.$row['ID'];?>" title="View Class">View Class</a>
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>
