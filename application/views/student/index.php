@@ -30,7 +30,7 @@
                                 </div>
                                     Student ID: <?php echo $row['student_id'];?><br><?php endforeach; ?>
                                     <?php foreach($student_year as $row1): ?>
-                                        Program: <?php echo $row1['programName'];?><br>
+                                        Program: <?php echo $row1['programName'].' - '.$row1['year_level'];?><br>
                                         Effective Year: <?php echo $row1['effective_year'].' - '.($row1['effective_year']+1);?><br>
                                     <?php endforeach; ?>     
                                 </div>

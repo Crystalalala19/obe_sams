@@ -1034,7 +1034,6 @@ class Admin extends CI_Controller {
         $data['title'] = 'OBE SAMS Academic';
 
         $data['activity_log'] = $this->model_admin->activity_log();
-        //$data['show_courses'] = $this->model_admin->show_courses();
         $data['teacher_log'] = $this->model_admin->teacher_log();
 
         $this->load->view('admin/header', $data);

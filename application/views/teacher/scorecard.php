@@ -31,6 +31,8 @@
                                 <?php $stud_id = $row1->student_id; $stud_name = $row1->lname.', '.$row1->fname;?> 
                                 <?php echo '[ '.$row1->student_id.' ]  ';?>
                                 <?php echo $row1->lname.', '.$row1->fname.' '.$row1->mname; ?>
+                                <br>
+                                <?php echo 'Year Level: '.$row1->year_level;?>
                                 <?php endforeach; ?>
                             </h4> 
                             <hr>
@@ -55,7 +57,7 @@
                                     <?php endforeach; ?>
                                 </tbody>
                                 <tfoot>
-                                    <tr>
+                                    <tr bgcolor="#FFF380">
                                         <td><center>Average</center></td>
                                         <?php for($x = 1; $x <= $po_count; $x++):?>
                                             <td></td>

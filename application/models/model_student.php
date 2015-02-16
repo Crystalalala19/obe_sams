@@ -117,7 +117,7 @@ class Model_student extends CI_Model {
     }
 
     function student_year($student_id) {
-        $query = $this->db->query("SELECT program.programFullName, program_year.effective_year, program.programName, program_year.programID FROM student_course 
+        $query = $this->db->query("SELECT program.programFullName, program_year.effective_year, program.programName, program_year.programID, MAX(student_course.year_level) as year_level FROM student_course 
                                             INNER JOIN po_course ON student_course.courseID = po_course.courseID
                                             INNER JOIN course ON po_course.courseID = course.ID
                                             INNER JOIN program_year ON course.pyID = program_year.ID
