@@ -9,10 +9,15 @@ form.validate({
 form.children("div").steps({
     headerTag: "h2",
     bodyTag: "section",
+    enableCancelButton: true,
     autoFocus: true,
+    labels: {finish: "Submit"},
     onStepChanging: function(event, currentIndex, newIndex) {
         form.validate().settings.ignore = ":disabled,:hidden";
         return form.valid();
+    },
+    onCanceled: function (event) { 
+        history.go(-1);
     },
     onFinishing: function(event, currentIndex) {
         form.validate().settings.ignore = ":disabled";

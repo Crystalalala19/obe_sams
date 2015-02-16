@@ -19,7 +19,7 @@
                                         <th>Student ID</th>
                                         <th>Name</th>
                                         <th>Program</th>
-                                        <th>Action</th>
+                                        <th class="no-sort" width="10%">Action</th>
                                     </tr>
                                 </thead>
                                 
@@ -31,9 +31,7 @@
                                         <td><center><?php echo $row->programName;?> - <?php echo $row->effective_year;?></center></td>
                                         <td>
                                             <center>
-                                                <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row->studentID;?>" title="View Scorecard">
-                                                <i class="icon-eye-open"></i> View Scorecard
-                                                </a>
+                                                <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row->studentID;?>" title="View Scorecard">View Scorecard</a>
                                             </center>
                                         </td>
                                     </tr>
@@ -49,6 +47,10 @@
 
     <script type="text/javascript" language="javascript">
         var dataTableOptions = {
+            "columnDefs": [
+                { targets: 'no-sort', orderable: false }
+            ],
+
             "bLengthChange": false,
             "bFilter": true,
             "bInfo": false,

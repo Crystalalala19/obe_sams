@@ -59,7 +59,7 @@
                                         <?php for($x = 1; $x <= $po_count; $x++):?>
                                             <th>PO <?php echo $x;?></i></th>
                                         <?php endfor; $row_num=1;?>
-                                        <th width="5%" class="no-sort text-center">Scorecard</th>
+                                        <th width="10%" class="no-sort">Scorecard</th>
                                     </tr>
                                 </thead>
                                 
@@ -72,9 +72,7 @@
                                             <td><?php echo $row1;?></td>
                                         <?php endforeach; $row_num++; ?>   
                                         <td>
-                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>admin/student_scorecard/<?php echo $row['student_id'];?>" title="View Student Scorecard">
-                                                <i class="icon-eye-open"></i> View
-                                            </a>
+                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>admin/student_scorecard/<?php echo $row['student_id'];?>" title="View Student Scorecard">View</a>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>   

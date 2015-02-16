@@ -171,12 +171,11 @@ class Model_admin extends CI_Model {
             return FALSE;
     }
 
-    function get_program($data) {
+    function get_programFull($data) {
         $query = $this->db->get_where('program', $data);
 
         if($query->num_rows() > 0){
-            $row = $query->row_array();
-            return $row['programName'];
+            return $query->row_array();
         }
         else
             return FALSE;
@@ -430,7 +429,6 @@ class Model_admin extends CI_Model {
                                         teacher_class.group_num, teacher_class.courseCode, teacher_class.start_time,
                                         teacher_class.end_time, teacher_class.days, teacher_class.ID,
                                         teacher.teacher_id, teacher_class.school_year
-                                        -- teacher.teacher_id, teacher_class.school_year
                                         FROM student_course
                                         INNER JOIN teacher_class ON student_course.classID = teacher_class.ID
                                         INNER JOIN teacher ON teacher_class.teacherID = teacher.teacher_id

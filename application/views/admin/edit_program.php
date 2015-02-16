@@ -26,9 +26,7 @@
                                 <div class="control-group">
                                     <label for="program_inp">Program:</label>
                                     <select class="form-control input-sm" id="program_inp" name="program" readonly>
-                                        <?php foreach($program_list as $row):?>
-                                        <option value="<?php echo $row['programName'];?>" <?php if($program == $row['programName']) echo 'selected="selected"'; ?>><?php echo rawurldecode($row['programName']);?></option>
-                                        <?php endforeach;?>
+                                        <option value="<?php echo $program;?>" selected="selected"><?php echo $program;?></option>
                                     </select>
                                 </div>
 

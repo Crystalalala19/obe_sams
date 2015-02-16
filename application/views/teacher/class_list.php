@@ -18,11 +18,7 @@
                         </div> <!-- /widget-header -->
 
                         <div class="widget-content">
-                            <div class="pull-left">
-                                <a onclick="javascript:window.history.back();">
-                                    <button type="button" class="btn btn-info"><i class="icon-angle-left"></i> Go Back</button>
-                                </a>
-                            </div>
+                            <button onclick="javascript:window.history.back();" type="button" class="btn btn-info"><i class="icon-angle-left"></i> Go Back</button>
                             <div class="clearfix"></div><br>
 
                             <?php
@@ -75,7 +71,7 @@
                                         <?php for($x = 1; $x <= $po_count; $x++):?>
                                             <th>PO <?php echo $x;?></i></th>
                                         <?php endfor; ?>
-                                        <th width="5%" class="no-sort text-center">Scorecard</th>
+                                        <th width="10%" class="no-sort">Scorecard</th>
                                     </tr>
                                 </thead>
                                 
@@ -88,9 +84,7 @@
                                             <td><?php echo $row1;?></td>
                                         <?php endforeach; ?>   
                                         <td>
-                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row['student_id'];?>" title="View Scorecard">
-                                                <i class="icon-eye-open"></i> View
-                                            </a>
+                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row['student_id'];?>" title="View Scorecard">View Scorecard</a>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>   

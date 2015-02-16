@@ -9,12 +9,9 @@
                         </div> <!-- /widget-header -->
 
                         <div class="widget-content">
-                            <div class="pull-left">
-                                <a href="javascript:window.history.go(-1);">
-                                    <button type="button" class="btn btn-info"><i class="icon-angle-left"></i> Go Back</button>
-                                </a>
-                            </div>
+                            <button onclick="javascript:window.history.back();" type="button" class="btn btn-info"><i class="icon-angle-left"></i> Go Back</button>
                             <div class="clearfix"></div><br>
+
                             <?php 
                                 $po_count = count($get_po);
                                 $attributes = array('class' => 'col-md-4');
