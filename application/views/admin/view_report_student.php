@@ -24,6 +24,9 @@
                             ?>
 
                             <?php echo form_open('admin/report_student');?>
+                                <button onclick="javascript:window.history.back();" type="button" class="btn btn-info"><i class="icon-angle-left"></i> Go Back</button>
+                                <div class="clearfix"></div><br>
+
                                 <label class="control-label" for="program">Program:</label>
                                 <select class="span2" id="program" name="program">
                                     <option value="">Program:</option>

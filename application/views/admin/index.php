@@ -25,12 +25,12 @@
                                     <span class="shortcut-label">Teachers</span> 
                                 </a>
 
-                                <a href="javascript:;" class="shortcut"> 
+                                <a href="<?php echo base_url('admin/reports/teacher'); ?>" class="shortcut"> 
                                     <i class="shortcut-icon icon-user-md"></i>
                                     <span class="shortcut-label">Teacher Reports</span> 
                                 </a>
 
-                                <a href="javascript:;" class="shortcut"> 
+                                <a href="<?php echo base_url('admin/reports/student'); ?>" class="shortcut"> 
                                     <i class="shortcut-icon icon-user"></i>
                                     <span class="shortcut-label">Student Reports</span> 
                                 </a>

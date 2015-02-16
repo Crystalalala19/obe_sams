@@ -29,6 +29,9 @@
                             <h3><?php echo $header;?></h3>
                         </div> <!-- /widget-header -->
                         <div class="widget-content">
+                            <button onclick="javascript:window.history.back();" type="button" class="btn btn-info"><i class="icon-angle-left"></i> Go Back</button>
+                            <div class="clearfix"></div><br>
+
                             <label for="selector">Select Academic Year:</label>
                             <select name="academic_year" id="selector" class="selectpicker show-tick" title="Select Academic Year" data-live-search="true" multiple data-max-options="1" data-size="auto">
                                 <?php foreach($year_classes as $row):?>
