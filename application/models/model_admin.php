@@ -118,6 +118,22 @@ class Model_admin extends CI_Model {
         return $this->check_query();
     }
 
+    function update_program($data, $year_id, $po_id) {
+        $this->db->where('ID', $po_id);
+        $this->db->where('pyID', $year_id);
+        $this->db->update('po', $data);
+
+        return $this->check_query();
+    }
+
+    function update_courses($data, $year_id, $co_id) {
+        $this->db->where('ID', $co_id);
+        $this->db->where('pyID', $year_id);
+        $this->db->update('course', $data);
+
+        return $this->check_query();
+    }
+
     function delete_program($data) {
         $query = $this->db->delete('program', $data);
 
@@ -151,9 +167,8 @@ class Model_admin extends CI_Model {
             $row = $query->row_array();
             return $row['effective_year'];
         }
-        else {
+        else 
             return FALSE;
-        }
     }
 
     function get_program($data) {
@@ -163,9 +178,8 @@ class Model_admin extends CI_Model {
             $row = $query->row_array();
             return $row['programName'];
         }
-        else {
+        else
             return FALSE;
-        }
     }
 
     function get_programYearID($program_id, $year) {
@@ -175,9 +189,8 @@ class Model_admin extends CI_Model {
             $row = $query->row_array();
             return $row['ID'];
         }
-        else {
+        else 
             return FALSE;
-        }
     }
 
     function get_programID($data) {
@@ -187,6 +200,8 @@ class Model_admin extends CI_Model {
             $row = $query->row_array();
             return $row['ID'];
         }
+        else
+            return false;
     }
 
     function get_courses($data) {
@@ -292,7 +307,7 @@ class Model_admin extends CI_Model {
     }
 
     function delete_teacher($data) {
-        $query = $this->db->delete('teacher', $data);
+        $this->db->delete('teacher', $data);
 
         return $this->check_query();
     }

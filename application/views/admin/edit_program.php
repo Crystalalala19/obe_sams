@@ -25,7 +25,7 @@
                         ?>
                                 <div class="control-group">
                                     <label for="program_inp">Program:</label>
-                                    <select class="form-control input-sm" id="program_inp" name="program" disabled>
+                                    <select class="form-control input-sm" id="program_inp" name="program" readonly>
                                         <?php foreach($program_list as $row):?>
                                         <option value="<?php echo $row['programName'];?>" <?php if($program == $row['programName']) echo 'selected="selected"'; ?>><?php echo rawurldecode($row['programName']);?></option>
                                         <?php endforeach;?>
@@ -34,7 +34,7 @@
 
                                 <div class="control-group">
                                     <label for="effective_year">Effective Year:</label>
-                                    <select name="year" disabled>
+                                    <select name="effective_year" readonly>
                                         <option value="<?php echo $year;?>" selected="selected"><?php echo $year;?></option>
                                     </select>
                                 </div>
@@ -51,6 +51,7 @@
                                         <tbody>
                                             <?php foreach($program_data as $row):?>
                                             <tr>
+                                                <input type="hidden" name="po_id[]" value="<?php echo $row['ID'];?>">
                                                 <td><input type="text" class="form-control input-sm" name="po_code[]" value="<?php echo $row['poCode'];?>"></td>
                                                 <td><input type="text" class="form-control input-sm" name="po_attrib[]" value="<?php echo $row['attribute'];?>"></td>
                                                 <td><textarea class="form-control span6" name="po_desc[]" rows="5"><?php echo $row['description'];?></textarea></td>
@@ -71,6 +72,7 @@
                                         <tbody>
                                             <?php foreach($course_list as $row):?>
                                             <tr>
+                                                <input type="hidden" class="form-control input-sm" name="co_id[]" value="<?php echo $row['ID'];?>">
                                                 <td><input type="text" class="form-control input-sm" name="co_code[]" value="<?php echo $row['CourseCode'];?>"></td>
                                                 <td><textarea class="form-control input-sm span6" name="co_desc[]" rows="3"><?php echo $row['CourseDesc'];?></textarea></td>
                                             </tr>

@@ -352,6 +352,14 @@ class Admin extends CI_Controller {
             'effective_year' => $year
         );
 
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules("po_code[]", "PO Code", "required|trim");
+        $this->form_validation->set_rules("po_attrib[]", "PO Attribute", "required|trim");
+        $this->form_validation->set_rules("po_desc[]", "PO Description", "required|trim");
+        $this->form_validation->set_rules("co_code[]", "Course Code", "required|trim");
+        $this->form_validation->set_rules("co_desc[]", "Course Description", "required|trim");
+
         if(!$this->model_admin->get_programYear($year_data)) {
             $message = '<strong>Program Year</strong> does not exist.';
             $data['message'] = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
@@ -360,7 +368,7 @@ class Admin extends CI_Controller {
             $message = '<strong>Program</strong> does not exist.';
             $data['message'] = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
         }
-        else {
+        elseif($this->form_validation->run() == FALSE){
             $data['program'] = $this->model_admin->get_program($program_data);
             $data['program_list'] = $this->model_admin->check_rows('program');
 
@@ -372,6 +380,65 @@ class Admin extends CI_Controller {
             $data['program_data'] = $this->model_admin->get_curriculum($program, $year);
 
             $data['year'] = $this->model_admin->get_programYear($year_data);
+        }
+        else {
+            $po_id = $this->input->post('po_id');
+            $po_rows = $this->input->post('po_code');
+            $attribs = $this->input->post('po_attrib');
+            $descs = $this->input->post('po_desc');
+
+            $course_rows = $this->input->post('co_code');
+            $course_id = $this->input->post('co_id');
+            $course_desc = $this->input->post('co_desc');
+
+            $program = array(
+                'programName' => rawurldecode($this->input->post('program'))
+            );
+
+            $year = $this->input->post('effective_year');
+
+            $progam_id = $this->model_admin->get_programID($program);
+            $year_id = $this->model_admin->get_programYearID($program_id, $year);
+
+            $this->db->trans_start();
+
+            foreach ($po_rows as $key => $value) {
+                $po_update = array(
+                    'attribute' => $attribs[$key],
+                    'poCode' => $value,
+                    'description' => $descs[$key]
+                );
+
+                $result = $this->model_admin->update_program($po_update, $year_id, $po_id[$key]);
+            }
+
+            foreach ($course_rows as $key => $value) {
+                $co_update = array(
+                    'CourseCode' => $value,
+                    'CourseDesc' => $course_desc[$key]
+                );
+
+                $result = $this->model_admin->update_courses($co_update, $year_id, $course_id[$key]);
+            }
+
+            if($this->db->trans_status() === FALSE) {
+                $this->db->trans_rollback();
+
+                $message = '<strong>Error in updating Curriculum!</strong>';
+                $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
+
+                $data['message'] = $message;
+            }
+            else{
+                $this->db->trans_complete();
+
+                $message = '<strong>Success!</strong> Curriculum updated.';
+                $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
+
+                $this->session->set_flashdata('message', $message);
+
+                redirect(current_url());
+            }
         }
 
         $this->load->view('admin/header', $data);
@@ -501,7 +568,7 @@ class Admin extends CI_Controller {
         if($this->form_validation->run() == FALSE) {
             $id = $this->uri->segment(4);
             if(!$this->model_admin->check_rowID('teacher', $id)) {
-                $message = 'ID number does not exists.';
+                $message = 'Teacher ID does not exists.';
                 $data['message'] = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
             }
             else {
@@ -653,12 +720,12 @@ class Admin extends CI_Controller {
         }
         
         if($check_teacher == FALSE) {
-            $message = '<strong>ID</strong> does not exist!';
+            $message = '<strong>Teacher ID</strong> does not exist!';
             $message = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
             $data['message'] = $message;
         }
         elseif($check_class == FALSE) {
-            $message = '<strong>Teacher</strong> has no classes.';
+            $message = '<strong>Teacher</strong> has not been assigned with classes.';
             $message = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
             $data['message'] = $message;
         }
