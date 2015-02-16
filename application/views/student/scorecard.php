@@ -52,7 +52,7 @@
                                 <?php endforeach; ?>
                             </tbody>
                             <tfoot>
-                                <tr>
+                                <tr bgcolor="#FFF380">
                                     <td><center>Average</center></td>
                                     <?php for($x = 1; $x <= $po_count; $x++):?>
                                     <td></td>

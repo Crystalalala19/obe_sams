@@ -487,6 +487,54 @@ class Model_admin extends CI_Model {
         else
             return false;
     }
+
+    function get_scoreEY($student_id) {
+        $query = $this->db->query("SELECT * FROM student_course
+                                            INNER JOIN po_course ON student_course.courseID = po_course.courseID
+                                            INNER JOIN course ON po_course.courseID = course.ID
+                                            INNER JOIN program_year ON course.pyID = program_year.ID
+                                            INNER JOIN program ON program_year.programID = program.ID
+                                            WHERE student_course.studentID = '".$student_id."' 
+                                            GROUP BY student_course.studentID ");
+        
+        return $query->result_array();
+    }
+
+    function get_studentName($student_id) {
+        $query = $this->db->query("SELECT student.student_id, student.fname, student.mname, student.lname, 
+                                        MAX(student_course.year_level) as year_level 
+                                        FROM student_course 
+                                        INNER JOIN student ON student_course.studentID = student.student_id
+                                        WHERE student.student_id = '".$student_id."' 
+                                             ");
+        return $query->result();
+    }
+
+    function get_class($student_id) {
+        $query = $this->db->query("SELECT DISTINCT semester, school_year FROM student_course 
+                                    INNER JOIN teacher_class ON student_course.classID = teacher_class.ID
+                                    WHERE studentID = '".$student_id."' ");
+        return $query->result();
+    }
+
+    function select_classSC($student_id) {
+        $query = $this->db->query("SELECT * FROM student_course 
+                                            INNER JOIN teacher_class ON student_course.classID = teacher_class.ID
+                                            WHERE studentID = '".$student_id."' 
+                                            GROUP BY classID");
+
+        return $query->result_array();
+    }
+
+    function get_poGeneral($student_id, $classID) { 
+        $query = $this->db->query("SELECT * FROM student_course 
+                                            INNER JOIN po_course ON student_course.poID = po_course.poID
+                                            WHERE student_course.studentID = '".$student_id."' AND student_course.classID = '".$classID."' 
+                                            GROUP BY po_course.poID");
+        
+        return $query->result_array();
+    }
+
     // END TEACHER
 }
 ?>

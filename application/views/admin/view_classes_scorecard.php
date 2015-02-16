@@ -72,7 +72,7 @@
                                             <td><?php echo $row1;?></td>
                                         <?php endforeach; $row_num++; ?>   
                                         <td>
-                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row['student_id'];?>" title="View Scorecard">
+                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>admin/student_scorecard/<?php echo $row['student_id'];?>" title="View Student Scorecard">
                                                 <i class="icon-eye-open"></i> View
                                             </a>
                                         </td>
@@ -81,7 +81,7 @@
                                 </tbody>
 
                                 <tfoot>
-                                    <tr>
+                                    <tr bgcolor="#FFF380">
                                         <td colspan="2"><center>Average</center></td>
                                         <?php for($x = 1; $x <= $po_count; $x++):?>
                                             <td></td>

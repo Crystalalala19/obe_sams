@@ -377,6 +377,10 @@ class Site extends CI_Controller {
     }
 
     public function account() {
+         if(!$this->session->userdata('is_logged_in')){
+            redirect('site');
+        }
+        
         $this->load->library('encrypt');
         $this->load->library('form_validation');
 

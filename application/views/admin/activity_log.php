@@ -74,4 +74,7 @@
         </div> <!-- /container -->
     </div> <!-- /main-inner -->
 
-  
+   <script type="text/javascript" language="javascript">
+        var d = document.getElementById("activity_log");
+        d.className = d.className + " active";
+    </script>

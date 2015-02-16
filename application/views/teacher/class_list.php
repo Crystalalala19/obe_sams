@@ -58,8 +58,9 @@
                                 </div>
 
                                 <div class="pull-right">
-                                    <h4><i class="icon-download-alt icon-2x"></i> Download Template:</h4>
-                                    <a href="<?php echo base_url('site/download/class');?>"><img src="<?php echo base_url('assets/img/excel.png');?>"></a>
+                                    <h4>Download Template:
+                                    <a href="<?php echo base_url('site/download/class');?>"><i class="icon-download-alt icon-2x"></i></a>
+                                    </h4>
                                 </div>
 
                             </div>   

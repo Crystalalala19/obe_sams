@@ -1039,4 +1039,40 @@ class Admin extends CI_Controller {
         $this->load->view('admin/header', $data);
         $this->load->view('admin/activity_log', $data);
     } 
+
+    public function student_scorecard() {
+        $data['header'] = 'Student Scorecard';
+        $data['title'] = 'OBE SAMS Academic';
+
+        $student_id = $this->uri->segment(3);
+
+        $data['get_studentName'] = $this->model_admin->get_studentName($student_id);
+        $data['get_scoreEY'] = $this->model_admin->get_scoreEY($student_id);
+        $data['get_class'] = $this->model_admin->get_class($student_id);
+        
+        $data['class_list'] = $this->model_admin->select_classSC($student_id);
+
+        $class_list = $data['class_list'];
+
+        $student_class = $data['class_list'];
+
+        foreach($data['class_list'] as $key => $val) {
+            $data['get_po'] = $this->model_admin->get_poGeneral($student_id, $class_list[$key]['ID']);
+            $data['class_list'][$key]['score'] = $this->model_admin->get_studentPoGrade($val['studentID'], $student_class[$key]['ID']);
+            $data['class_list'][$key]['poID'] = $this->model_admin->get_studentPoID($val['studentID'], $student_class[$key]['ID']);
+            
+            $i = 0;
+            foreach($data['class_list'][$key]['score'] as $key1 => $val1) {
+                if($val1['score'] == "0") {
+                    $data['class_list'][$key]['score'][$key1]['score'] = "0";
+                }
+            }
+            $i++;
+        }
+
+
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/view_student_scorecard', $data);
+        $this->load->view('admin/footer');
+    }
 }
