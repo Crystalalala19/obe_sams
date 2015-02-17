@@ -2372,7 +2372,7 @@ output {
           transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 .form-control:focus {
-  border-color: #237923;
+  border-color: #00904B;
   outline: 0;
   -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
           box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
@@ -2848,9 +2848,9 @@ fieldset[disabled] .btn-default.active {
   background-color: #333;
 }
 .btn-primary {
-  color: #237923;
-  background-color: #f0bc1a;
-  border-color: #f0bc1a;
+  color: #00904B;
+  background-color: #FEEA65;
+  border-color: #FEEA65;
 }
 .btn-primary:hover,
 .btn-primary:focus,
@@ -2858,9 +2858,9 @@ fieldset[disabled] .btn-default.active {
 .btn-primary:active,
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
-  color: #237923;
-  background-color: #f0bc1a;
-  border-color: #f0bc1a;
+  color: #00904B;
+  background-color: #FEEA65;
+  border-color: #FEEA65;
 }
 .btn-primary:active,
 .btn-primary.active,
