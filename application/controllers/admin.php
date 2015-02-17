@@ -379,6 +379,12 @@ class Admin extends CI_Controller {
             $data['course_list'] = $this->model_admin->get_courses($year_data2);
             $data['program_data'] = $this->model_admin->get_curriculum($program, $year);
 
+            foreach($data['course_list'] as $key => $value) {
+                $data['course_list'][$key]['equivalent'] = $this->model_admin->get_equivalents($value['ID']);
+            }
+
+            // print_r($data['course_list']);die();
+
             $data['year'] = $this->model_admin->get_programYear($year_data);
         }
         else {

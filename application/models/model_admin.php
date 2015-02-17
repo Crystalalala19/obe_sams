@@ -265,6 +265,11 @@ class Model_admin extends CI_Model {
         return $query->result_array();
     }
 
+    function get_equivalents($course_id) {
+        $query = $this->db->get_where('equivalent', array('courseID' => $course_id));
+
+        return $query->result_array();
+    }
     // END PROGRAM
 
     // STUDENT
@@ -284,7 +289,7 @@ class Model_admin extends CI_Model {
 
     // TEACHER
      function get_teachers() {
-        $query = $this->db->get_where('teacher');
+        $query = $this->db->get('teacher');
         if($query->num_rows() > 0)
             return $query->result_array();
         else 

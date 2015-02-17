@@ -106,8 +106,8 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <button type="button" class="btn btn-default btn-xs" id="btnAddRow" onclick="addRow()">Add Row</button>
-                                    <button type="button" class="btn btn-default btn-xs" id="btnRemoveRow" onclick="removeRow()">Remove Row</button>
+                                    <button type="button" class="btn btn-default btn-xs" onclick="addRow()">Add Row</button>
+                                    <button type="button" class="btn btn-default btn-xs" onclick="removeRow()">Remove Row</button>
                                 </section>
 
                                 <h2>Courses</h2>
@@ -130,8 +130,8 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <button type="button" class="btn btn-default btn-xs" id="btnAddRow" onclick="addRow2()">Add Row</button>
-                                    <button type="button" class="btn btn-default btn-xs" id="btnRemoveRow" onclick="removeRow2()">Remove Row</button>
+                                    <button type="button" class="btn btn-default btn-xs" onclick="addRow2()">Add Row</button>
+                                    <button type="button" class="btn btn-default btn-xs" onclick="removeRow2()">Remove Row</button>
                                 </section>
                             </div>
                             </form>
