@@ -406,26 +406,37 @@ class Admin extends CI_Controller {
             $progam_id = $this->model_admin->get_programID($program);
             $year_id = $this->model_admin->get_programYearID($program_id, $year);
 
+
+            $po_data = array();
+            $course_data = array();
+
             $this->db->trans_start();
 
             foreach ($po_rows as $key => $value) {
                 $po_update = array(
+                    'ID' => $po_id[$key],
                     'attribute' => $attribs[$key],
                     'poCode' => $value,
-                    'description' => $descs[$key]
+                    'description' => $descs[$key],
+                    'pyID' => $year_id
                 );
 
-                $result = $this->model_admin->update_program($po_update, $year_id, $po_id[$key]);
+                $po_data[] = $po_update;
             }
 
             foreach ($course_rows as $key => $value) {
                 $co_update = array(
+                    'ID' => $course_id[$key],
                     'CourseCode' => $value,
-                    'CourseDesc' => $course_desc[$key]
+                    'CourseDesc' => $course_desc[$key],
+                    'pyID' => $year_id
                 );
 
-                $result = $this->model_admin->update_courses($co_update, $year_id, $course_id[$key]);
+                $course_data[] = $co_update;
             }
+
+            $this->model_admin->update_po($po_data);
+            $this->model_admin->update_courses($course_data);
 
             if($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();

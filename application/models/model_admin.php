@@ -118,18 +118,14 @@ class Model_admin extends CI_Model {
         return $this->check_query();
     }
 
-    function update_program($data, $year_id, $po_id) {
-        $this->db->where('ID', $po_id);
-        $this->db->where('pyID', $year_id);
-        $this->db->update('po', $data);
+    function update_po($data) {
+        $query = $this->db->insert_on_duplicate_update_batch('po', $data);
 
         return $this->check_query();
     }
 
-    function update_courses($data, $year_id, $co_id) {
-        $this->db->where('ID', $co_id);
-        $this->db->where('pyID', $year_id);
-        $this->db->update('course', $data);
+    function update_courses($data) {
+        $query = $this->db->insert_on_duplicate_update_batch('course', $data);
 
         return $this->check_query();
     }
@@ -236,7 +232,7 @@ class Model_admin extends CI_Model {
     }
 
     function update_checks($data) {
-        $query = $this->db->insert_on_duplicate_update_batch('po_course', $data);
+        $this->db->insert_on_duplicate_update_batch('po_course', $data);
 
         return $this->check_query();
     }

@@ -115,7 +115,7 @@
             var lastcol = table.rows[0].cells.length;   
             var row = table.insertRow(lastrow); 
             var cellcol0 = row.insertCell(0);
-            cellcol0.innerHTML = "<input type='text' class='required' name='po_code[]' placeholder='Enter PO Code' required='required'>";
+            cellcol0.innerHTML = "<input type='hidden' name='po_id[]'><input type='text' class='required' name='po_code[]' placeholder='Enter PO Code' required='required'>";
             var cellcol1 = row.insertCell(1);
             cellcol1.innerHTML = "<input type='text' class='required' name='po_attrib[]' placeholder='Enter PO Attribute' required='required'>";
             var cellcol2 = row.insertCell(2);
@@ -138,7 +138,7 @@
             var lastcol = table2.rows[0].cells.length;   
             var row = table2.insertRow(lastrow); 
             var cellcol0 = row.insertCell(0);
-            cellcol0.innerHTML = "<input type='text' class='required' name='co_code[]' placeholder='Enter Course Code' required='required'>";
+            cellcol0.innerHTML = "<input type='hidden' name='co_id[]'><input type='text' class='required' name='co_code[]' placeholder='Enter Course Code' required='required'>";
             var cellcol1 = row.insertCell(1);
             cellcol1.innerHTML = "<textarea class='required span6' name='co_desc[]' rows='3' placeholder='Enter Course Description' required='required'></textarea>";
             var cellcol2 = row.insertCell(2);
