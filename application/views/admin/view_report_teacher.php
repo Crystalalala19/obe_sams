@@ -45,6 +45,7 @@
                             <table id="teacher_report" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
+                                        <th>Population</th>
                                         <th width="12%">Semester</th>
                                         <th>Teacher</th>
                                         <th width="12%">Group #</th>
@@ -55,6 +56,7 @@
                                 </thead>
                                 <tfoot>
                                     <tr>
+                                        <th>Population</th>
                                         <th>Semester</th>
                                         <th>Teacher</th>
                                         <th>Group #</th>
@@ -64,8 +66,9 @@
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                    <?php foreach($teacher_list as $row):?>
+                                    <?php foreach($teacher_list as $key => $row):?>
                                     <tr>
+                                        <td><?php echo $row['class_population'][0];?></td>
                                         <td><?php echo ucfirst($row['semester']);?></td>
                                         <td><?php echo $row['fname'].' '.$row['lname']; ?></td>
                                         <td><?php echo $row['group_num'];?></td>
@@ -117,7 +120,7 @@
 
         $('.dataTables_filter input').attr("placeholder", " Enter keyword");
 
-        $('#teacher_report tfoot th:not(:eq(5))').each( function () {
+        $('#teacher_report tfoot th:not(:eq(0), :eq(6))').each( function () {
             var title = $('#teacher_report thead th').eq( $(this).index() ).text();
             $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
         } );

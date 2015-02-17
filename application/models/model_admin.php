@@ -369,6 +369,16 @@ class Model_admin extends CI_Model {
             return false; 
     }
 
+    function check_teacherClassPopulation($class_id) {
+        // $query = $this->db->get_where('student_course', array('classID' => $class_id));
+        $query = $this->db->query("SELECT classID from student_course WHERE classID = '".$class_id."' ");
+
+        if($query->num_rows() > 0)
+            return true;
+        else
+            return false;
+    }
+
     function select_schedule($id){
         $query = $this->db->query("SELECT * FROM teacher_class WHERE ID = '".$id."' ");
         

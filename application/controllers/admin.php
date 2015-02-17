@@ -975,6 +975,14 @@ class Admin extends CI_Controller {
         $data['academic_year'] = $year;
         $data['year_classes'] = $this->model_admin->get_teacherReport();
         $data['teacher_list'] = $this->model_admin->get_allTeachersClasses($year);
+        // $data['teacher_list']['class_population'] = array();
+
+        foreach ($data['teacher_list'] as $key => $value) {
+            $data['teacher_list'][$key]['class_population'][] = $this->model_admin->check_teacherClassPopulation($value['ID']);
+        }
+
+
+        // print_r($data['teacher_list']);die();
 
         $this->load->view('admin/header', $data);
         $this->load->view('admin/view_report_teacher', $data);
