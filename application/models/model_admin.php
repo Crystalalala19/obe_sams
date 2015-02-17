@@ -313,7 +313,7 @@ class Model_admin extends CI_Model {
     }
 
     function get_allTeachersClasses($year) {
-        $query = $this->db->query("SELECT teacher_class.ID, teacher.teacher_id, fname, mname, lname, group_num, start_time, end_time, days, semester, school_year, courseCode FROM teacher
+        $query = $this->db->query("SELECT teacher_class.ID, teacher.teacher_id, fname, lname, group_num, start_time, end_time, days, semester, school_year, courseCode FROM teacher
                                   INNER JOIN teacher_class ON teacher.teacher_id = teacher_class.teacherID WHERE school_year = '".$year."'
                                   ");
 
@@ -436,7 +436,7 @@ class Model_admin extends CI_Model {
     }
 
     function teacher_log() {
-        $query = $this->db->query("SELECT student_course.date, teacher.fname, teacher.mname, teacher.lname, 
+        $query = $this->db->query("SELECT student_course.date, teacher.fname, teacher.lname, 
                                         teacher_class.group_num, teacher_class.courseCode, teacher_class.start_time,
                                         teacher_class.end_time, teacher_class.days, teacher_class.ID,
                                         teacher.teacher_id, teacher_class.school_year
@@ -451,8 +451,8 @@ class Model_admin extends CI_Model {
 
     function generate_studentReport($program, $year_level, $semester, $academic_year, $po_num) {
         $custom = "SELECT *, 
-                    teacher.fname as tfname, teacher.lname as tlname, teacher.mname as tmname,
-                    student.fname as sfname, student.lname as slname, student.mname as smname 
+                    teacher.fname as tfname, teacher.lname as tlname,
+                    student.fname as sfname, student.lname as slname
                     FROM program  
                     INNER JOIN program_year ON program.ID = program_year.programID
                     INNER JOIN po ON program_year.ID = po.pyID
@@ -510,7 +510,7 @@ class Model_admin extends CI_Model {
     }
 
     function get_studentName($student_id) {
-        $query = $this->db->query("SELECT student.student_id, student.fname, student.mname, student.lname, 
+        $query = $this->db->query("SELECT student.student_id, student.fname, student.lname, 
                                         MAX(student_course.year_level) as year_level 
                                         FROM student_course 
                                         INNER JOIN student ON student_course.studentID = student.student_id

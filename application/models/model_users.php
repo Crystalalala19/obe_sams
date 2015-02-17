@@ -208,7 +208,7 @@ class Model_users extends CI_Model {
     }
 
     function get_studentName($student_id) {
-        $query = $this->db->query("SELECT student.student_id, student.fname, student.mname, student.lname, 
+        $query = $this->db->query("SELECT student.student_id, student.fname, student.lname, 
                                         MAX(student_course.year_level) as year_level 
                                         FROM student_course 
                                         INNER JOIN student ON student_course.studentID = student.student_id

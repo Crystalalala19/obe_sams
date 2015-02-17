@@ -27,7 +27,7 @@
                                     <?php foreach($student_list as $row): ?>   
                                     <tr>          
                                         <td><center><?php echo $row->studentID;?></center></td>
-                                        <td><center><?php echo $row->fname." ".$row->mname." ".$row->lname;?></center></td>
+                                        <td><center><?php echo $row->fname." ".$row->lname;?></center></td>
                                         <td><center><?php echo $row->programName;?> - <?php echo $row->effective_year;?></center></td>
                                         <td>
                                             <center>

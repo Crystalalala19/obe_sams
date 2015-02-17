@@ -27,7 +27,7 @@
                                 <?php foreach($get_studentName as $row1): ?>
                                 <?php $stud_id = $row1->student_id; $stud_name = $row1->lname.', '.$row1->fname;?> 
                                 <?php echo '[ '.$row1->student_id.' ]  ';?>
-                                <?php echo $row1->lname.', '.$row1->fname.' '.$row1->mname; ?>
+                                <?php echo $row1->lname.', '.$row1->fname; ?>
                                 <br>
                                 <?php echo 'Year Level: '.$row1->year_level;?>
                                 <?php endforeach; ?>

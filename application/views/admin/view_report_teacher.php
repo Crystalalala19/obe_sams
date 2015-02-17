@@ -17,6 +17,22 @@
         tfoot input {
             width: 95%;
         }
+        @media (max-width: 768px) {
+            .btn-responsive {
+                padding:2px 4px;
+                font-size:80%;
+                line-height: 1;
+                border-radius:3px;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 992px) {
+            .btn-responsive {
+                padding:4px 9px;
+                font-size:90%;
+                line-height: 1.2;
+            }
+        }
     </style>
 
     <div class="main-inner">
@@ -45,7 +61,7 @@
                             <table id="teacher_report" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Population</th>
+                                        <th width="5%">Status</th>
                                         <th width="12%">Semester</th>
                                         <th>Teacher</th>
                                         <th width="12%">Group #</th>
@@ -56,7 +72,7 @@
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>Population</th>
+                                        <th>Status</th>
                                         <th>Semester</th>
                                         <th>Teacher</th>
                                         <th>Group #</th>
@@ -68,7 +84,7 @@
                                 <tbody>
                                     <?php foreach($teacher_list as $key => $row):?>
                                     <tr>
-                                        <td><?php echo $row['class_population'][0];?></td>
+                                        <td><?php if($row['class_population'][0] == 0):;?><button class="btn btn-danger btn-small btn-responsive">Empty</button><?php else: ?><button class="btn btn-success btn-small btn-responsive">OK</button><?php endif;?></td>
                                         <td><?php echo ucfirst($row['semester']);?></td>
                                         <td><?php echo $row['fname'].' '.$row['lname']; ?></td>
                                         <td><?php echo $row['group_num'];?></td>
@@ -110,15 +126,16 @@
                 { targets: 'no-sort', orderable: false }
             ],
 
-            "bLengthChange": false,
+            "bLengthChange": true,
             "bFilter": true,
-            "bInfo": false,
-            "bAutoWidth": false 
+            "bAutoWidth": false
         };
 
         var table = $('#teacher_report').DataTable( dataTableOptions );
 
         $('.dataTables_filter input').attr("placeholder", " Enter keyword");
+
+        $('#teacher_report tfoot th:eq(0), tfoot th:eq(6)').html("");
 
         $('#teacher_report tfoot th:not(:eq(0), :eq(6))').each( function () {
             var title = $('#teacher_report thead th').eq( $(this).index() ).text();

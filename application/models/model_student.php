@@ -129,7 +129,7 @@ class Model_student extends CI_Model {
     }
 
     function select_teacher($student_id) {
-        $query = $this->db->query("SELECT teacher.fname, teacher.mname, teacher.lname, student_course.studentID 
+        $query = $this->db->query("SELECT teacher.fname, teacher.lname, student_course.studentID 
                                             FROM student_course 
                                             INNER JOIN teacher_class ON student_course.classID = teacher_class.ID
                                             INNER JOIN teacher ON teacher_class.teacherID = teacher.teacher_id

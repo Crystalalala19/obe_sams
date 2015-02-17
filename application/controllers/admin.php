@@ -522,8 +522,7 @@ class Admin extends CI_Controller {
             $teacher_data = array(
                 'teacher_id' => $this->input->post('login_id'),
                 'fname' => $this->input->post('teacher_fname'),
-                'mname' => $this->input->post('teacher_mname'),
-                'lname' => $this->input->post('teacher_lname'),
+                'lname' => $this->input->post('teacher_lname')
             );
 
             $user_account = array(

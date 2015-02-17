@@ -26,6 +26,11 @@ html[direction='rtl'] div.dataTables_filter label {
 
 div.dataTables_info {
 	padding-top: 26px;
+    padding-left: 30px;
+}
+
+div.dataTables_length {
+    padding-left: 30px;
 }
 
 div.dataTables_paginate {
