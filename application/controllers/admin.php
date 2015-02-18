@@ -520,8 +520,8 @@ class Admin extends CI_Controller {
         else {
             $teacher_data = array(
                 'teacher_id' => $this->input->post('login_id'),
-                'fname' => $this->input->post('teacher_fname'),
-                'lname' => $this->input->post('teacher_lname')
+                'fname' => ucfirst(strtolower($this->input->post('teacher_fname'))),
+                'lname' => ucfirst(strtolower($this->input->post('teacher_lname')))
             );
 
             $user_account = array(
@@ -547,10 +547,6 @@ class Admin extends CI_Controller {
             }
         }
 
-        $this->view_teachers();
-    }
-
-    public function view_teachers() {
         $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Teachers';
         $data['teacher_list'] = $this->model_admin->get_teachers();

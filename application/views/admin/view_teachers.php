@@ -27,6 +27,12 @@
                             <?php
                             echo $this->session->flashdata('message');
                             if (!empty($message)) echo $message;
+
+                            echo validation_errors('
+                                <div class="alert alert-danger alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
+                                    <i class="icon-exclamation-sign"></i> ', 
+                                '</div>');
                             ?>
 
                             <button class="btn btn-info" data-toggle='modal' data-target='#add' title="Add New"><i class="icon-plus"></i> Add new</button>
