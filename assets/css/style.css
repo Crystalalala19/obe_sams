@@ -14,8 +14,8 @@
    LOGIN SECTION
     ===================================*/
 .login-field {
-    color: #00904B;
-    border-color: #00904B;
+    color: #237923;
+    border-color: #237923;
 }
 
 /*=====================================
@@ -42,16 +42,16 @@ body {
 }
   
 h2 {
-    color:#00904B;
+    color:#237923;
     font-weight:900;
     
 }
 h3{
-    color:#00904B;
+    color:#237923;
 }
 
 .fa {
-    color:#00904B;
+    color:#F0BC1A;
 }
  /*=====================================
   PRELOADER STYLES 
@@ -85,7 +85,7 @@ h3{
 /*Menu border Color*/
 .navbar-default {
     border-color: #006600;
-    background-color:#00904B;
+    background-color:#237923;
 }
 /*Logo Image */
 .navbar-brand-logo {
@@ -94,11 +94,11 @@ h3{
 }
 /*top-menu links color*/
 .navbar-default .navbar-nav > li > a {
-    color: #FEEA65;
+    color: #f0bc1a;
 }
 /*top-menu links color on hover*/
     .navbar-default .navbar-nav > li > a:hover {
-        color: #FEEA65;
+        color: #f0bc1a;
     }
 
 /*top-menu links & margin*/    
@@ -156,7 +156,7 @@ background-size: cover;
         min-height:700px;
     }
     #home h3 {
-        color:#FEEA65;
+        color:#f0bc1a;
     }
     .div-trans {
         position: relative;
@@ -276,7 +276,7 @@ p {
     background-color: #efefef; 
 }
 .portfolio-item {
-    border:5px solid #FEEA65;
+    border:5px solid #F0BC1A;
     margin:3px;
 }
     .portfolio-item p {
@@ -291,7 +291,7 @@ p {
     width: 100%;
     height: 100%;
     opacity: 0;
-    background-color: #00904B;
+    background-color: #237923;
     text-align: center;
     vertical-align: middle;
     -webkit-transition: opacity 300ms;
@@ -354,12 +354,12 @@ p {
 .media-headings {
     margin-top: 0px;
     margin-bottom: 5px;
-    color: #FEEA65;
+    color: #F0BC1A;
     font-size: 23px;
 }
 
 .media-title {
-    color: #FEEA65;
+    color: #F0BC1A;
     font-weight: 900;
 }
 /*==========================================
@@ -385,8 +385,8 @@ p {
 
 #footser-end {
     text-align:right;
-    background-color: #00904B;
-    color: #FEEA65;
+    background-color: #237923;
+    color: #F0BC1A;
      padding:10px;
 }
 
