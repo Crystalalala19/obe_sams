@@ -6,6 +6,12 @@
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/dataTables.tableTools.min.js"></script>
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/datatables-bootstrapv3.js"></script>
 
+<style type="text/css">
+    tfoot td {
+        font-size: 15px;
+        font-weight: bold;
+    }
+</style>
 
 <div class="main-inner">
     <div class="container">
@@ -35,7 +41,7 @@
                          <table id="scorecard_student" class="table table-striped table-bordered">
                             <thead>
                               <tr>
-                                <th> Course Code </th>
+                                <th>Code </th>
                                  <?php for($x = 1; $x <= $po_count; $x++):?>
                                     <th>PO <?php echo $x;?></i></th>
                                 <?php endfor;?>
@@ -44,9 +50,9 @@
                             <tbody>
                                 <?php foreach($class_list as $key => $row3): ?>
                                 <tr>
-                                    <td><?php echo $row3['courseCode']; ?></td>
+                                    <td width="7%"><?php echo $row3['courseCode']; ?></td>
                                     <?php for($x=0; $x < $po_count; $x++): ?>
-                                        <td><?php echo $row3['score'][$x]['score'];?></td>
+                                        <td width="7%"><?php echo number_format($row3['score'][$x]['score'],1);?></td>
                                     <?php endfor;?>   
                                 </tr>
                                 <?php endforeach; ?>

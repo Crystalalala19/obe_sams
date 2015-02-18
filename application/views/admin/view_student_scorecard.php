@@ -1,3 +1,10 @@
+<style type="text/css">
+     tfoot td {
+        font-size: 15px;
+        font-weight: bold;
+    }
+</style>
+
     <div class="main-inner">
         <div class="container">
             <div class="row">
@@ -160,6 +167,6 @@
 </script>
 
 <script type="text/javascript" language="javascript" class="init">
-    var d = document.getElementById('studentlist');
+    var d = document.getElementById("teachers_menu");
     d.className = d.className + " active";
 </script>

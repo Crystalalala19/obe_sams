@@ -1,3 +1,9 @@
+    <style type="text/css">
+         tfoot td {
+            font-size: 15px;
+            font-weight: bold;
+        }
+    </style>
     <div class="main-inner">
         <div class="container">
             <div class="row">

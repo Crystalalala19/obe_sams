@@ -719,7 +719,7 @@ class Admin extends CI_Controller {
 
     public function view_class() {
         $data['title'] = 'OBE SAMS Academic';
-        $data['header'] = 'View Classes';
+        $data['header'] = 'Assigned Classes';
         $message = '';
 
         $teacher_id = $this->uri->segment(4);
@@ -772,7 +772,7 @@ class Admin extends CI_Controller {
 
     public function view_class_scorecard() {
         $data['title'] = 'OBE SAMS Academic';
-        $data['header'] = 'View Classes';
+        $data['header'] = 'Students';
 
         $teacher_id = $this->uri->segment(4);
         $class_id = $this->uri->segment(6);

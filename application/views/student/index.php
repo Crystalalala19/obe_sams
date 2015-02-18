@@ -41,7 +41,7 @@
                         <table id="view_classlist" class="table table-striped table-bordered dataTable no-footer">
                             <thead>
                                 <tr>
-                                    <th>Group Number</th>
+                                    <th>Grp #</th>
                                     <th>Subject</th>
                                     <th>Course Description</th>
                                     <th>Schedule</th>
@@ -52,7 +52,7 @@
                             <tbody>
                                 <?php foreach($get_courses as $row): ?>   
                                 <tr>
-                                    <td><?php echo $row['group_num']; ?></td>          
+                                    <td width="5%"><?php echo $row['group_num']; ?></td>          
                                     <td><?php echo $row['courseCode']; ?></td>
                                     <td><?php echo $row['CourseDesc']; ?></td>
                                     <td><?php echo $row['start_time'].' - '.$row['end_time'].' '.$row['days']; ?></td> 

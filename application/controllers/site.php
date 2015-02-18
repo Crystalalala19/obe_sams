@@ -126,7 +126,7 @@ class Site extends CI_Controller {
    }
 
     public function class_list(){
-        if(!$this->session->userdata('is_logged_in')){
+        if(!$this->session->userdata('is_logged_in')){  
             redirect('site');
         }
 
@@ -154,7 +154,7 @@ class Site extends CI_Controller {
                 if($val1['status'] == "1" && isset($data['class_list'][$key]['score'][$i])) {
                     $data['class_list'][$key]['score'][$i] =  $data['class_list'][$key]['score'][$i]['score'];
                 } else {
-                    $data['class_list'][$key]['score'][$i] = "";
+                    $data['class_list'][$key]['score'][$i] = "0";
                 }
 
                 $i++;

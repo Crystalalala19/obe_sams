@@ -7,6 +7,13 @@
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/datatables-bootstrapv3.js"></script>
     <!-- End DataTables -->
 
+    <style type="text/css">
+         tfoot td {
+            font-size: 15px;
+            font-weight: bold;
+        }
+    </style>
+
     <div class="main-inner">
         <div class="container">
             <div class="row">
@@ -81,7 +88,7 @@
                                         <td><?php echo $row['studentID'];?></td>
                                         <td><?php echo $row['fname']." ".$row['lname'];?></td>
                                         <?php foreach($row['score'] as $row1): ?>
-                                            <td><?php echo $row1;?></td>
+                                            <td id="score"><?php echo $row1;?></td>
                                         <?php endforeach; ?>   
                                         <td>
                                             <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row['student_id'];?>" title="View Scorecard">View Scorecard</a>
@@ -122,6 +129,14 @@
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/bootstrap-filestyle.min.js"></script>
     
     <script type="text/javascript">
+        var score = document.getElementById ( "score" );
+        if(score == '0')
+        {
+            $('#score').onchange(function(){
+                $('#score').addClass('hidden');
+            })               
+        }
+
         var values = [],
             table = document.getElementById('view_classlist'),
             rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr'),

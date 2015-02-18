@@ -7,13 +7,20 @@
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/datatables-bootstrapv3.js"></script>
     <!-- End DataTables -->
 
+    <style type="text/css">
+         tfoot td {
+            font-size: 15px;
+            font-weight: bold;
+        }
+    </style>
+
     <div class="main-inner">
         <div class="container">
             <div class="row">
                 <div class="span12">
                     <div class="widget">
                         <div class="widget-header">
-                            <i class="icon-book"></i>
+                            <i class="icon-group"></i>
                             <h3><?php echo $header;?></h3>
                         </div> <!-- /widget-header -->
                         <div class="widget-content">
@@ -72,7 +79,7 @@
                                             <td><?php echo $row1;?></td>
                                         <?php endforeach; $row_num++; ?>   
                                         <td>
-                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>admin/student_scorecard/<?php echo $row['student_id'];?>" title="View Student Scorecard">View</a>
+                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>admin/student_scorecard/<?php echo $row['student_id'];?>" title="View Student Scorecard">View Scorecard</a>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>   
@@ -176,4 +183,7 @@
         var tt = new $.fn.dataTable.TableTools( table, tableToolsOptions );
 
         $( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
+
+        var d = document.getElementById("teachers_menu");
+        d.className = d.className + " active";
     </script>

@@ -12,7 +12,7 @@
                 <div class="span12">
                     <div class="widget" style="overflow: visible;">
                         <div class="widget-header">
-                            <i class="icon-book"></i>
+                            <i class="icon-list"></i>
                             <h3><?php echo $header;?></h3>
                         </div> <!-- /widget-header -->
                         <div class="widget-content">
