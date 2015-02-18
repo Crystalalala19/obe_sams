@@ -55,7 +55,7 @@
                                                                 </a>
                                                             </p>
                                                             <p>Uploaded by: 
-                                                                <?php echo $row1['fname'].' '.$row1['mname'].' '.$row1['lname'];?>
+                                                                <?php echo $row1['fname'].' '.$row1['lname'];?>
                                                             </p>
                                                         </p>
                                                     </div>

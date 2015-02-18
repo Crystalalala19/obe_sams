@@ -25,7 +25,7 @@
                               <div class="message_wrap"> <span class="arrow"></span>
                                 <div class="info"> 
                                     <a class="name"> 
-                                        <h2>Welcome <?php foreach($user as $row): ?><?php echo $row['lname'].", ".$row['fname']." ".$row['mname'];?></h2>   
+                                        <h2>Welcome <?php foreach($user as $row): ?><?php echo $row['lname'].", ".$row['fname'];?></h2>   
                                     </a> 
                                 </div>
                                     Student ID: <?php echo $row['student_id'];?><br><?php endforeach; ?>
@@ -56,7 +56,7 @@
                                     <td><?php echo $row['courseCode']; ?></td>
                                     <td><?php echo $row['CourseDesc']; ?></td>
                                     <td><?php echo $row['start_time'].' - '.$row['end_time'].' '.$row['days']; ?></td> 
-                                    <td><?php echo $row['fname'].' '.$row['mname'].' '.$row['lname']; ?></td> 
+                                    <td><?php echo $row['fname'].' '.$row['lname']; ?></td> 
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>
