@@ -35,7 +35,7 @@ class Site extends CI_Controller {
 	public function members() {
 		
 		if($this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'admin') {
-			$this->load->view('admin/index');
+			redirect('admin');
 		}  
 		elseif($this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'teacher') {
 			 

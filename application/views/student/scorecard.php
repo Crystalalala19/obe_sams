@@ -97,6 +97,9 @@
             var avg = sum / numOfValues;
             footer.getElementsByTagName('td')[i]
             .innerHTML = parseFloat(Math.round(avg * 100) / 100).toFixed(1);
+
+            if( isNaN(footer.getElementsByTagName('td')[i].innerHTML) )
+                footer.getElementsByTagName('td')[i].innerHTML = " ";
         }
 
    var dataTableOptions = {
