@@ -76,8 +76,16 @@
                                         <td><?php echo $row['studentID'];?></td>
                                         <td><?php echo $row['fname']." ".$row['lname'];?></td>
                                         <?php foreach($row['grade'] as $row1): ?>
-                                            <td><?php echo $row1;?></td>
-                                        <?php endforeach; $row_num++; ?>   
+                                        <td><?php 
+                                            if($row1 == ''){
+                                                echo '';
+                                            }
+                                            else{
+                                                echo number_format($row1,1);
+                                            }
+                                        ?>
+                                        </td>
+                                        <?php endforeach;?>   
                                         <td>
                                             <a class="btn btn-mini btn-info" href="<?php echo base_url();?>admin/student_scorecard/<?php echo $row['student_id'];?>" title="View Student Scorecard">View Scorecard</a>
                                         </td>
@@ -108,7 +116,7 @@
             rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr'),
             footer = table.getElementsByTagName('tfoot')[0];
 
-        for(var i=2; i<<?php echo $po_count;?>; i++){
+        for(var i=2; i<=15; i++){
             values[i] = [];
             for(var j=0, l=rows.length; j<l; j++){
                 values[i].push(

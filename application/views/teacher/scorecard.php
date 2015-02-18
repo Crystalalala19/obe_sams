@@ -52,8 +52,14 @@
                                     <tr>
                                         <td><?php echo $row3['courseCode']; ?></td>
                                         <?php for($x=0; $x < $po_count; $x++): ?>
-                                            <td>
-                                                <?php echo $row3['score'][$x]['score'];?>
+                                            <td><?php 
+                                                    if($row3['score'][$x]['score'] == ''){
+                                                        echo '';
+                                                    }
+                                                    else{
+                                                        echo number_format($row3['score'][$x]['score'],1);
+                                                    }
+                                                ?>
                                             </td>
                                         <?php endfor;?>   
                                     </tr>

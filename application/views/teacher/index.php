@@ -33,6 +33,38 @@
                             </li>
                         </ul>
                         <?php endforeach; ?>
+                        <div class="clearfix"></div>
+                        <ul class="nav nav-tabs">
+                                <li class="active"><a href="#tab1" data-toggle="tab">Teacher Log</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tab1">
+                                    <div class='panel panel-default grid'>
+                                        <div style="height:200px;width:1150px;overflow:auto;">
+                                            <ul class="news-items">
+                                            <?php foreach($log as $row1): ?> 
+                                                <li>
+                                                    <div class="news-item-date"> 
+                                                        <span class="news-item-day"><?php echo "".date('jS', strtotime($row1['date']));?></span> 
+                                                        <span class="news-item-month"><?php echo "".date('M Y', strtotime($row1['date']));?></span> 
+                                                    </div>
+                                                        <?php echo "".date('h:i A', strtotime($row1['date']));?>
+                                                        <p class="news-item-preview">
+                                                            <p>
+                                                                <?php echo 'Group #: '.$row1['group_num'].' '.$row1['courseCode'].' '.$row1['start_time'].' - '.$row1['end_time'].' '.$row1['days'];?>
+                                                            </p>
+                                                            <p>
+                                                                <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/class_list/<?php echo $row1['ID'];?>" title="View Class">View Class</a>
+                                                            </p>
+                                                        </p>
+                                                </li>
+                                                <?php endforeach; ?> 
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                     </div>
                 </div> <!-- /widget -->                 
             </div> <!-- /span12 -->         

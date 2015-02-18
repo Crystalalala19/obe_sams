@@ -1088,7 +1088,7 @@ class Admin extends CI_Controller {
             $i = 0;
             foreach($data['class_list'][$key]['score'] as $key1 => $val1) {
                 if($val1['score'] == "0") {
-                    $data['class_list'][$key]['score'][$key1]['score'] = "0";
+                    $data['class_list'][$key]['score'][$key1]['score'] = "";
                 }
             }
             $i++;

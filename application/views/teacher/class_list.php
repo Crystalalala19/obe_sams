@@ -76,7 +76,7 @@
                                         <th width="15%">Student ID</i></th>
                                         <th>Name</i></th>
                                         <?php for($x = 1; $x <= $po_count; $x++):?>
-                                            <th>PO <?php echo $x;?></i></th>
+                                        <th>PO <?php echo $x;?></i></th>
                                         <?php endfor; ?>
                                         <th width="10%" class="no-sort">Scorecard</th>
                                     </tr>
@@ -88,7 +88,15 @@
                                         <td><?php echo $row['studentID'];?></td>
                                         <td><?php echo $row['fname']." ".$row['lname'];?></td>
                                         <?php foreach($row['score'] as $row1): ?>
-                                            <td id="score"><?php echo $row1;?></td>
+                                        <td><?php 
+                                                if($row1 == ''){
+                                                    echo '';
+                                                }
+                                                else{
+                                                    echo number_format($row1,1);
+                                                }
+                                            ?>
+                                        </td>
                                         <?php endforeach; ?>   
                                         <td>
                                             <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row['student_id'];?>" title="View Scorecard">View Scorecard</a>
@@ -101,7 +109,7 @@
                                     <tr bgcolor="#FFF380">
                                         <td colspan="2"><center>Average</center></td>
                                         <?php for($x = 1; $x <= $po_count; $x++):?>
-                                            <td></td>
+                                        <td></td>
                                         <?php endfor;?>
                                         <td></td>
                                     </tr>
@@ -129,20 +137,12 @@
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/bootstrap-filestyle.min.js"></script>
     
     <script type="text/javascript">
-        var score = document.getElementById ( "score" );
-        if(score == '0')
-        {
-            $('#score').onchange(function(){
-                $('#score').addClass('hidden');
-            })               
-        }
-
         var values = [],
             table = document.getElementById('view_classlist'),
             rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr'),
             footer = table.getElementsByTagName('tfoot')[0];
 
-        for(var i=2; i<<?php echo $po_count;?>; i++){
+        for(var i=2; i<=15; i++){
             values[i] = [];
             for(var j=0, l=rows.length; j<l; j++){
                 values[i].push(

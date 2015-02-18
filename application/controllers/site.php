@@ -41,6 +41,7 @@ class Site extends CI_Controller {
 			 
 			$data['user'] = $this->model_users->select_user();
 			$data['title'] = "OBE SAMS Academic";
+            $data['log'] = $this->model_users->log();
 			 
 			$this->load->view("teacher/header", $data);
 			$this->load->view('teacher/index', $data);
@@ -154,7 +155,7 @@ class Site extends CI_Controller {
                 if($val1['status'] == "1" && isset($data['class_list'][$key]['score'][$i])) {
                     $data['class_list'][$key]['score'][$i] =  $data['class_list'][$key]['score'][$i]['score'];
                 } else {
-                    $data['class_list'][$key]['score'][$i] = "0";
+                    $data['class_list'][$key]['score'][$i] = "";
                 }
 
                 $i++;
@@ -317,7 +318,7 @@ class Site extends CI_Controller {
             $i = 0;
             foreach($data['class_list'][$key]['score'] as $key1 => $val1) {
                 if($val1['score'] == "0") {
-                    $data['class_list'][$key]['score'][$key1]['score'] = "0";
+                    $data['class_list'][$key]['score'][$key1]['score'] = "";
                 }
             }
             $i++;
