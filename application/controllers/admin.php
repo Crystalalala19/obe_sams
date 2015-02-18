@@ -14,6 +14,12 @@ class Admin extends CI_Controller {
     // "detect_indentation": false
 
     public function index(){
+        var_dump($this->session->userdata());die();
+
+        if(!$this->session->userdata('is_logged_in')){
+            redirect('site');
+        }
+
         $data['title'] = 'OBE SAMS Academic';
 
         $this->load->view('admin/header', $data);
@@ -22,6 +28,11 @@ class Admin extends CI_Controller {
     }
 
     // CALLBACK and/or FUNCTIONS
+    public function logout() {
+        $this->session->sess_destroy();
+        redirect('site');
+    }
+
     function alpha_dash_space($str_in) {
         if (! preg_match("/^([-a-z-9 ])+$/i", $str_in)) {
             $this->form_validation->set_message('alpha_dash_space', 'The %s field may only contain alpha characters, spaces, and dashes.');
@@ -60,6 +71,10 @@ class Admin extends CI_Controller {
     // END FUNCTIONS
 
     public function program_outcome() {
+        if(!$this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'admin'){
+            redirect('site');
+        }
+        
         $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Program Outcomes';
        
@@ -162,6 +177,10 @@ class Admin extends CI_Controller {
     }
 
     public function add_program(){
+        if(!$this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'admin'){
+            redirect('site');
+        }
+
         $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Add new Curriculum';
 
@@ -288,6 +307,10 @@ class Admin extends CI_Controller {
     }
 
     public function view_programs() {
+        if(!$this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'admin'){
+            redirect('site');
+        }
+        
         $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'View Curriculums';
         
@@ -335,6 +358,10 @@ class Admin extends CI_Controller {
     }
 
     public function edit_program() {
+        if(!$this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'admin'){
+            redirect('site');
+        }
+
         $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Edit Curriculum';
         $data['message'] = '';
@@ -464,6 +491,10 @@ class Admin extends CI_Controller {
     }
 
     public function delete_programYear() {
+        if(!$this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'admin'){
+            redirect('site');
+        }
+
         $program = $this->uri->segment(4);
         $year = $this->uri->segment(5);
 
@@ -507,6 +538,10 @@ class Admin extends CI_Controller {
 
     // TEACHER
     public function teachers() {
+        if(!$this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'admin'){
+            redirect('site');
+        }
+
         $this->load->library('encrypt');
         $this->load->library('form_validation');
 
@@ -564,6 +599,10 @@ class Admin extends CI_Controller {
     }
 
     public function edit_teacher(){
+        if(!$this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'admin'){
+            redirect('site');
+        }
+
         $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Edit Teacher Information';
         $data['message'] = '';
@@ -616,6 +655,10 @@ class Admin extends CI_Controller {
     }
 
     public function upload_class() {
+        if(!$this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'admin'){
+            redirect('site');
+        }
+        
         $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Assign Classes';
         $data['message'] = '';
@@ -626,6 +669,10 @@ class Admin extends CI_Controller {
     }
 
     public function upload() {
+        if(!$this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'admin'){
+            redirect('site');
+        }
+        
         $this->load->library('csvimport');
 
         $config['upload_path'] = './uploads/';
@@ -711,6 +758,10 @@ class Admin extends CI_Controller {
     }
 
     public function view_class() {
+        if(!$this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'admin'){
+            redirect('site');
+        }
+        
         $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Assigned Classes';
         $message = '';
@@ -764,6 +815,10 @@ class Admin extends CI_Controller {
     }
 
     public function view_class_scorecard() {
+        if(!$this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'admin'){
+            redirect('site');
+        }
+        
         $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Students';
 
@@ -812,6 +867,10 @@ class Admin extends CI_Controller {
     // END TEACHER
 
     public function upload_students() {
+        if(!$this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'admin'){
+            redirect('site');
+        }
+        
         $this->load->library('csvimport');
         $this->load->library('form_validation');
        
@@ -883,6 +942,10 @@ class Admin extends CI_Controller {
     }
 
     public function view_students(){
+        if(!$this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'admin'){
+            redirect('site');
+        }
+        
         $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'View Student List';
         $data['student_list'] = $this->model_admin->check_rows('student');
@@ -901,6 +964,10 @@ class Admin extends CI_Controller {
     }
 
     public function edit_student() {
+        if(!$this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'admin'){
+            redirect('site');
+        }
+        
         $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Edit Student Information';
         $data['message'] = '';
@@ -956,6 +1023,10 @@ class Admin extends CI_Controller {
     }
 
     public function report_teacher() {
+        if(!$this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'admin'){
+            redirect('site');
+        }
+        
         $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Teacher Reports';
 
@@ -979,6 +1050,10 @@ class Admin extends CI_Controller {
     }
 
     public function report_student() {
+        if(!$this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'admin'){
+            redirect('site');
+        }
+        
         $this->load->library('form_validation');
 
         $data['title'] = 'OBE SAMS Academic';
@@ -1044,6 +1119,10 @@ class Admin extends CI_Controller {
     }
 
     public function activity_log() {
+        if(!$this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'admin'){
+            redirect('site');
+        }
+        
         $data['header'] = 'Activity Log';
         $data['title'] = 'OBE SAMS Academic';
 
@@ -1055,6 +1134,10 @@ class Admin extends CI_Controller {
     } 
 
     public function student_scorecard() {
+        if(!$this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'admin'){
+            redirect('site');
+        }
+        
         $data['header'] = 'Student Scorecard';
         $data['title'] = 'OBE SAMS Academic';
 

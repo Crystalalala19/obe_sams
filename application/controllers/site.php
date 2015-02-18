@@ -76,7 +76,6 @@ class Site extends CI_Controller {
         redirect(base_url());
     }
 
-
     public function course_list(){
         if(!$this->session->userdata('is_logged_in')){
             redirect('site');
