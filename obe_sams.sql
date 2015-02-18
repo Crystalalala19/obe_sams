@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 17, 2015 at 02:36 PM
+-- Generation Time: Feb 18, 2015 at 08:05 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `course` (
   `pyID` int(3) NOT NULL,
   `year_level` enum('1','2','3','4') NOT NULL,
   `semester` enum('1','2') NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `course`
@@ -146,50 +146,50 @@ CREATE TABLE IF NOT EXISTS `po` (
   `poCode` varchar(10) NOT NULL,
   `description` text NOT NULL,
   `pyID` int(3) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `po`
 --
 
 INSERT INTO `po` (`ID`, `attribute`, `poCode`, `description`, `pyID`) VALUES
-(10, 'Knowledge for Solving Computing Problems', 'ICT01', 'Acquire, synergize and apply...', 5),
-(11, 'Problem Analysis', 'ICT02', 'Fully determine, formulate,...', 5),
-(12, 'Design/Development of Solutions', 'ICT03', 'Design and evaluate...', 5),
-(13, 'Modern Tool Usage', 'ICT04', 'Create, select, adopt...', 5),
-(14, 'Individual and teamwork', 'ICT05', 'Able to work independently...', 5),
+(10, 'Knowledge for Solving Computing Problems', 'ICT01', 'Acquire, synergize and apply with excellence the computing fundamentals, various algorithmic principles, technical concepts and practices, best practices and standards in the application of core information technologies in numerous application environments, mathematics, science, and domain knowledge appropriate for the information technology practice to the abstraction and conceptualization of solution models from defined problems and requirements by deepening one’s insight to the full. ', 5),
+(11, 'Problem Analysis', 'ICT02', 'Fully determine, formulate, investigate related research works and analyze user or domain needs to solve multidisciplinary and communal information technology problems accomplishing practical software solutions that are applicable and beneficial to society using fundamentals principles of mathematics, computing fundamentals, technical concepts and practices in the core information technologies, and relevant domain disciplines.', 5),
+(12, 'Design/Development of Solutions', 'ICT03', 'Design and evaluate with prudence optimum solutions for multidisciplinary and communal computing problems, and software systems, of varying levels of complexities, components, or computing processes that meet specified user needs taking into account design choices with appropriate consideration for public health and safety, cultural, societal, and environmental considerations. ', 5),
+(13, 'Modern Tool Usage', 'ICT04', 'Create, select, adapt, and apply effective and efficient techniques, resources, and suitable modern computing tools to complex computing activities, with an understanding of the limitations in service of humanity.', 5),
+(14, 'Individual and teamwork', 'ICT05', 'Able to work independently and indiscriminately collaborate as a member or leader in diverse teams in computing activities, multidisciplinary settings, and “glocalized” communities.', 5),
 (15, 'Communication', 'ICT06', 'Communicate effectively and...', 5),
-(16, 'Computing professionalism and society', 'ICT07', 'Comprehend and assess...', 5),
-(17, 'Ethics', 'ICT08', 'Understand, demonstrate and...', 5),
-(18, 'Life-long learning', 'ICT09', 'Recognize and appreciate...', 5),
-(19, 'Knowledge for Solving Computing Problems', 'IT01', 'Acquire, synergize...', 6),
-(20, 'Problem Analysis', 'IT02', 'Fully determine...', 6),
-(21, 'Design/Development of Solutions', 'IT03', 'Design and evaluate...', 6),
-(22, 'Design/Development of Solutions', 'IT04', 'Able to...', 6),
-(23, 'Modern Tool Usage', 'IT05', 'Create, select,...', 6),
-(24, 'Individual and Teamwork', 'IT06', 'Able to work...', 6),
-(25, 'Communication', 'IT07', 'Communicate effectively...', 6),
-(26, 'Computing Professionalism and Society', 'IT08', 'Comprehend and...', 6),
-(27, 'Ethics', 'IT09', 'Understand, demonstrate...', 6),
-(28, 'Life-long Learning', 'IT10', 'Recognize and...', 6),
-(34, 'Knowledge for Solving Computing Problems', 'CS01', '...', 10),
-(35, 'Problem Analysis', 'CS02', '...', 10),
-(36, 'Design/Development of Solutions', 'CS03', '...', 10),
-(37, 'Modern Tool Usage', 'CS04', '...', 10),
-(38, 'Individual and Team Work', 'CS05', '...', 10),
-(39, 'Communication', 'CS06', '...', 10),
-(40, 'Computing Professionalism and Society', 'CS07', '...', 10),
-(41, 'Ethics', 'CS08', '...', 10),
-(42, 'Life-long Learning', 'CS09', '...', 10),
-(43, 'Knowledge for Solving Computing Problems', 'ICT01', 'sdfsdfsdfsdfsdfsdf', 11),
-(44, 'Problem Analysis', 'ICT02', 'sdfsdfsdfsdfsdfsdf', 11),
-(45, 'Design/Development of Solutions', 'ICT03', 'sdfsdfsdfsdfsdfsdf', 11),
-(46, 'Modern Tool Usage', 'ICT04', 'sdfsdfsdfsdfsdfsdf', 11),
-(47, 'Individual and teamwork', 'ICT05', 'sdfsdfsdfsdfsdfsdf', 11),
-(48, 'Communication', 'ICT06', 'sdfsdfsdfsdfsdfsdf', 11),
-(49, 'Computing professionalism and society', 'ICT07', 'sdfsdfsdfsdfsdfsdf', 11),
-(50, 'Ethics', 'ICT08', 'sdfsdfsdfsdfsdfsdf', 11),
-(51, 'Life-long learning', 'ICT09', 'sdfsdfsdfsdfsdfsdf', 11);
+(16, 'Computing professionalism and society', 'ICT07', 'Comprehend and assess thoroughly the impact of software solutions and computing to health, safety, cultural, legal, and environmental concerns within “glocalized” context, and develop, nurture and apply a sense of social responsibility.', 5),
+(17, 'Ethics', 'ICT08', 'Understand, demonstrate and live an ethical and moral profession in the development, usage and presentation of theories, research and software solutions; and peer collaborations based on moral and professionals standards to benefit society.', 5),
+(18, 'Life-long learning', 'ICT09', 'Recognize and appreciate the relevance of computing principles and theories in the cooperative life journey and apply current and emerging technologies to continuously evolve as a computing professional who can contribute to society’s development and progress.', 5),
+(19, 'Knowledge for Solving Computing Problems', 'IT01', 'Acquire, synergize and apply with excellence the computing fundamentals, various algorithmic principles, technical concepts and practices, best practices and standards in the application of core information technologies in numerous application environments, mathematics, science, and domain knowledge appropriate for the information technology practice to the abstraction and conceptualization of solution models from defined problems and requirements by deepening one’s insight to the full.', 6),
+(20, 'Problem Analysis', 'IT02', 'Fully determine, formulate, investigate related research works and analyze user or domain needs to solve multidisciplinary and communal information technology problems accomplishing practical software solutions that are applicable and beneficial to society using fundamentals principles of mathematics, computing fundamentals, technical concepts and practices in the core information technologies, and relevant domain disciplines.', 6),
+(21, 'Design/Development of Solutions', 'IT03', 'Design and evaluate with prudence optimum solutions for multidisciplinary and communal computing problems, and software systems, of varying levels of complexities, components, or computing processes that meet specified user needs taking into account design choices with appropriate consideration for public health and safety, cultural, societal, and environmental considerations. ', 6),
+(22, 'Design/Development of Solutions', 'IT04', 'Able to diligently assist in the creation of an effective project plan and integrate efficient IT-based solutions that includes selection, creation, evaluation, and administration of IT Systems appropriate to the user environment. ', 6),
+(23, 'Modern Tool Usage', 'IT05', 'Create, select, adapt, and apply effective and efficient techniques, resources, and suitable modern computing tools to complex computing activities, with an understanding of the limitations in service of humanity.', 6),
+(24, 'Individual and Teamwork', 'IT06', 'Able to work independently and indiscriminately collaborate as a member or leader in diverse teams in computing activities, multidisciplinary settings, and “glocalized” communities.', 6),
+(25, 'Communication', 'IT07', 'Communicate effectively and decently with the computing community and with society at large (in local and international scenes) about complex computing activities by being able to comprehend and write effective reports, design documentation make and deliver effective presentations, and give and understand clear instructions.', 6),
+(26, 'Computing Professionalism and Society', 'IT08', 'Comprehend and assess thoroughly the impact of software solutions and computing to health, safety, cultural, legal, and environmental concerns within “glocalized” context, and develop, nurture and apply a sense of social responsibility.', 6),
+(27, 'Ethics', 'IT09', 'Understand, demonstrate and live an ethical and moral profession in the development, usage and presentation of theories, research and software solutions; and peer collaborations based on moral and professionals standards to benefit society.', 6),
+(28, 'Life-long Learning', 'IT10', 'Recognize and appreciate the relevance of computing principles and theories in the cooperative life journey and apply current and emerging technologies to continuously evolve as a computing professional who can contribute to society’s development and progress.', 6),
+(34, 'Knowledge for Solving Computing Problems', 'CS01', 'Acquire, synergize and apply with excellence the computing fundamentals, various algorithmic principles, technical concepts and practices, best practices and standards in the application of core information technologies in numerous application environments, mathematics, science, and domain knowledge appropriate for the information technology practice to the abstraction and conceptualization of solution models from defined problems and requirements by deepening one’s insight to the full.', 10),
+(35, 'Problem Analysis', 'CS02', 'Fully determine, formulate, investigate related research works and analyze user or domain needs to solve multidisciplinary and communal information technology problems accomplishing practical software solutions that are applicable and beneficial to society using fundamentals principles of mathematics, computing fundamentals, technical concepts and practices in the core information technologies, and relevant domain disciplines.', 10),
+(36, 'Design/Development of Solutions', 'CS03', 'Design and evaluate with prudence optimum solutions for multidisciplinary and communal computing problems, and software systems, of varying levels of complexities, components, or computing processes that meet specified user needs taking into account design choices with appropriate consideration for public health and safety, cultural, societal, and environmental considerations. Able to diligently assist in the creation of an effective project plan and integrate efficient IT-based solutions that includes selection, creation, evaluation, and administration of IT Systems appropriate to the user environment. ', 10),
+(37, 'Modern Tool Usage', 'CS04', 'Create, select, adapt, and apply effective and efficient techniques, resources, and suitable modern computing tools to complex computing activities, with an understanding of the limitations in service of humanity.', 10),
+(38, 'Individual and Team Work', 'CS05', 'Able to work independently and indiscriminately collaborate as a member or leader in diverse teams in computing activities, multidisciplinary settings, and “glocalized” communities.', 10),
+(39, 'Communication', 'CS06', 'Communicate effectively and decently with the computing community and with society at large (in local and international scenes) about complex computing activities by being able to comprehend and write effective reports, design documentation make and deliver effective presentations, and give and understand clear instructions.', 10),
+(40, 'Computing Professionalism and Society', 'CS07', 'Comprehend and assess thoroughly the impact of software solutions and computing to health, safety, cultural, legal, and environmental concerns within “glocalized” context, and develop, nurture and apply a sense of social responsibility.', 10),
+(41, 'Ethics', 'CS08', 'Understand, demonstrate and live an ethical and moral profession in the development, usage and presentation of theories, research and software solutions; and peer collaborations based on moral and professionals standards to benefit society.', 10),
+(42, 'Life-long Learning', 'CS09', 'Recognize and appreciate the relevance of computing principles and theories in the cooperative life journey and apply current and emerging technologies to continuously evolve as a computing professional who can contribute to society’s development and progress.', 10),
+(43, 'Knowledge for Solving Computing Problems', 'ICT01', 'Acquire, synergize and apply with excellence the computing fundamentals, various algorithmic principles, technical concepts and practices, best practices and standards in the application of core information technologies in numerous application environments, mathematics, science, and domain knowledge appropriate for the information technology practice to the abstraction and conceptualization of solution models from defined problems and requirements by deepening one’s insight to the full.', 11),
+(44, 'Problem Analysis', 'ICT02', 'Fully determine, formulate, investigate related research works and analyze user or domain needs to solve multidisciplinary and communal information technology problems accomplishing practical software solutions that are applicable and beneficial to society using fundamentals principles of mathematics, computing fundamentals, technical concepts and practices in the core information technologies, and relevant domain disciplines.', 11),
+(45, 'Design/Development of Solutions', 'ICT03', 'Design and evaluate with prudence optimum solutions for multidisciplinary and communal computing problems, and software systems, of varying levels of complexities, components, or computing processes that meet specified user needs taking into account design choices with appropriate consideration for public health and safety, cultural, societal, and environmental considerations. Able to diligently assist in the creation of an effective project plan and integrate efficient IT-based solutions that includes selection, creation, evaluation, and administration of IT Systems appropriate to the user environment. ', 11),
+(46, 'Modern Tool Usage', 'ICT04', 'Create, select, adapt, and apply effective and efficient techniques, resources, and suitable modern computing tools to complex computing activities, with an understanding of the limitations in service of humanity.', 11),
+(47, 'Individual and teamwork', 'ICT05', 'Able to work independently and indiscriminately collaborate as a member or leader in diverse teams in computing activities, multidisciplinary settings, and “glocalized” communities.', 11),
+(48, 'Communication', 'ICT06', 'Communicate effectively and decently with the computing community and with society at large (in local and international scenes) about complex computing activities by being able to comprehend and write effective reports, design documentation make and deliver effective presentations, and give and understand clear instructions.', 11),
+(49, 'Computing professionalism and society', 'ICT07', 'Comprehend and assess thoroughly the impact of software solutions and computing to health, safety, cultural, legal, and environmental concerns within “glocalized” context, and develop, nurture and apply a sense of social responsibility.', 11),
+(50, 'Ethics', 'ICT08', 'Understand, demonstrate and live an ethical and moral profession in the development, usage and presentation of theories, research and software solutions; and peer collaborations based on moral and professionals standards to benefit society.', 11),
+(51, 'Life-long learning', 'ICT09', 'Recognize and appreciate the relevance of computing principles and theories in the cooperative life journey and apply current and emerging technologies to continuously evolve as a computing professional who can contribute to society’s development and progress.', 11);
 
 -- --------------------------------------------------------
 
@@ -982,7 +982,7 @@ CREATE TABLE IF NOT EXISTS `program` (
 `ID` int(3) NOT NULL,
   `programName` char(8) NOT NULL,
   `programFullName` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `program`
@@ -1003,7 +1003,7 @@ CREATE TABLE IF NOT EXISTS `program_year` (
 `ID` int(3) NOT NULL,
   `effective_year` year(4) NOT NULL,
   `programID` int(3) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `program_year`
@@ -1303,7 +1303,7 @@ CREATE TABLE IF NOT EXISTS `teacher` (
   `teacher_id` varchar(15) NOT NULL,
   `fname` varchar(20) NOT NULL,
   `lname` varchar(20) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `teacher`
@@ -1357,7 +1357,7 @@ CREATE TABLE IF NOT EXISTS `user_account` (
   `idnum` varchar(15) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` enum('admin','teacher','student') NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user_account`
@@ -1459,22 +1459,22 @@ ALTER TABLE `user_account`
 -- AUTO_INCREMENT for table `course`
 --
 ALTER TABLE `course`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=100;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=96;
 --
 -- AUTO_INCREMENT for table `po`
 --
 ALTER TABLE `po`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=55;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=52;
 --
 -- AUTO_INCREMENT for table `program`
 --
 ALTER TABLE `program`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `program_year`
 --
 ALTER TABLE `program_year`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `student`
 --
@@ -1484,7 +1484,7 @@ MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=57;
 -- AUTO_INCREMENT for table `teacher`
 --
 ALTER TABLE `teacher`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `teacher_class`
 --
@@ -1494,7 +1494,7 @@ MODIFY `ID` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
 -- AUTO_INCREMENT for table `user_account`
 --
 ALTER TABLE `user_account`
-MODIFY `ID` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
+MODIFY `ID` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- Constraints for dumped tables
 --
