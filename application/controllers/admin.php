@@ -511,7 +511,6 @@ class Admin extends CI_Controller {
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('teacher_fname', 'First Name', 'required|trim|max_length[20]|callback_alpha_dash_space');
-        $this->form_validation->set_rules('teacher_mname', 'Middle Name', 'required|trim|max_length[20]|callback_alpha_dash_space');
         $this->form_validation->set_rules('teacher_lname', 'Last Name', 'required|trim|max_length[20]|callback_alpha_dash_space');
         $this->form_validation->set_rules('login_id', 'ID login', 'required|trim|alpha_numeric|min_length[10]|max_length[15]|is_unique[teacher.teacher_id]');
 
@@ -578,7 +577,6 @@ class Admin extends CI_Controller {
         $this->form_validation->set_rules('teacher_id', 'Teacher ID', 'required|trim|min_length[10]|max_length[15]|alpha_numeric');
         $this->form_validation->set_rules('id', 'id', 'required|trim|numeric');
         $this->form_validation->set_rules('fname', 'First Name', 'required|trim|max_length[20]|callback_alpha_dash_space');
-        $this->form_validation->set_rules('mname', 'Middle Name', 'required|trim|max_length[20]|callback_alpha_dash_space');
         $this->form_validation->set_rules('lname', 'Last Name', 'required|trim|max_length[20]|callback_alpha_dash_space');
 
         if($this->form_validation->run() == FALSE) {
@@ -596,7 +594,6 @@ class Admin extends CI_Controller {
             $update = array(
                 'teacher_id' => $this->input->post('teacher_id'),
                 'fname' => $this->input->post('fname'),
-                'mname' => $this->input->post('mname'),
                 'lname' => $this->input->post('lname')
             );
 
@@ -859,7 +856,6 @@ class Admin extends CI_Controller {
                             'student_id'=>$row['student_id'],
                             'lname'=>$row['lname'],
                             'fname'=>$row['fname'],
-                            'mname'=>$row['mname'],
                             'programID'=> $this->input->post('program')
                         );
                     }
@@ -918,7 +914,6 @@ class Admin extends CI_Controller {
         $this->form_validation->set_rules('student_id', 'Student ID', 'required|trim|max_length[9]|numeric|');
         $this->form_validation->set_rules('id', 'id', 'required|trim|numeric');
         $this->form_validation->set_rules('fname', 'First Name', 'required|trim|max_length[20]|callback_alpha_dash_space');
-        $this->form_validation->set_rules('mname', 'Middle Name', 'required|trim|max_length[20]|callback_alpha_dash_space');
         $this->form_validation->set_rules('lname', 'Last Name', 'required|trim|max_length[20]|callback_alpha_dash_space');
 
         if($this->form_validation->run() == FALSE) {
@@ -939,7 +934,6 @@ class Admin extends CI_Controller {
             $update = array(
                 'student_id' => $this->input->post('student_id'),
                 'fname' => $this->input->post('fname'),
-                'mname' => $this->input->post('mname'),
                 'lname' => $this->input->post('lname')
             );
 

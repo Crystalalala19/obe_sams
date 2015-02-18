@@ -33,10 +33,6 @@
                                             <input type="text" name="fname" value="<?php echo set_value('fname', $row['fname']); ?>" id="fname" class="form-control input-sm">
                                         </div>
                                         <div class="form-group">
-                                            <label for="mname">Middle Name:</label>
-                                            <input type="text" name="mname" value="<?php echo set_value('mname', $row['mname']); ?>" id="mname" class="form-control input-sm">
-                                        </div>
-                                        <div class="form-group">
                                             <label for="lname">Last Name:</label>
                                             <input type="text" name="lname" value="<?php echo set_value('lname', $row['lname']); ?>" id="lname" class="form-control input-sm">
                                         </div>

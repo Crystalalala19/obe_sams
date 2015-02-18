@@ -1,7 +1,21 @@
-    <!-- For filter table -->
-    <link href="<?php echo base_url();?>assets/css/bootstrap-editable.css" rel="stylesheet">
-    <link href="<?php echo base_url();?>assets/css/bootstrap-filterable.css" rel="stylesheet">
-    <!-- End filter table -->
+    <!-- PDF doesn't work, EDIT: now fixed -->
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/dataTables.bootstrapv3.css">
+
+    <!-- Datatables Script -->
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/dataTables.tableTools.min.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/datatables-bootstrapv3.js"></script>
+    <!-- End DataTables -->
+
+    <style type="text/css">
+        td.details-control {
+            background: url('http://datatables.net/examples/resources/details_open.png') no-repeat center center;
+            cursor: pointer;
+        }
+        tr.shown td.details-control {
+            background: url('http://datatables.net/examples/resources/details_close.png') no-repeat center center;
+        }
+    </style>
 
     <div class="main-inner">
         <div class="container">
@@ -74,20 +88,20 @@
                             <hr>
 
                             <?php if(!empty($result)): ?>
-                            <table class="table table-striped table-bordered" id="filterme">
+                            <table class="table table-striped table-bordered" cellspacing="0" width="100%" id="student_report">
                                 <thead>
                                     <tr>
-                                        <th width="10%">Student ID <i class="icon-filter"></th>
-                                        <th width="15%">Name <i class="icon-filter"></th>
-                                        <th width="10%">Subject <i class="icon-filter"></th>
-                                        <th width="15%">Teacher <i class="icon-filter"></th>
-                                        <th width="10%">PO <i class="icon-filter"></th>
+                                        <th width="2%" class="no-sort"></th>
+                                        <th width="15%">Name</th>
+                                        <th width="10%">Subject</th>
+                                        <th width="15%">Teacher</th>
+                                        <th width="10%">PO</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach($result as $key => $row): ?>
-                                        <tr>
-                                            <td><?php echo $row['studentID'];?></td>
+                                        <tr data-child-id="<?php echo $row['studentID'];?>" data-child-level="<?php echo $row['year_level'];?>">
+                                            <td class="details-control"></td>
                                             <td><?php echo $row['sfname'].' '.$row['slname'];?></td>
                                             <td><?php echo $row['courseCode'].' Grp. '.$row['group_num'];?></td>
                                             <td><?php echo $row['tfname'].' '.$row['tlname'];?></td>
@@ -96,9 +110,7 @@
                                     <?php endforeach;?>
                                 </tbody>
                             </table>
-
                             <?php endif;?>
-
                         </div> <!-- /widget-content -->  
                     </div> <!-- /widget -->                 
                 </div> <!-- /span12 -->         
@@ -106,17 +118,84 @@
         </div> <!-- /container -->
     </div> <!-- /main-inner -->
 
-    <!-- Filter table -->
-    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/bootstrap-editable.min.js"></script>
-    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/filterable-utils.js"></script>
-    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/filterable-cell.js"></script>
-    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/filterable-row.js"></script>
-    <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/filterable.js"></script>
-    <!-- End filter table -->
-
     <script type="text/javascript" language="javascript">
         var d = document.getElementById("report_dropdown");
         d.className = d.className + " active";
 
-        $('#filterme').filterable();
+        var dataTableOptions = {
+            //Auto sort column
+            "order": [[1,'asc']],
+
+            //Disable sorting with class no-sort
+            "columnDefs": [
+                { targets: 'no-sort', orderable: false }
+            ],
+
+            "bLengthChange": true,
+            "bFilter": true,
+            "bAutoWidth": false 
+        };
+
+        var tableToolsOptions = {
+            "sSwfPath": "http://cdn.datatables.net/tabletools/2.2.3/swf/copy_csv_xls_pdf.swf",
+            "aButtons": [ {
+                    "sExtends": "copy",
+                    "sButtonText": "Copy"
+                }, 
+                {
+                    "sExtends":    "collection",
+                    "sButtonText": "Save as...",
+                    "aButtons":    [ {
+                            "sExtends": "xls",
+                            "sTitle": "Teacher List",
+                            "oSelectorOpts": {
+                                page: 'current'
+                            }
+                        }, {
+                            "sExtends": "pdf",
+                            "sTitle": "Teacher List",
+                            "sButtonText": "PDF"
+                        }
+                    ]
+                }
+            ]
+        };
+
+        /* Formatting function for row details - modify as you need */
+        function format ( id, level) {
+            // `d` is the original data object for the row
+            return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+                '<tr>'+
+                    '<td>Student ID: '+id+'</td>'+
+                '</tr>'+
+                '<tr>'+
+                    '<td>Year Level: '+level+'</td>'+
+                '</tr>'+
+            '</table>';
+        }
+
+        var table = $('#student_report').DataTable( dataTableOptions );
+
+        // Add event listener for opening and closing details
+        $('#student_report tbody').on('click', 'td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = table.row( tr );
+     
+            if ( row.child.isShown() ) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child( format( tr.data('child-id'), tr.data('child-level') ) ).show();
+                tr.addClass('shown');
+            }
+        } );
+
+        $('.dataTables_filter input').attr("placeholder", " Enter keyword");
+
+        var tt = new $.fn.dataTable.TableTools( table, tableToolsOptions );
+
+        $( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
     </script>
