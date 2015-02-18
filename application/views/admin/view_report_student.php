@@ -92,9 +92,9 @@
                                 <thead>
                                     <tr>
                                         <th width="2%" class="no-sort"></th>
-                                        <th width="15%">Name</th>
+                                        <th width="10%">Name</th>
                                         <th width="10%">Subject</th>
-                                        <th width="15%">Teacher</th>
+                                        <th width="10%">Teacher</th>
                                         <th width="10%">PO</th>
                                     </tr>
                                 </thead>
