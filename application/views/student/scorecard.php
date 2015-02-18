@@ -37,35 +37,44 @@
                         <?php endforeach; ?>  
                         </center></h4>  
                         <hr>
-
-                         <table id="scorecard_student" class="table table-striped table-bordered">
-                            <thead>
-                              <tr>
-                                <th>Code </th>
-                                 <?php for($x = 1; $x <= $po_count; $x++):?>
-                                    <th>PO <?php echo $x;?></i></th>
-                                <?php endfor;?>
-                              </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach($class_list as $key => $row3): ?>
-                                <tr>
-                                    <td width="7%"><?php echo $row3['courseCode']; ?></td>
-                                    <?php for($x=0; $x < $po_count; $x++): ?>
-                                        <td width="7%"><?php echo number_format($row3['score'][$x]['score'],1);?></td>
-                                    <?php endfor;?>   
-                                </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                            <tfoot>
-                                <tr bgcolor="#FFF380">
-                                    <td><center>Average</center></td>
-                                    <?php for($x = 1; $x <= $po_count; $x++):?>
-                                    <td></td>
+                        <div style="height:300px;width:1130px;overflow:auto;">
+                            <table id="scorecard_student" class="table table-striped table-bordered">
+                                <thead>
+                                  <tr>
+                                    <th>Code </th>
+                                     <?php for($x = 1; $x <= $po_count; $x++):?>
+                                        <th>PO <?php echo $x;?></i></th>
                                     <?php endfor;?>
-                                </tr>
-                            </tfoot>
-                        </table>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach($class_list as $key => $row3): ?>
+                                    <tr>
+                                        <td width="7%"><?php echo $row3['courseCode']; ?></td>
+                                        <?php for($x=0; $x < $po_count; $x++): ?>
+                                            <td><?php 
+                                                    if($row3['score'][$x]['score'] == ''){
+                                                        echo '';
+                                                    }
+                                                    else{
+                                                        echo number_format($row3['score'][$x]['score'],1);
+                                                    }
+                                                ?>
+                                            </td>
+                                        <?php endfor;?>   
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                                <tfoot>
+                                    <tr bgcolor="#FFF380">
+                                        <td><center>Average</center></td>
+                                        <?php for($x = 1; $x <= $po_count; $x++):?>
+                                        <td></td>
+                                        <?php endfor;?>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>    
                     </div> <!-- /widget-content -->
                 </div> <!-- /widget -->                 
             </div> <!-- /span12 -->         
@@ -75,27 +84,25 @@
 
 
 <script type="text/javascript">
-        var values = [],
-            table = document.getElementById('scorecard_student'),
+         var table = document.getElementById('scorecard_student'),
             rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr'),
             footer = table.getElementsByTagName('tfoot')[0];
 
-        for(var i=1; i<=<?php echo $po_count;?>; i++){
-            values[i] = [];
-            for(var j=0, l=rows.length; j<l; j++){
-                values[i].push(
-                    parseFloat(
+        for (var i = 1; i <= <?php echo $po_count; ?>; i++) {
+            var sum = numOfValues = 0;
+            for (var j = 0, l = rows.length; j < l; j++) {
+                try {
+                    sum += parseFloat(
                         rows[j].getElementsByTagName('td')[i]
-                      .innerHTML
-                    )
-                );
+                        .innerHTML
+                    );
+                    numOfValues++;
+                } catch (e) {}
             }
 
-            var score = values[i].reduce(function(pv,cv){return pv + cv;},0) / values[i].length;
-            footer.getElementsByTagName('td')[i].innerHTML = Math.round(score * 100) / 100;
-          
-            if( isNaN(footer.getElementsByTagName('td')[i].innerHTML) )
-                footer.getElementsByTagName('td')[i].innerHTML = " ";
+            var avg = sum / numOfValues;
+            footer.getElementsByTagName('td')[i]
+            .innerHTML = Math.round(avg * 100) / 100;
         }
 
    var dataTableOptions = {
