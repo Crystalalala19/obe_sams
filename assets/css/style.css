@@ -14,8 +14,8 @@
    LOGIN SECTION
     ===================================*/
 .login-field {
-    color: #237923;
-    border-color: #237923;
+   	color: #00904B;
+    border-color: #00904B;
 }
 
 /*=====================================
@@ -42,16 +42,16 @@ body {
 }
   
 h2 {
-    color:#237923;
+    color:#00904B;
     font-weight:900;
     
 }
 h3{
-    color:#237923;
+    color:#00904B;
 }
 
 .fa {
-    color:#F0BC1A;
+    color:#00904B;
 }
  /*=====================================
   PRELOADER STYLES 
@@ -85,7 +85,7 @@ h3{
 /*Menu border Color*/
 .navbar-default {
     border-color: #006600;
-    background-color:#237923;
+    background-color:#00904B;
 }
 /*Logo Image */
 .navbar-brand-logo {
@@ -94,11 +94,11 @@ h3{
 }
 /*top-menu links color*/
 .navbar-default .navbar-nav > li > a {
-    color: #f0bc1a;
+    color: #FEEA65;
 }
 /*top-menu links color on hover*/
     .navbar-default .navbar-nav > li > a:hover {
-        color: #f0bc1a;
+        color: #FEEA65;
     }
 
 /*top-menu links & margin*/    
@@ -156,7 +156,7 @@ background-size: cover;
         min-height:700px;
     }
     #home h3 {
-        color:#f0bc1a;
+        color:#FEEA65;
     }
     .div-trans {
         position: relative;
@@ -276,12 +276,12 @@ p {
     background-color: #efefef; 
 }
 .portfolio-item {
-    border:5px solid #F0BC1A;
+    border:5px solid #FEEA65;
     margin:3px;
 }
     .portfolio-item p {
         padding:50px;
-        color:#fff;
+        color:#00904B;
     }
 
 .portfolio-item .overlay {
@@ -354,12 +354,12 @@ p {
 .media-headings {
     margin-top: 0px;
     margin-bottom: 5px;
-    color: #F0BC1A;
+    color: #FEEA65;
     font-size: 23px;
 }
 
 .media-title {
-    color: #F0BC1A;
+    color: #FEEA65;
     font-weight: 900;
 }
 /*==========================================
@@ -385,8 +385,8 @@ p {
 
 #footser-end {
     text-align:right;
-    background-color: #237923;
-    color: #F0BC1A;
+    background-color: #00904B;
+    color: #FEEA65;
      padding:10px;
 }
 
