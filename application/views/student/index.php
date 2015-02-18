@@ -44,7 +44,7 @@
                                     </div>
                                 </li>
                             </ul>
-                        <div style="height:260px;width:1130px;overflow:auto;">
+                            <div class="clearfix"></div>
                             <table id="view_classlist" class="table table-striped table-bordered dataTable no-footer">
                                 <thead>
                                     <tr>
@@ -81,7 +81,6 @@
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
-                        </div>
                     </div> <!-- /widget-content -->
                 </div> <!-- /widget -->                 
             </div> <!-- /span12 -->         
