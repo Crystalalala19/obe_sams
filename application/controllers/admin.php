@@ -7,14 +7,9 @@ class Admin extends CI_Controller {
         $this->load->model('model_admin');
     }
 
-    // Sublime -> Preferences -> Settings - User
-    // "translate_tabs_to_spaces": true,
-    // "tab_size": 4,
-    // "indent_to_bracket": true,
-    // "detect_indentation": false
-
     public function index(){
-        
+        $this->check_role();
+
         $data['title'] = 'OBE SAMS Academic';
 
         $this->load->view('admin/header', $data);
@@ -23,16 +18,13 @@ class Admin extends CI_Controller {
     }
 
     // CALLBACK and/or FUNCTIONS
-    
-
     function alpha_dash_space($str_in) {
         if (! preg_match("/^([-a-z-9 ])+$/i", $str_in)) {
             $this->form_validation->set_message('alpha_dash_space', 'The %s field may only contain alpha characters, spaces, and dashes.');
             return FALSE;
         } 
-        else {
+        else 
             return TRUE;
-        }
     }
 
     function program_ajax() {
@@ -41,29 +33,144 @@ class Admin extends CI_Controller {
         );
 
         $result = $this->model_admin->get_programYears($program_data);
-
         echo json_encode($result);
     }
 
     function get_semester() {
         $date = getdate();
 
-        if($date['mon'] >= 6 AND $date['mon'] <= 10) {
+        if($date['mon'] >= 6 AND $date['mon'] <= 10)
             $semester = 1;
-        }
         elseif($date['mon'] >= 11 OR $date['mon'] <= 3) {
             $semester = 2;
+
         }
-        else {
+        else
             $semester = 'summer';
-        }
         
         return $semester;
+    }
+
+    function error_404() {
+        $data['title'] = 'Error 404';
+        $this->load->view('error', $data);
+    }
+
+    function download($file_type = '') {
+        if(empty($file_type))
+            $this->error_404();
+        else {
+            $this->load->helper('download');
+
+            if($file_type == 'csv') {
+                $data = file_get_contents('uploads/Template Upload Class.csv');
+                $name = 'Template Upload Class.csv';
+            }
+            elseif($file_type == 'pdf') {
+                $data = file_get_contents('uploads/test.pdf');
+                $name = 'Test for PDF.pdf';
+            }
+
+            force_download($name, $data); 
+        }
+    }
+
+    function upload() {
+        $this->load->library('csvimport');
+
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = 'csv';
+        $config['max_size'] = '99999';
+        $this->load->library('upload', $config);
+
+        if(!$this->upload->do_upload()) {
+            $message = $this->upload->display_errors('
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
+                    <i class="icon-exclamation-sign"></i>
+                    <span class="sr-only">Error: </span>',
+                '</div>');
+            $this->session->set_flashdata('message', $message);
+        }
+        else {
+            $file_data = $this->upload->data();
+            $file_path =  './uploads/'.$file_data['file_name'];
+
+            if ($this->csvimport->get_array($file_path)) {
+                $insert_data = array();
+                $nonExistingCourse = array();
+                $nonExistingTeacher = array();
+                $csv_array = $this->csvimport->get_array($file_path, array('Teacher ID', 'Group Number', 'Course Code', 'Start Time', 'End Time', 'Days'));
+                
+                foreach ($csv_array as $row) {
+                    if(!$this->model_admin->check_course($row['Course Code'])) {
+                        $nonExistingCourse[] = $row['Course Code'];
+                    }
+                    elseif(!$this->model_admin->check_teacher($row['Teacher ID'])) {
+                        $nonExistingTeacher[] = $row['Teacher ID'];
+                    }    
+                    else {
+                        $insert_data[] = array(
+                            'group_num'=>$row['Group Number'],
+                            'courseCode'=>$row['Course Code'],
+                            'start_time'=>$row['Start Time'],
+                            'end_time'=>$row['End Time'],
+                            'days'=>$row['Days'],
+                            'semester'=> $this->get_semester(),
+                            'school_year'=> date('Y'),
+                            'teacherID'=> $row['Teacher ID']
+                        );
+                    }
+                }
+
+                //Deletes uploaded file
+                unlink($file_path);
+
+                if(!empty($nonExistingTeacher))
+                    $this->session->set_flashdata('non_existingTeacher', $nonExistingTeacher);
+                if(!empty($nonExistingCourse))
+                    $this->session->set_flashdata('non_existingCourse', $nonExistingCourse);
+                
+                if(empty($nonExistingCourse) AND empty($nonExistingTeacher)) {
+                    $result = $this->model_admin->insert_classes($insert_data);
+
+                    if($result['is_success'] == FALSE) {
+                        $message = '<strong>Error: </strong>'.  $result['db_error'];
+                        $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
+
+                        $this->session->set_flashdata('message', $message);
+                    }
+                    else {
+                        $message = '<strong>Success!</strong> Classes added.';
+                        $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
+
+                        $this->session->set_flashdata('message', $message);
+                    }
+                }
+            }
+            else {
+                $message = '<strong>Error: </strong> Inserting .CSV file.';
+                $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
+
+                $this->session->set_flashdata('message', $message);
+            }            
+        }
+        redirect('admin/teachers/upload');
+    }
+
+    function check_role() {
+        header("cache-Control: no-store, no-cache, must-revalidate");
+        header("cache-Control: post-check=0, pre-check=0", false);
+        header("Pragma: no-cache");
+        header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
+        
+        if($this->session->userdata('role') != 'admin')
+            redirect('site');
     }
     // END FUNCTIONS
 
     public function program_outcome() {
-       
+        $this->check_role();
         
         $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Program Outcomes';
@@ -167,7 +274,7 @@ class Admin extends CI_Controller {
     }
 
     public function add_program(){
-
+        $this->check_role();
 
         $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Add new Curriculum';
@@ -295,7 +402,7 @@ class Admin extends CI_Controller {
     }
 
     public function view_programs() {
-      
+        $this->check_role();
         
         $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'View Curriculums';
@@ -344,7 +451,7 @@ class Admin extends CI_Controller {
     }
 
     public function edit_program() {
-       
+        $this->check_role();
 
         $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Edit Curriculum';
@@ -413,10 +520,8 @@ class Admin extends CI_Controller {
             );
 
             $year = $this->input->post('effective_year');
-
             $progam_id = $this->model_admin->get_programID($program);
             $year_id = $this->model_admin->get_programYearID($program_id, $year);
-
 
             $po_data = array();
             $course_data = array();
@@ -475,7 +580,7 @@ class Admin extends CI_Controller {
     }
 
     public function delete_programYear() {
-     
+        $this->check_role();
 
         $program = $this->uri->segment(4);
         $year = $this->uri->segment(5);
@@ -502,7 +607,6 @@ class Admin extends CI_Controller {
         }
 
         $program_id = $this->model_admin->get_programID($program_data);
-
         $result = $this->model_admin->delete_programYear($year, $program_id);
 
         if($result['is_success'] == FALSE) {
@@ -520,7 +624,7 @@ class Admin extends CI_Controller {
 
     // TEACHER
     public function teachers() {
-       
+        $this->check_role();
 
         $this->load->library('encrypt');
         $this->load->library('form_validation');
@@ -569,9 +673,9 @@ class Admin extends CI_Controller {
         if($data['teacher_list'] == FALSE) {
             $message = 'No teachers found in record. Please consider adding.';
             $data['message'] = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
-        } else {
+        } 
+        else
             $data['message'] = '';
-        }
 
         $this->load->view('admin/header', $data);
         $this->load->view('admin/view_teachers', $data);
@@ -579,7 +683,7 @@ class Admin extends CI_Controller {
     }
 
     public function edit_teacher(){
-   
+        $this->check_role();
 
         $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Edit Teacher Information';
@@ -633,7 +737,7 @@ class Admin extends CI_Controller {
     }
 
     public function upload_class() {
-      
+        $this->check_role();
         
         $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Assign Classes';
@@ -644,94 +748,8 @@ class Admin extends CI_Controller {
         $this->load->view('admin/footer');
     }
 
-    public function upload() {
-      
-        $this->load->library('csvimport');
-
-        $config['upload_path'] = './uploads/';
-        $config['allowed_types'] = 'csv';
-        $config['max_size'] = '99999';
-        $this->load->library('upload', $config);
-
-        if(!$this->upload->do_upload()){
-            $message = $this->upload->display_errors('
-                <div class="alert alert-danger alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
-                    <i class="icon-exclamation-sign"></i>
-                    <span class="sr-only">Error: </span>',
-                '</div>');
-            $this->session->set_flashdata('message', $message);
-        }
-        else{
-            $file_data = $this->upload->data();
-            $file_path =  './uploads/'.$file_data['file_name'];
-
-            if ($this->csvimport->get_array($file_path)) {
-                $insert_data = array();
-                $nonExistingCourse = array();
-                $nonExistingTeacher = array();
-                $csv_array = $this->csvimport->get_array($file_path, array('Teacher ID', 'Group Number', 'Course Code', 'Start Time', 'End Time', 'Days'));
-                
-                foreach ($csv_array as $row) {
-                    if(!$this->model_admin->check_course($row['Course Code'])) {
-                        $nonExistingCourse[] = $row['Course Code'];
-                    }
-                    elseif(!$this->model_admin->check_teacher($row['Teacher ID'])) {
-                        $nonExistingTeacher[] = $row['Teacher ID'];
-                    }    
-                    else {
-                        $insert_data[] = array(
-                            'group_num'=>$row['Group Number'],
-                            'courseCode'=>$row['Course Code'],
-                            'start_time'=>$row['Start Time'],
-                            'end_time'=>$row['End Time'],
-                            'days'=>$row['Days'],
-                            'semester'=> $this->get_semester(),
-                            'school_year'=> date('Y'),
-                            'teacherID'=> $row['Teacher ID']
-                        );
-                    }
-                }
-
-                //Deletes uploaded file
-                unlink($file_path);
-
-                if(!empty($nonExistingTeacher)) {
-                    $this->session->set_flashdata('non_existingTeacher', $nonExistingTeacher);
-                }
-                if(!empty($nonExistingCourse)) {
-                    $this->session->set_flashdata('non_existingCourse', $nonExistingCourse);
-                }
-                
-                if(empty($nonExistingCourse) AND empty($nonExistingTeacher)) {
-                    $result = $this->model_admin->insert_classes($insert_data);
-
-                    if($result['is_success'] == FALSE) {
-                        $message = '<strong>Error: </strong>'.  $result['db_error'];
-                        $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
-
-                        $this->session->set_flashdata('message', $message);
-                    }
-                    else {
-                        $message = '<strong>Success!</strong> Classes added.';
-                        $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
-
-                        $this->session->set_flashdata('message', $message);
-                    }
-                }
-            }
-            else {
-                $message = '<strong>Error: </strong> Inserting .CSV file.';
-                $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
-
-                $this->session->set_flashdata('message', $message);
-            }            
-        }
-        redirect('admin/teachers/upload');
-    }
-
     public function view_class() {
-       
+        $this->check_role();
         
         $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Assigned Classes';
@@ -786,7 +804,7 @@ class Admin extends CI_Controller {
     }
 
     public function view_class_scorecard() {
-       
+        $this->check_role();
         
         $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Students';
@@ -816,7 +834,6 @@ class Admin extends CI_Controller {
                 } else {
                     $data['class_list'][$key]['grade'][$i] = "";
                 }
-
                 $i++;
             }
         }
@@ -824,169 +841,18 @@ class Admin extends CI_Controller {
         if($data['class_list'] == FALSE) {
             $message = 'The assigned teacher has not yet uploaded his/her class.';
             $data['message'] = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
-        } else {
+        } 
+        else
             $data['message'] = '';
-        }
 
         $this->load->view('admin/header', $data);
         $this->load->view('admin/view_classes_scorecard', $data);
         $this->load->view('admin/footer');
     }
-
     // END TEACHER
 
-    public function upload_students() {
-       
-        
-        $this->load->library('csvimport');
-        $this->load->library('form_validation');
-       
-        $data['title'] = 'OBE SAMS Academic';
-        $data['header'] = 'Upload Student List';
-        
-        $data['programs'] = $this->model_admin->check_rows('program');
-
-        $config['upload_path'] = './uploads/';
-        $config['allowed_types'] = 'csv';
-        $config['max_size'] = '1000';
-        $this->load->library('upload', $config);
-
-        $this->form_validation->set_rules('program', 'Program List', 'required|trim');
-
-        if($this->form_validation->run() == FALSE) {
-            $data['message'] = '';
-        }
-        elseif(!$this->upload->do_upload()){
-            $data['message'] = $this->upload->display_errors('
-            <div class="alert alert-danger alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                <span class="sr-only">Error:</span>',
-            '</div>');;
-        }
-        else{
-            $file_data = $this->upload->data();
-            $file_path =  './uploads/'.$file_data['file_name'];
-            
-            if ($this->csvimport->get_array($file_path)) {
-                $insert_data = array();
-                $csv_array = $this->csvimport->get_array($file_path);
-
-                foreach ($csv_array as $row) {
-                    if(!$this->model_admin->if_id_exists($row['student_id'])) {
-                        $insert_data = array(
-                            'student_id'=>$row['student_id'],
-                            'lname'=>$row['lname'],
-                            'fname'=>$row['fname'],
-                            'programID'=> $this->input->post('program')
-                        );
-                    }
-                    $result = $this->model_admin->insert_csv($insert_data);
-                }
-
-                if($result['is_success'] == TRUE) {
-                    $message = '<strong>Success!</strong> Teacher added.';
-                    $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
-
-                    $this->session->set_flashdata('message', $message);
-                    redirect(current_url());
-                }
-                else {
-                    $message = '<strong>Error: </strong>'.  $account_result['db_error'];
-                    $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
-
-                    $data['message'] = $message;
-                }
-            }
-            else {
-                $data['message'] = 'File path error occured';
-            }            
-        }
-
-        $this->load->view('admin/header', $data);
-        $this->load->view('admin/upload_students', $data);
-        $this->load->view('admin/footer');
-    }
-
-    public function view_students(){
-       
-        
-        $data['title'] = 'OBE SAMS Academic';
-        $data['header'] = 'View Student List';
-        $data['student_list'] = $this->model_admin->check_rows('student');
-
-        if($data['student_list'] == FALSE) {
-            $message = 'There are no currently students added.';
-            $data['message'] = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
-        }
-        else {
-            $data['message'] = '';
-        }
-
-        $this->load->view('admin/header', $data);
-        $this->load->view('admin/view_students', $data);
-        $this->load->view('admin/footer');
-    }
-
-    public function edit_student() {
-        
-        
-        $data['title'] = 'OBE SAMS Academic';
-        $data['header'] = 'Edit Student Information';
-        $data['message'] = '';
-
-        $this->load->library('form_validation');
-
-        $this->form_validation->set_rules('student_id', 'Student ID', 'required|trim|max_length[9]|numeric|');
-        $this->form_validation->set_rules('id', 'id', 'required|trim|numeric');
-        $this->form_validation->set_rules('fname', 'First Name', 'required|trim|max_length[20]|callback_alpha_dash_space');
-        $this->form_validation->set_rules('lname', 'Last Name', 'required|trim|max_length[20]|callback_alpha_dash_space');
-
-        if($this->form_validation->run() == FALSE) {
-            $id = $this->uri->segment(4);
-
-            if(!$this->model_admin->check_rowID('student', $id)) {
-                $message = 'ID number does not exists.';
-                $data['message'] = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
-            }
-            else {
-                //Student's Information
-                $data['row'] = $this->model_admin->check_rowID('student', $id);
-            }
-        }
-        else {
-            $id = $this->input->post('id');
-
-            $update = array(
-                'student_id' => $this->input->post('student_id'),
-                'fname' => $this->input->post('fname'),
-                'lname' => $this->input->post('lname')
-            );
-
-            $result = $this->model_admin->update_student($id, $update);
-
-            if($result['is_success'] == FALSE) {
-                $message = '<strong>Error: </strong>'.  $result['db_error'];
-                $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
-
-                $data['message'] = $message;
-            }
-            else {
-                $message = '<strong>Success!</strong> Student updated.';
-                $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
-
-                $this->session->set_flashdata('message2', $message);
-                redirect(current_url());
-            }
-        }
-
-        $this->load->view('admin/header', $data);
-        $this->load->view('admin/edit_student', $data);
-        $this->load->view('admin/footer');
-    }
-
     public function report_teacher() {
-       
+        $this->check_role();
         
         $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Teacher Reports';
@@ -1002,7 +868,6 @@ class Admin extends CI_Controller {
             $data['teacher_list'][$key]['class_population'][] = $this->model_admin->check_teacherClassPopulation($value['ID']);
         }
 
-
         // print_r($data['teacher_list']);die();
 
         $this->load->view('admin/header', $data);
@@ -1011,7 +876,8 @@ class Admin extends CI_Controller {
     }
 
     public function report_student() {
-     
+        $this->check_role();
+        
         $this->load->library('form_validation');
 
         $data['title'] = 'OBE SAMS Academic';
@@ -1061,23 +927,8 @@ class Admin extends CI_Controller {
         $this->load->view('admin/footer');
     }
 
-    public function download($file_type = '') {
-        $this->load->helper('download');
-
-        if($file_type == 'csv') {
-            $data = file_get_contents('uploads/Template Upload Class.csv');
-            $name = 'Template Upload Class.csv';
-        }
-        elseif($file_type == 'pdf') {
-            $data = file_get_contents('uploads/test.pdf');
-            $name = 'Test for PDF.pdf';
-        }
-
-        force_download($name, $data); 
-    }
-
     public function activity_log() {
-       
+        $this->check_role();
         
         $data['header'] = 'Activity Log';
         $data['title'] = 'OBE SAMS Academic';
@@ -1090,7 +941,7 @@ class Admin extends CI_Controller {
     } 
 
     public function student_scorecard() {
-        
+        $this->check_role();
         
         $data['header'] = 'Student Scorecard';
         $data['title'] = 'OBE SAMS Academic';
@@ -1120,7 +971,6 @@ class Admin extends CI_Controller {
             }
             $i++;
         }
-
 
         $this->load->view('admin/header', $data);
         $this->load->view('admin/view_student_scorecard', $data);

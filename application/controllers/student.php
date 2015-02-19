@@ -8,9 +8,7 @@ class Student extends CI_Controller {
     }
 
     public function index(){
-        if(!$this->session->userdata('is_logged_in')){
-            redirect('site');
-        }
+        $this->check_role();
 
         $data['user'] = $this->model_student->select_user();
         $data['title'] = 'OBE SAMS Academic';
@@ -27,10 +25,13 @@ class Student extends CI_Controller {
         $this->load->view('student/footer');
     }
 
-    function scorecard(){
-        if(!$this->session->userdata('is_logged_in')){
+    function check_role() {
+        if($this->session->userdata('role') != 'student')
             redirect('site');
-        }
+    }
+
+    public function scorecard(){
+        $this->check_role();
 
         $data['user'] = $this->model_student->select_user();
         $data['title'] = 'OBE SAMS Academic';
@@ -60,10 +61,6 @@ class Student extends CI_Controller {
                 }
             }
             $i++;
-
-            // print_r($data['class_list']);
-            // die();
-
         }
 
         $this->load->view('student/header', $data);
@@ -72,6 +69,8 @@ class Student extends CI_Controller {
     }
 
     public function account() {
+        $this->check_role();
+
         $this->load->library('encrypt');
         $this->load->library('form_validation');
 
@@ -122,9 +121,7 @@ class Student extends CI_Controller {
     }
 
     function po_legend() {
-        if(!$this->session->userdata('is_logged_in')){
-            redirect('site');
-        }
+        $this->check_role();
 
         $data['user'] = $this->model_student->select_user();
         $data['title'] = 'OBE SAMS Academic';
@@ -132,7 +129,6 @@ class Student extends CI_Controller {
         $student_id = $this->session->userdata('idnum');
         $data['view_po'] = $this->model_student->view_po($student_id);
         $data['student_year'] = $this->model_student->student_year($student_id);
-
 
         $this->load->view('student/header', $data);
         $this->load->view('student/po_legend', $data);

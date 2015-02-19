@@ -32,13 +32,11 @@ class Site extends CI_Controller {
 		$this->load->view("index/footer");
 	}	
 
-	public function members() {
-		
-		if($this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'admin') {
+    //CALLBACKS and/or FUNCTIONS
+	function members() {
+		if($this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'admin')
 			redirect('admin');
-		}  
 		elseif($this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'teacher') {
-			 
 			$data['user'] = $this->model_users->select_user();
 			$data['title'] = "OBE SAMS Academic";
             $data['log'] = $this->model_users->log();
@@ -47,39 +45,56 @@ class Site extends CI_Controller {
 			$this->load->view('teacher/index', $data);
 			$this->load->view("teacher/footer");
 		} 
-        elseif($this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'student') {
+        elseif($this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'student')
             redirect('student');
-        } 
-		else{  
-			redirect('site/restricted');
-		}
+		else
+			$this->error_404();
 	}
 
-	public function restricted() {
-		$this->load->view('index/restricted');
-	}
-
-    public function validate_credentials($query) {
+    function validate_credentials($query) {
         $data = array('idnum' => $this->input->post('idnum'));
         $pass = $this->input->post('password');
-        if($this->model_users->can_log_in($data, $pass)) {
+        if($this->model_users->can_log_in($data, $pass))
             return true;
-        } 
         else {
             $this->form_validation->set_message('validate_credentials', 'Incorrect Username and/or Password combination.');
             return false;
         }
     }
 
-    public function logout() {
+    function download($file_type = '') {
+        $this->load->helper('download');
+        
+        if($file_type == 'class') {
+            $data = file_get_contents('uploads/Template Grades.csv');
+            $name = 'Template Grades.csv';
+        }
+        elseif($file_type == 'pdf') {
+            $data = file_get_contents('uploads/test.pdf');
+            $name = 'Test for PDF.pdf';
+        }
+
+        force_download($name, $data); 
+    }
+
+    function error_404() {
+        $data['title'] = 'Error 404';
+        $this->load->view('error', $data);
+    }
+
+    function check_role() {
+        if($this->session->userdata('role') != 'teacher')
+            redirect('site');
+    }
+
+    function logout() {
         $this->session->sess_destroy();
         redirect(base_url());
     }
+    //END CALLBACK and/or FUNCSTIONS
 
     public function course_list(){
-        if(!$this->session->userdata('is_logged_in')){
-            redirect('site');
-        }
+        $this->check_role();
 
         $year = $this->uri->segment(3);
 
@@ -126,9 +141,7 @@ class Site extends CI_Controller {
    }
 
     public function class_list(){
-        if(!$this->session->userdata('is_logged_in')){  
-            redirect('site');
-        }
+        $this->check_role();
 
         $this->load->library('csvimport');
 
@@ -189,8 +202,9 @@ class Site extends CI_Controller {
                 $to_insert_grade = array();
                 $csv_array = $this->csvimport->get_array($file_path);
                 $headers = $this->csvimport->get_headers();
-                // print_r($csv_array);die();
                 $po_courses = $this->model_users->get_poCourse($student_courseID);
+
+                $this->db->trans_start();
 
                 foreach ($csv_array as $row) {
                     $check_studentID = $this->model_users->check_studentRecord($row['Student ID']);
@@ -200,8 +214,7 @@ class Site extends CI_Controller {
                         $insert_data = array(
                             'student_id'=>$row['Student ID'],
                             'lname'=>$row['Last Name'],
-                            'fname'=>$row['First Name'],
-                            'mname'=>$row['Middle Name']
+                            'fname'=>$row['First Name']
                         );
 
                         $account_data = array(
@@ -210,14 +223,13 @@ class Site extends CI_Controller {
                             'password' => $this->encrypt->sha1($row['Student ID'])
                         );
 
-                        $this->model_users->insert_student($insert_data, $account_data);
-
+                        $result = $this->model_users->insert_student($insert_data);
                         $insert_id = $this->model_users->get_lastId();
                         $student_id = $this->model_users->get_newInsertStudent($insert_id);
+                        $this->model_users->insert_studentAccount($account_data);
                     }
-                    else {
+                    else
                         $student_id = $check_studentID;
-                    }
 
                     $studentCourse_data = array(
                         'score' => array(),
@@ -259,18 +271,20 @@ class Site extends CI_Controller {
                     }
                 }
                 
-                $result = $this->model_users->insert_grades($to_insert_grade);
+                $this->model_users->insert_grades($to_insert_grade);
 
                 //Deletes uploaded file
                 unlink($file_path);
 
-                if($result['is_success'] == FALSE) {
+                if($this->db->trans_status() === FALSE) {
+                    $this->db->trans_rollback();
                     $message = '<strong>Error: </strong>Uploading grades.';
                     $message = $this->model_users->notify_message('alert-danger', 'icon-exclamation', $message);
 
                     $this->session->set_flashdata('message', $message);
                 }
                 else {
+                    $this->db->trans_complete();
                     $message = '<strong>Success!</strong> Grades uploaded.';
                     $message = $this->model_users->notify_message('alert-success', 'icon-ok', $message);
 
@@ -293,9 +307,7 @@ class Site extends CI_Controller {
     }
 
     public function scorecard(){
-        if(!$this->session->userdata('is_logged_in')){
-            redirect('site');
-        }
+        $this->check_role();
 
         $student_id = $this->uri->segment(3);
 
@@ -332,15 +344,11 @@ class Site extends CI_Controller {
     }
 
     public function student_list(){
-        if(!$this->session->userdata('is_logged_in')){
-            redirect('site');
-        }
+        $this->check_role();
         
         $session_id = $this->session->userdata('idnum');
         $data['student_list'] = $this->model_users->student_list($session_id);  
         
-
-
         $data['user'] = $this->model_users->select_user();
         $data['title'] = "OBE SAMS Academic";
 
@@ -356,30 +364,8 @@ class Site extends CI_Controller {
         $this->load->view("teacher/footer");
     }
 
-    public function download($file_type = '') {
-        $this->load->helper('download');
-        
-        if($file_type == 'class') {
-            $data = file_get_contents('uploads/Template Grades.csv');
-            $name = 'Template Grades.csv';
-        }
-        elseif($file_type == 'pdf') {
-            $data = file_get_contents('uploads/test.pdf');
-            $name = 'Test for PDF.pdf';
-        }
-
-        force_download($name, $data); 
-    }
-
-    public function error_404() {
-        $data['title'] = 'Error 404';
-        $this->load->view('error', $data);
-    }
-
     public function account() {
-         if(!$this->session->userdata('is_logged_in')){
-            redirect('site');
-        }
+        $this->check_role();
         
         $this->load->library('encrypt');
         $this->load->library('form_validation');
