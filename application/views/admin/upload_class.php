@@ -38,9 +38,12 @@
                         ?>
                                 <div class="control-group">
                                     <div class="pull-right">
-                                        <h3><i class="icon-download-alt icon-2x"></i> Download Template:</h3>
-                                        <a href="<?php echo base_url('admin/download/csv');?>" title="Download .CSV template"><img src="<?php echo base_url('assets/img/excel.png');?>" title=".CSV Template"></a>
+                                        <!-- <h3>Download Template:</h3> -->
+                                        <!-- <a href="<?php echo base_url('admin/download/csv');?>" title="Download .CSV template"><img src="<?php echo base_url('assets/img/excel.png');?>" title=".CSV Template"></a> -->
                                         <!-- <a href="<?php echo base_url('admin/download/pdf');?>"><img src="<?php echo base_url('assets/img/pdf.png');?>"></a> -->
+                                        <h4>Download Template:
+                                        <a href="<?php echo base_url('admin/download/csv');?>"><i class="icon-download-alt icon-2x"></i></a>
+                                        </h4>
                                     </div>
                                     <label for="userfile">Upload .CSV File: </label>
                                     <input type="file" name="userfile" id="userfile" class="filestyle" data-buttonText="Find file" data-buttonName="btn-primary" data-iconName="icon-upload-alt">
