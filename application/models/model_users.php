@@ -279,7 +279,8 @@ class Model_users extends CI_Model {
     }
 
     function log() {
-        $query = $this->db->query("SELECT * FROM student_course 
+        $query = $this->db->query("SELECT student_course.date, teacher_class.group_num, teacher_class.courseCode, teacher_class.start_time, teacher_class.end_time, teacher_class.days, teacher_class.ID 
+                                  FROM student_course 
                                   INNER JOIN teacher_class ON student_course.classID = teacher_class.ID
                                   WHERE teacher_class.teacherID = '".$this->session->userdata('idnum')."' 
                                   GROUP BY student_course.classID ");

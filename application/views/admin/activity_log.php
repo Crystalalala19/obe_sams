@@ -34,7 +34,7 @@
 
                                 <div class="tab-pane" id="tab2">
                                     <div class='panel panel-default grid'>
-                                        <div style="height:400px;width:1150px;overflow:auto;">
+                                        <!-- <div style="height:400px;width:1150px;overflow:auto;"> -->
                                             <ul class="news-items">
                                             <?php foreach($teacher_log as $row1): ?> 
                                                 <li>
@@ -59,7 +59,7 @@
                                                 </li>
                                             <?php endforeach; ?>     
                                             </ul>
-                                        </div>    
+                                        <!-- </div>     -->
                                     </div>
                                 </div>
 
