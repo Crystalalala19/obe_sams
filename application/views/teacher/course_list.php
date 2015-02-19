@@ -34,7 +34,7 @@
                                     <?php endforeach;?>
                                 </select>
                             </div>
-                            <?php if(!empty($this->uri->segment(3))):?>
+                            <?php if(!empty($year)):?>
                             <h4>Academic Year: <?php echo $academic_year.' - '.($academic_year+1);?></h4>                                   
                             <hr>
                             <div class="clearfix"></div>

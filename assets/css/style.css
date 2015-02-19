@@ -120,7 +120,7 @@ h3{
  HOME SECTION
     ===================================*/
 #home{
-background: url(../img/head.jpg) no-repeat center center;
+background: url("../img/head.JPG") no-repeat center center;
 padding: 0;
 -webkit-background-size: cover;
 background-size: cover;
@@ -244,7 +244,6 @@ p {
   DONARS STYLES 
     ===================================*/
 .donars-section {
-    background: url(../img/donars.jpg) no-repeat center center;
     padding: 0;
     -webkit-background-size: cover;
     background-size: cover;
