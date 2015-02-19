@@ -130,6 +130,12 @@ class Model_admin extends CI_Model {
         return $this->check_query();
     }
 
+    function update_equivalents($data) {
+        $query = $this->db->insert_on_duplicate_update_batch('equivalent', $data);
+
+        return $this->check_query();
+    }
+
     function delete_program($data) {
         $query = $this->db->delete('program', $data);
 
@@ -483,10 +489,7 @@ class Model_admin extends CI_Model {
         }
 
         if(!empty($po_num)) {
-            if($po_num != "all")
-                $custom .= " AND poCode LIKE '%".$po_num."' AND po_course.status = '1' AND (score <> '0') ";
-            else
-                $custom .= " AND po_course.status = '1' AND (score <> '0') ";
+            $custom .= " AND po_course.status = '1' AND (score <> '0') ";
         }
 
         $custom .= " GROUP BY student_id, student_course.classID;";
@@ -544,6 +547,17 @@ class Model_admin extends CI_Model {
                                             GROUP BY po_course.poID");
         
         return $query->result_array();
+    }
+
+    function get_maxPoCode() {
+        $query = $this->db->query("SELECT (SELECT digits(max(poCode))) AS max_po FROM po");
+
+        if ($query->num_rows() > 0){
+            $row = $query->row_array();
+            return $row['max_po'];
+        }
+        else 
+            return FALSE;
     }
 
     // END TEACHER

@@ -78,8 +78,7 @@
                                                 <input type="hidden" class="form-control input-sm" name="co_id[]" value="<?php echo $row['ID'];?>">
                                                 <td><input type="text" class="form-control input-sm" name="co_code[]" value="<?php echo $row['CourseCode'];?>"></td>
                                                 <td><textarea class="form-control input-sm span6" name="co_desc[]" rows="3"><?php echo $row['CourseDesc'];?></textarea></td>
-                                                <td><input type="text" class="" name="co_equi[]" value="" placeholder="Enter Course Equivalent">
-                                                </td>
+                                                <td><input type="text" class="" name="co_equi[]" value="<?php if(isset($equivalent[$key]))echo $equivalent[$key];?>" placeholder="Enter Course Equivalent"></td>
                                             </tr>
                                             <?php endforeach;?>
                                         </tbody>

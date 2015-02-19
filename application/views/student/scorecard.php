@@ -25,7 +25,12 @@
 
                     <div class="widget-content">
                         <div class="clearfix"></div><br>
-                        <?php 
+                        <?php
+
+                            foreach ($user as $key => $user) {
+                                $stud_info = $user['lname'].', '.$user['fname']. ' '.$user['student_id'];
+                            }
+
                             $po_count = count($get_po);
                             $attributes = array('class' => 'col-md-4');
                         ?>
@@ -121,12 +126,14 @@
                     "sButtonText": "Save as...",
                     "aButtons":    [ {
                             "sExtends": "xls",
+                            "sTitle": "<?php echo $stud_info; ?>",
                             "oSelectorOpts": {
                                 page: 'current'
                             },
                             "mColumns": [ 0, 1 ]
                         }, {
                             "sExtends": "pdf",
+                            "sTitle": "<?php echo $stud_info; ?>",
                             "sButtonText": "PDF",
                             "mColumns": [ 0, 1 ]
                         }

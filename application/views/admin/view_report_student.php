@@ -29,6 +29,7 @@
                         <div class="widget-content">
                             <?php 
                                 if (!empty($message)) echo $message;
+                                echo $this->session->flashdata('message');
 
                                 echo validation_errors('
                                 <div class="alert alert-danger alert-dismissible" role="alert">
@@ -37,7 +38,7 @@
                                 '</div>');
                             ?>
 
-                            <?php echo form_open('admin/report_student');?>
+                            <?php echo form_open('admin/report_student/');?>
                                 <button onclick="javascript:window.history.back();" type="button" class="btn btn-info"><i class="icon-angle-left"></i> Go Back</button>
                                 <div class="clearfix"></div><br>
 
@@ -75,8 +76,7 @@
 
                                 <select class="span2" name="po_num">
                                     <option value="">PO #:</option>
-                                    <option value="all" <?php echo set_select('po_num', 'all');?>>All</option>
-                                    <?php for($x = 1; $x <= 10; $x++):?>
+                                    <?php for($x = 1; $x <= $max_po; $x++):?>
                                     <option value="0<?php echo $x;?>" <?php echo set_select('po_num', '0'.$x);?>>PO <?php echo $x;?></option>
                                     <?php endfor; ?>
                                 </select>
@@ -147,13 +147,13 @@
                     "sButtonText": "Save as...",
                     "aButtons":    [ {
                             "sExtends": "xls",
-                            "sTitle": "Teacher List",
+                            "sTitle": "Student Reports <?php echo date('M Y');?>",
                             "oSelectorOpts": {
                                 page: 'current'
                             }
                         }, {
                             "sExtends": "pdf",
-                            "sTitle": "Teacher List",
+                            "sTitle": "Student Reports <?php echo date('M Y');?>",
                             "sButtonText": "PDF"
                         }
                     ]

@@ -244,7 +244,7 @@ class Site extends CI_Controller {
                         'courseID' => $student_courseID
                     ); 
 
-                    for($x = 0, $index = 5; $x < count($po_courses); $x++, $index++) {
+                    for($x = 0, $index = 4; $x < count($po_courses); $x++, $index++) {
                         if($po_courses[$x]['status'] == '1') {
                             if($row[$headers[$index]] == NULL) {
                                 $message = '<strong>Error: </strong>There\'s an empty score found. Please check your .CSV file.';

@@ -41,14 +41,21 @@ class Admin extends CI_Controller {
 
         if($date['mon'] >= 6 AND $date['mon'] <= 10)
             $semester = 1;
-        elseif($date['mon'] >= 11 OR $date['mon'] <= 3) {
+        elseif($date['mon'] >= 11 OR $date['mon'] <= 3)
             $semester = 2;
-
-        }
         else
             $semester = 'summer';
-        
+
         return $semester;
+    }
+
+    function get_sy() {
+        if($this->get_semester() == 'summer')
+            $sy = date('Y')-1;
+        else
+            $sy = date('Y');
+
+        return $sy;
     }
 
     function error_404() {
@@ -117,7 +124,7 @@ class Admin extends CI_Controller {
                             'end_time'=>$row['End Time'],
                             'days'=>$row['Days'],
                             'semester'=> $this->get_semester(),
-                            'school_year'=> date('Y'),
+                            'school_year'=> $this->get_sy(),
                             'teacherID'=> $row['Teacher ID']
                         );
                     }
@@ -497,11 +504,26 @@ class Admin extends CI_Controller {
             $data['course_list'] = $this->model_admin->get_courses($year_data2);
             $data['program_data'] = $this->model_admin->get_curriculum($program, $year);
 
+            $equivalent = array();
+            $equivalent_data = array();
+            $equivalent_implode = array();
+
             foreach($data['course_list'] as $key => $value) {
-                $data['course_list'][$key]['equivalent'] = $this->model_admin->get_equivalents($value['ID']);
+                $equivalent[] = $this->model_admin->get_equivalents($value['ID']);
             }
 
-            // print_r($data['course_list']);die();
+            $i = 0;
+            foreach ($data['course_list'] as $key => $value) {
+                if(isset($equivalent[$key][$i])) {
+                    for($x=0; $x < count($equivalent[$key]); $x++) {
+                        $equivalent_data[$key][$x] = $equivalent[$key][$x]['CourseEquivalent'];
+                        $equivalent_implode[$key] = implode(', ',$equivalent_data[$key]);
+                    }
+                }
+                $i++;
+            }
+  
+            $data['equivalent'] = $equivalent_implode;
 
             $data['year'] = $this->model_admin->get_programYear($year_data);
         }
@@ -514,6 +536,7 @@ class Admin extends CI_Controller {
             $course_rows = $this->input->post('co_code');
             $course_id = $this->input->post('co_id');
             $course_desc = $this->input->post('co_desc');
+            $course_equi = $this->input->post('co_equi');
 
             $program = array(
                 'programName' => rawurldecode($this->input->post('program'))
@@ -525,8 +548,7 @@ class Admin extends CI_Controller {
 
             $po_data = array();
             $course_data = array();
-
-            $this->db->trans_start();
+            $exploded = array();
 
             foreach ($po_rows as $key => $value) {
                 $po_update = array(
@@ -551,8 +573,28 @@ class Admin extends CI_Controller {
                 $course_data[] = $co_update;
             }
 
+            foreach($course_equi as $key => $val) {
+                $exploded[$key] = explode(", ", $val);                        
+            }
+
+            $equivalent_data = array();
+
+            foreach ($exploded as $key => $exploded_data) {
+                foreach ($exploded_data as $key2 => $value) {
+                    if(!empty($value)) {
+                        $equivalent_data[] = array(
+                            'CourseEquivalent' => $value,
+                            'courseID' => $course_id[$key]
+                        );
+                    }
+                }
+            }
+
+            $this->db->trans_start();
+
             $this->model_admin->update_po($po_data);
             $this->model_admin->update_courses($course_data);
+            $result = $this->model_admin->update_equivalents($equivalent_data);
 
             if($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();
@@ -885,18 +927,27 @@ class Admin extends CI_Controller {
 
         $data['program_list'] = $this->model_admin->check_rows('program');
         $data['year_classes'] = $this->model_admin->get_teacherReport();
+        $data['max_po'] = $this->model_admin->get_maxPoCode();
 
-        $this->form_validation->set_rules('program', 'Program', 'trim|required');
-        $this->form_validation->set_rules('year_level', 'Year Level', 'trim|required');
-        $this->form_validation->set_rules('semester', 'Semester', 'trim|required');
-        $this->form_validation->set_rules('academic_year', 'Academic Year', 'trim|required');
-        $this->form_validation->set_rules('po_num', 'PO Number', 'trim|required');
+        $this->form_validation->set_rules('program', 'Program', 'trim');
+        $this->form_validation->set_rules('year_level', 'Year Level', 'trim');
+        $this->form_validation->set_rules('semester', 'Semester', 'trim');
+        $this->form_validation->set_rules('academic_year', 'Academic Year', 'trim');
+        $this->form_validation->set_rules('po_num', 'PO Number', 'trim');
 
         if($this->form_validation->run() == FALSE) {
             $data['message'] = '';
             $data['result'] = '';
         }
         else{
+            if($this->input->post('program') == null or $this->input->post('year_level') == null or $this->input->post('semester') == null or $this->input->post('academic_year') == null or $this->input->post('po_num') == null) {
+                $message = 'Please select filter(s) to search.';
+                $message = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
+
+                $this->session->set_flashdata('message', $message);
+                redirect(current_url());
+            }
+
             $program = $this->input->post('program');
             $year_level = $this->input->post('year_level');
             $semester = $this->input->post('semester');
@@ -908,6 +959,7 @@ class Admin extends CI_Controller {
             $data['result'] = $result;
             
             // print_r($result);die();
+            
             if($result == FALSE) {
                 $message = 'No results found. Try refining your search.';
                 $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
@@ -921,7 +973,7 @@ class Admin extends CI_Controller {
                 $data['message'] = $message; 
             }
         }
-
+        
         $this->load->view('admin/header', $data);
         $this->load->view('admin/view_report_student', $data);
         $this->load->view('admin/footer');

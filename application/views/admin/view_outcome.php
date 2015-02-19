@@ -26,8 +26,8 @@
                                 $po_count = count($po_list);
                             ?>
 
-                            <h3><?php echo $program_info['programFullName'];?></h3>
-                            <h4>Effective School Year: <?php echo $academic_year.' - '.($academic_year+1);?></h4><hr>
+                            <center><h3><?php echo $program_info['programFullName'];?></h3>
+                            <h4>Effective School Year: <?php echo $academic_year.' - '.($academic_year+1);?></h4><hr></center>
                             
                             <?php echo form_open();?>
 

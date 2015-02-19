@@ -115,7 +115,6 @@
                                     <table class="table table-striped table-bordered no-footer text-center" id="course-table">
                                         <tbody>
                                             <tr>
-                                                <th></th>
                                                 <th>Course Code</th>
                                                 <th>Course Description</th>
                                                 <th>Course Equivalents 
@@ -123,7 +122,6 @@
                                                 </th>
                                             </tr>
                                             <tr>
-                                                <td><p style="margin:4px 2px;">1.</p></td>
                                                 <td><span class="red-req">*</span><input type="text" class="required" name="co_code[]" id="co_code"></td>
                                                 <td><span class="red-req">*</span><textarea class="required span6" name="co_desc[]" rows="3" id="co_desc"></textarea></td>
                                                 <td><input type="text" class="" name="co_equi[]"></td>
@@ -186,13 +184,11 @@
             var lastcol = table2.rows[0].cells.length;   
             var row = table2.insertRow(lastrow); 
             var cellcol0 = row.insertCell(0);
-            cellcol0.innerHTML = "<p style='margin:4px 2px;'>"+lastrow+".</p>";
+            cellcol0.innerHTML = "<span class='red-req'>*</span><input type='text' class='required' name='co_code[]' id='co_code'>";
             var cellcol1 = row.insertCell(1);
-            cellcol1.innerHTML = "<span class='red-req'>*</span><input type='text' class='required' name='co_code[]' id='co_code'>";
+            cellcol1.innerHTML = "<span class='red-req'>*</span><textarea class='required span6' name='co_desc[]' rows='3' id='co_desc'></textarea>";
             var cellcol2 = row.insertCell(2);
-            cellcol2.innerHTML = "<span class='red-req'>*</span><textarea class='required span6' name='co_desc[]' rows='3' id='co_desc'></textarea>";
-            var cellcol3 = row.insertCell(3);
-            cellcol3.innerHTML = "<input type='text' class='' name='co_equi[]'>";
+            cellcol2.innerHTML = "<input type='text' class='' name='co_equi[]'>";
         }
         
         function removeRow2(){

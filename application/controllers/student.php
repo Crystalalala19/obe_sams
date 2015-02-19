@@ -46,7 +46,6 @@ class Student extends CI_Controller {
         $data['student_year'] = $this->model_student->student_year($student_id);
         $data['get_studentName'] = $this->model_student->get_studentName($student_id);
         $data['get_class'] = $this->model_student->get_class($student_id);
-        
         $data['class_list'] = $this->model_student->select_classSC($student_id);
         $data['select_teacher'] = $this->model_student->select_teacher($student_id);
 

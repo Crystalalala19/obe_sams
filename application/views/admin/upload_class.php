@@ -15,7 +15,6 @@
                             <div class="alert alert-danger alert-dismissible" role="alert">
                                 <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
                                 <i class="icon-exclamation-sign"></i>
-                                <span class="sr-only">Error:</span>
                                 <strong>Error:</strong> uploading failed. <br><br>The following <strong>Teacher ID(s)</strong> does not exist:
                                 <?php foreach ($this->session->flashdata('non_existingTeacher') as $value): ?>
                                 <strong><?php echo $value;?>, </strong>
@@ -26,7 +25,6 @@
                             <div class="alert alert-danger alert-dismissible" role="alert">
                                 <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
                                 <i class="icon-exclamation-sign"></i>
-                                <span class="sr-only">Error:</span>
                                 <strong>Error:</strong> uploading failed. <br><br>The following <strong>Course(s)</strong> does not exist in the Curriculums:
                                 <?php foreach ($this->session->flashdata('non_existingCourse') as $value): ?>
                                 <strong><?php echo $value;?>, </strong>
