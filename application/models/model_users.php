@@ -125,9 +125,14 @@ class Model_users extends CI_Model {
         return $output;
     }
 
-    function insert_student($data, $data2) {
-        $this->db->insert('user_account', $data2);
+    function insert_student($data) {
         $this->db->insert('student', $data);
+
+        return $this->check_query();
+    }
+
+    function insert_studentAccount($data) {
+        $this->db->insert('user_account', $data);
 
         return $this->check_query();
     }
@@ -156,23 +161,25 @@ class Model_users extends CI_Model {
     }
 
     function check_studentRecord($data){
-        $this->db->select('student_id');
         $query = $this->db->get_where('student', array('student_id' => $data));
         if($query->num_rows() == 1) {
             $row = $query->row_array();
 
             return $row['student_id'];
         }
-        else {
+        else
             return false;
-        }
     }
 
     function get_newInsertStudent($insert_id) {
         $query = $this->db->get_where('student', array('ID' => $insert_id));
-        $row = $query->row_array();
+        if($query->num_rows() == 1) {
+            $row = $query->row_array();
 
-        return $row['student_id'];
+            return $row['student_id'];
+        }
+        else
+            return false;
     }
 
     function get_poCourse($course_id) {
