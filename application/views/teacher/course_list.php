@@ -34,7 +34,7 @@
                                     <?php endforeach;?>
                                 </select>
                             </div>
-                            <?php if(!empty($year)):?>
+                            <?php if(!empty($academic_year)):?>
                             <h4>Academic Year: <?php echo $academic_year.' - '.($academic_year+1);?></h4>                                   
                             <hr>
                             <div class="clearfix"></div>
@@ -128,7 +128,7 @@
                                     </div>
                                 </div>    
                             </div>
-                            <?php endif?>
+                            <?php endif; ?>
                         </div> <!-- /widget-content -->  
                         <?php endif?>  
                     </div> <!-- /widget -->    
