@@ -32,12 +32,6 @@
                                 echo $this->session->flashdata('message');
                                 if (!empty($message)) echo $message;
 
-                                echo validation_errors('
-                                <div class="alert alert-danger alert-dismissible" role="alert">
-                                    <button type="button" class="close" data-dismiss="alert"><i class="icon-remove-sign"></i></button>
-                                    <i class="icon-exclamation-sign" aria-hidden="true"></i> ', 
-                                '</div>');
-
                                 $po_count = count($get_po);
                                 $attributes = array('class' => 'col-md-4');
                             ?>
@@ -116,17 +110,18 @@
                                 </tfoot>
                             </table>
                             <br>
+                            <?php foreach($user as $row): ?>
                             <?php echo form_open_multipart();?>
                                 <div class="control-group">
                                     <label for="userfile">Upload .CSV File: </label>
-                                    <input type="hidden" name="teacher_id" value="<?php echo $this->session->userdata('teacher_id');?>">
+                                    <input type="hidden" name="teacher_id" value="<?php echo $row['teacher_id'];?>">
                                     <input type="file" name="userfile" id="userfile" class="filestyle" data-buttonText="Find file" data-buttonName="btn-primary" data-iconName="icon-upload-alt">
                                 </div>
-
                                 <div class="control-group">
                                     <input type="submit" class="btn btn-success" name="submit" value="Submit">
                                 </div>
                             </form>  
+                            <?php endforeach; ?> 
                         </div> <!-- /widget-content --> 
                     </div> <!-- /widget -->                 
                 </div> <!-- /span12 -->         
