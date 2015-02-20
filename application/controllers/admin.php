@@ -299,12 +299,14 @@ class Admin extends CI_Controller {
         $this->form_validation->set_rules("po_desc[]", "PO Description", "required|trim");
         $this->form_validation->set_rules("co_code[]", "Course Code", "required|trim");
         $this->form_validation->set_rules("co_desc[]", "Course Description", "required|trim");
-        
+        $this->form_validation->set_rules("year_level[]", "Year Level", "required|trim");
+        $this->form_validation->set_rules("semester[]", "Semester", "required|trim");
+
         if($this->form_validation->run() == FALSE){
             $data['message'] = '';
         }
         elseif($this->model_admin->check_programYear($program, $year)) {
-            $message = '<strong>Effectivity Year</strong> for the <strong>Program</strong> already exists.';
+            $message = '<strong>The Effectivite Year</strong> of the selected <strong>Program</strong> already exists.';
             $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
 
             $data['message'] = $message;
@@ -317,6 +319,8 @@ class Admin extends CI_Controller {
             $course_rows = $this->input->post('co_code');
             $course_desc = $this->input->post('co_desc');
             $course_equi = $this->input->post('co_equi');
+            $year_level = $this->input->post('year_level');
+            $semester = $this->input->post('semester');
 
             $program = array(
                 'programName' => rawurldecode($this->input->post('program'))
@@ -355,7 +359,9 @@ class Admin extends CI_Controller {
                 $course_fields = array(
                     'CourseCode' => $val,
                     'CourseDesc' => $course_desc[$key],
-                    'pyID' => $program_year
+                    'pyID' => $program_year,
+                    'year_level' => $year_level[$key],
+                    'semester' => $semester[$key]
                 );
                 $course_result = $this->model_admin->insert_course($course_fields);
 
@@ -514,16 +520,15 @@ class Admin extends CI_Controller {
                 $equivalent[] = $this->model_admin->get_equivalents($value['ID']);
             }
 
-            $i = 0;
             foreach ($data['course_list'] as $key => $value) {
-                if(isset($equivalent[$key][$i])) {
                     for($x=0; $x < count($equivalent[$key]); $x++) {
                         $equivalent_data[$key][$x] = $equivalent[$key][$x]['CourseEquivalent'];
+                        if($equivalent_data[$key][$x] != NULL)
                         $equivalent_implode[$key] = implode(', ',$equivalent_data[$key]);
                     }
-                }
-                $i++;
             }
+
+            // print_r($equivalent_implode);die();
   
             $data['equivalent'] = $equivalent_implode;
 
@@ -579,12 +584,15 @@ class Admin extends CI_Controller {
 
             foreach ($exploded as $key => $exploded_data) {
                 foreach ($exploded_data as $key2 => $value) {
-                    if(!empty($value)) {
+                    // if(!$this->model_admin->check_equivalent($course_id[$key])) {
+                    // if(!empty($value)) {
                         $equivalent_data[] = array(
                             'CourseEquivalent' => $value,
                             'courseID' => $course_id[$key]
                         );
-                    }
+                        // $this->model_admin->delete_equivalents($course_id[$key]);
+                    // }
+                    // }
                 }
             }
 
@@ -1031,6 +1039,58 @@ class Admin extends CI_Controller {
 
         $this->load->view('admin/header', $data);
         $this->load->view('admin/view_student_scorecard', $data);
+        $this->load->view('admin/footer');
+    }
+
+    public function account() {
+        $this->check_role();
+
+        $this->load->library('encrypt');
+        $this->load->library('form_validation');
+
+        $data['title'] = "OBE SAMS Academic";
+
+        $account_id = $this->session->userdata('idnum');
+
+        $this->form_validation->set_rules('cur_pass', 'Current Password', 'required|trim|min_length[6]|max_length[15]');
+        $this->form_validation->set_rules('new_pass', 'New Password', 'required|trim|min_length[6]|max_length[15]|alpha_numeric');
+        $this->form_validation->set_rules('con_pass', 'Confirm Password', 'required|trim|matches[new_pass]');
+
+        if($this->form_validation->run() == FALSE) {
+            $data['message'] = '';
+        }
+        elseif(!$this->model_admin->check_password($account_id, $this->input->post('cur_pass'))) {
+            $message = "<strong>Error:</strong> Invalid entered current password.";
+            $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
+
+            $data['message'] = $message;
+        }
+        else {
+            $new_pass = $this->input->post('new_pass');
+
+            $change_data = array(
+                'password' => $this->encrypt->sha1($this->input->post('new_pass'))
+            );
+
+            $result = $this->model_admin->change_pass($change_data, $account_id);
+
+            if($result['is_success'] == FALSE) {
+                $message = '<strong>Error: </strong>'.  $result['db_error'];
+                $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
+
+                $data['message'] = $message; 
+            }
+            else {
+                $message = '<strong>Success!</strong> Password changed.';
+                $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
+
+                $this->session->set_flashdata('message', $message);
+                redirect(current_url());
+            }
+        }
+
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/account', $data);
         $this->load->view('admin/footer');
     }
 }

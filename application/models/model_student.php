@@ -83,8 +83,8 @@ class Model_student extends CI_Model {
         }
     }
 
-    function change_pass($data, $teacher_id) {
-        $this->db->where('idnum', $teacher_id);
+    function change_pass($data, $student_id) {
+        $this->db->where('idnum', $student_id);
         $query = $this->db->update('user_account', $data);
 
         return $this->check_query();

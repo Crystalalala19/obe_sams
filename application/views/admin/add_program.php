@@ -65,7 +65,7 @@
                                 <h2>Program</h2>
                                 <section>
                                     <label class="control-label" for="program_inp">Program: <span class="red-req">*</span></label><br>
-                                    <select class="required" title="Please select a Program" id="program_inp" name="program">
+                                    <select class="required" title="Please select a Program" id="program_inp" name="program" onchange="auto_input();">
                                         <option value="">Select a Program:</option>
                                         <?php foreach ($program_list as $row): ?>
                                         <option value="<?php echo $row['programName']; ?>"><?php echo rawurldecode($row['programName']); ?></option>
@@ -111,8 +111,8 @@
                                 </section>
 
                                 <h2>Courses</h2>
-                                <section style="position:relative;">
-                                    <table class="table table-striped table-bordered no-footer text-center" id="course-table">
+                                <section>
+                                    <table class="table table-striped table-bordered" id="course-table">
                                         <tbody>
                                             <tr>
                                                 <th>Course Code</th>
@@ -120,11 +120,29 @@
                                                 <th>Course Equivalents 
                                                     <a href="#" data-toggle="popover" data-html="true" data-content="Separate by comma. <br>Ex: IT110, CS110, ICT110"><i class="icon-info-sign icon-large"></i></a>
                                                 </th>
+                                                <th>Year Level</th>
+                                                <th>Semester</th>
                                             </tr>
                                             <tr>
-                                                <td><span class="red-req">*</span><input type="text" class="required" name="co_code[]" id="co_code"></td>
-                                                <td><span class="red-req">*</span><textarea class="required span6" name="co_desc[]" rows="3" id="co_desc"></textarea></td>
-                                                <td><input type="text" class="" name="co_equi[]"></td>
+                                                <td><span class="red-req">*</span><input type="text" class="required span1" name="co_code[]" id="co_code"></td>
+                                                <td><span class="red-req">*</span><input type="text" class="required span2" name="co_desc[]" id="co_desc"></td>
+                                                <td><input type="text" class="span2" name="co_equi[]"></td>
+                                                <td><span class="red-req">*</span>
+                                                    <select class="required" title="Please select a Year" name="year_level[]">
+                                                        <option value="">Select Year Level: </option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                    </select>
+                                                </td>
+                                                <td><span class="red-req">*</span>
+                                                    <select class="required" title="Please select a Semester" name="semester[]">
+                                                        <option value="">Select Semester: </option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                    </select>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -157,15 +175,20 @@
         var table = document.getElementById("po-table");
 
         function addRow() {
+            var x = document.getElementById("program_inp").value;
+            var res = x.substr(2, x.length);
             var lastrow = table.rows.length;
+            var prefix = 0;
             var lastcol = table.rows[0].cells.length;   
             var row = table.insertRow(lastrow); 
             var cellcol0 = row.insertCell(0);
-            cellcol0.innerHTML = "<span class='red-req'>*</span><input type='text' class='required' name='po_code[]' id='po_code'>";
+            if(lastrow >= 10)
+                prefix = '';
+            cellcol0.innerHTML = "<span class='red-req'>*</span><input type='text' class='required' name='po_code[]' id='po_code' value='"+res+prefix+lastrow+"' >";
             var cellcol1 = row.insertCell(1);
             cellcol1.innerHTML = "<span class='red-req'>*</span><input type='text' class='required' name='po_attrib[]' id='po_attrib'>";
             var cellcol2 = row.insertCell(2);
-            cellcol2.innerHTML = "<span class='red-req'>*</span><textarea class='required span6' name='po_desc[]' rows='5' id='po_desc'></textarea>";
+            cellcol2.innerHTML = "<span class='red-req'>*</span><textarea class='required span6' name='po_desc[]' rows='5' id='po_desc'>";
         }
 
         function removeRow(){
@@ -180,15 +203,21 @@
         var table2 = document.getElementById("course-table");
 
         function addRow2() {
+            var x = document.getElementById("program_inp").value;
+            var res = x.substr(2, x.length);
             var lastrow = table2.rows.length;
             var lastcol = table2.rows[0].cells.length;   
             var row = table2.insertRow(lastrow); 
             var cellcol0 = row.insertCell(0);
-            cellcol0.innerHTML = "<span class='red-req'>*</span><input type='text' class='required' name='co_code[]' id='co_code'>";
+            cellcol0.innerHTML = "<span class='red-req'>*</span><input type='text' class='required span1' name='co_code[]' id='co_code' value='"+res+"'>";
             var cellcol1 = row.insertCell(1);
-            cellcol1.innerHTML = "<span class='red-req'>*</span><textarea class='required span6' name='co_desc[]' rows='3' id='co_desc'></textarea>";
+            cellcol1.innerHTML = "<span class='red-req'>*</span><input type='text' class='required span2' name='co_desc[]' id='co_desc'>";
             var cellcol2 = row.insertCell(2);
-            cellcol2.innerHTML = "<input type='text' class='' name='co_equi[]'>";
+            cellcol2.innerHTML = "<input type='text' class='span2' name='co_equi[]'>";
+            var cellcol3 = row.insertCell(3);
+            cellcol3.innerHTML = "<span class='red-req'>*</span><select class='required' title='Please select a Year' name='year_level[]'><option value=''>Select Year Level: </option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option></select>";
+            var cellcol4 = row.insertCell(4);
+            cellcol4.innerHTML = "<span class='red-req'>*</span><select class='required' title='Please select a Semester' name='semester[]'><option value=''>Select Semester: </option><option value='1'>1</option><option value='2'>2</option></select>";
         }
         
         function removeRow2(){
@@ -198,5 +227,16 @@
                 return;
             }
             table2.deleteRow(lastrow-1);
+        }
+
+        function auto_input() {
+            var x = document.getElementById("program_inp").value;
+            var lastrow = table.rows.length;
+            var res = x.substr(2, x.length);
+            var elem = document.getElementById("po_code");
+            elem.value = res+'0'+(lastrow-1);
+
+            var elem1 = document.getElementById("co_code");
+            elem1.value = res;
         }
     </script>

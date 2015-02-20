@@ -87,6 +87,7 @@
                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Account">
                             <i class="icon-cog"></i> Account <b class="caret"></b></a>
                             <ul class="dropdown-menu">
+                                <li><a href="<?php echo base_url('admin/account');?>"><i class="icon-key" title="Change Password"></i> Change Password</a></li>
                                 <li><a href="<?php echo base_url('site/logout');?>" title="Logout"><i class="icon-off"></i> Logout</a></li>
                             </ul>
                         </li>

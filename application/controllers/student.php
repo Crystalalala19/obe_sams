@@ -81,7 +81,7 @@ class Student extends CI_Controller {
         $data['title'] = "OBE SAMS Academic";
         $data['user'] = $this->model_student->select_user();
 
-        $teacher_id = $this->session->userdata('idnum');
+        $student_id = $this->session->userdata('idnum');
 
         $this->form_validation->set_rules('cur_pass', 'Current Password', 'required|trim|min_length[6]|max_length[15]');
         $this->form_validation->set_rules('new_pass', 'New Password', 'required|trim|min_length[6]|max_length[15]|alpha_numeric');
@@ -90,7 +90,7 @@ class Student extends CI_Controller {
         if($this->form_validation->run() == FALSE) {
             $data['message'] = '';
         }
-        elseif(!$this->model_student->check_password($teacher_id, $this->input->post('cur_pass'))) {
+        elseif(!$this->model_student->check_password($student_id, $this->input->post('cur_pass'))) {
             $message = "<strong>Error:</strong> Invalid entered current password.";
             $message = $this->model_student->notify_message('alert-danger', 'icon-exclamation', $message);
 
@@ -103,7 +103,7 @@ class Student extends CI_Controller {
                 'password' => $this->encrypt->sha1($this->input->post('new_pass'))
             );
 
-            $result = $this->model_student->change_pass($change_data, $teacher_id);
+            $result = $this->model_student->change_pass($change_data, $student_id);
 
             if($result['is_success'] == FALSE) {
                 $message = '<strong>Error: </strong>'.  $result['db_error'];

@@ -137,6 +137,21 @@ class Model_admin extends CI_Model {
         return $this->check_query();
     }
 
+    function check_equivalent($id) {
+        $query = $this->db->get_where('equivalent', array('courseID' => $id));
+
+        if($query->num_rows() == 1){
+            return TRUE;
+        }
+        else
+            return FALSE;
+    }
+
+    function delete_equivalents($id) {
+        $this->db->where('courseID', $id);
+        $this->db->delete('equivalent');
+    }
+
     function update_equivalents($data) {
         $query = $this->db->insert_on_duplicate_update_batch('equivalent', $data);
 
@@ -567,6 +582,28 @@ class Model_admin extends CI_Model {
             return FALSE;
     }
 
+    function check_password($data, $pass) {
+        $query = $this->db->get_where('user_account', array('idnum'=>$data));
+        if($query->num_rows() == 1) {
+
+            $row = $query->row_array();
+            $db_pass= $row['password'];
+
+            $hashed = $this->encrypt->sha1($pass);
+
+            if($db_pass == $hashed)
+                return true;
+            else
+                return false;
+        }
+    }
+
+    function change_pass($data, $account_id) {
+        $this->db->where('idnum', $account_id);
+        $query = $this->db->update('user_account', $data);
+
+        return $this->check_query();
+    }
     // END TEACHER
 }
 ?>
