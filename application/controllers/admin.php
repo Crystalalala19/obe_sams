@@ -794,6 +794,8 @@ class Admin extends CI_Controller {
     public function upload_class() {
         $this->check_role();
         
+        $this->load->library('form_validation');
+
         $data['title'] = 'OBE SAMS Academic';
         $data['header'] = 'Assign Classes';
         $data['message'] = '';

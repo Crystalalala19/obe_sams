@@ -149,7 +149,6 @@ class Site extends CI_Controller {
         $this->check_role();
 
         $this->load->library('form_validation');
-
         $this->load->library('csvimport');
 
         $class_id = $this->uri->segment(3);
