@@ -30,12 +30,6 @@
                                 echo $this->session->flashdata('message');
                                 if (!empty($message)) echo $message;
 
-                                echo validation_errors('
-                                <div class="alert alert-danger alert-dismissible" role="alert">
-                                    <button type="button" class="close" data-dismiss="alert"><i class="icon-remove-sign"></i></button>
-                                    <i class="icon-exclamation-sign" aria-hidden="true"></i> ', 
-                                '</div>');
-
                                 $po_count = count($get_po);
                                 $attributes = array('class' => 'col-md-4');
                             ?>

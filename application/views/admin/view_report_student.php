@@ -104,7 +104,7 @@
                                             <td><?php echo $row['sfname'].' '.$row['slname'];?></td>
                                             <td><?php echo $row['courseCode'].' Grp. '.$row['group_num'];?></td>
                                             <td><?php echo $row['tfname'].' '.$row['tlname'];?></td>
-                                            <td><?php echo $row['score'];?></td>
+                                            <td><?php echo number_format($row['score'], 1);?></td>
                                         </tr>
                                     <?php endforeach;?>
                                 </tbody>

@@ -17,6 +17,10 @@
                         </div> <!-- /widget-header -->
                         <div class="widget-content">
                             <button onclick="javascript:window.history.back();" type="button" class="btn btn-info"><i class="icon-angle-left"></i> Go Back</button>
+                            <div class="pull-right">
+                                <h3><?php echo $teacher_info['fname'].' '.$teacher_info['lname']; ?></h3>
+                                <h4><?php echo $teacher_info['teacher_id']; ?></h4>
+                            </div>
                             <div class="clearfix"></div><br>
 
                             <?php
@@ -28,9 +32,10 @@
                                 endif;
                             ?>
 
-                            <input type="hidden" name="teacher_id" value="<?php echo $teacher_id;?>" id="teacher_id">
+                            <input type="hidden" name="teacher_id" value="<?php echo $teacher_info['teacher_id'];?>" id="teacher_id">
                             
                             <div class="control-group">
+                                <label for="selector">Select Academic Year: </label>
                                 <select name="academic_year" id="selector" class="selectpicker show-tick" title="Select Academic Year" data-live-search="true" multiple data-max-options="1" data-size="auto">
                                     <?php foreach($year_classes as $row):?>
                                     <option value='<?php echo $row['school_year'];?>' <?php if($academic_year == $row['school_year']) echo 'selected="selected"'; ?>><?php echo $row['school_year'].' - '.($row['school_year']+1);?></option>
@@ -38,7 +43,7 @@
                                 </select>
                             </div>
                             
-                            <?php if(!empty($academic_year)):?>                            
+                            <?php if(!empty($academic_year)):?>     
                             <h4>Academic Year: <?php echo $academic_year.' - '.($academic_year+1);?></h4>                                   
                             <hr>
                             <div class="clearfix"></div>
@@ -68,7 +73,7 @@
                                                         <td><?php echo $row['courseCode']; ?></td>
                                                         <td><?php echo $row['start_time'].' - '.$row['end_time'].' '.$row['days']; ?></td>
                                                         <td>
-                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>admin/teachers/scorecard/<?php echo $teacher_id.'/'.$academic_year.'/'.$row['ID'];?>" title="View Class">View Class</a>
+                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>admin/teachers/scorecard/<?php echo $teacher_info['teacher_id'].'/'.$academic_year.'/'.$row['ID'];?>" title="View Class">View Class</a>
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>
@@ -96,7 +101,7 @@
                                                         <td><?php echo $row['courseCode']; ?></td>
                                                         <td><?php echo $row['start_time'].' - '.$row['end_time'].' '.$row['days']; ?></td>
                                                         <td>
-                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>admin/teachers/scorecard/<?php echo $teacher_id.'/'.$academic_year.'/'.$row['ID'];?>" title="View Class">View Class</a>
+                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>admin/teachers/scorecard/<?php echo $teacher_info['teacher_id'].'/'.$academic_year.'/'.$row['ID'];?>" title="View Class">View Class</a>
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>
@@ -124,7 +129,7 @@
                                                         <td><?php echo $row['courseCode']; ?></td>
                                                         <td><?php echo $row['start_time'].' - '.$row['end_time'].' '.$row['days']; ?></td>
                                                         <td>
-                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>admin/teachers/scorecard/<?php echo $teacher_id.'/'.$academic_year.'/'.$row['ID'];?>" title="View Class">View Class</a>
+                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>admin/teachers/scorecard/<?php echo $teacher_info['teacher_id'].'/'.$academic_year.'/'.$row['ID'];?>" title="View Class">View Class</a>
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>

@@ -835,7 +835,7 @@ class Admin extends CI_Controller {
         }
 
         $data['academic_year'] = $year;
-        $data['teacher_id'] = $teacher_id;
+        $data['teacher_info'] = $this->model_admin->get_teacherInfo($teacher_id);
         $data['year_classes'] = $this->model_admin->get_teacherClasses($teacher_id);
         $data['first_sem'] = $this->model_admin->get_firstSem($teacher_id, $year);
         $data['second_sem'] = $this->model_admin->get_secondSem($teacher_id, $year);

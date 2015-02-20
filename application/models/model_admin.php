@@ -312,7 +312,16 @@ class Model_admin extends CI_Model {
     // END STUDENT
 
     // TEACHER
-     function get_teachers() {
+    function get_teacherInfo($id) {
+        $query = $this->db->get_where('teacher', array('teacher_id'=> $id));
+
+        if($query->num_rows() == 1)
+            return $query->row_array();
+        else
+            return FALSE;
+    }
+
+    function get_teachers() {
         $query = $this->db->get('teacher');
         if($query->num_rows() > 0)
             return $query->result_array();
