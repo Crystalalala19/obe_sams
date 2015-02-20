@@ -50,6 +50,7 @@
                                     <tr>
                                         <th>Academic Year</th>
                                         <th>Semester</th>
+                                        <th>Year Level</th>
                                         <th>Grp #</th>
                                         <th>Subject</th>
                                         <th>Course Description</th>
@@ -72,6 +73,7 @@
                                                         echo 'SUMMER';
                                                     }
                                                     ?></td>
+                                        <td><?php echo $row['year_level']; ?></td>
                                         <td width="7%"><?php echo $row['group_num']; ?></td>          
                                         <td><?php echo $row['courseCode']; ?></td>
                                         <td><?php echo $row['CourseDesc']; ?></td>

@@ -1,4 +1,4 @@
-T<style type="text/css">
+<style type="text/css">
     h2 {
         color: #060;
         font-size: 15px;

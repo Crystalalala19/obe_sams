@@ -16,25 +16,27 @@
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tab1">
                                     <div class='panel panel-default grid'>
-                                        <ul class="news-items">
-                                        <?php foreach($activity_log as $row): ?> 
-                                            <li>
-                                                <div class="news-item-date"> 
-                                                    <span class="news-item-day"><?php echo "".date('jS', strtotime($row['date']));?></span> 
-                                                    <span class="news-item-month"><?php echo "".date('M Y', strtotime($row['date']));?></span> 
-                                                </div>
-                                                <div class="news-item-detail">
-                                                    <?php echo "".date('h:i A', strtotime($row['date']));?>
-                                                </div>
-                                            </li>
-                                            <?php endforeach; ?> 
-                                        </ul>
+                                        <div style="height:300px;width:1150px;overflow:auto;">
+                                            <ul class="news-items">
+                                            <?php foreach($activity_log as $row): ?> 
+                                                <li>
+                                                    <div class="news-item-date"> 
+                                                        <span class="news-item-day"><?php echo "".date('jS', strtotime($row['date']));?></span> 
+                                                        <span class="news-item-month"><?php echo "".date('M Y', strtotime($row['date']));?></span> 
+                                                    </div>
+                                                    <div class="news-item-detail">
+                                                        <?php echo "".date('h:i A', strtotime($row['date']));?>
+                                                    </div>
+                                                </li>
+                                                <?php endforeach; ?> 
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="tab-pane" id="tab2">
                                     <div class='panel panel-default grid'>
-                                        <!-- <div style="height:400px;width:1150px;overflow:auto;"> -->
+                                        <div style="height:300px;width:1150px;overflow:auto;">
                                             <ul class="news-items">
                                             <?php foreach($teacher_log as $row1): ?> 
                                                 <li>
@@ -52,14 +54,14 @@
                                                                 <i class="icon-eye-open"></i> View Class
                                                             </a>
                                                         </p>
-                                                        <p>Uploaded by: 
+                                                        <p>Submitted by: 
                                                             <?php echo $row1['fname'].' '.$row1['lname'];?>
                                                         </p>
                                                     </p>
                                                 </li>
                                             <?php endforeach; ?>     
                                             </ul>
-                                        <!-- </div>     -->
+                                        </div>    
                                     </div>
                                 </div>
 

@@ -145,7 +145,8 @@ class Model_student extends CI_Model {
                                     INNER JOIN course ON teacher_class.courseCode = course.CourseCode
                                     INNER JOIN teacher ON teacher_class.teacherID = teacher.teacher_id
                                     WHERE student_course.studentID  = '".$student_id."' 
-                                    GROUP BY teacher_class.ID ");
+                                    GROUP BY teacher_class.ID 
+                                    ORDER BY teacher_class.courseCode ");
 
         return $query->result_array();
     }
