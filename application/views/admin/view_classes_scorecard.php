@@ -1,4 +1,3 @@
-    <!-- PDF doesn't work, EDIT: now fixed -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/dataTables.bootstrapv3.css">
 
     <!-- Datatables Script -->
@@ -76,14 +75,7 @@
                                         <td><?php echo $row['studentID'];?></td>
                                         <td><?php echo $row['fname']." ".$row['lname'];?></td>
                                         <?php foreach($row['grade'] as $row1): ?>
-                                        <td><?php 
-                                            if($row1 == ''){
-                                                echo '';
-                                            }
-                                            else{
-                                                echo number_format($row1,1);
-                                            }
-                                        ?>
+                                        <td><?php if($row1 == '') echo ''; else echo number_format($row1,1);?>
                                         </td>
                                         <?php endforeach;?>   
                                         <td>

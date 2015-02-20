@@ -25,9 +25,13 @@
                         ?>
                                 <div class="control-group">
                                     <label for="program_inp">Program:</label>
-                                    <select class="form-control input-sm" id="program_inp" name="program" readonly>
-                                        <option value="<?php echo $program;?>" selected="selected"><?php echo $program;?></option>
-                                    </select>
+                                    <input type="hidden" name="program_id" value="<?php echo set_value('program_id', $program_info['ID']);?>">
+                                    <input type="text" name="program" id="program_inp" value="<?php echo set_value('program', $program_info['programName']);?>">
+                                </div>
+
+                                <div class="control-group">
+                                    <label for="program_full">Program Full Name:</label>
+                                    <input type="text" name="program_full" class="span6" id="program_full" value="<?php echo set_value('program', $program_info['programFullName']);?>">
                                 </div>
 
                                 <div class="control-group">

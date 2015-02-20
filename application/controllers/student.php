@@ -85,6 +85,7 @@ class Student extends CI_Controller {
 
         $this->form_validation->set_rules('cur_pass', 'Current Password', 'required|trim|min_length[6]|max_length[15]');
         $this->form_validation->set_rules('new_pass', 'New Password', 'required|trim|min_length[6]|max_length[15]|alpha_numeric');
+        $this->form_validation->set_rules('con_pass', 'Confirm Password', 'required|trim|matches[new_pass]');
 
         if($this->form_validation->run() == FALSE) {
             $data['message'] = '';

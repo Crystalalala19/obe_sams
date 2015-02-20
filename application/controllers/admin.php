@@ -472,6 +472,7 @@ class Admin extends CI_Controller {
         );
 
         $program_id = $this->model_admin->get_programID($program_data);
+        $data['program_info'] = $this->model_admin->get_programFull($program_data);
         $year_id = $this->model_admin->get_programYearID($program_id ,$year);
 
         $year_data = array(
@@ -480,6 +481,9 @@ class Admin extends CI_Controller {
 
         $this->load->library('form_validation');
 
+        $this->form_validation->set_rules("program_id", "Program ID", "required|trim");
+        $this->form_validation->set_rules("program", "Program", "required|trim|callback_alpha_dash_space");
+        $this->form_validation->set_rules("program_full", "Program Full Name", "required|trim|callback_alpha_dash_space");
         $this->form_validation->set_rules("po_code[]", "PO Code", "required|trim");
         $this->form_validation->set_rules("po_attrib[]", "PO Attribute", "required|trim");
         $this->form_validation->set_rules("po_desc[]", "PO Description", "required|trim");
@@ -495,8 +499,6 @@ class Admin extends CI_Controller {
             $data['message'] = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
         }
         elseif($this->form_validation->run() == FALSE){
-            $data['program'] = $program;
-
             $year_data2 = array(
                 'pyID' => $year_id
             );
@@ -538,13 +540,9 @@ class Admin extends CI_Controller {
             $course_desc = $this->input->post('co_desc');
             $course_equi = $this->input->post('co_equi');
 
-            $program = array(
-                'programName' => rawurldecode($this->input->post('program'))
-            );
-
-            $year = $this->input->post('effective_year');
-            $progam_id = $this->model_admin->get_programID($program);
-            $year_id = $this->model_admin->get_programYearID($program_id, $year);
+            $program_id = $this->input->post('program_id');
+            $program = rawurldecode($this->input->post('program'));
+            $program_full = $this->input->post('program_full');
 
             $po_data = array();
             $course_data = array();
@@ -590,8 +588,14 @@ class Admin extends CI_Controller {
                 }
             }
 
+            $program_data = array(
+                'programName' => $program,
+                'programFullName' => $program_full
+            );
+            
             $this->db->trans_start();
 
+            $this->model_admin->update_program($program_id, $program_data);
             $this->model_admin->update_po($po_data);
             $this->model_admin->update_courses($course_data);
             $result = $this->model_admin->update_equivalents($equivalent_data);
@@ -612,7 +616,7 @@ class Admin extends CI_Controller {
 
                 $this->session->set_flashdata('message', $message);
 
-                redirect(current_url());
+                redirect(base_url('admin/programs/edit/'.$program.'/'.$year));
             }
         }
 
@@ -674,6 +678,7 @@ class Admin extends CI_Controller {
         $this->form_validation->set_rules('teacher_fname', 'First Name', 'required|trim|max_length[20]|callback_alpha_dash_space');
         $this->form_validation->set_rules('teacher_lname', 'Last Name', 'required|trim|max_length[20]|callback_alpha_dash_space');
         $this->form_validation->set_rules('login_id', 'ID login', 'required|trim|alpha_numeric|min_length[10]|max_length[15]|is_unique[teacher.teacher_id]');
+        $this->form_validation->set_message('is_unique', 'The entered %s already existed.');
 
         if($this->form_validation->run() == FALSE) {
             $data['message'] = '';

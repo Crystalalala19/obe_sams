@@ -21,19 +21,7 @@
     <link href="<?php echo base_url();?>assets/css/animate.css" rel="stylesheet" />
     <!--  Pretty Photo Style -->
     <link href="<?php echo base_url();?>assets/css/prettyPhoto.css" rel="stylesheet" />
-    
-    <!-- 
-        If livehost na atoa, uncomment below link rels and remove/comment above link rels. 
-        Otherwise, retain above codes. 
-    -->
-    <!-- 
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="//raw.githubusercontent.com/daneden/animate.css/master/animate.css" rel="stylesheet">
-    <link href="//cdn.jsdelivr.net/prettyphoto/3.1.5/css/prettyPhoto.css" rel="stylesheet"> 
-    -->
-
-    
+        
     <!--  Custom Style -->
     <link href="<?php echo base_url();?>assets/css/style.css" rel="stylesheet" />
 

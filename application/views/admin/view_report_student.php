@@ -1,4 +1,3 @@
-    <!-- PDF doesn't work, EDIT: now fixed -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/dataTables.bootstrapv3.css">
 
     <!-- Datatables Script -->
@@ -9,11 +8,11 @@
 
     <style type="text/css">
         td.details-control {
-            background: url('http://datatables.net/examples/resources/details_open.png') no-repeat center center;
+            background: url('<?php echo base_url();?>/assets/img/details_open.png') no-repeat center center;
             cursor: pointer;
         }
         tr.shown td.details-control {
-            background: url('http://datatables.net/examples/resources/details_close.png') no-repeat center center;
+            background: url('<?php echo base_url();?>/assets/img/details_close.png') no-repeat center center;
         }
     </style>
 
@@ -95,12 +94,12 @@
                                         <th width="10%">Name</th>
                                         <th width="10%">Subject</th>
                                         <th width="10%">Teacher</th>
-                                        <th width="10%">PO</th>
+                                        <th width="10%">PO Score</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach($result as $key => $row): ?>
-                                        <tr data-child-id="<?php echo $row['studentID'];?>" data-child-level="<?php echo $row['year_level'];?>">
+                                        <tr data-child-id="<?php echo $row['studentID'];?>" data-child-level="<?php echo $row['year_level'];?>" data-child-program="<?php echo $row['programName'].' '.$row['effective_year'].'-'.($row['effective_year']+1);?>">
                                             <td class="details-control"></td>
                                             <td><?php echo $row['sfname'].' '.$row['slname'];?></td>
                                             <td><?php echo $row['courseCode'].' Grp. '.$row['group_num'];?></td>
@@ -162,9 +161,12 @@
         };
 
         /* Formatting function for row details - modify as you need */
-        function format ( id, level) {
+        function format ( program, id, level) {
             // `d` is the original data object for the row
-            return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+            return '<table class="table table-striped table-bordered">'+
+                '<tr>'+
+                    '<td>Program: <b>'+program+'</b></td>'+
+                '</tr>'+
                 '<tr>'+
                     '<td>Student ID: '+id+'</td>'+
                 '</tr>'+
@@ -188,7 +190,7 @@
             }
             else {
                 // Open this row
-                row.child( format( tr.data('child-id'), tr.data('child-level') ) ).show();
+                row.child( format( tr.data('child-program'), tr.data('child-id'), tr.data('child-level') ) ).show();
                 tr.addClass('shown');
             }
         } );

@@ -118,6 +118,13 @@ class Model_admin extends CI_Model {
         return $this->check_query();
     }
 
+    function update_program($id, $data) {
+        $this->db->where('ID', $id);
+        $this->db->update('program', $data);
+
+        return $this->check_query();
+    }
+
     function update_po($data) {
         $query = $this->db->insert_on_duplicate_update_batch('po', $data);
 

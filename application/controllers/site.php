@@ -247,7 +247,7 @@ class Site extends CI_Controller {
                     for($x = 0, $index = 4; $x < count($po_courses); $x++, $index++) {
                         if($po_courses[$x]['status'] == '1') {
                             if($row[$headers[$index]] == NULL) {
-                                $message = '<strong>Error: </strong>There\'s an empty score found. Please check your .CSV file.';
+                                $message = '<strong>Error: </strong>There\'s an empty score found. Please re-check activated PO\'s and your .CSV file.';
                                 $message = $this->model_users->notify_message('alert-danger', 'icon-exclamation', $message);
 
                                 $this->session->set_flashdata('message', $message);
@@ -382,6 +382,7 @@ class Site extends CI_Controller {
 
         $this->form_validation->set_rules('cur_pass', 'Current Password', 'required|trim|min_length[6]|max_length[15]');
         $this->form_validation->set_rules('new_pass', 'New Password', 'required|trim|min_length[6]|max_length[15]|alpha_numeric');
+        $this->form_validation->set_rules('con_pass', 'Confirm Password', 'required|trim|matches[new_pass]');
 
         if($this->form_validation->run() == FALSE) {
             $data['message'] = '';

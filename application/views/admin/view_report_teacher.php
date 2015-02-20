@@ -1,7 +1,4 @@
-    <!-- <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.css"> -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap-select.min.css">
-
-    <!-- PDF doesn't work, EDIT: now fixed -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/dataTables.bootstrapv3.css">
 
     <!-- Datatables Script -->
@@ -51,13 +48,13 @@
                             <label for="selector">Select Academic Year:</label>
                             <select name="academic_year" id="selector" class="selectpicker show-tick" title="Select Academic Year" data-live-search="true" multiple data-max-options="1" data-size="auto">
                                 <?php foreach($year_classes as $row):?>
-                                <option value='<?php echo $row['school_year'];?>' <?php if($this->uri->segment(4) == $row['school_year']) echo 'selected="selected"'; ?>><?php echo $row['school_year'].' - '.($row['school_year']+1);?></option>
+                                <option value='<?php echo $row['school_year'];?>' <?php if($academic_year == $row['school_year']) echo 'selected="selected"'; ?>><?php echo $row['school_year'].' - '.($row['school_year']+1);?></option>
                                 <?php endforeach;?>
                             </select>
 
                             <hr>
 
-                            <?php if(!empty($this->uri->segment(4))):?>     
+                            <?php if(!empty($academic_year)):?>     
                             <table id="teacher_report" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>

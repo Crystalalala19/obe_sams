@@ -30,7 +30,6 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/dashboard.css">
 
     <!--  Font-Awesome Style -->
-    <!-- <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/fa-admin.min.css">
     
     <style type="text/css">

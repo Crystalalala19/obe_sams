@@ -28,7 +28,7 @@
                                 endif;
                             ?>
 
-                            <input type="hidden" name="teacher_id" value="<?php echo $this->uri->segment(4);?>" id="teacher_id">
+                            <input type="hidden" name="teacher_id" value="<?php echo $teacher_id;?>" id="teacher_id">
                             
                             <div class="control-group">
                                 <select name="academic_year" id="selector" class="selectpicker show-tick" title="Select Academic Year" data-live-search="true" multiple data-max-options="1" data-size="auto">
@@ -38,7 +38,7 @@
                                 </select>
                             </div>
                             
-                            <?php if(!empty($this->uri->segment(5))):?>                            
+                            <?php if(!empty($academic_year)):?>                            
                             <h4>Academic Year: <?php echo $academic_year.' - '.($academic_year+1);?></h4>                                   
                             <hr>
                             <div class="clearfix"></div>

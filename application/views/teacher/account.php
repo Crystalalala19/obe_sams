@@ -64,7 +64,7 @@
                                     <div class="control-group">                                         
                                         <label class="control-label" for="con_pass">Confirm Password</label>
                                         <div class="controls">
-                                            <input type="password" class="span4" id="con_pass" name="con_pass">
+                                            <input type="password" onpaste="return false;" class="span4" id="con_pass" name="con_pass">
                                         </div> <!-- /controls -->               
                                     </div> <!-- /control-group -->
 
