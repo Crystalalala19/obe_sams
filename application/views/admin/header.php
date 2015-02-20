@@ -109,7 +109,7 @@
                     <li class="dropdown" id="program_dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" title="Programs"> <i class="icon-briefcase"></i><span>Programs</span> <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="<?php echo base_url('admin/programs/add'); ?>" title="Add new Curriculum"><i class="icon-plus"></i> Add new Curriculum</a></li>
-                            <li><a href="<?php echo base_url('admin/programs/view'); ?>" title="View Programs"><i class="icon-briefcase"></i> View Programs</a></li>
+                            <li><a href="<?php echo base_url('admin/programs/view'); ?>" title="View Curriculums"><i class="icon-briefcase"></i> View Curriculums</a></li>
                         </ul>
                     </li>
                     <li <?php uri_match('teachers'); uri_match('upload')?> id="teachers_menu"><a href="<?php echo base_url('admin/teachers'); ?>" title="View Teachers"><i class="icon-sitemap"></i><span>Teachers</span> </a></li>

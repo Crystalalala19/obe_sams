@@ -8,6 +8,8 @@ class Site extends CI_Controller {
 	}
 
 	public function index() {
+        $this->check_role();
+        
 		$data['title'] = "OBE SAMS Academic";
         
         $this->load->library('form_validation');

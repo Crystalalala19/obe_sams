@@ -1,3 +1,13 @@
+    <?php 
+    function comma_period($array) {
+        $last_entry = array_pop($array);
+        if(count($array) > 0) {
+            echo implode(", ", $array) . " and " . $last_entry.'.';
+        } else {
+            echo $last_entry.'.';
+        }
+    }
+    ?>
     <div class="main-inner">
         <div class="container">
             <div class="row">
@@ -8,37 +18,30 @@
                             <h3><?php echo $header;?></h3>
                         </div> <!-- /widget-header -->
                         <div class="widget-content">
-                        <?php
-                            echo $this->session->flashdata('message');
+                        <?php echo $this->session->flashdata('message'); ?>
 
-                            if(!empty($this->session->flashdata('non_existingTeacher'))): ?>
+                        <?php if(!empty($this->session->flashdata('non_existingTeacher'))): ?>
                             <div class="alert alert-danger alert-dismissible" role="alert">
                                 <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
                                 <i class="icon-exclamation-sign"></i>
                                 <strong>Error:</strong> uploading failed. <br><br>The following <strong>Teacher ID(s)</strong> does not exist:
-                                <?php foreach ($this->session->flashdata('non_existingTeacher') as $value): ?>
-                                <strong><?php echo $value;?>, </strong>
-                                <?php endforeach;?> 
+                                <?php comma_period($this->session->flashdata('non_existingTeacher')); ?>
                             </div>
-                        <?php endif; 
-                            if(!empty($this->session->flashdata('non_existingCourse'))): ?>
+                        <?php endif; ?>
+                        <?php if(!empty($this->session->flashdata('non_existingCourse'))): ?>
                             <div class="alert alert-danger alert-dismissible" role="alert">
                                 <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
                                 <i class="icon-exclamation-sign"></i>
                                 <strong>Error:</strong> uploading failed. <br><br>The following <strong>Course(s)</strong> does not exist in the Curriculums:
-                                <?php foreach ($this->session->flashdata('non_existingCourse') as $value): ?>
-                                <strong><?php echo $value;?>, </strong>
-                                <?php endforeach;?> 
+                                <?php comma_period($this->session->flashdata('non_existingCourse')); ?>
                             </div>
-                        <?php endif;
+                        <?php endif; ?>
+                        <?php
                             $attributes = array('class' => 'col-md-4');
                             echo form_open_multipart('admin/upload', $attributes);
                         ?>
                                 <div class="control-group">
                                     <div class="pull-right">
-                                        <!-- <h3>Download Template:</h3> -->
-                                        <!-- <a href="<?php echo base_url('admin/download/csv');?>" title="Download .CSV template"><img src="<?php echo base_url('assets/img/excel.png');?>" title=".CSV Template"></a> -->
-                                        <!-- <a href="<?php echo base_url('admin/download/pdf');?>"><img src="<?php echo base_url('assets/img/pdf.png');?>"></a> -->
                                         <h4>Download Template:
                                         <a href="<?php echo base_url('admin/download/csv');?>"><i class="icon-download-alt icon-2x"></i></a>
                                         </h4>
