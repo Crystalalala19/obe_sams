@@ -7,9 +7,7 @@ class Site extends CI_Controller {
 		$this->load->model('model_users');
 	}
 
-	public function index() {
-        $this->check_role();
-        
+	public function index() {        
 		$data['title'] = "OBE SAMS Academic";
         
         $this->load->library('form_validation');
