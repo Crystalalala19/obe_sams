@@ -467,7 +467,7 @@ class Model_admin extends CI_Model {
     }
     
     function activity_log() {
-        $query = $this->db->query("SELECT * FROM teacher_class GROUP BY date");
+        $query = $this->db->query("SELECT * FROM teacher_class GROUP BY date ORDER BY date DESC");
 
         return $query->result_array();
     }
