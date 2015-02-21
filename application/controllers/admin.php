@@ -877,6 +877,7 @@ class Admin extends CI_Controller {
         $student_course = $select_schedule[0]['courseCode'];
         $student_courseID = $this->model_admin->get_courseID($student_course);
        
+        $data['class_program'] = $this->model_admin->get_classProgram($student_course);
         $data['get_po'] = $this->model_admin->get_po($student_courseID);
 
         foreach($data['class_list'] as $key => $val) {

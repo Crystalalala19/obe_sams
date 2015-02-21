@@ -60,15 +60,38 @@ class Model_admin extends CI_Model {
         }
     }
 
-    function if_id_exists($data){
-        $this->db->select('student_id');
-        $query = $this->db->get_where('student', array('student_id' => $data));
-        if($query->num_rows() > 0) {
-            return true;
+    function get_maxPoCode() {
+        $query = $this->db->query("SELECT (SELECT digits(max(poCode))) AS max_po FROM po");
+
+        if ($query->num_rows() > 0){
+            $row = $query->row_array();
+            return $row['max_po'];
         }
-        else {
-            return false;
+        else 
+            return FALSE;
+    }
+
+    function check_password($data, $pass) {
+        $query = $this->db->get_where('user_account', array('idnum'=>$data));
+        if($query->num_rows() == 1) {
+
+            $row = $query->row_array();
+            $db_pass= $row['password'];
+
+            $hashed = $this->encrypt->sha1($pass);
+
+            if($db_pass == $hashed)
+                return true;
+            else
+                return false;
         }
+    }
+
+    function change_pass($data, $account_id) {
+        $this->db->where('idnum', $account_id);
+        $query = $this->db->update('user_account', $data);
+
+        return $this->check_query();
     }
     // End of General Functions
 
@@ -294,22 +317,17 @@ class Model_admin extends CI_Model {
 
         return $query->result_array();
     }
+
+    function get_classProgram($course_code) {
+        $query = $this->db->query("SELECT programFullName, effective_year FROM course 
+                                    INNER JOIN program_year ON course.pyID = program_year.ID
+                                    INNER JOIN program ON program_year.programID = program.ID 
+                                  WHERE CourseCode = '".$course_code."' 
+                                  ");
+
+        return $query->row_array();
+    }
     // END PROGRAM
-
-    // STUDENT
-    function insert_csv($data) {
-        $this->db->insert('student', $data);
-
-        return $this->check_query();
-    }
-
-    function update_student($id, $data) {
-        $this->db->where('ID', $id);
-        $this->db->update('student', $data);
-
-        return $this->check_query();
-    }
-    // END STUDENT
 
     // TEACHER
     function get_teacherInfo($id) {
@@ -578,40 +596,6 @@ class Model_admin extends CI_Model {
                                             GROUP BY po_course.poID");
         
         return $query->result_array();
-    }
-
-    function get_maxPoCode() {
-        $query = $this->db->query("SELECT (SELECT digits(max(poCode))) AS max_po FROM po");
-
-        if ($query->num_rows() > 0){
-            $row = $query->row_array();
-            return $row['max_po'];
-        }
-        else 
-            return FALSE;
-    }
-
-    function check_password($data, $pass) {
-        $query = $this->db->get_where('user_account', array('idnum'=>$data));
-        if($query->num_rows() == 1) {
-
-            $row = $query->row_array();
-            $db_pass= $row['password'];
-
-            $hashed = $this->encrypt->sha1($pass);
-
-            if($db_pass == $hashed)
-                return true;
-            else
-                return false;
-        }
-    }
-
-    function change_pass($data, $account_id) {
-        $this->db->where('idnum', $account_id);
-        $query = $this->db->update('user_account', $data);
-
-        return $this->check_query();
     }
     // END TEACHER
 }

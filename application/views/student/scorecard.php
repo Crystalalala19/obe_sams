@@ -36,7 +36,7 @@
                         ?>
 
                         <h4><center>
-                        <?php foreach($student_year as $row): ?>
+                        <?php foreach($student_year as $row): $stud_prog = $row['programFullName'].' '.$row['effective_year'].' - '.($row['effective_year']+1); ?>
                             <?php echo $row['programFullName'];?><br>
                             <?php echo '(Effective SY: '.$row['effective_year'].' - '.($row['effective_year']+1).')';?>                                
                         <?php endforeach; ?>  
@@ -54,7 +54,7 @@
                                 <tbody>
                                     <?php foreach($class_list as $key => $row3): ?>
                                     <tr>
-                                        <td width="7%"><?php echo $row3['courseCode']; ?></td>
+                                        <td width="10%"><?php echo $row3['courseCode']; ?></td>
                                         <?php for($x=0; $x < $po_count; $x++): ?>
                                             <td><?php if($row3['score'][$x]['score'] == ''){echo '';}else{echo number_format($row3['score'][$x]['score'],1);}?></td>
                                         <?php endfor;?>   
@@ -125,17 +125,11 @@
                     "sExtends":    "collection",
                     "sButtonText": "Save as...",
                     "aButtons":    [ {
-                            "sExtends": "xls",
-                            "sTitle": "<?php echo $stud_info; ?>",
-                            "oSelectorOpts": {
-                                page: 'current'
-                            },
-                            "mColumns": [ 0, 1 ]
-                        }, {
                             "sExtends": "pdf",
                             "sTitle": "<?php echo $stud_info; ?>",
                             "sButtonText": "PDF",
-                            "mColumns": [ 0, 1 ]
+                            "sPdfMessage": "<?php echo $stud_prog; ?>",
+                            "mColumns": "visible"
                         }
                     ]
                 }

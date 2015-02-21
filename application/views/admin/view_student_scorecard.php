@@ -31,7 +31,7 @@
                             ?>
 
                             <h4><center>
-                            <?php foreach($get_scoreEY as $row): ?>
+                            <?php foreach($get_scoreEY as $row): $stud_prog = $row['programFullName'].' '.$row['effective_year'].' - '.($row['effective_year']+1);?>
                                 <?php echo $row['programFullName'];?><br>
                                 <?php echo '(Effective SY: '.$row['effective_year'].' - '.($row['effective_year']+1).')';?>                                
                             <?php endforeach; ?>  
@@ -58,7 +58,7 @@
                                 <tbody>
                                     <?php foreach($class_list as $key => $row3): ?>
                                     <tr>
-                                        <td width="7%"><?php echo $row3['courseCode']; ?></td>
+                                        <td width="10%"><?php echo $row3['courseCode']; ?></td>
                                         <?php for($x=0; $x < $po_count; $x++): ?>
                                             <td><?php if($row3['score'][$x]['score'] == ''){echo '';}else{echo number_format($row3['score'][$x]['score'],1);}?></td>
                                         <?php endfor;?>   
@@ -140,6 +140,7 @@
                             "sExtends": "pdf",
                             "sTitle": "<?php echo $stud_name.' '.$stud_id; ?>",
                             "sButtonText": "PDF",
+                            "sPdfMessage": "<?php echo $stud_prog; ?>",
                             "mColumns": "visible"
                         }
                     ]

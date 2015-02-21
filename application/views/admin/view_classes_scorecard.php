@@ -34,6 +34,13 @@
                                 $attributes = array('class' => 'col-md-4');
                             ?>
                             
+                            <h4>
+                                <center>
+                                    <?php echo $class_program['programFullName'];?><br>
+                                    <?php echo '(Effective SY: '.$class_program['effective_year'].' - '.($class_program['effective_year']+1).')';?>    
+                                </center>
+                            </h4>
+
                             <div class="pull-left">
                                 <?php foreach($select_schedule as $row1): ?>
                                     <h4>
@@ -51,15 +58,17 @@
                                 <?php endforeach; ?>
                             </div>
                             <div class="clearfix"></div>
+                            <hr>
+                            <div class="clearfix"></div>
                             <table id="view_classlist" class="table table-striped table-bordered dataTable no-footer">
                                 <thead>
                                     <tr>
-                                        <th width="10%">Student ID</i></th>
+                                        <th width="11%">Student ID</i></th>
                                         <th>Name</i></th>
                                         <?php for($x = 1; $x <= $po_count; $x++):?>
                                             <th>PO <?php echo $x;?></i></th>
                                         <?php endfor; $row_num=1;?>
-                                        <th width="10%" class="no-sort">Scorecard</th>
+                                        <th width="11%" class="no-sort">Scorecard</th>
                                     </tr>
                                 </thead>
                                 
@@ -146,10 +155,10 @@
         var tableToolsOptions = {
             "sSwfPath": "http://cdn.datatables.net/tabletools/2.2.3/swf/copy_csv_xls_pdf.swf",
             "aButtons": [ {
-                    "sExtends": "copy",
-                    "sButtonText": "Copy"
-                }, 
-                {
+                    "sExtends": "print",
+                    "sButtonText": "Print",
+                    "bShowAll": false
+                }, {
                     "sExtends":    "collection",
                     "sButtonText": "Save as...",
                     "aButtons":    [ {
@@ -164,6 +173,7 @@
                             "sExtends": "pdf",
                             "sTitle": "<?php echo $co_code.' Group No. '.$grp;?>",
                             "sButtonText": "PDF",
+                            "sPdfMessage": "<?php echo $class_program['programFullName'].' '.$class_program['effective_year'].' - '.($class_program['effective_year']+1);?>",
                             //Columns to export as data, exluded Action column
                             "mColumns": "visible"
                         }
