@@ -294,13 +294,13 @@ class Admin extends CI_Controller {
 
         $this->form_validation->set_rules("program", "Program Name", "required|trim");
         $this->form_validation->set_rules("effective_year", "Effective Year", "required|trim");
-        $this->form_validation->set_rules("po_code[]", "PO Code", "required|trim");
-        $this->form_validation->set_rules("po_attrib[]", "PO Attribute", "required|trim");
-        $this->form_validation->set_rules("po_desc[]", "PO Description", "required|trim");
-        $this->form_validation->set_rules("co_code[]", "Course Code", "required|trim");
-        $this->form_validation->set_rules("co_desc[]", "Course Description", "required|trim");
-        $this->form_validation->set_rules("year_level[]", "Year Level", "required|trim");
-        $this->form_validation->set_rules("semester[]", "Semester", "required|trim");
+        $this->form_validation->set_rules("po_code[]", "PO Code", "required|trim|alpha_numeric");
+        $this->form_validation->set_rules("po_attrib[]", "PO Attribute", "required|trim|callback_alpha_dash_space");
+        $this->form_validation->set_rules("po_desc[]", "PO Description", "required|trim|callback_alpha_dash_space");
+        $this->form_validation->set_rules("co_code[]", "Course Code", "required|trim|alpha_numeric");
+        $this->form_validation->set_rules("co_desc[]", "Course Description", "required|trim|callback_alpha_dash_space");
+        $this->form_validation->set_rules("year_level[]", "Year Level", "required|trim|numeric");
+        $this->form_validation->set_rules("semester[]", "Semester", "required|trim|numeric");
 
         if($this->form_validation->run() == FALSE){
             $data['message'] = '';
@@ -357,7 +357,7 @@ class Admin extends CI_Controller {
 
             foreach($course_rows as $key => $val) {
                 $course_fields = array(
-                    'CourseCode' => $val,
+                    'CourseCode' => strtoupper($val),
                     'CourseDesc' => $course_desc[$key],
                     'pyID' => $program_year,
                     'year_level' => $year_level[$key],
@@ -383,7 +383,7 @@ class Admin extends CI_Controller {
                 $course_equi_array = array();
                 
                 foreach ($exploded_data as $key2 => $value) {
-                    $course_equi_array[$key2]['CourseEquivalent'] = $value;
+                    $course_equi_array[$key2]['CourseEquivalent'] = strtoupper($value);
                     $course_equi_array[$key2]['courseID'] = $course_id[$key1];
                 }
                 $equi_result = $this->model_admin->insert_equivalents($course_equi_array);
@@ -431,7 +431,7 @@ class Admin extends CI_Controller {
         else {
             $program_data = array(
                 'programName' => strtoupper($this->input->post('program_name')),
-                'programFullName' => ucwords($this->input->post('full_name'))
+                'programFullName' => strtoupper($this->input->post('full_name'))
             );
             $result = $this->model_admin->insert_program($program_data);
 
@@ -495,6 +495,7 @@ class Admin extends CI_Controller {
         $this->form_validation->set_rules("po_desc[]", "PO Description", "required|trim");
         $this->form_validation->set_rules("co_code[]", "Course Code", "required|trim");
         $this->form_validation->set_rules("co_desc[]", "Course Description", "required|trim");
+        
 
         if(!$this->model_admin->get_programYear($year_data)) {
             $message = '<strong>Program Year</strong> does not exist.';
@@ -527,8 +528,6 @@ class Admin extends CI_Controller {
                         $equivalent_implode[$key] = implode(', ',$equivalent_data[$key]);
                     }
             }
-
-            // print_r($equivalent_implode);die();
   
             $data['equivalent'] = $equivalent_implode;
 
@@ -568,7 +567,7 @@ class Admin extends CI_Controller {
             foreach ($course_rows as $key => $value) {
                 $co_update = array(
                     'ID' => $course_id[$key],
-                    'CourseCode' => $value,
+                    'CourseCode' => strtoupper($value),
                     'CourseDesc' => $course_desc[$key],
                     'pyID' => $year_id
                 );
@@ -581,24 +580,24 @@ class Admin extends CI_Controller {
             }
 
             $equivalent_data = array();
+            $equivalent_delete = array();
 
             foreach ($exploded as $key => $exploded_data) {
                 foreach ($exploded_data as $key2 => $value) {
-                    // if(!$this->model_admin->check_equivalent($course_id[$key])) {
-                    // if(!empty($value)) {
+                    if(!empty($value)) {
                         $equivalent_data[] = array(
-                            'CourseEquivalent' => $value,
+                            'CourseEquivalent' => strtoupper($value),
                             'courseID' => $course_id[$key]
                         );
-                        // $this->model_admin->delete_equivalents($course_id[$key]);
-                    // }
-                    // }
+
+                        $equivalent_delete[] = $course_id[$key];
+                    }
                 }
             }
 
             $program_data = array(
-                'programName' => $program,
-                'programFullName' => $program_full
+                'programName' => strtoupper($program),
+                'programFullName' => strtoupper($program_full)
             );
             
             $this->db->trans_start();
@@ -606,7 +605,8 @@ class Admin extends CI_Controller {
             $this->model_admin->update_program($program_id, $program_data);
             $this->model_admin->update_po($po_data);
             $this->model_admin->update_courses($course_data);
-            $result = $this->model_admin->update_equivalents($equivalent_data);
+            $this->model_admin->delete_equivalents($equivalent_delete);
+            $this->model_admin->update_equivalents($equivalent_data);
 
             if($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();

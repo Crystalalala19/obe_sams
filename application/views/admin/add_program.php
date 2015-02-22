@@ -141,6 +141,7 @@
                                                         <option value="">Select Semester: </option>
                                                         <option value="1">1</option>
                                                         <option value="2">2</option>
+                                                        <option value="summer">Summer</option>
                                                     </select>
                                                 </td>
                                             </tr>

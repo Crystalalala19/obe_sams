@@ -290,7 +290,7 @@ class Model_users extends CI_Model {
                                   FROM student_course 
                                   INNER JOIN teacher_class ON student_course.classID = teacher_class.ID
                                   WHERE teacher_class.teacherID = '".$this->session->userdata('idnum')."' 
-                                  GROUP BY student_course.classID ");
+                                  GROUP BY student_course.classID ORDER BY date DESC");
 
         return $query->result_array();
     }

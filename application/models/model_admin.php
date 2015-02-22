@@ -170,8 +170,8 @@ class Model_admin extends CI_Model {
             return FALSE;
     }
 
-    function delete_equivalents($id) {
-        $this->db->where('courseID', $id);
+    function delete_equivalents($ids) {
+        $this->db->where_in('courseID', $ids);
         $this->db->delete('equivalent');
     }
 

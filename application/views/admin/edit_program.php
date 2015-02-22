@@ -54,9 +54,9 @@
                                             <?php foreach($program_data as $row):?>
                                             <tr>
                                                 <input type="hidden" name="po_id[]" value="<?php echo $row['ID'];?>">
-                                                <td><input type="text" class="form-control input-sm" name="po_code[]" value="<?php echo $row['poCode'];?>"></td>
-                                                <td><input type="text" class="form-control input-sm" name="po_attrib[]" value="<?php echo $row['attribute'];?>"></td>
-                                                <td><textarea class="form-control span6" name="po_desc[]" rows="5"><?php echo $row['description'];?></textarea></td>
+                                                <td><input type="text" class="span1" name="po_code[]" value="<?php echo $row['poCode'];?>"></td>
+                                                <td><input type="text" class="span4" name="po_attrib[]" value="<?php echo $row['attribute'];?>"></td>
+                                                <td><textarea class="span6" name="po_desc[]" rows="5"><?php echo $row['description'];?></textarea></td>
                                             </tr>
                                             <?php endforeach;?>
                                         </tbody>
@@ -74,15 +74,34 @@
                                                 <th>Course Equivalents 
                                                     <a href="#" data-toggle="popover" data-html="true" data-content="Separate by comma. <br>Ex: IT110, CS110, ICT110"><i class="icon-info-sign icon-large"></i></a>
                                                 </th>
+                                                <th>Year Level</th>
+                                                <th>Semester</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php foreach($course_list as $key => $row):?>
                                             <tr>
-                                                <input type="hidden" class="form-control input-sm" name="co_id[]" value="<?php echo $row['ID'];?>">
-                                                <td><input type="text" class="form-control input-sm" name="co_code[]" value="<?php echo $row['CourseCode'];?>"></td>
-                                                <td><textarea class="form-control input-sm span6" name="co_desc[]" rows="3"><?php echo $row['CourseDesc'];?></textarea></td>
+                                                <input type="hidden" name="co_id[]" value="<?php echo $row['ID'];?>">
+                                                <td><input type="text" class="span1" name="co_code[]" value="<?php echo $row['CourseCode'];?>"></td>
+                                                <td><input type="text" class="span3" name="co_desc[]" value="<?php echo $row['CourseDesc'];?>"></td>
                                                 <td><input type="text" class="" name="co_equi[]" value="<?php if(isset($equivalent[$key]))echo $equivalent[$key];?>" placeholder="Enter Course Equivalent"></td>
+                                                <td>
+                                                    <select title="Please select a Year" name="year_level[]">
+                                                        <option value="">Select Year Level: </option>
+                                                        <option value="1" <?php if($row['year_level'] == 1) echo 'selected="selected"';?>>1</option>
+                                                        <option value="2" <?php if($row['year_level'] == 2) echo 'selected="selected"';?>>2</option>
+                                                        <option value="3" <?php if($row['year_level'] == 3) echo 'selected="selected"';?>>3</option>
+                                                        <option value="4" <?php if($row['year_level'] == 4) echo 'selected="selected"';?>>4</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select title="Please select a Semester" name="semester[]">
+                                                        <option value="">Select Semester: </option>
+                                                        <option value="1" <?php if($row['semester'] == 1) echo 'selected="selected"';?>>1</option>
+                                                        <option value="2" <?php if($row['semester'] == 2) echo 'selected="selected"';?>>2</option>
+                                                        <option value="summer" <?php if($row['semester'] == 'summer') echo 'selected="selected"';?>>Summer</option>
+                                                    </select>
+                                                </td>
                                             </tr>
                                             <?php endforeach;?>
                                         </tbody>
