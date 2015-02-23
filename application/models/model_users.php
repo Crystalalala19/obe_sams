@@ -196,7 +196,8 @@ class Model_users extends CI_Model {
         return $row['ID'];
     }
 
-    function insert_grades($data) {
+    function insert_grades($data, $class_id) {
+        $this->db->delete('student_course', array('classID' => $class_id)); 
         $this->db->insert_on_duplicate_update_batch('student_course', $data);  
         
         return $this->check_query();

@@ -277,7 +277,7 @@ class Site extends CI_Controller {
                     }
                 }
                 
-                $this->model_users->insert_grades($to_insert_grade);
+                $this->model_users->insert_grades($to_insert_grade, $class_id);
 
                 //Deletes uploaded file
                 unlink($file_path);
