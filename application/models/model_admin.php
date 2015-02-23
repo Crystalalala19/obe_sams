@@ -282,8 +282,8 @@ class Model_admin extends CI_Model {
             return false;
     }
 
-    function check_courseGroup($course, $group_num, $teacher_id) {
-        $query = $this->db->query("SELECT courseCode, group_num, teacherID FROM teacher_class WHERE (courseCode = '".$course."' AND group_num = '".$group_num."') AND teacherID = '".$teacher_id."' ");
+    function check_courseGroup($course, $group_num, $teacher_id, $sy, $semester) {
+        $query = $this->db->query("SELECT courseCode, group_num, teacherID FROM teacher_class WHERE (courseCode = '".$course."' AND group_num = '".$group_num."') AND teacherID = '".$teacher_id."' AND (school_year = '".$sy."' AND semester = '".$semester."' ) ");
 
         if($query->num_rows() == 1)
             return true;

@@ -118,7 +118,7 @@ class Admin extends CI_Controller {
                     elseif(!$this->model_admin->check_teacher($row['Teacher ID'])) {
                         $nonExistingTeacher[] = $row['Teacher ID'];
                     }    
-                    elseif(!$this->model_admin->check_courseGroup($row['Course Code'], $row['Group Number'], $row['Teacher ID'])) {
+                    elseif($this->model_admin->check_courseGroup($row['Course Code'], $row['Group Number'], $row['Teacher ID'], $this->get_sy(), $this->get_semester())) {
                         $ExistingCourseGroup[] = '<br>Teacher ID: '.$row['Teacher ID'].' Grp # '.$row['Group Number'].' '.$row['Course Code'].'<br>';
                     }
                     else {
