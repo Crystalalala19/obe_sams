@@ -36,6 +36,14 @@
                                 <?php comma_period($this->session->flashdata('non_existingCourse')); ?>
                             </div>
                         <?php endif; ?>
+                        <?php if(!empty($this->session->flashdata('existingCourseGroup'))): ?>
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
+                                <i class="icon-exclamation-sign"></i>
+                                <strong>Error:</strong> uploading failed. <br><br>The following <strong>Classes(s)</strong> already existed:
+                                <?php comma_period($this->session->flashdata('existingCourseGroup')); ?>
+                            </div>
+                        <?php endif; ?>
                         <?php
                             $attributes = array('class' => 'col-md-4');
                             echo form_open_multipart('admin/upload', $attributes);

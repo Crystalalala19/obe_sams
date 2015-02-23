@@ -107,7 +107,9 @@ class Admin extends CI_Controller {
                 $insert_data = array();
                 $nonExistingCourse = array();
                 $nonExistingTeacher = array();
+                $ExistingCourseGroup = array();
                 $csv_array = $this->csvimport->get_array($file_path, array('Teacher ID', 'Group Number', 'Course Code', 'Start Time', 'End Time', 'Days'));
+                $csv_array = array_filter(array_map('array_filter', $csv_array));
                 
                 foreach ($csv_array as $row) {
                     if(!$this->model_admin->check_course($row['Course Code'])) {
@@ -116,6 +118,9 @@ class Admin extends CI_Controller {
                     elseif(!$this->model_admin->check_teacher($row['Teacher ID'])) {
                         $nonExistingTeacher[] = $row['Teacher ID'];
                     }    
+                    elseif(!$this->model_admin->check_courseGroup($row['Course Code'], $row['Group Number'], $row['Teacher ID'])) {
+                        $ExistingCourseGroup[] = '<br>Teacher ID: '.$row['Teacher ID'].' Grp # '.$row['Group Number'].' '.$row['Course Code'].'<br>';
+                    }
                     else {
                         $insert_data[] = array(
                             'group_num'=>$row['Group Number'],
@@ -137,8 +142,10 @@ class Admin extends CI_Controller {
                     $this->session->set_flashdata('non_existingTeacher', $nonExistingTeacher);
                 if(!empty($nonExistingCourse))
                     $this->session->set_flashdata('non_existingCourse', $nonExistingCourse);
+                if(!empty($ExistingCourseGroup))
+                    $this->session->set_flashdata('existingCourseGroup', $ExistingCourseGroup);
                 
-                if(empty($nonExistingCourse) AND empty($nonExistingTeacher)) {
+                if(empty($nonExistingCourse) AND empty($nonExistingTeacher) AND empty($ExistingCourseGroup)) {
                     $result = $this->model_admin->insert_classes($insert_data);
 
                     if($result['is_success'] == FALSE) {

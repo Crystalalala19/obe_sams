@@ -111,7 +111,7 @@
                                 </section>
 
                                 <h2>Courses</h2>
-                                <section>
+                                <section style="position:relative;">
                                     <table class="table table-striped table-bordered" id="course-table">
                                         <tbody>
                                             <tr>

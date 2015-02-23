@@ -51,7 +51,7 @@
 
                                 <select class="span2" id="year_level" name="year_level">
                                     <option value="">Year level:</option>
-                                    <option value="all" <?php echo set_select('year_level', 'all');?>>All</option>
+                                    <option value="all" <?php echo set_select('year_level', 'all');?>>All Year Level</option>
                                     <option value="1" <?php echo set_select('year_level', '1');?>>First Year</option>
                                     <option value="2" <?php echo set_select('year_level', '2');?>>Second Year</option>
                                     <option value="3" <?php echo set_select('year_level', '3');?>>Third Year</option>
@@ -60,7 +60,7 @@
                                 
                                 <select class="span2" name="semester">
                                     <option value="">Semester:</option>
-                                    <option value="all" <?php echo set_select('semester', 'all');?>>All</option>
+                                    <option value="all" <?php echo set_select('semester', 'all');?>>All Semester</option>
                                     <option value="1" <?php echo set_select('semester', '1');?>>First</option>
                                     <option value="2" <?php echo set_select('semester', '2');?>>Second</option>
                                     <option value="summer" <?php echo set_select('semester', 'summer');?>>Summer</option>

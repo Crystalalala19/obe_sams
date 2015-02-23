@@ -62,7 +62,7 @@ class Model_users extends CI_Model {
 
     function select_SY(){
         $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('idnum')."' 
-                                                                          GROUP BY school_year ");
+                                                                          GROUP BY school_year ORDER BY school_year");
         
         return $query->result();
     }

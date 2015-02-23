@@ -282,6 +282,15 @@ class Model_admin extends CI_Model {
             return false;
     }
 
+    function check_courseGroup($course, $group_num, $teacher_id) {
+        $query = $this->db->query("SELECT courseCode, group_num, teacherID FROM teacher_class WHERE (courseCode = '".$course."' AND group_num = '".$group_num."') AND teacherID = '".$teacher_id."' ");
+
+        if($query->num_rows() == 1)
+            return true;
+        else
+            return false;
+    }
+
     function update_checks($data) {
         $this->db->insert_on_duplicate_update_batch('po_course', $data);
 
@@ -376,7 +385,7 @@ class Model_admin extends CI_Model {
     }
 
     function get_teacherClasses($teacher_id) {
-        $query = $this->db->query("SELECT DISTINCT school_year FROM teacher_class WHERE teacherID = '".$teacher_id."' ");
+        $query = $this->db->query("SELECT DISTINCT school_year FROM teacher_class WHERE teacherID = '".$teacher_id."' ORDER BY school_year ");
     
         return $query->result_array();
     }
