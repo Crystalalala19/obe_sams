@@ -42,14 +42,22 @@
                                 <div class="clearfix"></div><br>
 
                                 <label class="control-label" for="program">Program:</label>
-                                <select class="span2" id="program" name="program">
+                                <select class="span2" id="program" name="program" required>
                                     <option value="">Program:</option>
                                     <?php foreach ($program_list as $row): ?>
                                     <option value="<?php echo $row['programName'];?>" <?php echo set_select('program', $row['programName']);?>><?php echo rawurldecode($row['programName']); ?></option>
                                     <?php endforeach;?>
                                 </select>
 
-                                <select class="span2" id="year_level" name="year_level">
+                                <select class="span2" id="program_ajax" name="program_year" required>
+                                    <option value="" selected="selected"></option>
+                                </select>
+
+                                <select class="span2" id="program_ajax2" name="course" required>
+                                    <option value="" selected="selected"></option>
+                                </select>
+
+                                <select class="span2" id="year_level" name="year_level" required>
                                     <option value="">Year level:</option>
                                     <option value="all" <?php echo set_select('year_level', 'all');?>>All Year Level</option>
                                     <option value="1" <?php echo set_select('year_level', '1');?>>First Year</option>
@@ -58,7 +66,7 @@
                                     <option value="4" <?php echo set_select('year_level', '4');?>>Fourth Year</option>
                                 </select>
                                 
-                                <select class="span2" name="semester">
+                                <select class="span2" name="semester" required>
                                     <option value="">Semester:</option>
                                     <option value="all" <?php echo set_select('semester', 'all');?>>All Semester</option>
                                     <option value="1" <?php echo set_select('semester', '1');?>>First</option>
@@ -66,14 +74,14 @@
                                     <option value="summer" <?php echo set_select('semester', 'summer');?>>Summer</option>
                                 </select>
 
-                                <select class="span2" name="academic_year">
+                                <select class="span2" name="academic_year" required>
                                     <option value="">Academic Year:</option>
                                     <?php foreach ($year_classes as $row): ?>
                                     <option value="<?php echo $row['school_year'];?>" <?php echo set_select('academic_year', $row['school_year']);?>><?php echo $row['school_year'].' - '. ($row['school_year']+1); ?></option>
                                     <?php endforeach;?>
                                 </select>
 
-                                <select class="span2" name="po_num">
+                                <select class="span1" name="po_num" required>
                                     <option value="">PO #:</option>
                                     <?php for($x = 1; $x <= $max_po; $x++):?>
                                     <option value="0<?php echo $x;?>" <?php echo set_select('po_num', '0'.$x);?>>PO <?php echo $x;?></option>
@@ -116,6 +124,12 @@
             </div> <!-- /row -->
         </div> <!-- /container -->
     </div> <!-- /main-inner -->
+
+    <script type="text/javascript" language="javascript">
+        var baseurl = "<?php print base_url(); ?>";
+    </script>
+    <script type="text/javascript" language="javascript" src="<?php echo base_url(); ?>assets/js/report_student.js"></script>
+    <script type="text/javascript" language="javascript" src="<?php echo base_url(); ?>assets/js/report_student2.js"></script>
 
     <script type="text/javascript" language="javascript">
         var d = document.getElementById("report_dropdown");

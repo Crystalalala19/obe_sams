@@ -93,6 +93,12 @@ class Model_admin extends CI_Model {
 
         return $this->check_query();
     }
+
+    function get_eyCourses($py_id) {
+        $query = $this->db->query("SELECT ID, CourseCode FROM course WHERE pyID = '".$py_id."' ");
+
+        return $query->result_array();
+    }
     // End of General Functions
 
     // PROGRAMS
@@ -488,7 +494,7 @@ class Model_admin extends CI_Model {
     }
 
     function get_teacherReport() {
-        $query = $this->db->query("SELECT DISTINCT school_year FROM teacher_class");
+        $query = $this->db->query("SELECT DISTINCT school_year FROM teacher_class ORDER BY school_year");
     
         return $query->result_array();
     }
@@ -513,7 +519,7 @@ class Model_admin extends CI_Model {
         return $query->result_array();
     }
 
-    function generate_studentReport($program, $year_level, $semester, $academic_year, $po_num) {
+    function generate_studentReport($program, $effective_year, $course, $year_level, $semester, $academic_year, $po_num) {
         $custom = "SELECT *, 
                     teacher.fname as tfname, teacher.lname as tlname,
                     student.fname as sfname, student.lname as slname
@@ -530,6 +536,15 @@ class Model_admin extends CI_Model {
 
         if(!empty($program)) {
             $custom .= " AND programName = '".$program."' ";
+        }
+
+        if(!empty($effective_year)) {
+            $custom .= " AND program_year.ID = '".$effective_year."' ";
+        }
+
+        if(!empty($course)) {
+            if($course != "all")
+                $custom .= " AND CourseCode = '".$course."' ";
         }
 
         if(!empty($year_level)) {
@@ -553,6 +568,8 @@ class Model_admin extends CI_Model {
         $custom .= " GROUP BY student_id, student_course.classID;";
 
         $query = $this->db->query($custom);
+
+        // return $this->check_query();
 
         if($query->num_rows() > 0) 
             return $query->result_array();

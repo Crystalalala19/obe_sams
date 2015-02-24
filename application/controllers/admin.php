@@ -36,6 +36,13 @@ class Admin extends CI_Controller {
         echo json_encode($result);
     }
 
+    function programCourses_ajax() {
+        $py_id = $this->input->post('option2');
+
+        $result = $this->model_admin->get_eyCourses($py_id);
+        echo json_encode($result);
+    }
+
     function get_semester() {
         $date = getdate();
 
@@ -952,11 +959,13 @@ class Admin extends CI_Controller {
         $data['year_classes'] = $this->model_admin->get_teacherReport();
         $data['max_po'] = $this->model_admin->get_maxPoCode();
 
-        $this->form_validation->set_rules('program', 'Program', 'trim');
-        $this->form_validation->set_rules('year_level', 'Year Level', 'trim');
-        $this->form_validation->set_rules('semester', 'Semester', 'trim');
-        $this->form_validation->set_rules('academic_year', 'Academic Year', 'trim');
-        $this->form_validation->set_rules('po_num', 'PO Number', 'trim');
+        $this->form_validation->set_rules('program', 'Program', 'required|trim');
+        $this->form_validation->set_rules('program_year', 'Effective Year', 'required|trim');
+        $this->form_validation->set_rules('course', 'Course', 'required|trim');
+        $this->form_validation->set_rules('year_level', 'Year Level', 'required|trim');
+        $this->form_validation->set_rules('semester', 'Semester', 'required|trim');
+        $this->form_validation->set_rules('academic_year', 'Academic Year', 'required|trim');
+        $this->form_validation->set_rules('po_num', 'PO Number', 'required|trim');
 
         if($this->form_validation->run() == FALSE) {
             $data['message'] = '';
@@ -972,20 +981,19 @@ class Admin extends CI_Controller {
             }
 
             $program = $this->input->post('program');
+            $effective_year = $this->input->post('program_year');
+            $course = $this->input->post('course');
             $year_level = $this->input->post('year_level');
             $semester = $this->input->post('semester');
             $academic_year = $this->input->post('academic_year');
             $po_num = $this->input->post('po_num');
 
-            $result = $this->model_admin->generate_studentReport($program, $year_level, $semester, $academic_year, $po_num);
-            
-            $data['result'] = $result;
-            
+            $result = $this->model_admin->generate_studentReport($program, $effective_year, $course, $year_level, $semester, $academic_year, $po_num);
             // print_r($result);die();
             
             if($result == FALSE) {
                 $message = 'No results found. Try refining your search.';
-                $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
+                $message = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
 
                 $data['message'] = $message; 
             }
@@ -993,6 +1001,7 @@ class Admin extends CI_Controller {
                 $message = '<strong>Success!</strong>';
                 $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
 
+                $data['result'] = $result;
                 $data['message'] = $message; 
             }
         }

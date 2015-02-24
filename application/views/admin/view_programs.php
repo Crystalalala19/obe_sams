@@ -107,7 +107,8 @@
 
                             $('.toBeRemoved').append(trHTML);
                         }
-                        console.log(response);
+                        // For console debugging
+                        // console.log(response);
                     }
                 });
             }
