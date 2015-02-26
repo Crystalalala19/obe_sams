@@ -54,9 +54,9 @@
                                             <?php foreach($program_data as $row):?>
                                             <tr>
                                                 <input type="hidden" name="po_id[]" value="<?php echo $row['ID'];?>">
-                                                <td><input type="text" class="span1" name="po_code[]" value="<?php echo $row['poCode'];?>" placeholder="PO Code"></td>
-                                                <td><input type="text" class="span4" name="po_attrib[]" value="<?php echo $row['attribute'];?>" placeholder="PO Attribute"></td>
-                                                <td><textarea class="span6" name="po_desc[]" rows="5" placeholder="PO Description"><?php echo $row['description'];?></textarea></td>
+                                                <td><input type="text" class="span1" name="po_code[]" value="<?php echo $row['poCode'];?>" placeholder="PO Code" required='required'></td>
+                                                <td><input type="text" class="span4" name="po_attrib[]" value="<?php echo $row['attribute'];?>" placeholder="PO Attribute" required='required'></td>
+                                                <td><textarea class="span6" name="po_desc[]" rows="5" placeholder="PO Description" required='required'><?php echo $row['description'];?></textarea></td>
                                             </tr>
                                             <?php endforeach;?>
                                         </tbody>
@@ -82,11 +82,11 @@
                                             <?php foreach($course_list as $key => $row):?>
                                             <tr>
                                                 <input type="hidden" name="co_id[]" value="<?php echo $row['ID'];?>">
-                                                <td><input type="text" class="span1" name="co_code[]" value="<?php echo $row['CourseCode'];?>" placeholder="Course Code"></td>
-                                                <td><input type="text" class="span3" name="co_desc[]" value="<?php echo $row['CourseDesc'];?>" placeholder="Course Description"></td>
+                                                <td><input type="text" class="span1" name="co_code[]" value="<?php echo $row['CourseCode'];?>" placeholder="Course Code" required='required'></td>
+                                                <td><input type="text" class="span3" name="co_desc[]" value="<?php echo $row['CourseDesc'];?>" placeholder="Course Description" required='required'></td>
                                                 <td><input type="text" class="" name="co_equi[]" value="<?php if(isset($equivalent[$key]))echo $equivalent[$key];?>" placeholder="Course Equivalents"></td>
                                                 <td>
-                                                    <select title="Please select a Year" name="year_level[]">
+                                                    <select title="Please select a Year" name="year_level[]" required='required'>
                                                         <option value="">Select Year Level: </option>
                                                         <option value="1" <?php if($row['year_level'] == 1) echo 'selected="selected"';?>>1</option>
                                                         <option value="2" <?php if($row['year_level'] == 2) echo 'selected="selected"';?>>2</option>
@@ -95,7 +95,7 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <select title="Please select a Semester" name="semester[]">
+                                                    <select title="Please select a Semester" name="semester[]" required='required'>
                                                         <option value="">Select Semester: </option>
                                                         <option value="1" <?php if($row['semester'] == 1) echo 'selected="selected"';?>>1</option>
                                                         <option value="2" <?php if($row['semester'] == 2) echo 'selected="selected"';?>>2</option>
@@ -160,13 +160,13 @@
             var lastcol = table2.rows[0].cells.length;   
             var row = table2.insertRow(lastrow); 
             var cellcol0 = row.insertCell(0);
-            cellcol0.innerHTML = "<input type='hidden' name='co_id[]'><input type='text' class='span1' name='co_code[]' placeholder='Course Code' required='required'>";
+            cellcol0.innerHTML = "<input type='hidden' name='co_id[]'><input type='text' class='span1' name='co_code[]' placeholder='Course Code' required='required' required='required'>";
             var cellcol1 = row.insertCell(1);
-            cellcol1.innerHTML = "<input type='text' class='span3' name='co_desc[]' placeholder='Course Description'>";
+            cellcol1.innerHTML = "<input type='text' class='span3' name='co_desc[]' placeholder='Course Description' required='required'>";
             var cellcol2 = row.insertCell(2);
             cellcol2.innerHTML = "<input type='text' class='' name='co_equi[]' placeholder='Course Equivalents'>";
             var cellcol3 = row.insertCell(3);
-            cellcol3.innerHTML = "<select title='Please select a Year' name='year_level[]'>"+
+            cellcol3.innerHTML = "<select title='Please select a Year' name='year_level[]' required='required'>"+
                                     "<option value=''>Select Year Level: </option>"+
                                     "<option value='1'>1</option>"+
                                     "<option value='2'>2</option>"+
@@ -174,7 +174,7 @@
                                     "<option value='4'>4</option>"+
                                  "</select>";
             var cellcol4 = row.insertCell(4);
-            cellcol4.innerHTML = "<select title='Please select a Semester' name='semester[]'>"+
+            cellcol4.innerHTML = "<select title='Please select a Semester' name='semester[]' required='required'>"+
                                     "<option value=''>Select Semester: </option>"+
                                     "<option value='1'>1</option>"+
                                     "<option value='2'>2</option>"+
