@@ -110,8 +110,10 @@
                                 </tfoot>
                             </table>
                             <br>
+                            <?php if($class_list == FALSE):?>
                             <?php foreach($user as $row): ?>
                             <?php echo form_open_multipart();?>
+                                <?php echo $info; ?>
                                 <div class="control-group">
                                     <label for="userfile">Upload .CSV File: </label>
                                     <input type="hidden" name="teacher_id" value="<?php echo $row['teacher_id'];?>">
@@ -122,6 +124,7 @@
                                 </div>
                             </form>  
                             <?php endforeach; ?> 
+                            <?php endif; ?>
                         </div> <!-- /widget-content --> 
                     </div> <!-- /widget -->                 
                 </div> <!-- /span12 -->         

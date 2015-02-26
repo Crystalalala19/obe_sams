@@ -164,6 +164,9 @@ class Site extends CI_Controller {
        
         $data['get_po'] = $this->model_users->get_po($student_courseID);
 
+        $info = 'Can only upload once and cannot be edited after. Be sure to double-check and confirm.';
+        $data['info'] = $this->model_users->notify_message('alert-danger', 'icon-exclamation', $info);
+
         foreach($data['class_list'] as $key => $val) {
             $data['class_list'][$key]['score'] = $this->model_users->get_studentPoGrade($val['studentID'], $class_id);
             $data['class_list'][$key]['poID'] = $this->model_users->get_studentPoID($val['studentID'], $class_id);
