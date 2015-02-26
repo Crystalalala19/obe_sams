@@ -30,6 +30,7 @@ class Model_student extends CI_Model {
     function select_classSC($student_id) {
         $query = $this->db->query("SELECT * FROM student_course 
                                             INNER JOIN teacher_class ON student_course.classID = teacher_class.ID
+                                            -- INNER JOIN teacher ON teacher_class.teacherID = teacher.teacher_id
                                             WHERE student_course.studentID = '".$student_id."' 
                                             GROUP BY student_course.classID");
 

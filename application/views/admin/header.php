@@ -119,7 +119,7 @@
                             <li><a href="<?php echo base_url('admin/reports/student'); ?>"><i class="icon-user"></i> Student</a></li>
                         </ul>
                     </li>
-                    <li <?php uri_match('logs');?> id="activity_log"><a href="<?php echo base_url('admin/activity_log'); ?>" title="View Activity Log"><i class="icon-file"></i><span>Activity Log</span> </a></li>
+                    <li <?php uri_match('logs');?> id="activity_log"><a href="<?php echo base_url('admin/activity_log'); ?>" title="View Activity Log"><i class="icon-pushpin"></i><span>Activity Log</span> </a></li>
                 </ul>
             </div>
             <!-- /container --> 

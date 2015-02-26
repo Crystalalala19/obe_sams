@@ -36,7 +36,7 @@
                                 </a>
 
                                 <a href="<?php echo base_url('admin/activity_log');?>" class="shortcut">
-                                    <i class="shortcut-icon icon-file"></i>
+                                    <i class="shortcut-icon icon-pushpin"></i>
                                     <span class="shortcut-label">Activity Log</span> 
                                 </a>
 

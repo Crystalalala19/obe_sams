@@ -56,7 +56,6 @@
                                 <thead>
                                   <tr>
                                     <th>Code </th>
-                                    <th>Group # </th>
                                     <th>Schedule </th>
                                      <?php for($x = 1; $x <= $po_count; $x++):?>
                                         <th>PO <?php echo $x;?></th>
@@ -67,8 +66,7 @@
                                     <?php foreach($class_list as $key => $row3): ?>
                                     <tr>
                                         <td width="10%"><?php echo $row3['courseCode'];?></td>
-                                        <td width="9%"><?php echo $row3['group_num'];?></td>
-                                        <td><?php echo $row3['start_time'].' - '.$row3['end_time'].' '.$row3['days'];?></td>
+                                        <td><?php echo 'Group #:<b> '.$row3['group_num'].'</b> | '.$row3['start_time'].' - '.$row3['end_time'].' '.$row3['days'];?></td>
                                         <?php for($x=0; $x < $po_count; $x++): ?>
                                             <td><?php if($row3['score'][$x]['score'] == ''){echo '';}else{echo number_format($row3['score'][$x]['score'],1);}?></td>
                                         <?php endfor;?>   
@@ -77,7 +75,6 @@
                                 </tbody>
                                 <tfoot>
                                     <tr bgcolor="#FFF380">
-                                        <td></td>
                                         <td></td>
                                         <td><center>Average</center></td>
                                         <?php for($x=0; $x < $po_count; $x++): ?>
@@ -100,7 +97,7 @@
             footer = table.getElementsByTagName('tfoot')[0];
 
             
-        for (var i = 3; i <= 15; i++) {
+        for (var i = 2; i <= 15; i++) {
             var sum = numOfValues = 0;
             for (var j = 0, l = rows.length; j < l; j++) {
                 try {

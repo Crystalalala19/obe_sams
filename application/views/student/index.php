@@ -55,8 +55,7 @@
                                 <thead>
                                     <tr>
                                         <th>Academic Year</th>
-                                        <th>Semester</th>
-                                        <th>Year Level</th>
+                                        <th>Year Level - Semester</th>
                                         <th>Subject</th>
                                         <th>Course Description</th>
                                         <th>Schedule</th>
@@ -69,19 +68,21 @@
                                     <tr>
                                         <td width="15%"><?php echo $row['school_year'].' - '.($row['school_year']+1); ?></td>
                                         <td width="15%"><?php if($row['semester'] == '1'){
+                                                        echo $row['year_level'].' - ';
                                                         echo '1ST SEMESTER';
                                                     } 
                                                     elseif ($row['semester'] == '2') {
+                                                        echo $row['year_level'].' - ';
                                                         echo '2ND SEMESTER';
                                                     }
                                                     elseif ($row['semester'] == 'summer') {
+                                                        echo $row['year_level'].' - ';
                                                         echo 'SUMMER';
                                                     }
                                                     ?></td>
-                                        <td><?php echo $row['year_level']; ?></td>
                                         <td width="10%"><?php echo $row['courseCode']; ?></td>
                                         <td><?php echo $row['CourseDesc']; ?></td>
-                                        <td><?php echo 'Group #:'.$row['group_num'].' '.$row['start_time'].' - '.$row['end_time'].' '.$row['days'].' '; ?></td> 
+                                        <td width="22%"><?php echo 'Group #: <b>'.$row['group_num'].'</b> | '.$row['start_time'].' - '.$row['end_time'].' '.$row['days'].' '; ?></td> 
                                         <td><?php echo $row['fname'].' '.$row['lname']; ?></td> 
                                     </tr>
                                     <?php endforeach; ?>
