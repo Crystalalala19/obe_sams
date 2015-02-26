@@ -50,11 +50,11 @@
                                 </select>
 
                                 <select class="span2" id="program_ajax" name="program_year" required>
-                                    <option value="" selected="selected"></option>
+                                    <option value="" selected="selected">--------------------------------</option>
                                 </select>
 
                                 <select class="span2" id="program_ajax2" name="course" required>
-                                    <option value="" selected="selected"></option>
+                                    <option value="" selected="selected">--------------------------------</option>
                                 </select>
 
                                 <select class="span2" id="year_level" name="year_level" required>
