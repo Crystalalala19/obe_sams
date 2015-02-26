@@ -558,9 +558,6 @@ class Admin extends CI_Controller {
             $course_desc = $this->input->post('co_desc');
             $course_equi = $this->input->post('co_equi');
 
-            print_r($course_rows);
-            print_r($course_equi);
-
             $program_id = $this->input->post('program_id');
             $program = rawurldecode($this->input->post('program'));
             $program_full = $this->input->post('program_full');
@@ -601,18 +598,19 @@ class Admin extends CI_Controller {
                 $exploded[$key] = explode(", ", $val);                        
             }
 
-            // print_r($exploded);die();
-
             $equivalent_data = array();
             $equivalent_delete = array();
 
+            $this->db->trans_start();
+            $result3 = $this->model_admin->update_courses($course_data);
+            // print_r($result3);die();
+
             foreach ($exploded as $key => $exploded_data) {
                 foreach ($exploded_data as $key2 => $value) {
-                    $i = 0;
                     if(empty($course_id[$key])) {
                         $equivalent_data[] = array(
                             'CourseEquivalent' => strtoupper($value),
-                            'courseID' => $this->model_admin->get_courseID($course_rows[$i])
+                            'courseID' => $this->model_admin->get_courseID($course_rows[$key])
                         );
                     }
                     elseif(!empty($value)) {
@@ -623,35 +621,27 @@ class Admin extends CI_Controller {
                     }
                     
                     $equivalent_delete[] = $course_id[$key];
-                    $i++;
                 }
             }
-
-            // print_r($equivalent_data);die();
 
             $program_data = array(
                 'programName' => strtoupper($program),
                 'programFullName' => strtoupper($program_full)
             );
             
-            $this->db->trans_start();
 
             $result1 = $this->model_admin->update_program($program_id, $program_data);
             // print_r($result1);die();
             $result2 = $this->model_admin->update_po($po_data);
             // print_r($result2);die();
-            $result3 = $this->model_admin->update_courses($course_data);
-            // print_r($result3);die();
+            
             if(!empty($equivalent_delete)) {
                 $result4 = $this->model_admin->delete_equivalents($equivalent_delete);
                 // print_r($result4);die();
             }
-            // if(!empty($equivalent_data)) {
-                // print_r($equivalent_data);die();
-                $result5 = $this->model_admin->update_equivalents($equivalent_data);
-                // print_r($result5);die();
-            // }
-
+            
+            $result5 = $this->model_admin->update_equivalents($equivalent_data);
+            
             if($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();
 
