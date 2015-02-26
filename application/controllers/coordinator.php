@@ -91,19 +91,9 @@ class Coordinator extends CI_Controller {
 
         $data['check_program'] = $this->model_coordinator->check_program();
 
-        foreach ($check_program as $value) {
-            if($value['programName'] == 'BSICT') {
-                $program_name = $value['programName'];
-            }
-            elseif ($value['programName'] == 'BSIT') {
-               $program_name = $value['programName'];
-            }
-            elseif ($value['programName'] == 'BSCS') {
-                $program_name = $value['programName'];
-            }
-         } 
 
-        $data['student_list'] = $this->model_coordinator->student_list($program_name);
+
+        $data['student_list'] = $this->model_coordinator->student_list();
 
         if($data['student_list'] == FALSE) {
             $message = 'No students found in record. Please add students to your assigned classes.';
@@ -156,7 +146,7 @@ class Coordinator extends CI_Controller {
         $data['title'] = "OBE SAMS Academic";
 
         if($data['class_list'] == FALSE) {
-            $message = 'Your class is empty. Please upload students list with its PO grades.';
+            $message = 'This class is empty. Please tell the teacher assigned to this class to upload the PO scores.';
             $data['message'] = $this->model_coordinator->notify_message('alert-info', 'icon-info-sign', $message);
         } else {
             $data['message'] = '';
@@ -213,4 +203,43 @@ class Coordinator extends CI_Controller {
         $this->load->view('coordinator/course_list', $data);
         $this->load->view("coordinator/footer");
     }
+
+    public function scorecard(){
+        $this->check_role();
+
+        $student_id = $this->uri->segment(3);
+
+        $data['get_studentName'] = $this->model_coordinator->get_studentName($student_id);
+        $data['get_scoreEY'] = $this->model_coordinator->get_scoreEY($student_id);
+        $data['get_class'] = $this->model_coordinator->get_class($student_id);
+        
+        $data['class_list'] = $this->model_coordinator->select_classSC($student_id);
+
+        $class_list = $data['class_list'];
+
+        $student_class = $data['class_list'];
+
+        foreach($data['class_list'] as $key => $val) {
+            $data['get_po'] = $this->model_coordinator->get_poGeneral($student_id, $class_list[$key]['ID']);
+            $data['class_list'][$key]['score'] = $this->model_coordinator->get_studentPoGrade($val['studentID'], $student_class[$key]['ID']);
+            $data['class_list'][$key]['poID'] = $this->model_coordinator->get_studentPoID($val['studentID'], $student_class[$key]['ID']);
+            
+            $i = 0;
+            foreach($data['class_list'][$key]['score'] as $key1 => $val1) {
+                if($val1['score'] == "0") {
+                    $data['class_list'][$key]['score'][$key1]['score'] = "";
+                }
+            }
+            $i++;
+        }
+
+        $data['user'] = $this->model_coordinator->select_user();
+        $data['title'] = "OBE SAMS Academic";
+
+        $this->load->view("coordinator/header", $data);
+        $this->load->view('coordinator/scorecard', $data);
+        $this->load->view("coordinator/footer");
+    }
+
+
 }

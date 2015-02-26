@@ -1,14 +1,3 @@
-<style type="text/css">
-    h2 {
-        color: #060;
-        font-size: 15px;
-        font-weight: bold;
-        text-transform: uppercase;
-        text-align: left;
-    }
-</style>
-
-
 <div class="main-inner">
     <div class="container">
         <div class="row">
@@ -42,7 +31,7 @@
                                         <td><center><?php echo $row->programName;?> - <?php echo $row->effective_year;?></center></td>
                                         <td>
                                             <center>
-                                                <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row->studentID;?>" title="View Scorecard">View Scorecard</a>
+                                                <a class="btn btn-mini btn-info" href="<?php echo base_url();?>coordinator/scorecard/<?php echo $row->studentID;?>" title="View Scorecard">View Scorecard</a>
                                             </center>
                                         </td>
                                     </tr>

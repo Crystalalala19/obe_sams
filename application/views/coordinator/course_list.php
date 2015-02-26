@@ -64,7 +64,7 @@
                                                         <td><?php echo $row1->courseCode;?></td>
                                                         <td><?php echo $row1->start_time."-".$row1->end_time." ".$row1->days;?></td>
                                                         <td>
-                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/class_list/<?php echo $row1->ID;?>" title="View Class">View Class</a>
+                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>coordinator/class_list/<?php echo $row1->ID;?>" title="View Class">View Class</a>
                                                         </td>
                                                     </tr>  
                                                     <?php endforeach; ?> 
@@ -92,7 +92,7 @@
                                                         <td><?php echo $row2->courseCode;?></td>
                                                         <td><?php echo $row2->start_time."-".$row2->end_time." ".$row2->days;?></td>
                                                         <td>
-                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/class_list/<?php echo $row2->ID;?>" title="View Class">View Class</a>
+                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>coordinator/class_list/<?php echo $row2->ID;?>" title="View Class">View Class</a>
                                                         </td>
                                                     <?php endforeach; ?>   
                                                 </tbody>
@@ -119,7 +119,7 @@
                                                         <td><?php echo $row3->courseCode;?></td>
                                                         <td><?php echo $row3->start_time."-".$row3->end_time." ".$row3->days;?></td>
                                                         <td>
-                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/class_list/<?php echo $row3->ID;?>" title="View Class">View Class</a>
+                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>coordinator/class_list/<?php echo $row3->ID;?>" title="View Class">View Class</a>
                                                         </td>
                                                     <?php endforeach; ?>   
                                                 </tbody>
@@ -158,6 +158,6 @@
 
         $('#selector').change(function()
         {
-            self.location = "<?php echo base_url('site/course_list');?>/"+ this.value;
+            self.location = "<?php echo base_url('coordinator/course_list');?>/"+ this.value;
         });
     </script>

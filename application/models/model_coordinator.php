@@ -60,14 +60,14 @@ class Model_coordinator extends CI_Model {
         }
     }
 
-    function student_list($programName) {
+    function student_list() {
         $query = $this->db->query("SELECT DISTINCT * FROM student_course 
                                                     INNER JOIN student ON student_course.studentID = student.student_id
                                                     INNER JOIN po_course ON student_course.courseID = po_course.courseID
                                                     INNER JOIN course ON po_course.courseID = course.ID
                                                     INNER JOIN program_year ON course.pyID = program_year.ID
                                                     INNER JOIN program ON program_year.programID = program.ID
-                                                    WHERE program.programName = '".$programName."'
+                                                    WHERE program.programName = 'BSICT'
                                                     GROUP BY student_course.studentID");
         return $query->result();
     }
@@ -134,28 +134,112 @@ class Model_coordinator extends CI_Model {
     }
 
     function get_1stSemester($year){
-        $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('idnum')."' AND semester = 1 AND school_year = '".$year."' ");
+        $query = $this->db->query("SELECT * FROM teacher_class 
+                                                    INNER JOIN student_course ON teacher_class.ID = student_course.classID
+                                                    INNER JOIN student ON student_course.studentID = student.student_id
+                                                    INNER JOIN po_course ON student_course.courseID = po_course.courseID
+                                                    INNER JOIN course ON po_course.courseID = course.ID
+                                                    INNER JOIN program_year ON course.pyID = program_year.ID
+                                                    INNER JOIN program ON program_year.programID = program.ID
+                                                    WHERE program.programName = 'BSICT'
+                                                    AND teacher_class.semester = 1 
+                                                    AND teacher_class.school_year = '".$year."' 
+                                                    GROUP BY teacher_class.courseCode ");
 
         return $query->result();
     }
 
     function get_2ndSemester($year){
-        $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('idnum')."' AND semester = 2 AND school_year = '".$year."' ");
+        $query = $this->db->query("SELECT * FROM teacher_class 
+                                                    INNER JOIN student_course ON teacher_class.ID = student_course.classID
+                                                    INNER JOIN student ON student_course.studentID = student.student_id
+                                                    INNER JOIN po_course ON student_course.courseID = po_course.courseID
+                                                    INNER JOIN course ON po_course.courseID = course.ID
+                                                    INNER JOIN program_year ON course.pyID = program_year.ID
+                                                    INNER JOIN program ON program_year.programID = program.ID
+                                                    WHERE program.programName = 'BSICT'
+                                                    AND teacher_class.semester = 2 
+                                                    AND teacher_class.school_year = '".$year."'
+                                                    GROUP BY teacher_class.courseCode ");
 
         return $query->result();
     }
 
     function get_summer($year){
-        $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('idnum')."' AND semester = 'summer' AND school_year = '".$year."' ");
+        $query = $this->db->query("SELECT * FROM teacher_class 
+                                                    INNER JOIN student_course ON teacher_class.ID = student_course.classID
+                                                    INNER JOIN student ON student_course.studentID = student.student_id
+                                                    INNER JOIN po_course ON student_course.courseID = po_course.courseID
+                                                    INNER JOIN course ON po_course.courseID = course.ID
+                                                    INNER JOIN program_year ON course.pyID = program_year.ID
+                                                    INNER JOIN program ON program_year.programID = program.ID
+                                                    WHERE program.programName = 'BSICT'
+                                                    AND teacher_class.semester = 'summer' 
+                                                    AND teacher_class.school_year = '".$year."'
+                                                    GROUP BY teacher_class.courseCode ");
 
         return $query->result();
     }
 
     function select_SY(){
-        $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('idnum')."' 
-                                                                          GROUP BY school_year ORDER BY school_year");
+        $query = $this->db->query("SELECT * FROM teacher_class 
+                                                    INNER JOIN student_course ON teacher_class.ID = student_course.classID
+                                                    INNER JOIN student ON student_course.studentID = student.student_id
+                                                    INNER JOIN po_course ON student_course.courseID = po_course.courseID
+                                                    INNER JOIN course ON po_course.courseID = course.ID
+                                                    INNER JOIN program_year ON course.pyID = program_year.ID
+                                                    INNER JOIN program ON program_year.programID = program.ID
+                                                    WHERE program.programName = 'BSICT' 
+                                                    GROUP BY school_year ORDER BY school_year");
         
         return $query->result();
+    }
+
+    function get_studentName($student_id) {
+        $query = $this->db->query("SELECT student.student_id, student.fname, student.lname, 
+                                        MAX(student_course.year_level) as year_level 
+                                        FROM student_course 
+                                        INNER JOIN student ON student_course.studentID = student.student_id
+                                        WHERE student.student_id = '".$student_id."' 
+                                             ");
+        return $query->result();
+    }
+
+    function get_scoreEY($student_id) {
+        $query = $this->db->query("SELECT * FROM student_course
+                                            INNER JOIN po_course ON student_course.courseID = po_course.courseID
+                                            INNER JOIN course ON po_course.courseID = course.ID
+                                            INNER JOIN program_year ON course.pyID = program_year.ID
+                                            INNER JOIN program ON program_year.programID = program.ID
+                                            WHERE student_course.studentID = '".$student_id."' 
+                                            GROUP BY student_course.studentID ");
+        
+        return $query->result_array();
+    }
+
+    function get_class($student_id) {
+        $query = $this->db->query("SELECT DISTINCT semester, school_year FROM student_course 
+                                    INNER JOIN teacher_class ON student_course.classID = teacher_class.ID
+                                    WHERE studentID = '".$student_id."' ");
+        return $query->result();
+    }
+
+    function select_classSC($student_id) {
+        $query = $this->db->query("SELECT * FROM student_course 
+                                            INNER JOIN teacher_class ON student_course.classID = teacher_class.ID
+                                            WHERE studentID = '".$student_id."'
+                                            GROUP BY classID");
+
+        return $query->result_array();
+    }
+
+    function get_poGeneral($student_id, $classID) { 
+        $query = $this->db->query("SELECT * FROM student_course 
+                                            INNER JOIN po_course ON student_course.poID = po_course.poID
+                                            WHERE student_course.studentID = '".$student_id."' AND student_course.classID = '".$classID."' 
+                                            GROUP BY po_course.poID");
+        
+        return $query->result_array();
     }
 }
 ?>    

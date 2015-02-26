@@ -85,7 +85,7 @@
                                         </td>
                                         <?php endforeach; ?>   
                                         <td>
-                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/scorecard/<?php echo $row['student_id'];?>" title="View Scorecard">View Scorecard</a>
+                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>coordinator/scorecard/<?php echo $row['student_id'];?>" title="View Scorecard">View Scorecard</a>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>   

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2015 at 02:55 AM
+-- Generation Time: Feb 26, 2015 at 05:07 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `course` (
   `pyID` int(3) NOT NULL,
   `year_level` enum('1','2','3','4') NOT NULL,
   `semester` enum('1','2') NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `course`
@@ -140,7 +140,10 @@ INSERT INTO `course` (`ID`, `CourseCode`, `CourseDesc`, `pyID`, `year_level`, `s
 (70, 'CS146', 'Management Info System', 3, '4', '2'),
 (71, 'CS147', 'Quality Management and Processes', 3, '4', '2'),
 (72, 'CS148', 'Compiler Design', 3, '4', '2'),
-(73, 'CS148A', 'Compiler Design Project', 3, '4', '2');
+(73, 'CS148A', 'Compiler Design Project', 3, '4', '2'),
+(74, 'IS110', 'IS Programming', 4, '1', '1'),
+(75, 'IS11', 'Computer Operation', 4, '1', '2'),
+(76, 'IS121', 'Advanced Programming', 4, '2', '1');
 
 -- --------------------------------------------------------
 
@@ -230,7 +233,13 @@ INSERT INTO `equivalent` (`CourseEquivalent`, `courseID`) VALUES
 ('', 70),
 ('', 71),
 ('', 72),
-('', 73);
+('', 73),
+('CS110', 74),
+('CS11', 75),
+('CS121', 76),
+('CS110', 74),
+('CS11', 75),
+('CS121', 76);
 
 -- --------------------------------------------------------
 
@@ -244,7 +253,7 @@ CREATE TABLE IF NOT EXISTS `po` (
   `poCode` varchar(10) NOT NULL,
   `description` text NOT NULL,
   `pyID` int(3) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `po`
@@ -278,7 +287,9 @@ INSERT INTO `po` (`ID`, `attribute`, `poCode`, `description`, `pyID`) VALUES
 (25, 'Communication', 'CS06', 'Communicate effectively and decently with the computing community and with society at large (in local and international scenes) about complex computing activities by being able to comprehend and write effective reports, design documentation make and deliver effective presentations, and give and understand clear instructions.', 3),
 (26, 'Computing Professionalism and Society', 'CS07', 'Comprehend and assess thoroughly the impact of software solutions and computing to health, safety, cultural, legal, and environmental concerns within “glocalized” context, and develop, nurture and apply a sense of social responsibility.', 3),
 (27, 'Ethics', 'CS08', 'Understand, demonstrate and live an ethical and moral profession in the development, usage and presentation of theories, research and software solutions; and peer collaborations based on moral and professionals standards to benefit society.', 3),
-(28, 'Life-long Learning', 'CS09', 'Recognize and appreciate the relevance of computing principles and theories in the cooperative life journey and apply current and emerging technologies to continuously evolve as a computing professional who can contribute to society’s development and progress.', 3);
+(28, 'Life-long Learning', 'CS09', 'Recognize and appreciate the relevance of computing principles and theories in the cooperative life journey and apply current and emerging technologies to continuously evolve as a computing professional who can contribute to society’s development and progress.', 3),
+(29, 'Ethics', 'IS01', 'Ethics', 4),
+(30, 'Computing Professionalism and Society', 'IS02', 'Professionalism', 4);
 
 -- --------------------------------------------------------
 
@@ -978,7 +989,13 @@ INSERT INTO `po_course` (`status`, `poID`, `courseID`) VALUES
 ('', 28, 70),
 ('', 28, 71),
 ('1', 28, 72),
-('1', 28, 73);
+('1', 28, 73),
+('1', 29, 74),
+('', 29, 75),
+('1', 29, 76),
+('', 30, 74),
+('1', 30, 75),
+('1', 30, 76);
 
 -- --------------------------------------------------------
 
@@ -990,7 +1007,7 @@ CREATE TABLE IF NOT EXISTS `program` (
 `ID` int(3) NOT NULL,
   `programName` char(8) NOT NULL,
   `programFullName` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `program`
@@ -999,7 +1016,8 @@ CREATE TABLE IF NOT EXISTS `program` (
 INSERT INTO `program` (`ID`, `programName`, `programFullName`) VALUES
 (1, 'BSICT', 'BACHELOR OF SCIENCE IN INFORMATION AND COMMUNICATIONS TECHNOLOGY'),
 (2, 'BSIT', 'BACHELOR OF SCIENCE IN INFORMATION TECHNOLOGY'),
-(3, 'BSCS', 'BACHELOR OF SCIENCE IN COMPUTER SCIENCE');
+(3, 'BSCS', 'BACHELOR OF SCIENCE IN COMPUTER SCIENCE'),
+(4, 'BSIS', 'BACHELOR OF SCIENCE IN Information System');
 
 -- --------------------------------------------------------
 
@@ -1011,7 +1029,7 @@ CREATE TABLE IF NOT EXISTS `program_year` (
 `ID` int(3) NOT NULL,
   `effective_year` year(4) NOT NULL,
   `programID` int(3) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `program_year`
@@ -1020,7 +1038,8 @@ CREATE TABLE IF NOT EXISTS `program_year` (
 INSERT INTO `program_year` (`ID`, `effective_year`, `programID`) VALUES
 (1, 2009, 1),
 (2, 2007, 2),
-(3, 2007, 3);
+(3, 2007, 3),
+(4, 2015, 4);
 
 -- --------------------------------------------------------
 
@@ -7848,7 +7867,49 @@ INSERT INTO `student_course` (`poID`, `courseID`, `studentID`, `classID`, `score
 (28, 73, 11001440, 189, 1.5, '4', '2015-02-21 01:54:59'),
 (28, 73, 11001441, 189, 1.5, '4', '2015-02-21 01:54:59'),
 (28, 73, 11001442, 189, 2, '4', '2015-02-21 01:54:59'),
-(28, 73, 11001443, 189, 1.5, '4', '2015-02-21 01:54:59');
+(28, 73, 11001443, 189, 1.5, '4', '2015-02-21 01:54:59'),
+(29, 74, 11701434, 191, 1.5, '1', '2015-02-21 08:45:35'),
+(29, 74, 11701435, 191, 2, '1', '2015-02-21 08:45:35'),
+(29, 74, 11701436, 191, 1.5, '1', '2015-02-21 08:45:35'),
+(29, 74, 11701437, 191, 1.2, '1', '2015-02-21 08:45:35'),
+(29, 74, 11701438, 191, 1.5, '1', '2015-02-21 08:45:35'),
+(29, 74, 11701439, 191, 2, '1', '2015-02-21 08:45:35'),
+(29, 74, 11701440, 191, 2, '1', '2015-02-21 08:45:35'),
+(29, 74, 11701441, 191, 3, '1', '2015-02-21 08:45:35'),
+(29, 74, 11701442, 191, 5, '1', '2015-02-21 08:45:35'),
+(29, 74, 11701443, 191, 1, '1', '2015-02-21 08:45:35'),
+(29, 75, 11701440, 194, 0, '1', '2015-02-21 09:06:55'),
+(29, 76, 11701434, 193, 2, '1', '2015-02-21 08:48:12'),
+(29, 76, 11701435, 193, 2, '1', '2015-02-21 08:48:12'),
+(29, 76, 11701436, 193, 1.5, '1', '2015-02-21 08:48:12'),
+(29, 76, 11701437, 193, 1.2, '1', '2015-02-21 08:48:12'),
+(29, 76, 11701438, 193, 1.5, '1', '2015-02-21 08:48:12'),
+(29, 76, 11701439, 193, 2, '1', '2015-02-21 08:48:12'),
+(29, 76, 11701440, 193, 2, '1', '2015-02-21 08:48:12'),
+(29, 76, 11701441, 193, 3, '1', '2015-02-21 08:48:12'),
+(29, 76, 11701442, 193, 5, '1', '2015-02-21 08:48:12'),
+(29, 76, 11701443, 193, 1, '1', '2015-02-21 08:48:12'),
+(30, 74, 11701434, 191, 0, '1', '2015-02-21 08:45:35'),
+(30, 74, 11701435, 191, 0, '1', '2015-02-21 08:45:35'),
+(30, 74, 11701436, 191, 0, '1', '2015-02-21 08:45:35'),
+(30, 74, 11701437, 191, 0, '1', '2015-02-21 08:45:35'),
+(30, 74, 11701438, 191, 0, '1', '2015-02-21 08:45:35'),
+(30, 74, 11701439, 191, 0, '1', '2015-02-21 08:45:35'),
+(30, 74, 11701440, 191, 0, '1', '2015-02-21 08:45:35'),
+(30, 74, 11701441, 191, 0, '1', '2015-02-21 08:45:35'),
+(30, 74, 11701442, 191, 0, '1', '2015-02-21 08:45:35'),
+(30, 74, 11701443, 191, 0, '1', '2015-02-21 08:45:35'),
+(30, 75, 11701440, 194, 5, '1', '2015-02-21 09:06:55'),
+(30, 76, 11701434, 193, 3, '1', '2015-02-21 08:48:12'),
+(30, 76, 11701435, 193, 3, '1', '2015-02-21 08:48:12'),
+(30, 76, 11701436, 193, 3, '1', '2015-02-21 08:48:12'),
+(30, 76, 11701437, 193, 3, '1', '2015-02-21 08:48:12'),
+(30, 76, 11701438, 193, 3, '1', '2015-02-21 08:48:12'),
+(30, 76, 11701439, 193, 3, '1', '2015-02-21 08:48:12'),
+(30, 76, 11701440, 193, 3, '1', '2015-02-21 08:48:12'),
+(30, 76, 11701441, 193, 3, '1', '2015-02-21 08:48:12'),
+(30, 76, 11701442, 193, 3, '1', '2015-02-21 08:48:12'),
+(30, 76, 11701443, 193, 3, '1', '2015-02-21 08:48:12');
 
 -- --------------------------------------------------------
 
@@ -7861,7 +7922,7 @@ CREATE TABLE IF NOT EXISTS `teacher` (
   `teacher_id` varchar(15) NOT NULL,
   `fname` varchar(20) NOT NULL,
   `lname` varchar(20) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `teacher`
@@ -7879,7 +7940,10 @@ INSERT INTO `teacher` (`ID`, `teacher_id`, `fname`, `lname`) VALUES
 (9, '1111111119', 'Bashron', 'Dicol'),
 (10, '1111111120', 'Annalie', 'Golo'),
 (11, '1111111121', 'Ronilo', 'Olivar'),
-(12, '1111111122', 'Mona lisa', 'Inso');
+(12, '1111111122', 'Mona lisa', 'Inso'),
+(13, 'ictcoordinator', 'COORDINATOR', 'ICT'),
+(14, 'itcoordinator', 'COORDINATOR', 'IT'),
+(15, 'cscoordinator', 'COORDINATOR', 'CS');
 
 -- --------------------------------------------------------
 
@@ -7898,7 +7962,7 @@ CREATE TABLE IF NOT EXISTS `teacher_class` (
   `courseCode` varchar(9) NOT NULL,
   `teacherID` varchar(15) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=191 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=195 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `teacher_class`
@@ -8033,7 +8097,11 @@ INSERT INTO `teacher_class` (`ID`, `group_num`, `start_time`, `end_time`, `days`
 (187, 1, '9:00 AM', '10:30 AM', 'MW', '2', 2018, 'CS147', '1111111121', '2015-02-20 19:08:51'),
 (188, 1, '10:30 AM', '12:00:00 N', 'MW', '2', 2018, 'CS148', '1111111121', '2015-02-20 19:08:51'),
 (189, 1, '10:30 AM', '12:00 AM', 'TTH', '2', 2018, 'CS148A', '1111111121', '2015-02-20 19:08:51'),
-(190, 1, '9:00 AM', '10:30 AM', 'TTH', '1', 2017, 'CS133', '1111111113', '2015-02-21 01:24:40');
+(190, 1, '9:00 AM', '10:30 AM', 'TTH', '1', 2017, 'CS133', '1111111113', '2015-02-21 01:24:40'),
+(191, 1, '7:30 AM', '9:00 AM', 'TTh', '2', 2015, 'IS110', '1111111111', '2015-02-21 08:39:41'),
+(192, 2, '9:00 AM', '10:30 AM', 'Tth', '2', 2015, 'IS110', '1111111111', '2015-02-21 08:39:41'),
+(193, 1, '8:30 AM', '9:30 AM', 'MWF', '2', 2015, 'IS121', '1111111111', '2015-02-21 08:39:41'),
+(194, 1, '7:30 AM', '9:00 AM', 'TTh', '2', 2015, 'IS11', '1111111111', '2015-02-21 09:01:23');
 
 -- --------------------------------------------------------
 
@@ -8045,8 +8113,8 @@ CREATE TABLE IF NOT EXISTS `user_account` (
 `ID` int(5) NOT NULL,
   `idnum` varchar(15) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `role` enum('admin','teacher','student') NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=latin1;
+  `role` enum('admin','teacher','student','coordinator') NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user_account`
@@ -8115,7 +8183,10 @@ INSERT INTO `user_account` (`ID`, `idnum`, `password`, `role`) VALUES
 (60, '11001440', 'b669c75c2097be2c33c67bd4b78b9d982d3b284a', 'student'),
 (61, '11001441', 'ae1958bc477b4ced8616ec8fdee3a8330b45cd33', 'student'),
 (62, '11001442', '4318a0cd08e16947bc558aa0bde5089a624af2c3', 'student'),
-(63, '11001443', '2db3b6c2aa6288afc8264548d212b16fd22f457f', 'student');
+(63, '11001443', '2db3b6c2aa6288afc8264548d212b16fd22f457f', 'student'),
+(64, 'ictcoordinator', '84378786b570eb453b3926d4bb67ccdb723197a6', 'coordinator'),
+(65, 'itcoordinator', '7278756d0258013e117d21f209599a10edc8d5a1', 'coordinator'),
+(66, 'cscoordinator', '9414f96526be1d0c65e8023fbc6b86e8804d1ca8', 'coordinator');
 
 --
 -- Indexes for dumped tables
@@ -8195,22 +8266,22 @@ ALTER TABLE `user_account`
 -- AUTO_INCREMENT for table `course`
 --
 ALTER TABLE `course`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=74;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=77;
 --
 -- AUTO_INCREMENT for table `po`
 --
 ALTER TABLE `po`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=29;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT for table `program`
 --
 ALTER TABLE `program`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `program_year`
 --
 ALTER TABLE `program_year`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `student`
 --
@@ -8220,17 +8291,17 @@ MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=51;
 -- AUTO_INCREMENT for table `teacher`
 --
 ALTER TABLE `teacher`
-MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `teacher_class`
 --
 ALTER TABLE `teacher_class`
-MODIFY `ID` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=191;
+MODIFY `ID` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=195;
 --
 -- AUTO_INCREMENT for table `user_account`
 --
 ALTER TABLE `user_account`
-MODIFY `ID` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=64;
+MODIFY `ID` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=67;
 --
 -- Constraints for dumped tables
 --
