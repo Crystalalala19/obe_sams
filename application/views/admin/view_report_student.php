@@ -69,8 +69,8 @@
                                 <select class="span2" name="semester" required>
                                     <option value="">Semester:</option>
                                     <option value="all" <?php echo set_select('semester', 'all');?>>All Semester</option>
-                                    <option value="1" <?php echo set_select('semester', '1');?>>First</option>
-                                    <option value="2" <?php echo set_select('semester', '2');?>>Second</option>
+                                    <option value="1" <?php echo set_select('semester', '1');?>>First Semester</option>
+                                    <option value="2" <?php echo set_select('semester', '2');?>>Second Semester</option>
                                     <option value="summer" <?php echo set_select('semester', 'summer');?>>Summer</option>
                                 </select>
 
@@ -163,11 +163,13 @@
                             "sTitle": "Student Reports <?php echo date('M Y');?>",
                             "oSelectorOpts": {
                                 page: 'current'
-                            }
+                            },
+                            "mColumns": [1,2,3,4]
                         }, {
                             "sExtends": "pdf",
                             "sTitle": "Student Reports <?php echo date('M Y');?>",
-                            "sButtonText": "PDF"
+                            "sButtonText": "PDF",
+                            "mColumns": [1,2,3,4]
                         }
                     ]
                 }

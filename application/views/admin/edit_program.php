@@ -54,9 +54,9 @@
                                             <?php foreach($program_data as $row):?>
                                             <tr>
                                                 <input type="hidden" name="po_id[]" value="<?php echo $row['ID'];?>">
-                                                <td><input type="text" class="span1" name="po_code[]" value="<?php echo $row['poCode'];?>"></td>
-                                                <td><input type="text" class="span4" name="po_attrib[]" value="<?php echo $row['attribute'];?>"></td>
-                                                <td><textarea class="span6" name="po_desc[]" rows="5"><?php echo $row['description'];?></textarea></td>
+                                                <td><input type="text" class="span1" name="po_code[]" value="<?php echo $row['poCode'];?>" placeholder="PO Code"></td>
+                                                <td><input type="text" class="span4" name="po_attrib[]" value="<?php echo $row['attribute'];?>" placeholder="PO Attribute"></td>
+                                                <td><textarea class="span6" name="po_desc[]" rows="5" placeholder="PO Description"><?php echo $row['description'];?></textarea></td>
                                             </tr>
                                             <?php endforeach;?>
                                         </tbody>
@@ -82,9 +82,9 @@
                                             <?php foreach($course_list as $key => $row):?>
                                             <tr>
                                                 <input type="hidden" name="co_id[]" value="<?php echo $row['ID'];?>">
-                                                <td><input type="text" class="span1" name="co_code[]" value="<?php echo $row['CourseCode'];?>"></td>
-                                                <td><input type="text" class="span3" name="co_desc[]" value="<?php echo $row['CourseDesc'];?>"></td>
-                                                <td><input type="text" class="" name="co_equi[]" value="<?php if(isset($equivalent[$key]))echo $equivalent[$key];?>" placeholder="Enter Course Equivalent"></td>
+                                                <td><input type="text" class="span1" name="co_code[]" value="<?php echo $row['CourseCode'];?>" placeholder="Course Code"></td>
+                                                <td><input type="text" class="span3" name="co_desc[]" value="<?php echo $row['CourseDesc'];?>" placeholder="Course Description"></td>
+                                                <td><input type="text" class="" name="co_equi[]" value="<?php if(isset($equivalent[$key]))echo $equivalent[$key];?>" placeholder="Course Equivalents"></td>
                                                 <td>
                                                     <select title="Please select a Year" name="year_level[]">
                                                         <option value="">Select Year Level: </option>
@@ -137,11 +137,11 @@
             var lastcol = table.rows[0].cells.length;   
             var row = table.insertRow(lastrow); 
             var cellcol0 = row.insertCell(0);
-            cellcol0.innerHTML = "<input type='hidden' name='po_id[]'><input type='text' class='required' name='po_code[]' placeholder='Enter PO Code' required='required'>";
+            cellcol0.innerHTML = "<input type='hidden' name='po_id[]'><input type='text' class='span1' name='po_code[]' placeholder='PO Code' required='required'>";
             var cellcol1 = row.insertCell(1);
-            cellcol1.innerHTML = "<input type='text' class='required' name='po_attrib[]' placeholder='Enter PO Attribute' required='required'>";
+            cellcol1.innerHTML = "<input type='text' class='span4' name='po_attrib[]' placeholder='PO Attribute' required='required'>";
             var cellcol2 = row.insertCell(2);
-            cellcol2.innerHTML = "<textarea class='required span6' name='po_desc[]' rows='5' placeholder='Enter PO Description' required='required'></textarea>";
+            cellcol2.innerHTML = "<textarea class='span6' name='po_desc[]' rows='5' placeholder='PO Description' required='required'></textarea>";
         }
 
         function removeRow(){
@@ -160,11 +160,26 @@
             var lastcol = table2.rows[0].cells.length;   
             var row = table2.insertRow(lastrow); 
             var cellcol0 = row.insertCell(0);
-            cellcol0.innerHTML = "<input type='hidden' name='co_id[]'><input type='text' class='required' name='co_code[]' placeholder='Enter Course Code' required='required'>";
+            cellcol0.innerHTML = "<input type='hidden' name='co_id[]'><input type='text' class='span1' name='co_code[]' placeholder='Course Code' required='required'>";
             var cellcol1 = row.insertCell(1);
-            cellcol1.innerHTML = "<textarea class='required span6' name='co_desc[]' rows='3' placeholder='Enter Course Description' required='required'></textarea>";
+            cellcol1.innerHTML = "<input type='text' class='span3' name='co_desc[]' placeholder='Course Description'>";
             var cellcol2 = row.insertCell(2);
-            cellcol2.innerHTML = "<input type='text' class='' name='co_equi[]' placeholder='Enter Course Equivalents'>";
+            cellcol2.innerHTML = "<input type='text' class='' name='co_equi[]' placeholder='Course Equivalents'>";
+            var cellcol3 = row.insertCell(3);
+            cellcol3.innerHTML = "<select title='Please select a Year' name='year_level[]'>"+
+                                    "<option value=''>Select Year Level: </option>"+
+                                    "<option value='1'>1</option>"+
+                                    "<option value='2'>2</option>"+
+                                    "<option value='3'>3</option>"+
+                                    "<option value='4'>4</option>"+
+                                 "</select>";
+            var cellcol4 = row.insertCell(4);
+            cellcol4.innerHTML = "<select title='Please select a Semester' name='semester[]'>"+
+                                    "<option value=''>Select Semester: </option>"+
+                                    "<option value='1'>1</option>"+
+                                    "<option value='2'>2</option>"+
+                                    "<option value='summer'>Summer</option>"+
+                                 "</select>";
         }
         
         function removeRow2(){
