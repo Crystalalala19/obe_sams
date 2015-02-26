@@ -16,6 +16,7 @@
     }
 </style>
 
+
 <div class="main-inner">
     <div class="container">
         <div class="row">
@@ -36,7 +37,7 @@
                                         </a> 
                                     </div>
                                         Student ID: <?php echo $row['student_id'];?><br><?php endforeach; ?>
-                                        <?php foreach($student_year as $row1): ?>
+                                        <?php foreach($student_year as $row1): $stud_prog = $row1['programFullName'].' '.$row1['effective_year'].' - '.($row1['effective_year']+1); ?>
                                             Student Prospectus: <?php echo $row1['programName'].' - '.$row1['effective_year'];?><br>
                                             Year Level: <?php echo $row1['year_level'];?><br>
                                         <?php endforeach; ?>
@@ -44,13 +45,18 @@
                                 </li>
                             </ul>
                             <div class="clearfix"></div>
+                            <?php
+                                foreach ($user as $key => $user) {
+                                $stud_info = $user['lname'].', '.$user['fname']. ' '.$user['student_id'];
+                            }
+                                
+                            ?>
                             <table id="view_classlist" class="table table-striped table-bordered dataTable no-footer">
                                 <thead>
                                     <tr>
                                         <th>Academic Year</th>
                                         <th>Semester</th>
                                         <th>Year Level</th>
-                                        <th>Grp #</th>
                                         <th>Subject</th>
                                         <th>Course Description</th>
                                         <th>Schedule</th>
@@ -62,7 +68,7 @@
                                     <?php foreach($get_courses as $row): ?>   
                                     <tr>
                                         <td width="15%"><?php echo $row['school_year'].' - '.($row['school_year']+1); ?></td>
-                                        <td><?php if($row['semester'] == '1'){
+                                        <td width="15%"><?php if($row['semester'] == '1'){
                                                         echo '1ST SEMESTER';
                                                     } 
                                                     elseif ($row['semester'] == '2') {
@@ -73,10 +79,9 @@
                                                     }
                                                     ?></td>
                                         <td><?php echo $row['year_level']; ?></td>
-                                        <td width="7%"><?php echo $row['group_num']; ?></td>          
-                                        <td><?php echo $row['courseCode']; ?></td>
+                                        <td width="10%"><?php echo $row['courseCode']; ?></td>
                                         <td><?php echo $row['CourseDesc']; ?></td>
-                                        <td><?php echo $row['start_time'].' - '.$row['end_time'].' '.$row['days']; ?></td> 
+                                        <td><?php echo 'Group #:'.$row['group_num'].' '.$row['start_time'].' - '.$row['end_time'].' '.$row['days'].' '; ?></td> 
                                         <td><?php echo $row['fname'].' '.$row['lname']; ?></td> 
                                     </tr>
                                     <?php endforeach; ?>
@@ -107,16 +112,12 @@
                 }, {
                     "sExtends":    "collection",
                     "sButtonText": "Save as...",
-                    "aButtons":    [ {
-                            "sExtends": "xls",
-                            "oSelectorOpts": {
-                                page: 'current'
-                            },
-                            "mColumns": [ 0, 1 ]
-                        }, {
+                    "aButtons":    [{
                             "sExtends": "pdf",
+                            "sTitle": "<?php echo $stud_info; ?>",
                             "sButtonText": "PDF",
-                            "mColumns": [ 0, 1 ]
+                            "sPdfMessage": "<?php echo $stud_prog; ?>",
+                            "mColumns": "visible"
                         }
                     ]
                 }

@@ -7,13 +7,6 @@
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/datatables-bootstrapv3.js"></script>
 
 <style type="text/css">
-    h2 {
-        color: #060;
-        font-size: 15px;
-        font-weight: bold;
-        text-transform: uppercase;
-        text-align: left;
-    }
     tfoot td {
         font-size: 15px;
         font-weight: bold;
@@ -49,6 +42,16 @@
                         <?php endforeach; ?>  
                         </center></h4>  
                         <hr>
+                        <br>
+                        <h4>
+                            <?php foreach($get_studentName as $row1): ?>
+                            <?php $stud_id = $row1->student_id; $stud_name = $row1->lname.', '.$row1->fname;?> 
+                            <?php echo '[ '.$row1->student_id.' ]  ';?>
+                            <?php echo $row1->lname.', '.$row1->fname; ?>
+                            <br>
+                            <?php echo 'Year Level: '.$row1->year_level;?>
+                            <?php endforeach; ?>
+                        </h4> 
                             <table id="scorecard_student" class="table table-striped table-bordered dataTable no-footer">
                                 <thead>
                                   <tr>
@@ -130,7 +133,7 @@
             "bAutoWidth": false 
         };
 
-        var tableToolsOptions = {
+         var tableToolsOptions = {
             "sSwfPath": "http://cdn.datatables.net/tabletools/2.2.3/swf/copy_csv_xls_pdf.swf",
             "aButtons": [ {
                     "sExtends": "print",
@@ -140,13 +143,11 @@
                     "sExtends":    "collection",
                     "sButtonText": "Save as...",
                     "aButtons":    [ {
-                            "sExtends": "xls",
-                            "oSelectorOpts": {
-                                page: 'current'
-                            },
-                        }, {
                             "sExtends": "pdf",
+                            "sTitle": "<?php echo $stud_info; ?>",
                             "sButtonText": "PDF",
+                            "sPdfMessage": "<?php echo $stud_prog; ?>",
+                            "mColumns": "visible"
                         }
                     ]
                 }
@@ -158,5 +159,5 @@
         var tt = new $.fn.dataTable.TableTools( table, tableToolsOptions );
 
         $( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
-    </script>
+</script>
 

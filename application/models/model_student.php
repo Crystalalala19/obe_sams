@@ -13,7 +13,10 @@ class Model_student extends CI_Model {
     }
 
     function get_studentName($student_id) {
-        $query = $this->db->query("SELECt * FROM student WHERE student_id = '".$student_id."' ");
+        $query = $this->db->query("SELECT student.student_id, student.fname, student.lname, MAX(student_course.year_level) as year_level FROM student 
+                                            INNER JOIN student_course ON student.student_id = student_course.studentID
+                                            WHERE student.student_id = '".$student_id."' 
+                                            GROUP BY student.student_id");
         return $query->result();
     }
 
