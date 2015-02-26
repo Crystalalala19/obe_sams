@@ -54,6 +54,7 @@
                                                         <th width="10%">Group # <i class="icon-filter"></i></th>
                                                         <th>Course Code <i class="icon-filter"></i></th>
                                                         <th>Schedule <i class="icon-filter"></i></th>
+                                                        <th>Teacher <i class="icon-filter"></i></th>
                                                         <th width="8%">Action</th>
                                                     </tr>
                                                 </thead>
@@ -63,6 +64,7 @@
                                                         <td><?php echo $row1->group_num;?></td>
                                                         <td><?php echo $row1->courseCode;?></td>
                                                         <td><?php echo $row1->start_time."-".$row1->end_time." ".$row1->days;?></td>
+                                                        <td><?php echo $row1->fname.' '.$row1->lname; ?></td>
                                                         <td>
                                                             <a class="btn btn-mini btn-info" href="<?php echo base_url();?>coordinator/class_list/<?php echo $row1->ID;?>" title="View Class">View Class</a>
                                                         </td>
@@ -82,6 +84,7 @@
                                                         <th width="10%">Group # <i class="icon-filter"></i></th>
                                                         <th>Course Code <i class="icon-filter"></i></th>
                                                         <th>Schedule <i class="icon-filter"></i></th>
+                                                        <th>Teacher <i class="icon-filter"></i></th>
                                                         <th width="8%">Action</th>
                                                     </tr>
                                                 </thead>
@@ -91,6 +94,7 @@
                                                         <td><?php echo $row2->group_num;?></td>
                                                         <td><?php echo $row2->courseCode;?></td>
                                                         <td><?php echo $row2->start_time."-".$row2->end_time." ".$row2->days;?></td>
+                                                        <td><?php echo $row1->fname.' '.$row1->lname; ?></td>
                                                         <td>
                                                             <a class="btn btn-mini btn-info" href="<?php echo base_url();?>coordinator/class_list/<?php echo $row2->ID;?>" title="View Class">View Class</a>
                                                         </td>
@@ -109,6 +113,7 @@
                                                         <th width="10%">Group # <i class="icon-filter"></i></th>
                                                         <th>Course Code <i class="icon-filter"></i></th>
                                                         <th>Schedule <i class="icon-filter"></i></th>
+                                                        <th>Teacher <i class="icon-filter"></i></th>
                                                         <th width="8%">Action</i></th>
                                                     </tr>
                                                 </thead>
@@ -118,6 +123,7 @@
                                                         <td><?php echo $row3->group_num;?></td>
                                                         <td><?php echo $row3->courseCode;?></td>
                                                         <td><?php echo $row3->start_time."-".$row3->end_time." ".$row3->days;?></td>
+                                                        <td><?php echo $row1->fname.' '.$row1->lname; ?></td>
                                                         <td>
                                                             <a class="btn btn-mini btn-info" href="<?php echo base_url();?>coordinator/class_list/<?php echo $row3->ID;?>" title="View Class">View Class</a>
                                                         </td>

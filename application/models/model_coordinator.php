@@ -87,7 +87,9 @@ class Model_coordinator extends CI_Model {
     }
 
     function select_schedule($id){
-        $query = $this->db->query("SELECT * FROM teacher_class WHERE ID = '".$id."' ");
+        $query = $this->db->query("SELECT * FROM teacher_class 
+                                                INNER JOIN teacher ON teacher_class.teacherID = teacher.teacher_id
+                                                WHERE teacher_class.ID = '".$id."' ");
         
         return $query->result();
     }
@@ -134,9 +136,10 @@ class Model_coordinator extends CI_Model {
     }
 
     function get_1stSemester($year){
-        $query = $this->db->query("SELECT * FROM teacher_class 
+        $query = $this->db->query("SELECT * FROM teacher_class
+                                                    INNER JOIN teacher ON teacher_class.teacherID = teacher.teacher_id 
                                                     INNER JOIN student_course ON teacher_class.ID = student_course.classID
-                                                    INNER JOIN student ON student_course.studentID = student.student_id
+                                                    -- INNER JOIN student ON student_course.studentID = student.student_id
                                                     INNER JOIN po_course ON student_course.courseID = po_course.courseID
                                                     INNER JOIN course ON po_course.courseID = course.ID
                                                     INNER JOIN program_year ON course.pyID = program_year.ID
@@ -150,9 +153,10 @@ class Model_coordinator extends CI_Model {
     }
 
     function get_2ndSemester($year){
-        $query = $this->db->query("SELECT * FROM teacher_class 
+        $query = $this->db->query("SELECT * FROM teacher_class
+                                                    INNER JOIN teacher ON teacher_class.teacherID = teacher.teacher_id 
                                                     INNER JOIN student_course ON teacher_class.ID = student_course.classID
-                                                    INNER JOIN student ON student_course.studentID = student.student_id
+                                                    -- INNER JOIN student ON student_course.studentID = student.student_id
                                                     INNER JOIN po_course ON student_course.courseID = po_course.courseID
                                                     INNER JOIN course ON po_course.courseID = course.ID
                                                     INNER JOIN program_year ON course.pyID = program_year.ID
@@ -166,9 +170,10 @@ class Model_coordinator extends CI_Model {
     }
 
     function get_summer($year){
-        $query = $this->db->query("SELECT * FROM teacher_class 
+        $query = $this->db->query("SELECT * FROM teacher_class
+                                                    INNER JOIN teacher ON teacher_class.teacherID = teacher.teacher_id 
                                                     INNER JOIN student_course ON teacher_class.ID = student_course.classID
-                                                    INNER JOIN student ON student_course.studentID = student.student_id
+                                                    -- INNER JOIN student ON student_course.studentID = student.student_id
                                                     INNER JOIN po_course ON student_course.courseID = po_course.courseID
                                                     INNER JOIN course ON po_course.courseID = course.ID
                                                     INNER JOIN program_year ON course.pyID = program_year.ID

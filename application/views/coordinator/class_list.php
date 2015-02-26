@@ -49,6 +49,7 @@
                                                 echo $row1->days.'<br>';
                                             ?>
                                             Semester: <?php echo $row1->semester,' | ';?> School Year: <?php echo $row1->school_year; ?>
+                                            <br><br><?php echo 'Assigned Teacher: '.$row1->fname.' '.$row1->lname;?>
                                         </h4>
                                      <?php endforeach; ?>
                                 </div>
