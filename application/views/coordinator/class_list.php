@@ -52,13 +52,6 @@
                                         </h4>
                                      <?php endforeach; ?>
                                 </div>
-
-                                <div class="pull-right">
-                                    <h4>Download Template:
-                                    <a href="<?php echo base_url('site/download/class');?>"><i class="icon-download-alt icon-2x"></i></a>
-                                    </h4>
-                                </div>
-
                             </div>   
                              
                             <div class="clearfix"></div>
@@ -108,22 +101,6 @@
                                     </tr>
                                 </tfoot>
                             </table>
-                            <br>
-                            <?php if($class_list == FALSE):?>
-                            <?php foreach($user as $row): ?>
-                            <?php echo form_open_multipart();?>
-                                <?php echo $info; ?>
-                                <div class="control-group">
-                                    <label for="userfile">Upload .CSV File: </label>
-                                    <input type="hidden" name="teacher_id" value="<?php echo $row['teacher_id'];?>">
-                                    <input type="file" name="userfile" id="userfile" class="filestyle" data-buttonText="Find file" data-buttonName="btn-primary" data-iconName="icon-upload-alt">
-                                </div>
-                                <div class="control-group">
-                                    <input type="submit" class="btn btn-success" name="submit" value="Submit">
-                                </div>
-                            </form>  
-                            <?php endforeach; ?> 
-                            <?php endif; ?>
                         </div> <!-- /widget-content --> 
                     </div> <!-- /widget -->                 
                 </div> <!-- /span12 -->         

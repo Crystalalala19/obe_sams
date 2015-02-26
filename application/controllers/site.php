@@ -39,14 +39,17 @@ class Site extends CI_Controller {
 		elseif($this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'teacher') {
 			$data['user'] = $this->model_users->select_user();
 			$data['title'] = "OBE SAMS Academic";
-            $data['log'] = $this->model_users->log();
 			 
 			$this->load->view("teacher/header", $data);
 			$this->load->view('teacher/index', $data);
 			$this->load->view("teacher/footer");
 		} 
-        elseif($this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'student')
+        elseif($this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'student'){
             redirect('student');
+        }
+        elseif($this->session->userdata('is_logged_in') && $this->session->userdata('role') == 'coordinator'){
+            redirect('coordinator');
+        }
 		else
 			$this->error_404();
 	}
@@ -423,6 +426,16 @@ class Site extends CI_Controller {
 
         $this->load->view('teacher/header', $data);
         $this->load->view('teacher/account', $data);
+        $this->load->view('teacher/footer');
+    }
+
+    public function teacher_log(){
+        $data['title'] = "OBE SAMS Academic";
+        $data['user'] = $this->model_users->select_user();
+        $data['log'] = $this->model_users->log();
+
+        $this->load->view('teacher/header', $data);
+        $this->load->view('teacher/teacher_log', $data);
         $this->load->view('teacher/footer');
     }
 }

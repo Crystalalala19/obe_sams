@@ -7,6 +7,13 @@
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/datatables-bootstrapv3.js"></script>
 
 <style type="text/css">
+    h2 {
+        color: #060;
+        font-size: 15px;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: left;
+    }
     tfoot td {
         font-size: 15px;
         font-weight: bold;
@@ -42,10 +49,12 @@
                         <?php endforeach; ?>  
                         </center></h4>  
                         <hr>
-                            <table id="scorecard_student" class="table table-striped table-bordered">
+                            <table id="scorecard_student" class="table table-striped table-bordered dataTable no-footer">
                                 <thead>
                                   <tr>
                                     <th>Code </th>
+                                    <th>Group # </th>
+                                    <th>Schedule </th>
                                      <?php for($x = 1; $x <= $po_count; $x++):?>
                                         <th>PO <?php echo $x;?></th>
                                     <?php endfor;?>
@@ -54,7 +63,9 @@
                                 <tbody>
                                     <?php foreach($class_list as $key => $row3): ?>
                                     <tr>
-                                        <td width="10%"><?php echo $row3['courseCode']; ?></td>
+                                        <td width="10%"><?php echo $row3['courseCode'];?></td>
+                                        <td width="9%"><?php echo $row3['group_num'];?></td>
+                                        <td><?php echo $row3['start_time'].' - '.$row3['end_time'].' '.$row3['days'];?></td>
                                         <?php for($x=0; $x < $po_count; $x++): ?>
                                             <td><?php if($row3['score'][$x]['score'] == ''){echo '';}else{echo number_format($row3['score'][$x]['score'],1);}?></td>
                                         <?php endfor;?>   
@@ -63,6 +74,8 @@
                                 </tbody>
                                 <tfoot>
                                     <tr bgcolor="#FFF380">
+                                        <td></td>
+                                        <td></td>
                                         <td><center>Average</center></td>
                                         <?php for($x=0; $x < $po_count; $x++): ?>
                                         <td></td>
@@ -84,7 +97,7 @@
             footer = table.getElementsByTagName('tfoot')[0];
 
             
-        for (var i = 1; i <= <?php echo $po_count; ?>; i++) {
+        for (var i = 3; i <= 15; i++) {
             var sum = numOfValues = 0;
             for (var j = 0, l = rows.length; j < l; j++) {
                 try {
@@ -106,8 +119,10 @@
             if( isNaN(footer.getElementsByTagName('td')[i].innerHTML) )
                 footer.getElementsByTagName('td')[i].innerHTML = " ";
         }
+</script>
 
-   var dataTableOptions = {
+<script type="text/javascript" language="javascript">
+    var dataTableOptions = {
             "bPaginate": false,
             "bLengthChange": false,
             "bFilter": true,
@@ -125,11 +140,13 @@
                     "sExtends":    "collection",
                     "sButtonText": "Save as...",
                     "aButtons":    [ {
+                            "sExtends": "xls",
+                            "oSelectorOpts": {
+                                page: 'current'
+                            },
+                        }, {
                             "sExtends": "pdf",
-                            "sTitle": "<?php echo $stud_info; ?>",
                             "sButtonText": "PDF",
-                            "sPdfMessage": "<?php echo $stud_prog; ?>",
-                            "mColumns": "visible"
                         }
                     ]
                 }
@@ -141,7 +158,5 @@
         var tt = new $.fn.dataTable.TableTools( table, tableToolsOptions );
 
         $( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
-
-
-</script>
+    </script>
 

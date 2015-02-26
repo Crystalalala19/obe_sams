@@ -25,10 +25,10 @@
                               <div class="message_wrap"> <span class="arrow"></span>
                                 <div class="info"> 
                                     <a class="name"> 
-                                        <h2>Welcome <?php foreach($user as $row): ?><?php echo $row['lname'].", ".$row['fname'];?></h2>   
+                                        <h2>Welcome <?php foreach($user as $row): ?><?php echo $row['lname']." ".$row['fname'];?></h2>   
                                     </a> 
                                 </div>
-                                <div class="text">Teacher ID: <?php echo $row['teacher_id'];?><br></div>
+                                <div class="text">Coordinator ID/Username: <?php echo $row['teacher_id'];?><br></div>
                               </div>
                             </li>
                         </ul>

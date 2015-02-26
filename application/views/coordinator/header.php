@@ -91,7 +91,7 @@
                                 <?php foreach($user as $row): ?><?php echo $row['teacher_id'];?><?php endforeach; ?> 
                                 <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="<?php echo base_url('site/account');?>"><i class="icon-key" title="Change Password"></i> Change Password</a></li>
+                                <li><a href="<?php echo base_url('coordinator/account');?>"><i class="icon-key" title="Change Password"></i> Change Password</a></li>
                                 <li><a href="<?php echo base_url('site/logout');?>" title="Logout"><i class="icon-off"></i> Logout</a></li>
                             </ul>
                         </li>
@@ -109,24 +109,19 @@
         <div class="subnavbar-inner">
             <div class="container">
                 <ul class="mainnav">
-                    <li <?php uri_match('members');?>>
-                        <a href="<?php echo base_url();?>site/members" title="Home">
+                    <li <?php uri_match('coordinator');?>>
+                        <a href="<?php echo base_url('coordinator');?>" title="Home">
                             <i class="icon-home"></i><span>Home</span> 
                         </a> 
                     </li>
-                    <li id="courselist">
-                        <a href="<?php echo base_url('site/course_list'); ?>" title="Class List"><i class="icon-list"></i>
+                    <li <?php uri_match('class_list');?> id="courselist">
+                        <a href="<?php echo base_url('coordinator/course_list'); ?>" title="View Class"><i class="icon-list"></i>
                             <span>Class List</span> 
                         </a>
                     </li>
                     <li <?php uri_match('student_list');?> id="studentlist">
-                        <a href="<?php echo base_url('site/student_list'); ?>" title="View Students"><i class="icon-group"></i>
+                        <a href="<?php echo base_url('coordinator/student_list'); ?>" title="View Students"><i class="icon-group"></i>
                             <span>Students</span> 
-                        </a>
-                    </li>
-                    <li <?php uri_match('teacher_log');?> id="teacher_log">
-                        <a href="<?php echo base_url('site/teacher_log'); ?>" title="View Teacher Log"><i class="icon-pushpin"></i>
-                            <span>Teacher Log</span> 
                         </a>
                     </li>
                 </ul>

@@ -235,7 +235,8 @@ class Model_users extends CI_Model {
     function select_classSC($student_id) {
         $query = $this->db->query("SELECT * FROM student_course 
                                             INNER JOIN teacher_class ON student_course.classID = teacher_class.ID
-                                            WHERE studentID = '".$student_id."' 
+                                            WHERE studentID = '".$student_id."'
+                                            AND teacher_class.teacherID = '".$this->session->userdata('idnum')."'  
                                             GROUP BY classID");
 
         return $query->result_array();
