@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2015 at 05:07 PM
+-- Generation Time: Feb 26, 2015 at 07:08 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `course` (
   `CourseDesc` varchar(255) NOT NULL,
   `pyID` int(3) NOT NULL,
   `year_level` enum('1','2','3','4') NOT NULL,
-  `semester` enum('1','2') NOT NULL
+  `semester` enum('1','2','summer') NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=latin1;
 
 --
@@ -155,91 +155,6 @@ CREATE TABLE IF NOT EXISTS `equivalent` (
   `CourseEquivalent` varchar(30) NOT NULL,
   `courseID` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `equivalent`
---
-
-INSERT INTO `equivalent` (`CourseEquivalent`, `courseID`) VALUES
-('', 1),
-('', 2),
-('', 3),
-('', 4),
-('', 5),
-('', 6),
-('', 7),
-('', 8),
-('', 9),
-('IT131', 10),
-('', 11),
-('', 12),
-('', 13),
-('', 14),
-('', 15),
-('', 16),
-('', 17),
-('', 18),
-('', 19),
-('', 20),
-('', 21),
-('', 22),
-('', 23),
-('', 24),
-('', 25),
-('', 26),
-('', 27),
-('', 28),
-('', 29),
-('', 30),
-('', 31),
-('', 32),
-('', 33),
-('', 34),
-('', 35),
-('', 36),
-('', 37),
-('', 38),
-('', 39),
-('', 40),
-('', 41),
-('', 42),
-('', 43),
-('', 44),
-('', 45),
-('', 46),
-('', 47),
-('', 48),
-('', 49),
-('', 50),
-('', 51),
-('', 52),
-('', 53),
-('', 54),
-('', 55),
-('', 56),
-('', 57),
-('', 58),
-('', 59),
-('', 60),
-('', 61),
-('', 62),
-('', 63),
-('', 64),
-('', 65),
-('', 66),
-('', 67),
-('', 68),
-('', 69),
-('', 70),
-('', 71),
-('', 72),
-('', 73),
-('CS110', 74),
-('CS11', 75),
-('CS121', 76),
-('CS110', 74),
-('CS11', 75),
-('CS121', 76);
 
 -- --------------------------------------------------------
 
