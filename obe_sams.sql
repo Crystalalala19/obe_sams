@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2015 at 07:08 PM
+-- Generation Time: Feb 27, 2015 at 01:32 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -47,6 +47,17 @@ SET len = CHAR_LENGTH( str );
 END$$
 
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `coordinator`
+--
+
+CREATE TABLE IF NOT EXISTS `coordinator` (
+  `coordinator_id` varchar(15) NOT NULL,
+  `program_id` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -8106,6 +8117,12 @@ INSERT INTO `user_account` (`ID`, `idnum`, `password`, `role`) VALUES
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `coordinator`
+--
+ALTER TABLE `coordinator`
+ ADD KEY `coordinator_id` (`coordinator_id`,`program_id`);
 
 --
 -- Indexes for table `course`

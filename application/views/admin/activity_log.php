@@ -99,6 +99,7 @@
                 { targets: 'no-sort', orderable: false }
             ],
 
+            "bInfo": false,
             "bLengthChange": false,
             "bFilter": true,
             "bAutoWidth": false,
@@ -124,7 +125,8 @@
                 { targets: 'no-sort', orderable: false }
             ],
 
-            "bLengthChange": true,
+            "bInfo": false,
+            "bLengthChange": false,
             "bFilter": true,
             "bAutoWidth": false,
             "bSort": false 

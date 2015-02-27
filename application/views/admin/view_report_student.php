@@ -14,6 +14,10 @@
         tr.shown td.details-control {
             background: url('<?php echo base_url();?>/assets/img/details_close.png') no-repeat center center;
         }
+        tfoot td {
+            font-size: 15px;
+            font-weight: bold;
+        }
     </style>
 
     <div class="main-inner">
@@ -116,6 +120,14 @@
                                         </tr>
                                     <?php endforeach;?>
                                 </tbody>
+                                <tfoot>
+                                    <tr bgcolor="#FFF380">
+                                        <td></td>
+                                        <td><center>Average</center></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
                             </table>
                             <?php endif;?>
                         </div> <!-- /widget-content -->  
@@ -144,8 +156,10 @@
                 { targets: 'no-sort', orderable: false }
             ],
 
-            "bLengthChange": true,
+            "bPaginate": false,
+            "bLengthChange": false,
             "bFilter": true,
+            "bInfo": false,
             "bAutoWidth": false 
         };
 
@@ -216,4 +230,34 @@
         var tt = new $.fn.dataTable.TableTools( table, tableToolsOptions );
 
         $( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
+    </script>
+
+    <script type="text/javascript">
+        var table = document.getElementById('student_report'),
+            rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr'),
+            footer = table.getElementsByTagName('tfoot')[0];
+
+            
+        for (var i = 4; i <= 15; i++) {
+            var sum = numOfValues = 0;
+            for (var j = 0, l = rows.length; j < l; j++) {
+                try {
+                    if(rows[j].getElementsByTagName('td')[i].innerHTML != '') {
+                        sum += parseFloat(
+                            rows[j].getElementsByTagName('td')[i]
+                            .innerHTML
+                        ) || 0;
+
+                        numOfValues++;
+                    }
+                } catch (e) {}
+            }
+
+            var avg = sum / numOfValues;
+            footer.getElementsByTagName('td')[i]
+            .innerHTML = parseFloat(Math.round(avg * 100) / 100).toFixed(1);
+
+            if( isNaN(footer.getElementsByTagName('td')[i].innerHTML) )
+                footer.getElementsByTagName('td')[i].innerHTML = " ";
+        }
     </script>
