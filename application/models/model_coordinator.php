@@ -7,7 +7,7 @@ class Model_coordinator extends CI_Model {
     }
 
     function select_user(){     
-        $query = $this->db->query("SELECT * FROM teacher WHERE teacher_id = '".$this->session->userdata('idnum')."'");
+        $query = $this->db->query("SELECT * FROM coordinator WHERE coordinator_id = '".$this->session->userdata('idnum')."'");
 
         return $query->result_array();
     }
