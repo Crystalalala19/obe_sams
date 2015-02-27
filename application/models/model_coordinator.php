@@ -67,7 +67,7 @@ class Model_coordinator extends CI_Model {
                                                     INNER JOIN course ON po_course.courseID = course.ID
                                                     INNER JOIN program_year ON course.pyID = program_year.ID
                                                     INNER JOIN program ON program_year.programID = program.ID
-                                                    WHERE program.programName = 'BSICT'
+                                                    WHERE program.programName = 'BSCS'
                                                     GROUP BY student_course.studentID");
         return $query->result();
     }
@@ -144,7 +144,7 @@ class Model_coordinator extends CI_Model {
                                                     INNER JOIN course ON po_course.courseID = course.ID
                                                     INNER JOIN program_year ON course.pyID = program_year.ID
                                                     INNER JOIN program ON program_year.programID = program.ID
-                                                    WHERE program.programName = 'BSICT'
+                                                    WHERE program.programName = 'BSCS'
                                                     AND teacher_class.semester = 1 
                                                     AND teacher_class.school_year = '".$year."' 
                                                     GROUP BY teacher_class.courseCode ");
@@ -161,7 +161,7 @@ class Model_coordinator extends CI_Model {
                                                     INNER JOIN course ON po_course.courseID = course.ID
                                                     INNER JOIN program_year ON course.pyID = program_year.ID
                                                     INNER JOIN program ON program_year.programID = program.ID
-                                                    WHERE program.programName = 'BSICT'
+                                                    WHERE program.programName = 'BSCS'
                                                     AND teacher_class.semester = 2 
                                                     AND teacher_class.school_year = '".$year."'
                                                     GROUP BY teacher_class.courseCode ");
@@ -178,7 +178,7 @@ class Model_coordinator extends CI_Model {
                                                     INNER JOIN course ON po_course.courseID = course.ID
                                                     INNER JOIN program_year ON course.pyID = program_year.ID
                                                     INNER JOIN program ON program_year.programID = program.ID
-                                                    WHERE program.programName = 'BSICT'
+                                                    WHERE program.programName = 'BSCS'
                                                     AND teacher_class.semester = 'summer' 
                                                     AND teacher_class.school_year = '".$year."'
                                                     GROUP BY teacher_class.courseCode ");
@@ -194,7 +194,7 @@ class Model_coordinator extends CI_Model {
                                                     INNER JOIN course ON po_course.courseID = course.ID
                                                     INNER JOIN program_year ON course.pyID = program_year.ID
                                                     INNER JOIN program ON program_year.programID = program.ID
-                                                    WHERE program.programName = 'BSICT' 
+                                                    WHERE program.programName = 'BSCS' 
                                                     GROUP BY school_year ORDER BY school_year");
         
         return $query->result();

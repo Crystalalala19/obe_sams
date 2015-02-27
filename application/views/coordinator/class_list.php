@@ -65,7 +65,7 @@
                                         <?php for($x = 1; $x <= $po_count; $x++):?>
                                         <th>PO <?php echo $x;?></i></th>
                                         <?php endfor; ?>
-                                        <th width="10%" class="no-sort">Scorecard</th>
+                                        <th width="13%" class="no-sort">Scorecard</th>
                                     </tr>
                                 </thead>
                                 
@@ -129,7 +129,7 @@
             }
 
             var score = values[i].reduce(function(pv,cv){return pv + cv;},0) / values[i].length;
-            footer.getElementsByTagName('td')[i-1].innerHTML = Math.round(score * 100) / 100;
+            footer.getElementsByTagName('td')[i-1].innerHTML = parseFloat(Math.round(score * 100) / 100).toFixed(1);
           
             if( isNaN(footer.getElementsByTagName('td')[i-1].innerHTML) )
                 footer.getElementsByTagName('td')[i-1].innerHTML = " ";

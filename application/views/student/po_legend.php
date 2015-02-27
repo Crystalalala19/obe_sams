@@ -10,12 +10,12 @@
 
                     <div class="widget-content">
                         <div class="clearfix"></div><br>
-                        <h4><center>
+                        <h3><center>
                         <?php foreach($student_year as $row1): ?>
                             <?php echo $row1['programFullName'];?><br>
                             <?php echo '(Effective SY: '.$row1['effective_year'].' - '.($row1['effective_year']+1).')';?>                                
                         <?php endforeach; ?>  
-                        </center></h4>  
+                        </center></h3>  
                         <hr>
 
                         <table id="view_classlist" class="table table-striped table-bordered dataTable no-footer">

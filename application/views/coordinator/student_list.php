@@ -29,6 +29,7 @@
                                         <td><center><?php echo $row->studentID;?></center></td>
                                         <td><center><?php echo $row->fname." ".$row->lname;?></center></td>
                                         <td><center><?php echo $row->programName;?> - <?php echo $row->effective_year;?></center></td>
+                                        <?php $program = $row->programName;?>
                                         <td>
                                             <center>
                                                 <a class="btn btn-mini btn-info" href="<?php echo base_url();?>coordinator/scorecard/<?php echo $row->studentID;?>" title="View Scorecard">View Scorecard</a>
@@ -45,19 +46,39 @@
     </div> <!-- /container -->
 </div> <!-- /main-inner -->
 
-<script type="text/javascript" language="javascript">
+    <script type="text/javascript" language="javascript">
         var dataTableOptions = {
-            "columnDefs": [
-                { targets: 'no-sort', orderable: false }
-            ],
-
+            "bPaginate": false,
             "bLengthChange": false,
             "bFilter": true,
             "bInfo": false,
             "bAutoWidth": false 
         };
 
-        var table = $('#view_studentlist').DataTable(dataTableOptions);
+        var tableToolsOptions = {
+            "sSwfPath": "http://cdn.datatables.net/tabletools/2.2.3/swf/copy_csv_xls_pdf.swf",
+            "aButtons": [{
+                    "sExtends": "print",
+                    "sButtonText": "Print",
+                    "bShowAll": false
+                }, {
+                    "sExtends":    "collection",
+                    "sButtonText": "Save as...",
+                    "aButtons":    [ {
+                            "sExtends": "pdf",
+                            "sTitle": "<?php echo $program; ?>",
+                            "sButtonText": "PDF",
+                            "mColumns": [0,1,2]
+                        }
+                    ]
+                }
+            ]
+        };
 
-        $('.dataTables_filter input').attr("placeholder", " Enter keyword");
+        var table = $('#view_studentlist').dataTable( dataTableOptions );
+
+        var tt = new $.fn.dataTable.TableTools( table, tableToolsOptions );
+
+        $( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
+
     </script>

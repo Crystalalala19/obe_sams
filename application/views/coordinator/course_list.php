@@ -94,7 +94,7 @@
                                                         <td><?php echo $row2->group_num;?></td>
                                                         <td><?php echo $row2->courseCode;?></td>
                                                         <td><?php echo $row2->start_time."-".$row2->end_time." ".$row2->days;?></td>
-                                                        <td><?php echo $row1->fname.' '.$row1->lname; ?></td>
+                                                        <td><?php echo $row2->fname.' '.$row2->lname; ?></td>
                                                         <td>
                                                             <a class="btn btn-mini btn-info" href="<?php echo base_url();?>coordinator/class_list/<?php echo $row2->ID;?>" title="View Class">View Class</a>
                                                         </td>
@@ -123,7 +123,7 @@
                                                         <td><?php echo $row3->group_num;?></td>
                                                         <td><?php echo $row3->courseCode;?></td>
                                                         <td><?php echo $row3->start_time."-".$row3->end_time." ".$row3->days;?></td>
-                                                        <td><?php echo $row1->fname.' '.$row1->lname; ?></td>
+                                                        <td><?php echo $row3->fname.' '.$row3->lname; ?></td>
                                                         <td>
                                                             <a class="btn btn-mini btn-info" href="<?php echo base_url();?>coordinator/class_list/<?php echo $row3->ID;?>" title="View Class">View Class</a>
                                                         </td>

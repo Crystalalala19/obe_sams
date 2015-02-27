@@ -116,7 +116,15 @@
                                             <td><?php echo $row['sfname'].' '.$row['slname'];?></td>
                                             <td><?php echo $row['courseCode'].' Grp. '.$row['group_num'];?></td>
                                             <td><?php echo $row['tfname'].' '.$row['tlname'];?></td>
-                                            <td><?php echo number_format($row['score'], 1);?></td>
+                                            <td><?php
+                                                    if (!is_numeric($row['score'])) {
+                                                        echo $row['score'];
+                                                    }
+                                                    else{
+                                                        echo number_format($row['score'],1);
+                                                    }
+                                                ?>
+                                            </td>
                                         </tr>
                                     <?php endforeach;?>
                                 </tbody>
@@ -234,16 +242,16 @@
     </script>
 
     <script type="text/javascript">
-        var table = document.getElementById('student_report'),
-            rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr'),
-            footer = table.getElementsByTagName('tfoot')[0];
+        var table2 = document.getElementById('student_report'),
+            rows = table2.getElementsByTagName('tbody')[0].getElementsByTagName('tr'),
+            footer = table2.getElementsByTagName('tfoot')[0];
 
             
-        for (var i = 4; i <= 15; i++) {
+        for (var i = 4; i <= 5; i++) {
             var sum = numOfValues = 0;
             for (var j = 0, l = rows.length; j < l; j++) {
                 try {
-                    if(rows[j].getElementsByTagName('td')[i].innerHTML != '') {
+                    if(!isNaN(rows[j].getElementsByTagName('td')[i].innerHTML)) {
                         sum += parseFloat(
                             rows[j].getElementsByTagName('td')[i]
                             .innerHTML
@@ -258,7 +266,7 @@
             footer.getElementsByTagName('td')[i]
             .innerHTML = parseFloat(Math.round(avg * 100) / 100).toFixed(1);
 
-            if( isNaN(footer.getElementsByTagName('td')[i].innerHTML) )
+            if( isNaN(footer.getElementsByTagName('td')[i].innerHTML) || footer.getElementsByTagName('td')[i].innerHTML == 0)
                 footer.getElementsByTagName('td')[i].innerHTML = " ";
         }
     </script>
