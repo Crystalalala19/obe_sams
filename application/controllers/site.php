@@ -253,6 +253,8 @@ class Site extends CI_Controller {
                     ); 
 
                     for($x = 0, $index = 4; $x < count($po_courses); $x++, $index++) {
+                        $flag = false;
+
                         if($po_courses[$x]['status'] == '1') {
                             if($row[$headers[$index]] == NULL) {
                                 $message = '<strong>Error: </strong>There\'s an empty score found. Please re-check activated PO\'s and your .CSV file.';
@@ -261,7 +263,22 @@ class Site extends CI_Controller {
                                 $this->session->set_flashdata('message', $message);
 
                                 redirect(current_url());
-                            };
+                            }
+
+                            if(is_numeric($row[$headers[$index]])) 
+                                $flag = true;
+                            elseif( $row[$headers[$index]] == 'NC' OR $row[$headers[$index]] == 'INC' OR $row[$headers[$index]] == 'W' )
+                                $flag = true;
+
+                            if(!$flag) {
+                                $message = '<strong>Error: </strong>Numeric, INC, NC, and W are the only valid scores.';
+                                $message = $this->model_users->notify_message('alert-danger', 'icon-exclamation', $message);
+
+                                $this->session->set_flashdata('message', $message);
+
+                                redirect(current_url());
+                            }
+
                             $studentCourse_data['score'][$x] = $row[$headers[$index]];
                             $studentCourse_data['poID'][$x] = $po_courses[$x]['poID'];
                         } else{
