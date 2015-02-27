@@ -49,7 +49,7 @@
                                 <select class="span2" id="program" name="program" required>
                                     <option value="">Program:</option>
                                     <?php foreach ($program_list as $row): ?>
-                                    <option value="<?php echo $row['programName'];?>" <?php echo set_select('program', $row['programName']);?>><?php echo rawurldecode($row['programName']); ?></option>
+                                    <option value="<?php echo $row['programName'];?>"><?php echo rawurldecode($row['programName']); ?></option>
                                     <?php endforeach;?>
                                 </select>
 
