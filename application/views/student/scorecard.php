@@ -35,12 +35,12 @@
                             $attributes = array('class' => 'col-md-4');
                         ?>
 
-                        <h4><center>
+                        <h3><center>
                         <?php foreach($student_year as $row): $stud_prog = $row['programFullName'].' '.$row['effective_year'].' - '.($row['effective_year']+1); ?>
                             <?php echo $row['programFullName'];?><br>
                             <?php echo '(Effective SY: '.$row['effective_year'].' - '.($row['effective_year']+1).')';?>                                
                         <?php endforeach; ?>  
-                        </center></h4>  
+                        </center></h3>  
                         <hr>
                         <br>
                         <h4>

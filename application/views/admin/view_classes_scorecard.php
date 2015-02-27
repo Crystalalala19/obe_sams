@@ -34,12 +34,12 @@
                                 $attributes = array('class' => 'col-md-4');
                             ?>
                             
-                            <h4>
+                            <!-- <h4>
                                 <center>
                                     <?php echo $class_program['programFullName'];?><br>
                                     <?php echo '(Effective SY: '.$class_program['effective_year'].' - '.($class_program['effective_year']+1).')';?>    
                                 </center>
-                            </h4>
+                            </h4> -->
 
                             <div class="pull-left">
                                 <?php foreach($select_schedule as $row1): ?>
@@ -54,6 +54,7 @@
                                             echo $row1['days'].'<br>';
                                         ?>
                                         Semester: <?php echo $row1['semester'].' | ';?> School Year: <?php echo $row1['school_year']; ?>
+                                        <br><br><?php echo 'Assigned Teacher: '.$row1['fname'].' '.$row1['lname'];?>
                                     </h4>
                                 <?php endforeach; ?>
                             </div>

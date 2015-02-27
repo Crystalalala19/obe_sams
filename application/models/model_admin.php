@@ -452,7 +452,9 @@ class Model_admin extends CI_Model {
     }
 
     function select_schedule($id){
-        $query = $this->db->query("SELECT * FROM teacher_class WHERE ID = '".$id."' ");
+        $query = $this->db->query("SELECT * FROM teacher_class 
+                                                INNER JOIN teacher ON teacher_class.teacherID = teacher.teacher_id
+                                                WHERE teacher_class.ID = '".$id."' ");
         
         return $query->result_array();
     }

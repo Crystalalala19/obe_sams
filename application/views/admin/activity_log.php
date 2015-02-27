@@ -17,14 +17,9 @@
                             <h3><?php echo $header;?></h3>
                         </div> <!-- /widget-header -->
                         <div class="widget-content">
-
-                            
-
-
-
                             <ul class="nav nav-tabs">
-                                <li class="active"><a href="#tab1" data-toggle="tab">Assigning Class</a></li>
-                                <li><a href="#tab2" data-toggle="tab">Teacher Log</a></li>
+                                <li class="active"><a href="#tab1" data-toggle="tab">Teacher Log</a></li>
+                                <li><a href="#tab2" data-toggle="tab">Assigning Class</a></li>
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tab1">
@@ -34,7 +29,7 @@
                                                 <tr>
                                                     <th><center>Date</center></th>
                                                     <th><center>Course</center></th>
-                                                    <th><center>Submitted by:</center></th>
+                                                    <th><center>Submitted By:</center></th>
                                                     <th></th>
                                                 </tr>
                                             </thead>

@@ -23,12 +23,12 @@
                                 $attributes = array('class' => 'col-md-4');
                             ?>
 
-                            <h4><center>
+                            <h3><center>
                             <?php foreach($get_scoreEY as $row): ?>
                                 <?php echo $row['programFullName'];?><br>
                                 <?php echo '(Effective SY: '.$row['effective_year'].' - '.($row['effective_year']+1).')';?>                                
                             <?php endforeach; ?>  
-                            </center></h4>
+                            </center></h3>
                             <br>
                             <h4>
                                 <?php foreach($get_studentName as $row1): ?>
