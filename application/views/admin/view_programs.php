@@ -42,6 +42,8 @@
 
                             <?php if($program_list != FALSE):?>
                             <div class="form-group col-md-2">
+                                <button onclick="javascript:window.history.back();" type="button" class="btn btn-info"><i class="icon-angle-left"></i> Go Back</button>
+                                <div class="clearfix"></div><br>
                                 <label for="program_ajax">Program:</label>
                                 <select name="program" class="selectpicker show-tick" title="Select Program" data-live-search="true" multiple data-max-options="1" data-size="5" id="program_ajax">
                                     <?php foreach($program_list as $row): ?>

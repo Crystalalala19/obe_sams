@@ -351,8 +351,8 @@ class Admin extends CI_Controller {
 
             foreach($po_rows as $key => $val){
                 $po_fields = array(
-                    'poCode' => $val,
-                    'attribute' => $attribs[$key],
+                    'poCode' => strtoupper($val),
+                    'attribute' => ucwords($attribs[$key]),
                     'description' => $descs[$key],
                     'pyID' => $program_year
                 );
@@ -435,9 +435,12 @@ class Admin extends CI_Controller {
         $data['header'] = 'View Curriculums';
         
         $this->load->library('form_validation');
+        $this->load->library('encrypt');
 
         $this->form_validation->set_rules('program_name', 'Program Name', 'required|trim|max_length[8]|callback_alpha_dash_space');
         $this->form_validation->set_rules('full_name', 'Full Program Name', 'required|trim|callback_alpha_dash_space');
+        $this->form_validation->set_rules('coor_id', 'Coordinator Username', 'required|trim|alpha_numeric|min_length[10]|max_length[15]|is_unique[coordinator.coordinator_id]');
+        $this->form_validation->set_message('is_unique', 'The Coordinator Username <strong>%s</strong> already existed.');
 
         if($this->form_validation->run() == FALSE) {
             $data['message'] = '';
@@ -447,16 +450,37 @@ class Admin extends CI_Controller {
                 'programName' => strtoupper($this->input->post('program_name')),
                 'programFullName' => strtoupper($this->input->post('full_name'))
             );
-            $result = $this->model_admin->insert_program($program_data);
 
-            if($result['is_success'] == FALSE) {
-                $message = '<strong>Error: </strong>'.  $result['db_error'];
+            $this->db->trans_start();
+
+            $this->model_admin->insert_program($program_data);
+
+            $coordinator_data = array(
+                'coordinator_id' => $this->input->post('coor_id'),
+                'program_id' => $this->model_admin->get_lastId()
+            );
+
+            $user_account = array(
+                'idnum' => $this->input->post('coor_id'),
+                'role' => 'coordinator',
+                'password' => $this->encrypt->sha1($this->input->post('coor_id'))
+            );
+
+            $this->model_admin->insert_coordinatorAccount($user_account);
+            $this->model_admin->insert_coordinator($coordinator_data);
+
+            if($this->db->trans_status() === FALSE) {
+                $this->db->trans_rollback();
+
+                $message = '<strong>Error: </strong>when adding new Program.';
                 $message = $this->model_admin->notify_message('alert-danger', 'icon-exclamation', $message);
 
                 $this->session->set_flashdata('message', $message);
                 redirect(base_url('admin/programs/add'));
             }
             else {
+                $this->db->trans_complete();
+
                 $message = '<strong>Success!</strong> Program added.';
                 $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
 
@@ -572,8 +596,8 @@ class Admin extends CI_Controller {
             foreach ($po_rows as $key => $value) {
                 $po_update = array(
                     'ID' => $po_id[$key],
-                    'attribute' => $attribs[$key],
-                    'poCode' => $value,
+                    'attribute' => ucwords($attribs[$key]),
+                    'poCode' => strtoupper($value),
                     'description' => $descs[$key],
                     'pyID' => $year_id
                 );
@@ -720,7 +744,7 @@ class Admin extends CI_Controller {
         $this->form_validation->set_rules('teacher_fname', 'First Name', 'required|trim|max_length[20]|callback_alpha_dash_space');
         $this->form_validation->set_rules('teacher_lname', 'Last Name', 'required|trim|max_length[20]|callback_alpha_dash_space');
         $this->form_validation->set_rules('login_id', 'ID login', 'required|trim|alpha_numeric|min_length[10]|max_length[15]|is_unique[teacher.teacher_id]');
-        $this->form_validation->set_message('is_unique', 'The entered %s already existed.');
+        $this->form_validation->set_message('is_unique', 'The Teacher Username <strong>%s</strong> already existed.');
 
         if($this->form_validation->run() == FALSE) {
             $data['message'] = '';

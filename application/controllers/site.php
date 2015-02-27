@@ -213,6 +213,7 @@ class Site extends CI_Controller {
                 $nonExistingTeacher = array();
                 $to_insert_grade = array();
                 $csv_array = $this->csvimport->get_array($file_path);
+                $csv_array = array_filter(array_map('array_filter', $csv_array));
                 $headers = $this->csvimport->get_headers();
                 $po_courses = $this->model_users->get_poCourse($student_courseID);
 

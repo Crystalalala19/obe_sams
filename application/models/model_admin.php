@@ -104,8 +104,14 @@ class Model_admin extends CI_Model {
     // PROGRAMS
     function insert_program($data) {
         $this->db->insert('program', $data);
+    }
 
-        return $this->check_query();
+    function insert_coordinator($data) {
+        $this->db->insert('coordinator', $data);
+    }
+
+    function insert_coordinatorAccount($data) {
+        $this->db->insert('user_account', $data);
     }
 
     function insert_programYear($data, $year) {

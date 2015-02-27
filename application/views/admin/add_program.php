@@ -34,14 +34,15 @@
                                                 <h4 class='modal-title' id='myModalLabel'><i class="icon-plus"></i> New Program</h4>
                                             </div>
                                             <div class='modal-body'>
-                                                <div class="form-group col-xs-4 col-sm-4 col-md-4">
-                                                    <label for="program_name">Program Code:</label>
-                                                    <input type="text" class="form-control input-sm" name="program_name" id="program_name" value="<?php echo set_value('teacher_fname'); ?>" required>
-                                                </div>
-                                                <div class="form-group col-xs-4 col-sm-4 col-md-4">
-                                                    <label for="full_name">Full Program Name:</label>
-                                                    <input type="text" class="form-control input-sm" name="full_name" id="full_name" value="<?php echo set_value('teacher_fname'); ?>" required>
-                                                </div>
+                                                <label for="program_name">Program Code:</label>
+                                                <input type="text" name="program_name" id="program_name" value="<?php echo set_value('program_name'); ?>" required>                                          
+                                                
+                                                <label for="full_name">Full Program Name:</label>
+                                                <input type="text" name="full_name" id="full_name" value="<?php echo set_value('full_name'); ?>" required>
+
+                                                <label for="coor_id">Coordinator Username:</label>
+                                                <input type="text" name="coor_id" id="coor_id" value="<?php echo set_value('coor_id'); ?>" required>
+                                              
                                                 <div class="clearfix"></div>
                                             </div>
                                             <div class='modal-footer'>
