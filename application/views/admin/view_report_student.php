@@ -123,6 +123,7 @@
                                 <tfoot>
                                     <tr bgcolor="#FFF380">
                                         <td></td>
+                                        <td></td>
                                         <td><center>Average</center></td>
                                         <td></td>
                                         <td></td>
