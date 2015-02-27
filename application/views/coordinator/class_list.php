@@ -76,8 +76,8 @@
                                         <td><?php echo $row['fname']." ".$row['lname'];?></td>
                                         <?php foreach($row['score'] as $row1): ?>
                                         <td><?php 
-                                                if($row1 == ''){
-                                                    echo '';
+                                                if (!is_numeric($row1)) {
+                                                    echo $row1;
                                                 }
                                                 else{
                                                     echo number_format($row1,1);
@@ -94,7 +94,8 @@
 
                                 <tfoot>
                                     <tr bgcolor="#FFF380">
-                                        <td colspan="2"><center>Average</center></td>
+                                        <td></td>
+                                        <td><center>Average</center></td>
                                         <?php for($x = 1; $x <= $po_count; $x++):?>
                                         <td></td>
                                         <?php endfor;?>
@@ -112,27 +113,32 @@
     <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/bootstrap-filestyle.min.js"></script>
     
     <script type="text/javascript">
-        var values = [],
-            table = document.getElementById('view_classlist'),
+        var table = document.getElementById('view_classlist'),
             rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr'),
             footer = table.getElementsByTagName('tfoot')[0];
 
-        for(var i=2; i<=15; i++){
-            values[i] = [];
-            for(var j=0, l=rows.length; j<l; j++){
-                values[i].push(
-                    parseFloat(
-                        rows[j].getElementsByTagName('td')[i]
-                      .innerHTML
-                    )
-                );
+            
+        for (var i = 2; i <= <?php echo $po_count+1;?>; i++) {
+            var sum = numOfValues = 0;
+            for (var j = 0, l = rows.length; j < l; j++) {
+                try {
+                    if(!isNaN(rows[j].getElementsByTagName('td')[i].innerHTML)) {
+                        sum += parseFloat(
+                            rows[j].getElementsByTagName('td')[i]
+                            .innerHTML
+                        ) || 0;
+
+                        numOfValues++;
+                    }
+                } catch (e) {}
             }
 
-            var score = values[i].reduce(function(pv,cv){return pv + cv;},0) / values[i].length;
-            footer.getElementsByTagName('td')[i-1].innerHTML = parseFloat(Math.round(score * 100) / 100).toFixed(1);
-          
-            if( isNaN(footer.getElementsByTagName('td')[i-1].innerHTML) )
-                footer.getElementsByTagName('td')[i-1].innerHTML = " ";
+            var avg = sum / numOfValues;
+            footer.getElementsByTagName('td')[i]
+            .innerHTML = parseFloat(Math.round(avg * 100) / 100).toFixed(1);
+
+            if( isNaN(footer.getElementsByTagName('td')[i].innerHTML) || footer.getElementsByTagName('td')[i].innerHTML == 0)
+                footer.getElementsByTagName('td')[i].innerHTML = " ";
         }
     </script>
 

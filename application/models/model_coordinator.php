@@ -7,7 +7,7 @@ class Model_coordinator extends CI_Model {
     }
 
     function select_user(){     
-        $query = $this->db->query("SELECT * FROM coordinator WHERE coordinator_id = '".$this->session->userdata('idnum')."'");
+        $query = $this->db->query("SELECT * FROM program WHERE coordinator_id = '".$this->session->userdata('idnum')."'");
 
         return $query->result_array();
     }
@@ -67,7 +67,7 @@ class Model_coordinator extends CI_Model {
                                                     INNER JOIN course ON po_course.courseID = course.ID
                                                     INNER JOIN program_year ON course.pyID = program_year.ID
                                                     INNER JOIN program ON program_year.programID = program.ID
-                                                    WHERE program.programName = 'BSCS'
+                                                    WHERE program.coordinator_id = '".$this->session->userdata('idnum')."'
                                                     GROUP BY student_course.studentID");
         return $query->result();
     }
@@ -136,52 +136,58 @@ class Model_coordinator extends CI_Model {
     }
 
     function get_1stSemester($year){
-        $query = $this->db->query("SELECT * FROM teacher_class
-                                                    INNER JOIN teacher ON teacher_class.teacherID = teacher.teacher_id 
-                                                    INNER JOIN student_course ON teacher_class.ID = student_course.classID
-                                                    -- INNER JOIN student ON student_course.studentID = student.student_id
-                                                    INNER JOIN po_course ON student_course.courseID = po_course.courseID
-                                                    INNER JOIN course ON po_course.courseID = course.ID
-                                                    INNER JOIN program_year ON course.pyID = program_year.ID
-                                                    INNER JOIN program ON program_year.programID = program.ID
-                                                    WHERE program.programName = 'BSCS'
-                                                    AND teacher_class.semester = 1 
-                                                    AND teacher_class.school_year = '".$year."' 
-                                                    GROUP BY teacher_class.courseCode ");
+        $query = $this->db->query("SELECT   teacher_class.group_num, teacher_class.courseCode, teacher_class.start_time, 
+                                            teacher_class.end_time, teacher_class.days, teacher.fname, teacher.lname, teacher_class.ID
+                                            FROM teacher_class
+                                            INNER JOIN teacher ON teacher_class.teacherID = teacher.teacher_id 
+                                            INNER JOIN student_course ON teacher_class.ID = student_course.classID
+                                            -- INNER JOIN student ON student_course.studentID = student.student_id
+                                            INNER JOIN po_course ON student_course.courseID = po_course.courseID
+                                            INNER JOIN course ON po_course.courseID = course.ID
+                                            INNER JOIN program_year ON course.pyID = program_year.ID
+                                            INNER JOIN program ON program_year.programID = program.ID
+                                            WHERE program.coordinator_id = '".$this->session->userdata('idnum')."'
+                                            AND teacher_class.semester = 1 
+                                            AND teacher_class.school_year = '".$year."' 
+                                            GROUP BY teacher_class.courseCode ");
 
         return $query->result();
     }
 
     function get_2ndSemester($year){
-        $query = $this->db->query("SELECT * FROM teacher_class
-                                                    INNER JOIN teacher ON teacher_class.teacherID = teacher.teacher_id 
-                                                    INNER JOIN student_course ON teacher_class.ID = student_course.classID
-                                                    -- INNER JOIN student ON student_course.studentID = student.student_id
-                                                    INNER JOIN po_course ON student_course.courseID = po_course.courseID
-                                                    INNER JOIN course ON po_course.courseID = course.ID
-                                                    INNER JOIN program_year ON course.pyID = program_year.ID
-                                                    INNER JOIN program ON program_year.programID = program.ID
-                                                    WHERE program.programName = 'BSCS'
-                                                    AND teacher_class.semester = 2 
-                                                    AND teacher_class.school_year = '".$year."'
-                                                    GROUP BY teacher_class.courseCode ");
+        $query = $this->db->query("SELECT   teacher_class.group_num, teacher_class.courseCode, teacher_class.start_time, 
+                                            teacher_class.end_time, teacher_class.days, teacher.fname, teacher.lname, teacher_class.ID
+                                            FROM teacher_class
+                                            INNER JOIN teacher ON teacher_class.teacherID = teacher.teacher_id 
+                                            INNER JOIN student_course ON teacher_class.ID = student_course.classID
+                                            -- INNER JOIN student ON student_course.studentID = student.student_id
+                                            INNER JOIN po_course ON student_course.courseID = po_course.courseID
+                                            INNER JOIN course ON po_course.courseID = course.ID
+                                            INNER JOIN program_year ON course.pyID = program_year.ID
+                                            INNER JOIN program ON program_year.programID = program.ID
+                                            WHERE program.coordinator_id = '".$this->session->userdata('idnum')."'
+                                            AND teacher_class.semester = 2 
+                                            AND teacher_class.school_year = '".$year."'
+                                            GROUP BY teacher_class.courseCode ");
 
         return $query->result();
     }
 
     function get_summer($year){
-        $query = $this->db->query("SELECT * FROM teacher_class
-                                                    INNER JOIN teacher ON teacher_class.teacherID = teacher.teacher_id 
-                                                    INNER JOIN student_course ON teacher_class.ID = student_course.classID
-                                                    -- INNER JOIN student ON student_course.studentID = student.student_id
-                                                    INNER JOIN po_course ON student_course.courseID = po_course.courseID
-                                                    INNER JOIN course ON po_course.courseID = course.ID
-                                                    INNER JOIN program_year ON course.pyID = program_year.ID
-                                                    INNER JOIN program ON program_year.programID = program.ID
-                                                    WHERE program.programName = 'BSCS'
-                                                    AND teacher_class.semester = 'summer' 
-                                                    AND teacher_class.school_year = '".$year."'
-                                                    GROUP BY teacher_class.courseCode ");
+        $query = $this->db->query("SELECT   teacher_class.group_num, teacher_class.courseCode, teacher_class.start_time, 
+                                            teacher_class.end_time, teacher_class.days, teacher.fname, teacher.lname, teacher_class.ID
+                                            FROM teacher_class
+                                            INNER JOIN teacher ON teacher_class.teacherID = teacher.teacher_id 
+                                            INNER JOIN student_course ON teacher_class.ID = student_course.classID
+                                            -- INNER JOIN student ON student_course.studentID = student.student_id
+                                            INNER JOIN po_course ON student_course.courseID = po_course.courseID
+                                            INNER JOIN course ON po_course.courseID = course.ID
+                                            INNER JOIN program_year ON course.pyID = program_year.ID
+                                            INNER JOIN program ON program_year.programID = program.ID
+                                            WHERE program.coordinator_id = '".$this->session->userdata('idnum')."'
+                                            AND teacher_class.semester = 'summer' 
+                                            AND teacher_class.school_year = '".$year."'
+                                            GROUP BY teacher_class.courseCode ");
 
         return $query->result();
     }
@@ -194,7 +200,7 @@ class Model_coordinator extends CI_Model {
                                                     INNER JOIN course ON po_course.courseID = course.ID
                                                     INNER JOIN program_year ON course.pyID = program_year.ID
                                                     INNER JOIN program ON program_year.programID = program.ID
-                                                    WHERE program.programName = 'BSCS' 
+                                                    WHERE program.coordinator_id = '".$this->session->userdata('idnum')."' 
                                                     GROUP BY school_year ORDER BY school_year");
         
         return $query->result();
@@ -230,8 +236,13 @@ class Model_coordinator extends CI_Model {
     }
 
     function select_classSC($student_id) {
-        $query = $this->db->query("SELECT * FROM student_course 
+        $query = $this->db->query("SELECT student_course.poID, student_course.courseID, student_course.studentID, 
+                                            student_course.classID, student_course.score, student_course.year_level,
+                                            student_course.date, teacher.fname, teacher.lname, teacher_class.ID,
+                                            teacher_class.courseCode
+                                            FROM student_course 
                                             INNER JOIN teacher_class ON student_course.classID = teacher_class.ID
+                                            INNER JOIN teacher ON teacher_class.teacherID = teacher.teacher_id
                                             WHERE studentID = '".$student_id."'
                                             GROUP BY classID");
 

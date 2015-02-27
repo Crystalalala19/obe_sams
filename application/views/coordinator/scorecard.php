@@ -45,6 +45,7 @@
                                 <thead>
                                   <tr>
                                     <th>Code</th>
+                                    <th>Teacher</th>
                                      <?php for($x = 1; $x <= $po_count; $x++):?><th>PO <?php echo $x;?></th><?php endfor;?>
                                   </tr>
                                 </thead>
@@ -52,6 +53,7 @@
                                     <?php foreach($class_list as $key => $row3): ?>
                                     <tr>
                                         <td width="7%"><?php echo $row3['courseCode']; ?></td>
+                                        <td width="7%"><?php echo $row3['fname'].' '.$row3['lname']; ?></td>
                                         <?php for($x=0; $x < $po_count; $x++): ?>
                                             <td><?php if(!is_numeric($row3['score'][$x]['score'])) {echo $row3['score'][$x]['score'];} else{echo number_format($row3['score'][$x]['score'],1);}?></td>
                                         <?php endfor;?>   
@@ -60,6 +62,7 @@
                                 </tbody>
                                 <tfoot>
                                     <tr bgcolor="#FFF380">
+                                        <td></td>
                                         <td><center>Average</center></td>
                                         <?php for($x = 1; $x <= $po_count; $x++):?>
                                             <td></td>
@@ -82,7 +85,7 @@
             footer = table.getElementsByTagName('tfoot')[0];
 
             
-        for (var i = 1; i <= <?php echo $po_count; ?>; i++) {
+        for (var i = 2; i <= <?php echo $po_count+1; ?>; i++) {
             var sum = numOfValues = 0;
             for (var j = 0, l = rows.length; j < l; j++) {
                 try {

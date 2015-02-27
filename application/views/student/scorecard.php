@@ -56,6 +56,7 @@
                                 <thead>
                                   <tr>
                                     <th>Code </th>
+                                    <th>Teacher </th>
                                     <th>Schedule </th>
                                      <?php for($x = 1; $x <= $po_count; $x++):?>
                                         <th>PO <?php echo $x;?></th>
@@ -66,15 +67,17 @@
                                     <?php foreach($class_list as $key => $row3): ?>
                                     <tr>
                                         <td width="10%"><?php echo $row3['courseCode'];?></td>
+                                        <td width="10%"><?php echo $row3['fname'].' '.$row3['lname'];?></td>
                                         <td><?php echo 'Group #:<b> '.$row3['group_num'].'</b> | '.$row3['start_time'].' - '.$row3['end_time'].' '.$row3['days'];?></td>
                                         <?php for($x=0; $x < $po_count; $x++): ?>
-                                            <td><?php if($row3['score'][$x]['score'] == ''){echo '';}else{echo number_format($row3['score'][$x]['score'],1);}?></td>
+                                            <td><?php if(!is_numeric($row3['score'][$x]['score'])) {echo $row3['score'][$x]['score'];} else{echo number_format($row3['score'][$x]['score'],1);}?></td>
                                         <?php endfor;?>   
                                     </tr>
                                     <?php endforeach; ?>
                                 </tbody>
                                 <tfoot>
                                     <tr bgcolor="#FFF380">
+                                        <td></td>
                                         <td></td>
                                         <td><center>Average</center></td>
                                         <?php for($x=0; $x < $po_count; $x++): ?>
@@ -97,11 +100,11 @@
             footer = table.getElementsByTagName('tfoot')[0];
 
             
-        for (var i = 2; i <= 15; i++) {
+        for (var i = 3; i <= <?php echo $po_count+2; ?>; i++) {
             var sum = numOfValues = 0;
             for (var j = 0, l = rows.length; j < l; j++) {
                 try {
-                    if(rows[j].getElementsByTagName('td')[i].innerHTML != '') {
+                    if(rows[j].getElementsByTagName('td')[i].innerHTML != '' && !isNaN(rows[j].getElementsByTagName('td')[i].innerHTML)) {
                         sum += parseFloat(
                             rows[j].getElementsByTagName('td')[i]
                             .innerHTML
@@ -116,9 +119,10 @@
             footer.getElementsByTagName('td')[i]
             .innerHTML = parseFloat(Math.round(avg * 100) / 100).toFixed(1);
 
-            if( isNaN(footer.getElementsByTagName('td')[i].innerHTML) )
+            if( isNaN(footer.getElementsByTagName('td')[i].innerHTML) || footer.getElementsByTagName('td')[i].innerHTML == 0)
                 footer.getElementsByTagName('td')[i].innerHTML = " ";
         }
+
 </script>
 
 <script type="text/javascript" language="javascript">

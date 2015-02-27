@@ -28,9 +28,14 @@ class Model_student extends CI_Model {
     }
 
     function select_classSC($student_id) {
-        $query = $this->db->query("SELECT * FROM student_course 
+        $query = $this->db->query("SELECT   student_course.poID, student_course.courseID, student_course.studentID, 
+                                            student_course.classID, student_course.score, student_course.year_level,
+                                            student_course.date, teacher.fname, teacher.lname, teacher_class.ID,
+                                            teacher_class.courseCode, teacher_class.start_time, teacher_class.end_time,
+                                            teacher_class.days, teacher_class.group_num
+                                            FROM student_course 
                                             INNER JOIN teacher_class ON student_course.classID = teacher_class.ID
-                                            -- INNER JOIN teacher ON teacher_class.teacherID = teacher.teacher_id
+                                            INNER JOIN teacher ON teacher_class.teacherID = teacher.teacher_id
                                             WHERE student_course.studentID = '".$student_id."' 
                                             GROUP BY student_course.classID");
 

@@ -117,7 +117,7 @@
             footer = table.getElementsByTagName('tfoot')[0];
 
             
-        for (var i = 2; i <= <?php echo $po_count;?>; i++) {
+        for (var i = 2; i <= <?php echo $po_count+1;?>; i++) {
             var sum = numOfValues = 0;
             for (var j = 0, l = rows.length; j < l; j++) {
                 try {
