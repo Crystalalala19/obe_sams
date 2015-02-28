@@ -77,7 +77,15 @@
                                         <?php foreach($row['score'] as $row1): ?>
                                         <td><?php 
                                                 if (!is_numeric($row1)) {
-                                                    echo $row1;
+                                                    if($row1 == 'NC') {
+                                                        echo '<font size="2" color="#FF0000"><b>NC</b></font>';
+                                                    } 
+                                                    elseif($row1 == 'INC') {
+                                                        echo '<font size="2" color="#FF9900"><b>INC</b></font>';
+                                                    } 
+                                                    elseif($row1 == 'W') {
+                                                        echo '<font size="2" color="#993300"><b>W</b></font>';
+                                                    }
                                                 }
                                                 else{
                                                     echo number_format($row1,1);
