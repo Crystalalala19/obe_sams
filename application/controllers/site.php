@@ -156,6 +156,7 @@ class Site extends CI_Controller {
 
         $class_id = $this->uri->segment(3);
 
+        $data['message'] = '';
         $data['class_list'] = $this->model_users->select_class($class_id);
         $data['select_schedule'] = $this->model_users->select_schedule($class_id);
 
@@ -168,7 +169,7 @@ class Site extends CI_Controller {
         $data['get_po'] = $this->model_users->get_po($student_courseID);
 
         $info = 'Can only upload once and cannot be edited after. Be sure to double-check and confirm.';
-        $data['info'] = $this->model_users->notify_message('alert-danger', 'icon-exclamation', $info);
+        $data['info'] = $this->model_users->notify_message('alert-info', 'icon-info-sign', $info);
 
         foreach($data['class_list'] as $key => $val) {
             $data['class_list'][$key]['score'] = $this->model_users->get_studentPoGrade($val['studentID'], $class_id);
@@ -188,13 +189,6 @@ class Site extends CI_Controller {
 
         $data['user'] = $this->model_users->select_user();
         $data['title'] = "OBE SAMS Academic";
-
-        if($data['class_list'] == FALSE) {
-            $message = 'Your class is empty. Please upload students list with its PO grades.';
-            $data['message'] = $this->model_users->notify_message('alert-info', 'icon-info-sign', $message);
-        } else {
-            $data['message'] = '';
-        }
 
         $config['upload_path'] = './uploads/';
         $config['allowed_types'] = 'csv';

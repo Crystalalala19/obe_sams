@@ -28,19 +28,27 @@ class Admin extends CI_Controller {
     }
 
     function program_ajax() {
-        $program_data = array(
-            'programName' => rawurldecode($this->input->post('option'))
-        );
+        if($this->input->is_ajax_request()) {
+            $program_data = array(
+                'programName' => rawurldecode($this->input->post('option'))
+            );
 
-        $result = $this->model_admin->get_programYears($program_data);
-        echo json_encode($result);
+            $result = $this->model_admin->get_programYears($program_data);
+            echo json_encode($result);
+        }
+        else
+            $this->error_404();
     }
 
     function programCourses_ajax() {
-        $py_id = $this->input->post('option2');
+        if($this->input->is_ajax_request()) {
+            $py_id = $this->input->post('option2');
 
-        $result = $this->model_admin->get_eyCourses($py_id);
-        echo json_encode($result);
+            $result = $this->model_admin->get_eyCourses($py_id);
+            echo json_encode($result);
+        }
+        else
+            $this->error_404();
     }
 
     function get_semester() {
@@ -439,7 +447,7 @@ class Admin extends CI_Controller {
 
         $this->form_validation->set_rules('program_name', 'Program Name', 'required|trim|max_length[8]|callback_alpha_dash_space');
         $this->form_validation->set_rules('full_name', 'Full Program Name', 'required|trim|callback_alpha_dash_space');
-        $this->form_validation->set_rules('coor_id', 'Coordinator Username', 'required|trim|alpha_numeric|min_length[10]|max_length[15]|is_unique[coordinator.coordinator_id]');
+        $this->form_validation->set_rules('coor_id', 'Coordinator Username', 'required|trim|alpha_numeric|min_length[10]|max_length[15]|is_unique[program.coordinator_id]');
         $this->form_validation->set_message('is_unique', 'The Coordinator Username <strong>%s</strong> already existed.');
 
         if($this->form_validation->run() == FALSE) {
@@ -448,26 +456,19 @@ class Admin extends CI_Controller {
         else {
             $program_data = array(
                 'programName' => strtoupper($this->input->post('program_name')),
-                'programFullName' => strtoupper($this->input->post('full_name'))
+                'programFullName' => strtoupper($this->input->post('full_name')),
+                'coordinator_id' => $this->input->post('coor_id')
             );
-
-            $this->db->trans_start();
-
-            $this->model_admin->insert_program($program_data);
-
-            $coordinator_data = array(
-                'coordinator_id' => $this->input->post('coor_id'),
-                'program_id' => $this->model_admin->get_lastId()
-            );
-
             $user_account = array(
                 'idnum' => $this->input->post('coor_id'),
                 'role' => 'coordinator',
                 'password' => $this->encrypt->sha1($this->input->post('coor_id'))
             );
 
+            $this->db->trans_start();
+
+            $this->model_admin->insert_program($program_data);
             $this->model_admin->insert_coordinatorAccount($user_account);
-            $this->model_admin->insert_coordinator($coordinator_data);
 
             if($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();
@@ -626,8 +627,7 @@ class Admin extends CI_Controller {
             $equivalent_delete = array();
 
             $this->db->trans_start();
-            $result3 = $this->model_admin->update_courses($course_data);
-            // print_r($result3);die();
+            $this->model_admin->update_courses($course_data);
 
             foreach ($exploded as $key => $exploded_data) {
                 foreach ($exploded_data as $key2 => $value) {
@@ -653,18 +653,13 @@ class Admin extends CI_Controller {
                 'programFullName' => strtoupper($program_full)
             );
             
-
-            $result1 = $this->model_admin->update_program($program_id, $program_data);
-            // print_r($result1);die();
-            $result2 = $this->model_admin->update_po($po_data);
-            // print_r($result2);die();
+            $this->model_admin->update_program($program_id, $program_data);
+            $this->model_admin->update_po($po_data);
             
-            if(!empty($equivalent_delete)) {
-                $result4 = $this->model_admin->delete_equivalents($equivalent_delete);
-                // print_r($result4);die();
-            }
+            if(!empty($equivalent_delete)) 
+                $this->model_admin->delete_equivalents($equivalent_delete);
             
-            $result5 = $this->model_admin->update_equivalents($equivalent_data);
+            $this->model_admin->update_equivalents($equivalent_data);
             
             if($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();
@@ -1066,6 +1061,7 @@ class Admin extends CI_Controller {
 
         $this->load->view('admin/header', $data);
         $this->load->view('admin/activity_log', $data);
+        $this->load->view('admin/footer');
     } 
 
     public function student_scorecard() {

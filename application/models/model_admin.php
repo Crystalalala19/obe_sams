@@ -106,10 +106,6 @@ class Model_admin extends CI_Model {
         $this->db->insert('program', $data);
     }
 
-    function insert_coordinator($data) {
-        $this->db->insert('coordinator', $data);
-    }
-
     function insert_coordinatorAccount($data) {
         $this->db->insert('user_account', $data);
     }
