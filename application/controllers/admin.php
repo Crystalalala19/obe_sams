@@ -1029,8 +1029,7 @@ class Admin extends CI_Controller {
 
             $result = $this->model_admin->generate_studentReport($program, $effective_year, $course, $year_level, $semester, $academic_year, $po_num);
             
-
-            print_r($result);die();
+            // print_r($result);die();
             
             if($result == FALSE) {
                 $message = 'No results found. Try refining your search.';
@@ -1039,6 +1038,13 @@ class Admin extends CI_Controller {
                 $data['message'] = $message; 
             }
             else {
+                $po_count = $this->model_admin->get_po($result[0]['courseID']);
+
+                if($po_num != "all")
+                    $data['po_count'] = 4;
+                else
+                    $data['po_count'] = count($po_count);
+
                 $message = '<strong>Success!</strong>';
                 $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
 

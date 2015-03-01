@@ -116,7 +116,7 @@
                     </li>
                     <li <?php uri_match('class_list');?> id="courselist">
                         <a href="<?php echo base_url('coordinator/course_list'); ?>" title="View Class"><i class="icon-list"></i>
-                            <span>Class List</span> 
+                            <span>General Class List</span> 
                         </a>
                     </li>
                     <li <?php uri_match('student_list');?> id="studentlist">

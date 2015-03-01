@@ -61,14 +61,17 @@ class Model_coordinator extends CI_Model {
     }
 
     function student_list() {
-        $query = $this->db->query("SELECT DISTINCT * FROM student_course 
-                                                    INNER JOIN student ON student_course.studentID = student.student_id
-                                                    INNER JOIN po_course ON student_course.courseID = po_course.courseID
-                                                    INNER JOIN course ON po_course.courseID = course.ID
-                                                    INNER JOIN program_year ON course.pyID = program_year.ID
-                                                    INNER JOIN program ON program_year.programID = program.ID
-                                                    WHERE program.coordinator_id = '".$this->session->userdata('idnum')."'
-                                                    GROUP BY student_course.studentID");
+        $query = $this->db->query("SELECT DISTINCT student_course.year_level, student_course.studentID, student.fname, 
+                                        student.lname, program.coordinator_id, program.programName, program_year.effective_year, 
+                                        MAX(student_course.year_level) as year_level
+                                        FROM student_course 
+                                        INNER JOIN student ON student_course.studentID = student.student_id
+                                        INNER JOIN po_course ON student_course.courseID = po_course.courseID
+                                        INNER JOIN course ON po_course.courseID = course.ID
+                                        INNER JOIN program_year ON course.pyID = program_year.ID
+                                        INNER JOIN program ON program_year.programID = program.ID
+                                        WHERE program.coordinator_id = '".$this->session->userdata('idnum')."'
+                                        GROUP BY student_course.studentID");
         return $query->result();
     }
 

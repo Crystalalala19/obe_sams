@@ -88,11 +88,6 @@ class Coordinator extends CI_Controller {
 
         $data['title'] = "OBE SAMS Academic";
         $data['user'] = $this->model_coordinator->select_user();
-
-        $data['check_program'] = $this->model_coordinator->check_program();
-
-
-
         $data['student_list'] = $this->model_coordinator->student_list();
 
         if($data['student_list'] == FALSE) {

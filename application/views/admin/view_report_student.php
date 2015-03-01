@@ -99,15 +99,22 @@
                                         <th width="10%">Name</th>
                                         <th width="10%">Course</th>
                                         <th width="10%">Teacher</th>
+                                        <?php if($po_count == 4): ?>
                                         <th width="10%">PO Score</th>
+                                        <?php else: ?>
+                                        <?php for($x=1;$x<=$po_count; $x++): ?>
+                                        <th>PO <?php echo$x; ?></th>
+                                        <?php endfor; ?>
+                                        <?php endif; ?>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach($result as $key => $row): ?>
-                                        <tr data-child-id="<?php echo $row['studentID'];?>" data-child-level="<?php echo $row['year_level'];?>" data-child-program="<?php echo $row['programName'].' '.$row['effective_year'].'-'.($row['effective_year']+1);?>">
+                                        <tr>
                                             <td><?php echo $row['sfname'].' '.$row['slname'];?></td>
                                             <td><?php echo $row['courseCode'].' Grp. '.$row['group_num'];?></td>
                                             <td><?php echo $row['tfname'].' '.$row['tlname'];?></td>
+                                            <?php if($po_count == 4): ?>
                                             <td><?php
                                                     if (!is_numeric($row['score'])) {
                                                         if($row == 'NC') {
@@ -125,6 +132,18 @@
                                                     }
                                                 ?>
                                             </td>
+                                            <?php else: ?>
+                                            <?php for($x=1;$x<=$po_count;$x++): ?>
+                                            <td>
+                                                <?php
+                                                if (!is_numeric($row['score']))
+                                                    echo $row['score'];
+                                                else
+                                                    echo number_format($row['score'],1);
+                                                ?>
+                                            </td>
+                                            <?php endfor; ?>
+                                            <?php endif;?>
                                         </tr>
                                     <?php endforeach;?>
                                 </tbody>
@@ -133,7 +152,13 @@
                                         <td></td>
                                         <td><center>Average</center></td>
                                         <td></td>
+                                        <?php if($po_count == 4): ?>
                                         <td></td>
+                                        <?php else: ?>
+                                        <?php for($x=1;$x<=$po_count;$x++): ?>
+                                        <td></td>
+                                        <?php endfor; ?>
+                                        <?php endif; ?>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -157,7 +182,7 @@
 
         var dataTableOptions = {
             //Auto sort column
-            "order": [[1,'asc']],
+            "order": [[0,'asc']],
 
             //Disable sorting with class no-sort
             "columnDefs": [
@@ -213,7 +238,7 @@
             footer = table2.getElementsByTagName('tfoot')[0];
 
             
-        for (var i = 3; i <= 4; i++) {
+        for (var i = 3; i <= <?php echo $po_count+2;?> ; i++) {
             var sum = numOfValues = 0;
             for (var j = 0, l = rows.length; j < l; j++) {
                 try {
