@@ -53,7 +53,7 @@
                                     <tr>
                                         <td width="7%"><?php echo $row3['courseCode']; ?></td>
                                         <?php for($x=0; $x < $po_count; $x++): ?>
-                                            <td><?php if(!is_numeric($row3['score'][$x]['score'])) {echo $row3['score'][$x]['score'];} else{echo number_format($row3['score'][$x]['score'],1);}?></td>
+                                            <td><?php if(!is_numeric($row3['score'][$x]['score'])) {if($row3['score'][$x]['score'] == 'NC'){echo '<font size="2" color="#FF0000"><b>NC</b></font>';} elseif($row3['score'][$x]['score'] == 'INC') {echo '<font size="2" color="#993300"><b>INC</b></font>';} elseif($row3['score'][$x]['score'] == 'W'){echo '<font size="2" color="#FFCC00"><b>W</b></font>';}} else{echo number_format($row3['score'][$x]['score'],1);}?></td>
                                         <?php endfor;?>   
                                     </tr>
                                     <?php endforeach; ?>

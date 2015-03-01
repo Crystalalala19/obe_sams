@@ -110,7 +110,15 @@
                                             <td><?php echo $row['tfname'].' '.$row['tlname'];?></td>
                                             <td><?php
                                                     if (!is_numeric($row['score'])) {
-                                                        echo $row['score'];
+                                                        if($row == 'NC') {
+                                                            echo '<font size="2" color="#FF0000"><b>NC</b></font>';
+                                                        } 
+                                                        elseif($row == 'INC') {
+                                                            echo '<font size="2" color="#FF9900"><b>INC</b></font>';
+                                                        } 
+                                                        elseif($row == 'W') {
+                                                            echo '<font size="2" color="#993300"><b>W</b></font>';
+                                                        }
                                                     }
                                                     else{
                                                         echo number_format($row['score'],1);
