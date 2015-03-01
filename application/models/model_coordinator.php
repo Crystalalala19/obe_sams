@@ -61,8 +61,8 @@ class Model_coordinator extends CI_Model {
     }
 
     function student_list() {
-        $query = $this->db->query("SELECT DISTINCT student_course.year_level, student_course.studentID, student.fname, 
-                                        student.lname, program.coordinator_id, program.programName, program_year.effective_year, 
+        $query = $this->db->query("SELECT student_course.studentID, student.fname, student.lname, program.coordinator_id, 
+                                        program.programName, program_year.effective_year, 
                                         MAX(student_course.year_level) as year_level
                                         FROM student_course 
                                         INNER JOIN student ON student_course.studentID = student.student_id

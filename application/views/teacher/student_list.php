@@ -18,6 +18,7 @@
                                     <tr>
                                         <th>Student ID</th>
                                         <th>Name</th>
+                                        <th>Year Level</th>
                                         <th>Program</th>
                                         <th class="no-sort" width="10%">Action</th>
                                     </tr>
@@ -28,6 +29,22 @@
                                     <tr>          
                                         <td><center><?php echo $row->studentID;?></center></td>
                                         <td><center><?php echo $row->fname." ".$row->lname;?></center></td>
+                                        <td><center>
+                                            <?php 
+                                                if($row->year_level == '1') { 
+                                                    echo '1st year';
+                                                } 
+                                                elseif($row->year_level == '2') {
+                                                    echo '2nd year';
+                                                }
+                                                elseif($row->year_level == '3') {
+                                                    echo '3rd year';
+                                                }
+                                                elseif($row->year_level == '4') {
+                                                    echo '4th year';
+                                                }
+                                            ?>
+                                        </center></td>
                                         <td><center><?php echo $row->programName;?> - <?php echo $row->effective_year;?></center></td>
                                         <td>
                                             <center>
