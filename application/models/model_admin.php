@@ -478,9 +478,7 @@ class Model_admin extends CI_Model {
     }
 
     function get_po($id){
-        $query = $this->db->query("SELECT * FROM po_course
-                                            WHERE courseID = '".$id."'
-                                            ");
+        $query = $this->db->query("SELECT * FROM po_course WHERE courseID = '".$id."' ");
 
         return $query->result_array();
     }
