@@ -7,13 +7,6 @@
     <!-- End DataTables -->
 
     <style type="text/css">
-        td.details-control {
-            background: url('<?php echo base_url();?>/assets/img/details_open.png') no-repeat center center;
-            cursor: pointer;
-        }
-        tr.shown td.details-control {
-            background: url('<?php echo base_url();?>/assets/img/details_close.png') no-repeat center center;
-        }
         tfoot td {
             font-size: 15px;
             font-weight: bold;
@@ -87,6 +80,7 @@
 
                                 <select class="span1" name="po_num" required>
                                     <option value="">PO #:</option>
+                                    <option value="all" <?php echo set_select('po_num', 'all');?>>All</option>
                                     <?php for($x = 1; $x <= $max_po; $x++):?>
                                     <option value="0<?php echo $x;?>" <?php echo set_select('po_num', '0'.$x);?>>PO <?php echo $x;?></option>
                                     <?php endfor; ?>
@@ -102,9 +96,8 @@
                             <table class="table table-striped table-bordered" cellspacing="0" width="100%" id="student_report">
                                 <thead>
                                     <tr>
-                                        <th width="2%" class="no-sort"></th>
                                         <th width="10%">Name</th>
-                                        <th width="10%">Subject</th>
+                                        <th width="10%">Course</th>
                                         <th width="10%">Teacher</th>
                                         <th width="10%">PO Score</th>
                                     </tr>
@@ -112,7 +105,6 @@
                                 <tbody>
                                     <?php foreach($result as $key => $row): ?>
                                         <tr data-child-id="<?php echo $row['studentID'];?>" data-child-level="<?php echo $row['year_level'];?>" data-child-program="<?php echo $row['programName'].' '.$row['effective_year'].'-'.($row['effective_year']+1);?>">
-                                            <td class="details-control"></td>
                                             <td><?php echo $row['sfname'].' '.$row['slname'];?></td>
                                             <td><?php echo $row['courseCode'].' Grp. '.$row['group_num'];?></td>
                                             <td><?php echo $row['tfname'].' '.$row['tlname'];?></td>
@@ -130,7 +122,6 @@
                                 </tbody>
                                 <tfoot>
                                     <tr bgcolor="#FFF380">
-                                        <td></td>
                                         <td></td>
                                         <td><center>Average</center></td>
                                         <td></td>
@@ -199,40 +190,7 @@
             ]
         };
 
-        /* Formatting function for row details - modify as you need */
-        function format ( program, id, level) {
-            // `d` is the original data object for the row
-            return '<table class="table table-striped table-bordered">'+
-                '<tr>'+
-                    '<td>Program: <b>'+program+'</b></td>'+
-                '</tr>'+
-                '<tr>'+
-                    '<td>Student ID: '+id+'</td>'+
-                '</tr>'+
-                '<tr>'+
-                    '<td>Year Level: '+level+'</td>'+
-                '</tr>'+
-            '</table>';
-        }
-
         var table = $('#student_report').DataTable( dataTableOptions );
-
-        // Add event listener for opening and closing details
-        $('#student_report tbody').on('click', 'td.details-control', function () {
-            var tr = $(this).closest('tr');
-            var row = table.row( tr );
-     
-            if ( row.child.isShown() ) {
-                // This row is already open - close it
-                row.child.hide();
-                tr.removeClass('shown');
-            }
-            else {
-                // Open this row
-                row.child( format( tr.data('child-program'), tr.data('child-id'), tr.data('child-level') ) ).show();
-                tr.addClass('shown');
-            }
-        } );
 
         $('.dataTables_filter input').attr("placeholder", " Enter keyword");
 
@@ -247,7 +205,7 @@
             footer = table2.getElementsByTagName('tfoot')[0];
 
             
-        for (var i = 4; i <= 5; i++) {
+        for (var i = 3; i <= 4; i++) {
             var sum = numOfValues = 0;
             for (var j = 0, l = rows.length; j < l; j++) {
                 try {

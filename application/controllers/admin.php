@@ -1028,7 +1028,9 @@ class Admin extends CI_Controller {
             $po_num = $this->input->post('po_num');
 
             $result = $this->model_admin->generate_studentReport($program, $effective_year, $course, $year_level, $semester, $academic_year, $po_num);
-            // print_r($result);die();
+            
+
+            print_r($result);die();
             
             if($result == FALSE) {
                 $message = 'No results found. Try refining your search.';
