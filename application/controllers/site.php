@@ -115,8 +115,20 @@ class Site extends CI_Controller {
 
         $data['academic_year'] = $year;
         $data['first_sem'] = $this->model_users->get_1stSemester($year);
+        foreach ($data['first_sem'] as $key => $value) {
+            $data['first_sem'][$key]['class_population'][] = $this->model_users->check_teacherClassPopulation($value['ID']);
+        }
+
         $data['second_sem'] = $this->model_users->get_2ndSemester($year);
+        foreach ($data['second_sem'] as $key => $value) {
+            $data['second_sem'][$key]['class_population'][] = $this->model_users->check_teacherClassPopulation($value['ID']);
+        }
+
         $data['summer'] = $this->model_users->get_summer($year);
+        foreach ($data['summer'] as $key => $value) {
+            $data['summer'][$key]['class_population'][] = $this->model_users->check_teacherClassPopulation($value['ID']);
+        }
+
         $data['select_SY'] = $this->model_users->select_SY();
 
         $data['user'] = $this->model_users->select_user();

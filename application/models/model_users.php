@@ -45,19 +45,19 @@ class Model_users extends CI_Model {
     function get_1stSemester($year){
         $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('idnum')."' AND semester = 1 AND school_year = '".$year."' ");
 
-        return $query->result();
+        return $query->result_array();
     }
 
     function get_2ndSemester($year){
         $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('idnum')."' AND semester = 2 AND school_year = '".$year."' ");
 
-        return $query->result();
+        return $query->result_array();
     }
 
     function get_summer($year){
         $query = $this->db->query("SELECT DISTINCT * FROM teacher_class WHERE teacherID = '".$this->session->userdata('idnum')."' AND semester = 'summer' AND school_year = '".$year."' ");
 
-        return $query->result();
+        return $query->result_array();
     }
 
     function select_SY(){
@@ -291,6 +291,15 @@ class Model_users extends CI_Model {
                                   GROUP BY student_course.classID ORDER BY date DESC");
 
         return $query->result_array();
+    }
+
+    function check_teacherClassPopulation($class_id) {
+        $query = $this->db->query("SELECT classID from student_course WHERE classID = '".$class_id."' ");
+
+        if($query->num_rows() > 0)
+            return true;
+        else
+            return false;
     }
 }
 ?>

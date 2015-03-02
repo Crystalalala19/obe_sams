@@ -51,6 +51,7 @@
                                             <table id="first_sem" class="table table-striped table-bordered">
                                                 <thead>
                                                     <tr>
+                                                        <th>Status</th>
                                                         <th width="10%">Group # <i class="icon-filter"></i></th>
                                                         <th>Course Code <i class="icon-filter"></i></th>
                                                         <th>Schedule <i class="icon-filter"></i></th>
@@ -60,11 +61,12 @@
                                                 <tbody>
                                                     <?php foreach($first_sem as $row1): ?>
                                                     <tr>
-                                                        <td><?php echo $row1->group_num;?></td>
-                                                        <td><?php echo $row1->courseCode;?></td>
-                                                        <td><?php echo $row1->start_time."-".$row1->end_time." ".$row1->days;?></td>
+                                                        <td><center><?php if($row1['class_population'][0] == 0):;?><button class="btn btn-danger btn-small btn-responsive">Empty</button><?php else: ?><button class="btn btn-success btn-small btn-responsive">OK</button><?php endif;?></center></td>
+                                                        <td><?php echo $row1['group_num'];?></td>
+                                                        <td><?php echo $row1['courseCode'];?></td>
+                                                        <td><?php echo $row1['start_time']."-".$row1['end_time']." ".$row1['days'];?></td>
                                                         <td>
-                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/class_list/<?php echo $row1->ID;?>" title="View Class">View Class</a>
+                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/class_list/<?php echo $row1['ID'];?>" title="View Class">View Class</a>
                                                         </td>
                                                     </tr>  
                                                     <?php endforeach; ?> 
@@ -79,6 +81,7 @@
                                             <table id="second_sem" class="table table-striped table-bordered">
                                                 <thead>
                                                     <tr>
+                                                        <th>Status</th>
                                                         <th width="10%">Group # <i class="icon-filter"></i></th>
                                                         <th>Course Code <i class="icon-filter"></i></th>
                                                         <th>Schedule <i class="icon-filter"></i></th>
@@ -88,11 +91,12 @@
                                                 <tbody>
                                                     <?php foreach($second_sem as $row2): ?>
                                                     <tr>
-                                                        <td><?php echo $row2->group_num;?></td>
-                                                        <td><?php echo $row2->courseCode;?></td>
-                                                        <td><?php echo $row2->start_time."-".$row2->end_time." ".$row2->days;?></td>
+                                                        <td><center><?php if($row2['class_population'][0] == 0):;?><button class="btn btn-danger btn-small btn-responsive">Empty</button><?php else: ?><button class="btn btn-success btn-small btn-responsive">OK</button><?php endif;?></center></td>
+                                                        <td><?php echo $row2['group_num'];?></td>
+                                                        <td><?php echo $row2['courseCode'];?></td>
+                                                        <td><?php echo $row2['start_time']."-".$row2['end_time']." ".$row2['days'];?></td>
                                                         <td>
-                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/class_list/<?php echo $row2->ID;?>" title="View Class">View Class</a>
+                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/class_list/<?php echo $row2['ID'];?>" title="View Class">View Class</a>
                                                         </td>
                                                     <?php endforeach; ?>   
                                                 </tbody>
@@ -106,6 +110,7 @@
                                             <table id="summer" class="table table-striped table-bordered">
                                                 <thead>
                                                     <tr>
+                                                        <th>Status</th>
                                                         <th width="10%">Group # <i class="icon-filter"></i></th>
                                                         <th>Course Code <i class="icon-filter"></i></th>
                                                         <th>Schedule <i class="icon-filter"></i></th>
@@ -115,11 +120,12 @@
                                                 <tbody>
                                                     <?php foreach($summer as $row3): ?>
                                                     <tr>
-                                                        <td><?php echo $row3->group_num;?></td>
-                                                        <td><?php echo $row3->courseCode;?></td>
-                                                        <td><?php echo $row3->start_time."-".$row3->end_time." ".$row3->days;?></td>
+                                                        <td><center><?php if($row3['class_population'][0] == 0):;?><button class="btn btn-danger btn-small btn-responsive">Empty</button><?php else: ?><button class="btn btn-success btn-small btn-responsive">OK</button><?php endif;?></center></td>
+                                                        <td><?php echo $row3['group_num'];?></td>
+                                                        <td><?php echo $row3['courseCode'];?></td>
+                                                        <td><?php echo $row3['start_time']."-".$row3['end_time']." ".$row3['days'];?></td>
                                                         <td>
-                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/class_list/<?php echo $row3->ID;?>" title="View Class">View Class</a>
+                                                            <a class="btn btn-mini btn-info" href="<?php echo base_url();?>site/class_list/<?php echo $row3['ID'];?>" title="View Class">View Class</a>
                                                         </td>
                                                     <?php endforeach; ?>   
                                                 </tbody>
