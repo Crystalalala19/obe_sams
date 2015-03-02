@@ -56,15 +56,6 @@ class Student extends CI_Controller {
         foreach($data['class_list'] as $key => $val) {
             $data['get_po'] = $this->model_student->get_poGeneral($student_id, $class_list[$key]['ID']);
             $data['class_list'][$key]['score'] = $this->model_student->get_studentPoGrade($val['studentID'], $student_class[$key]['ID']);
-            $data['class_list'][$key]['poID'] = $this->model_student->get_studentPoID($val['studentID'], $student_class[$key]['ID']);
-            
-            $i = 0;
-            foreach($data['class_list'][$key]['score'] as $key1 => $val1) {
-                if($val1['score'] == "0") {
-                    $data['class_list'][$key]['score'][$key1]['score'] = "";
-                }
-            }
-            $i++;
         }
 
         $this->load->view('student/header', $data);

@@ -130,13 +130,6 @@ class Model_coordinator extends CI_Model {
 
         return $query->result_array();
     }
-    
-    function get_studentPoID($student_id, $class_id) {
-        $query = $this->db->query("SELECT poID FROM student_course
-                                WHERE studentID = '".$student_id."' AND classID = '".$class_id."' ");
-
-        return $query->result_array();
-    }
 
     function get_1stSemester($year){
         $query = $this->db->query("SELECT   teacher_class.group_num, teacher_class.courseCode, teacher_class.start_time, 

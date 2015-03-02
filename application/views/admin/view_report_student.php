@@ -43,7 +43,7 @@
                                     <option value="">Program:</option>
                                     <?php foreach ($program_list as $row): ?>
                                     <option value="<?php echo $row['programName'];?>"><?php echo rawurldecode($row['programName']); ?></option>
-                                    <?php endforeach;?>
+                                    <?php endforeach; ?>
                                 </select>
 
                                 <select class="span2" id="program_ajax" name="program_year" required>
@@ -56,33 +56,33 @@
 
                                 <select class="span2" id="year_level" name="year_level" required>
                                     <option value="">Year level:</option>
-                                    <option value="all" <?php echo set_select('year_level', 'all');?>>All Year Level</option>
-                                    <option value="1" <?php echo set_select('year_level', '1');?>>First Year</option>
-                                    <option value="2" <?php echo set_select('year_level', '2');?>>Second Year</option>
-                                    <option value="3" <?php echo set_select('year_level', '3');?>>Third Year</option>
-                                    <option value="4" <?php echo set_select('year_level', '4');?>>Fourth Year</option>
+                                    <option value="all"<?php echo set_select('year_level', 'all');?>>All Year Level</option>
+                                    <option value="1"<?php echo set_select('year_level', '1');?>>First Year</option>
+                                    <option value="2"<?php echo set_select('year_level', '2');?>>Second Year</option>
+                                    <option value="3"<?php echo set_select('year_level', '3');?>>Third Year</option>
+                                    <option value="4"<?php echo set_select('year_level', '4');?>>Fourth Year</option>
                                 </select>
                                 
                                 <select class="span2" name="semester" required>
                                     <option value="">Semester:</option>
-                                    <option value="all" <?php echo set_select('semester', 'all');?>>All Semester</option>
-                                    <option value="1" <?php echo set_select('semester', '1');?>>First Semester</option>
-                                    <option value="2" <?php echo set_select('semester', '2');?>>Second Semester</option>
-                                    <option value="summer" <?php echo set_select('semester', 'summer');?>>Summer</option>
+                                    <option value="all"<?php echo set_select('semester', 'all');?>>All Semester</option>
+                                    <option value="1"<?php echo set_select('semester', '1');?>>First Semester</option>
+                                    <option value="2"<?php echo set_select('semester', '2');?>>Second Semester</option>
+                                    <option value="summer"<?php echo set_select('semester', 'summer');?>>Summer</option>
                                 </select>
 
                                 <select class="span2" name="academic_year" required>
                                     <option value="">Academic Year:</option>
                                     <?php foreach ($year_classes as $row): ?>
-                                    <option value="<?php echo $row['school_year'];?>" <?php echo set_select('academic_year', $row['school_year']);?>><?php echo $row['school_year'].' - '. ($row['school_year']+1); ?></option>
+                                    <option value="<?php echo $row['school_year'];?>"<?php echo set_select('academic_year', $row['school_year']);?>><?php echo $row['school_year'].' - '. ($row['school_year']+1); ?></option>
                                     <?php endforeach;?>
                                 </select>
 
                                 <select class="span1" name="po_num" required>
                                     <option value="">PO #:</option>
-                                    <option value="all" <?php echo set_select('po_num', 'all');?>>All</option>
+                                    <option value="all"<?php echo set_select('po_num', 'all');?>>All</option>
                                     <?php for($x = 1; $x <= $max_po; $x++):?>
-                                    <option value="0<?php echo $x;?>" <?php echo set_select('po_num', '0'.$x);?>>PO <?php echo $x;?></option>
+                                    <option value="0<?php echo $x;?>"<?php echo set_select('po_num', '0'.$x);?>>PO <?php echo $x;?></option>
                                     <?php endfor; ?>
                                 </select>
 
@@ -96,58 +96,58 @@
                             <table class="table table-striped table-bordered" cellspacing="0" width="100%" id="student_report">
                                 <thead>
                                     <tr>
-                                        <th width="10%">Name</th>
-                                        <th width="10%">Course</th>
-                                        <th width="10%">Teacher</th>
+                                        <th>Name</th>
+                                        <th>Course</th>
+                                        <th>Teacher</th>
                                         <?php if($po_count == 3): ?>
-                                        <th width="10%">PO Score</th>
+                                        <th>PO Score</th>
                                         <?php else: ?>
                                         <?php for($x=1;$x<=$po_count; $x++): ?>
-                                        <th>PO <?php echo$x; ?></th>
+                                        <th>PO <?php echo $x; ?></th>
                                         <?php endfor; ?>
                                         <?php endif; ?>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach($result as $key => $row): ?>
-                                        <tr>
-                                            <td><?php echo $row['sfname'].' '.$row['slname'];?></td>
-                                            <td><?php echo $row['courseCode'].' Grp. '.$row['group_num'];?></td>
-                                            <td><?php echo $row['tfname'].' '.$row['tlname'];?></td>
-                                            <?php if($po_count == 3): ?>
-                                            <td><?php
-                                                if (!is_numeric($row['score'])) {
-                                                    if($row == 'NC')
-                                                        echo '<font size="2" color="#FF0000"><b>NC</b></font>';
-                                                    elseif($row == 'INC')
-                                                        echo '<font size="2" color="#FF9900"><b>INC</b></font>';
-                                                    elseif($row == 'W')
-                                                        echo '<font size="2" color="#993300"><b>W</b></font>';
-                                                }
-                                                else
-                                                    echo number_format($row['score'],1);
-                                                ?>
-                                            </td>
-                                            <?php else: ?>
-                                            <?php for($x=0;$x<$po_count;$x++): ?>
-                                            <td>
-                                                <?php
-                                                if(!is_numeric($row['score'][$x]['score'])) {
-                                                    if($row['score'][$x]['score'] == 'NC')
-                                                        echo '<font size="2" color="#FF0000"><b>NC</b></font>';
-                                                    elseif($row['score'][$x]['score'] == 'INC')
-                                                        echo '<font size="2" color="#FF9900"><b>INC</b></font>';
-                                                    elseif($row['score'][$x]['score'] == 'W')
-                                                        echo '<font size="2" color="#993300"><b>W</b></font>';
-                                                }
-                                                else
-                                                    echo number_format($row['score'][$x]['score'],1);
-                                                ?>
-                                            </td>
-                                            <?php endfor; ?>
-                                            <?php endif;?>
-                                        </tr>
-                                    <?php endforeach;?>
+                                <?php foreach($result as $key => $row): ?>
+                                    <tr>
+                                        <td><?php echo $row['sfname'].' '.$row['slname'];?></td>
+                                        <td><?php echo $row['courseCode'].' Grp. '.$row['group_num'];?></td>
+                                        <td><?php echo $row['tfname'].' '.$row['tlname'];?></td>
+                                        <?php if($po_count == 3): ?>
+                                        <td><?php
+                                            if(!is_numeric($row['score'])) {
+                                                if($row == 'NC')
+                                                    echo '<font size="2" color="#FF0000"><b>NC</b></font>';
+                                                elseif($row == 'INC')
+                                                    echo '<font size="2" color="#FF9900"><b>INC</b></font>';
+                                                elseif($row == 'W')
+                                                    echo '<font size="2" color="#993300"><b>W</b></font>';
+                                            }
+                                            else
+                                                echo number_format($row['score'],1);
+                                            ?>
+                                        </td>
+                                        <?php else: ?>
+                                        <?php for($x=0;$x<$po_count;$x++): ?>
+                                        <td>
+                                            <?php
+                                            if(!is_numeric($row['score'][$x]['score'])) {
+                                                if($row['score'][$x]['score'] == 'NC')
+                                                    echo '<font size="2" color="#FF0000"><b>NC</b></font>';
+                                                elseif($row['score'][$x]['score'] == 'INC')
+                                                    echo '<font size="2" color="#FF9900"><b>INC</b></font>';
+                                                elseif($row['score'][$x]['score'] == 'W')
+                                                    echo '<font size="2" color="#993300"><b>W</b></font>';
+                                            }
+                                            else 
+                                                echo number_format($row['score'][$x]['score'],1);
+                                            ?>
+                                        </td>
+                                        <?php endfor; ?>
+                                        <?php endif;?>
+                                    </tr>
+                                <?php endforeach;?>
                                 </tbody>
                                 <tfoot>
                                     <tr bgcolor="#FFF380">
@@ -244,7 +244,7 @@
             var sum = numOfValues = 0;
             for (var j = 0, l = rows.length; j < l; j++) {
                 try {
-                    if(rows[j].getElementsByTagName('td')[i].innerHTML != '' && !isNaN(rows[j].getElementsByTagName('td')[i].innerHTML)) {
+                    if(rows[j].getElementsByTagName('td')[i].innerHTML.trim() != '' && !isNaN(rows[j].getElementsByTagName('td')[i].innerHTML)) {
                         sum += parseFloat(
                             rows[j].getElementsByTagName('td')[i]
                             .innerHTML
@@ -252,7 +252,7 @@
 
                         numOfValues++;
                     }
-                } catch (e) {alert(e);}
+                } catch (e) {}
             }
 
             var avg = sum / numOfValues;

@@ -58,13 +58,6 @@ class Model_student extends CI_Model {
         return $query->result_array();
     }
 
-    function get_studentPoID($student_id, $class_id) {
-        $query = $this->db->query("SELECT poID FROM student_course
-                                WHERE studentID = '".$student_id."' AND classID = '".$class_id."' ");
-
-        return $query->result_array();
-    }
-
     function notify_message($alert_type, $glyphicon, $message){
         $output = '
         <div class="alert '.$alert_type.' alert-dismissible" role="alert">

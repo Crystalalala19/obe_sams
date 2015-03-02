@@ -972,13 +972,9 @@ class Admin extends CI_Controller {
         $data['academic_year'] = $year;
         $data['year_classes'] = $this->model_admin->get_teacherReport();
         $data['teacher_list'] = $this->model_admin->get_allTeachersClasses($year);
-        // $data['teacher_list']['class_population'] = array();
 
-        foreach ($data['teacher_list'] as $key => $value) {
+        foreach ($data['teacher_list'] as $key => $value)
             $data['teacher_list'][$key]['class_population'][] = $this->model_admin->check_teacherClassPopulation($value['ID']);
-        }
-
-        // print_r($data['teacher_list']);die();
 
         $this->load->view('admin/header', $data);
         $this->load->view('admin/view_report_teacher', $data);
@@ -1019,9 +1015,7 @@ class Admin extends CI_Controller {
             $po_num = $this->input->post('po_num');
 
             $result = $this->model_admin->generate_studentReport($program, $effective_year, $course, $year_level, $semester, $academic_year, $po_num);
-            
-            // print_r($result);die();
-            
+                        
             if($result == FALSE) {
                 $message = 'No results found. Try refining your search.';
                 $message = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
@@ -1031,28 +1025,16 @@ class Admin extends CI_Controller {
             else {
                 $po_count = $this->model_admin->get_po($result[0]['courseID']);
 
-                // print_r($result);die();
-
                 if($po_num != "all")
                     $data['po_count'] = 3;
                 else {
                     $data['po_count'] = count($po_count);
 
                     if($course == 'all') {
-                        
-                        foreach($result as $key => $row) {
-                            $result[$key]['score'] = $this->model_admin->get_studentPoGrade($row['studentID'], $row['classID']);                            
-                            
-                            for($i=0;$i < count($result[$key]['score']); $i++) {
-                                if(empty($result[$key]['score'][$i]['score'])) 
-                                    $result[$key]['score'][$i]['score'] = 'tae';
-                            }
-                        }
+                        foreach($result as $key => $row) 
+                            $result[$key]['score'] = $this->model_admin->get_studentPoGrade($row['studentID'], $row['classID']);                                                        
                     }
-
-
                 }
-                // print_r($result);die();
 
                 $message = '<strong>Success!</strong>';
                 $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);

@@ -106,7 +106,6 @@ class Coordinator extends CI_Controller {
         $this->check_role();
 
         $this->load->library('form_validation');
-        //$this->load->library('csvimport');
 
         $class_id = $this->uri->segment(3);
 
@@ -123,7 +122,6 @@ class Coordinator extends CI_Controller {
 
         foreach($data['class_list'] as $key => $val) {
             $data['class_list'][$key]['score'] = $this->model_coordinator->get_studentPoGrade($val['studentID'], $class_id);
-            $data['class_list'][$key]['poID'] = $this->model_coordinator->get_studentPoID($val['studentID'], $class_id);
             $i = 0;
 
             foreach($data['get_po'] as $key1 => $val1) {
@@ -216,16 +214,7 @@ class Coordinator extends CI_Controller {
 
         foreach($data['class_list'] as $key => $val) {
             $data['get_po'] = $this->model_coordinator->get_poGeneral($student_id, $class_list[$key]['ID']);
-            $data['class_list'][$key]['score'] = $this->model_coordinator->get_studentPoGrade($val['studentID'], $student_class[$key]['ID']);
-            $data['class_list'][$key]['poID'] = $this->model_coordinator->get_studentPoID($val['studentID'], $student_class[$key]['ID']);
-            
-            $i = 0;
-            foreach($data['class_list'][$key]['score'] as $key1 => $val1) {
-                if($val1['score'] == "0") {
-                    $data['class_list'][$key]['score'][$key1]['score'] = "";
-                }
-            }
-            $i++;
+            $data['class_list'][$key]['score'] = $this->model_coordinator->get_studentPoGrade($val['studentID'], $student_class[$key]['ID']);            
         }
 
         $data['user'] = $this->model_coordinator->select_user();
@@ -235,6 +224,4 @@ class Coordinator extends CI_Controller {
         $this->load->view('coordinator/scorecard', $data);
         $this->load->view("coordinator/footer");
     }
-
-
 }
