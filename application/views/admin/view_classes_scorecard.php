@@ -118,8 +118,13 @@
             </div> <!-- /row -->
         </div> <!-- /container -->
     </div> <!-- /main-inner -->
+
+    <script type="text/javascript" language="javascript">
+        var d = document.getElementById("teachers_menu");
+        d.className = d.className + " active";
+    </script>
     
-    <script type="text/javascript">
+    <script type="text/javascript" language="javascript">
        var table = document.getElementById('view_classlist'),
             rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr'),
             footer = table.getElementsByTagName('tfoot')[0];
@@ -147,11 +152,6 @@
             if( isNaN(footer.getElementsByTagName('td')[i].innerHTML) || footer.getElementsByTagName('td')[i].innerHTML == 0)
                 footer.getElementsByTagName('td')[i].innerHTML = " ";
         }
-    </script>
-
-    <script type="text/javascript" language="javascript">
-        var d = document.getElementById('courselist');
-        d.className = d.className + " active";
     </script>
 
     <script type="text/javascript" language="javascript">
@@ -206,7 +206,4 @@
         var tt = new $.fn.dataTable.TableTools( table, tableToolsOptions );
 
         $( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
-
-        var d = document.getElementById("teachers_menu");
-        d.className = d.className + " active";
     </script>

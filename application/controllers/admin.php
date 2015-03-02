@@ -936,7 +936,6 @@ class Admin extends CI_Controller {
         foreach($data['class_list'] as $key => $val) {
             $data['class_list'][$key]['score'] = $this->model_admin->get_studentPoGrade($val['studentID'], $class_id);
             $data['class_list'][$key]['grade'] = array();
-            $data['class_list'][$key]['poID'] = $this->model_admin->get_studentPoID($val['studentID'], $class_id);
             $i = 0;
 
             foreach($data['get_po'] as $key1 => $val1) {
@@ -1011,14 +1010,6 @@ class Admin extends CI_Controller {
             $data['result'] = '';
         }
         else{
-            if($this->input->post('program') == null or $this->input->post('year_level') == null or $this->input->post('semester') == null or $this->input->post('academic_year') == null or $this->input->post('po_num') == null) {
-                $message = 'Please select filter(s) to search.';
-                $message = $this->model_admin->notify_message('alert-info', 'icon-info-sign', $message);
-
-                $this->session->set_flashdata('message', $message);
-                redirect(current_url());
-            }
-
             $program = $this->input->post('program');
             $effective_year = $this->input->post('program_year');
             $course = $this->input->post('course');
@@ -1040,10 +1031,28 @@ class Admin extends CI_Controller {
             else {
                 $po_count = $this->model_admin->get_po($result[0]['courseID']);
 
+                // print_r($result);die();
+
                 if($po_num != "all")
-                    $data['po_count'] = 4;
-                else
+                    $data['po_count'] = 3;
+                else {
                     $data['po_count'] = count($po_count);
+
+                    if($course == 'all') {
+                        
+                        foreach($result as $key => $row) {
+                            $result[$key]['score'] = $this->model_admin->get_studentPoGrade($row['studentID'], $row['classID']);                            
+                            
+                            for($i=0;$i < count($result[$key]['score']); $i++) {
+                                if(empty($result[$key]['score'][$i]['score'])) 
+                                    $result[$key]['score'][$i]['score'] = 'tae';
+                            }
+                        }
+                    }
+
+
+                }
+                // print_r($result);die();
 
                 $message = '<strong>Success!</strong>';
                 $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
@@ -1093,15 +1102,6 @@ class Admin extends CI_Controller {
         foreach($data['class_list'] as $key => $val) {
             $data['get_po'] = $this->model_admin->get_poGeneral($student_id, $class_list[$key]['ID']);
             $data['class_list'][$key]['score'] = $this->model_admin->get_studentPoGrade($val['studentID'], $student_class[$key]['ID']);
-            $data['class_list'][$key]['poID'] = $this->model_admin->get_studentPoID($val['studentID'], $student_class[$key]['ID']);
-            
-            $i = 0;
-            foreach($data['class_list'][$key]['score'] as $key1 => $val1) {
-                if($val1['score'] == "0") {
-                    $data['class_list'][$key]['score'][$key1]['score'] = "";
-                }
-            }
-            $i++;
         }
 
         $this->load->view('admin/header', $data);

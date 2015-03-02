@@ -173,7 +173,6 @@ class Site extends CI_Controller {
 
         foreach($data['class_list'] as $key => $val) {
             $data['class_list'][$key]['score'] = $this->model_users->get_studentPoGrade($val['studentID'], $class_id);
-            $data['class_list'][$key]['poID'] = $this->model_users->get_studentPoID($val['studentID'], $class_id);
             $i = 0;
 
             foreach($data['get_po'] as $key1 => $val1) {
@@ -343,22 +342,11 @@ class Site extends CI_Controller {
 
         $class_list = $data['class_list'];
 
-        $student_class = $data['class_list'];
-
         foreach($data['class_list'] as $key => $val) {
             $data['get_po'] = $this->model_users->get_poGeneral($student_id, $class_list[$key]['ID']);
-            $data['class_list'][$key]['score'] = $this->model_users->get_studentPoGrade($val['studentID'], $student_class[$key]['ID']);
-            $data['class_list'][$key]['poID'] = $this->model_users->get_studentPoID($val['studentID'], $student_class[$key]['ID']);
-            
-            $i = 0;
-            foreach($data['class_list'][$key]['score'] as $key1 => $val1) {
-                if($val1['score'] == "0") {
-                    $data['class_list'][$key]['score'][$key1]['score'] = "";
-                }
-            }
-            $i++;
+            $data['class_list'][$key]['score'] = $this->model_users->get_studentPoGrade($val['studentID'], $class_list[$key]['ID']);
         }
-
+        
         $data['user'] = $this->model_users->select_user();
         $data['title'] = "OBE SAMS Academic";
 

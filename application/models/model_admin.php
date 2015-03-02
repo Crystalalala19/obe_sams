@@ -490,13 +490,6 @@ class Model_admin extends CI_Model {
         return $query->result_array();
     }
     
-    function get_studentPoID($student_id, $class_id) {
-        $query = $this->db->query("SELECT poID FROM student_course
-                                WHERE studentID = '".$student_id."' AND classID = '".$class_id."' ");
-
-        return $query->result_array();
-    }
-
     function get_teacherReport() {
         $query = $this->db->query("SELECT DISTINCT school_year FROM teacher_class ORDER BY school_year");
     
@@ -524,7 +517,8 @@ class Model_admin extends CI_Model {
     }
 
     function generate_studentReport($program, $effective_year, $course, $year_level, $semester, $academic_year, $po_num) {
-        $custom = "SELECT *, 
+        $custom = "SELECT student_course.courseID, student_course.studentID, student_course.classID, 
+                    group_num, courseCode, score,
                     teacher.fname as tfname, teacher.lname as tlname,
                     student.fname as sfname, student.lname as slname
                     FROM program  

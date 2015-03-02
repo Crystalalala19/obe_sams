@@ -95,13 +95,6 @@ class Model_users extends CI_Model {
 
         return $query->result_array();
     }
-    
-    function get_studentPoID($student_id, $class_id) {
-        $query = $this->db->query("SELECT poID FROM student_course
-                                WHERE studentID = '".$student_id."' AND classID = '".$class_id."' ");
-
-        return $query->result_array();
-    }
 
     function select_programName($id){
         $query = $this->db->query("SELECT * FROM program_year INNER JOIN program ON program_year.programID = program.ID 

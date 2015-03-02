@@ -99,7 +99,7 @@
                                         <th width="10%">Name</th>
                                         <th width="10%">Course</th>
                                         <th width="10%">Teacher</th>
-                                        <?php if($po_count == 4): ?>
+                                        <?php if($po_count == 3): ?>
                                         <th width="10%">PO Score</th>
                                         <?php else: ?>
                                         <?php for($x=1;$x<=$po_count; $x++): ?>
@@ -114,32 +114,34 @@
                                             <td><?php echo $row['sfname'].' '.$row['slname'];?></td>
                                             <td><?php echo $row['courseCode'].' Grp. '.$row['group_num'];?></td>
                                             <td><?php echo $row['tfname'].' '.$row['tlname'];?></td>
-                                            <?php if($po_count == 4): ?>
+                                            <?php if($po_count == 3): ?>
                                             <td><?php
-                                                    if (!is_numeric($row['score'])) {
-                                                        if($row == 'NC') {
-                                                            echo '<font size="2" color="#FF0000"><b>NC</b></font>';
-                                                        } 
-                                                        elseif($row == 'INC') {
-                                                            echo '<font size="2" color="#FF9900"><b>INC</b></font>';
-                                                        } 
-                                                        elseif($row == 'W') {
-                                                            echo '<font size="2" color="#993300"><b>W</b></font>';
-                                                        }
-                                                    }
-                                                    else{
-                                                        echo number_format($row['score'],1);
-                                                    }
+                                                if (!is_numeric($row['score'])) {
+                                                    if($row == 'NC')
+                                                        echo '<font size="2" color="#FF0000"><b>NC</b></font>';
+                                                    elseif($row == 'INC')
+                                                        echo '<font size="2" color="#FF9900"><b>INC</b></font>';
+                                                    elseif($row == 'W')
+                                                        echo '<font size="2" color="#993300"><b>W</b></font>';
+                                                }
+                                                else
+                                                    echo number_format($row['score'],1);
                                                 ?>
                                             </td>
                                             <?php else: ?>
-                                            <?php for($x=1;$x<=$po_count;$x++): ?>
+                                            <?php for($x=0;$x<$po_count;$x++): ?>
                                             <td>
                                                 <?php
-                                                if (!is_numeric($row['score']))
-                                                    echo $row['score'];
+                                                if(!is_numeric($row['score'][$x]['score'])) {
+                                                    if($row['score'][$x]['score'] == 'NC')
+                                                        echo '<font size="2" color="#FF0000"><b>NC</b></font>';
+                                                    elseif($row['score'][$x]['score'] == 'INC')
+                                                        echo '<font size="2" color="#FF9900"><b>INC</b></font>';
+                                                    elseif($row['score'][$x]['score'] == 'W')
+                                                        echo '<font size="2" color="#993300"><b>W</b></font>';
+                                                }
                                                 else
-                                                    echo number_format($row['score'],1);
+                                                    echo number_format($row['score'][$x]['score'],1);
                                                 ?>
                                             </td>
                                             <?php endfor; ?>
@@ -152,7 +154,7 @@
                                         <td></td>
                                         <td><center>Average</center></td>
                                         <td></td>
-                                        <?php if($po_count == 4): ?>
+                                        <?php if($po_count == 3): ?>
                                         <td></td>
                                         <?php else: ?>
                                         <?php for($x=1;$x<=$po_count;$x++): ?>
@@ -238,11 +240,11 @@
             footer = table2.getElementsByTagName('tfoot')[0];
 
             
-        for (var i = 3; i <= <?php echo $po_count+2;?> ; i++) {
+        for (var i = 3; i <= <?php if($po_count == 3) echo $po_count; else echo $po_count+2; ?> ; i++) {
             var sum = numOfValues = 0;
             for (var j = 0, l = rows.length; j < l; j++) {
                 try {
-                    if(!isNaN(rows[j].getElementsByTagName('td')[i].innerHTML)) {
+                    if(rows[j].getElementsByTagName('td')[i].innerHTML != '' && !isNaN(rows[j].getElementsByTagName('td')[i].innerHTML)) {
                         sum += parseFloat(
                             rows[j].getElementsByTagName('td')[i]
                             .innerHTML
@@ -250,7 +252,7 @@
 
                         numOfValues++;
                     }
-                } catch (e) {}
+                } catch (e) {alert(e);}
             }
 
             var avg = sum / numOfValues;
