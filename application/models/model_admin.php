@@ -561,16 +561,14 @@ class Model_admin extends CI_Model {
 
         if(!empty($po_num)) {
             if($po_num != "all")
-                $custom .= " AND poCode LIKE '%".$po_num."' AND po_course.status = '1' AND (score <> '0') ";
+                $custom .= " AND poCode LIKE '%".$po_num."' AND po_course.status = '1' AND (score <> '') ";
             else
-                $custom .= " AND po_course.status = '1' AND (score <> '0') ";
+                $custom .= " AND po_course.status = '1' AND (score <> '') ";
         }
 
         $custom .= " GROUP BY student_id, student_course.classID;";
 
         $query = $this->db->query($custom);
-
-        // return $this->check_query();
 
         if($query->num_rows() > 0) 
             return $query->result_array();

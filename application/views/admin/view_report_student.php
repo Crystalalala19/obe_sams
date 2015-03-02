@@ -213,12 +213,12 @@
                             "oSelectorOpts": {
                                 page: 'current'
                             },
-                            "mColumns": [1,2,3,4]
+                            "mColumns": "visible"
                         }, {
                             "sExtends": "pdf",
                             "sTitle": "Student Reports <?php echo date('M Y');?>",
                             "sButtonText": "PDF",
-                            "mColumns": [1,2,3,4]
+                            "mColumns": "visible"
                         }
                     ]
                 }
