@@ -3,7 +3,7 @@ $('#program_ajax').change(function() {
 
     if(selectedValue == '') {
         $("#program_ajax2 option").remove();
-        $("#program_ajax2").html('<option value="" selected="selected">Select a Course:</option>');
+        $("#program_ajax2").html('<option value="" selected="selected">Select Course:</option>');
     }
     else {
         $.ajax({
@@ -17,7 +17,7 @@ $('#program_ajax').change(function() {
                     $("#program_ajax2").html('<option value="">No records found.</option>');
                 }
                 else {
-                    var toAppend = "<option value='' selected='selected'>Select Courses:</option><option value='all'>All</option>";
+                    var toAppend = "<option value='' selected='selected'>Select Course:</option><option value='all'>All</option>";
                     $.each(response, function(key, value) {
                         toAppend += "<option value="+value.CourseCode+">"+value.CourseCode+"</option>";
                     });

@@ -3,7 +3,7 @@ $('#program').change(function() {
 
     if(selectedValue == '') {
         $("#program_ajax option").remove();
-        $("#program_ajax").html('<option value="" selected="selected">Select a Program</option>');
+        $("#program_ajax").html('<option value="" selected="selected">Select Effective Year:</option>');
     }
     else {
         $.ajax({

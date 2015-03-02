@@ -518,7 +518,7 @@ class Model_admin extends CI_Model {
 
     function generate_studentReport($program, $effective_year, $course, $year_level, $semester, $academic_year, $po_num) {
         $custom = "SELECT student_course.courseID, student_course.studentID, student_course.classID, 
-                    group_num, courseCode, score,
+                    group_num, courseCode, score, programName, programFullName, effective_year,
                     teacher.fname as tfname, teacher.lname as tlname,
                     student.fname as sfname, student.lname as slname
                     FROM program  
