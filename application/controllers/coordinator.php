@@ -91,7 +91,7 @@ class Coordinator extends CI_Controller {
         $data['student_list'] = $this->model_coordinator->student_list();
 
         if($data['student_list'] == FALSE) {
-            $message = 'No students found in record. Please add students to your assigned classes.';
+            $message = 'No students found in record. The teachers have not assigned classes yet.';
             $data['message'] = $this->model_coordinator->notify_message('alert-info', 'icon-info-sign', $message);
         } else {
             $data['message'] = '';
