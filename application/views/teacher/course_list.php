@@ -51,7 +51,7 @@
                                             <table id="first_sem" class="table table-striped table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th>Status</th>
+                                                        <th>Status <i class="icon-filter"></i></th>
                                                         <th width="10%">Group # <i class="icon-filter"></i></th>
                                                         <th>Course Code <i class="icon-filter"></i></th>
                                                         <th>Schedule <i class="icon-filter"></i></th>
@@ -81,7 +81,7 @@
                                             <table id="second_sem" class="table table-striped table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th>Status</th>
+                                                        <th>Status <i class="icon-filter"></i></th>
                                                         <th width="10%">Group # <i class="icon-filter"></i></th>
                                                         <th>Course Code <i class="icon-filter"></i></th>
                                                         <th>Schedule <i class="icon-filter"></i></th>
@@ -110,7 +110,7 @@
                                             <table id="summer" class="table table-striped table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th>Status</th>
+                                                        <th>Status <i class="icon-filter"></i></th>
                                                         <th width="10%">Group # <i class="icon-filter"></i></th>
                                                         <th>Course Code <i class="icon-filter"></i></th>
                                                         <th>Schedule <i class="icon-filter"></i></th>
@@ -158,9 +158,9 @@
         var d = document.getElementById('courselist');
         d.className = d.className + " active";
 
-        $('#first_sem').filterable({ignoreColumns: [3]});
-        $('#second_sem').filterable({ignoreColumns: [3]});
-        $('#summer').filterable({ignoreColumns: [3]});
+        $('#first_sem').filterable({ignoreColumns: [4]});
+        $('#second_sem').filterable({ignoreColumns: [4]});
+        $('#summer').filterable({ignoreColumns: [4]});
 
         $('#selector').change(function()
         {
