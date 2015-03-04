@@ -11,6 +11,14 @@
             font-size: 15px;
             font-weight: bold;
         }
+
+        .label-danger {
+            background-color: #FF0000;
+        }
+        
+        .label-danger:hover {
+            background-color: #FF3030;
+        }
     </style>
 
     <div class="main-inner">
@@ -82,13 +90,13 @@
                                         <td><?php 
                                                 if (!is_numeric($row1)) {
                                                     if($row1 == 'NC') {
-                                                        echo '<font size="2" color="#FF0000"><b>NC</b></font>';
+                                                        echo '<span class="label label-danger">NC</span>';
                                                     } 
                                                     elseif($row1 == 'INC') {
-                                                        echo '<font size="2" color="#FF9900"><b>INC</b></font>';
+                                                        echo '<span class="label label-important">INC</span>';
                                                     } 
                                                     elseif($row1 == 'W') {
-                                                        echo '<font size="2" color="#993300"><b>W</b></font>';
+                                                        echo '<span class="label label-warning">W</span>';
                                                     }
                                                 } 
                                                 else echo number_format($row1,1);?>

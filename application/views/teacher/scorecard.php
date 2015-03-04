@@ -3,6 +3,14 @@
             font-size: 15px;
             font-weight: bold;
         }
+
+        .label-danger {
+            background-color: #FF0000;
+        }
+        
+        .label-danger:hover {
+            background-color: #FF3030;
+        }
     </style>
     <div class="main-inner">
         <div class="container">
@@ -53,7 +61,7 @@
                                     <tr>
                                         <td width="7%"><?php echo $row3['courseCode']; ?></td>
                                         <?php for($x=0; $x < $po_count; $x++): ?>
-                                            <td><?php if(!is_numeric($row3['score'][$x]['score'])) {if($row3['score'][$x]['score'] == 'NC'){echo '<font size="2" color="#FF0000"><b>NC</b></font>';} elseif($row3['score'][$x]['score'] == 'INC') {echo '<font size="2" color="#FF9900"><b>INC</b></font>';} elseif($row3['score'][$x]['score'] == 'W'){echo '<font size="2" color="#993300"><b>W</b></font>';}} else{echo number_format($row3['score'][$x]['score'],1);}?></td>
+                                            <td><?php if(!is_numeric($row3['score'][$x]['score'])) {if($row3['score'][$x]['score'] == 'NC'){echo '<span class="label label-danger">NC</span>';} elseif($row3['score'][$x]['score'] == 'INC') {echo '<span class="label label-important">INC</span>';} elseif($row3['score'][$x]['score'] == 'W'){echo '<span class="label label-warning">W</span>';}} else{echo number_format($row3['score'][$x]['score'],1);}?></td>
                                         <?php endfor;?>   
                                     </tr>
                                     <?php endforeach; ?>

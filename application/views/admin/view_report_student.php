@@ -11,6 +11,14 @@
             font-size: 15px;
             font-weight: bold;
         }
+        
+        .label-danger {
+            background-color: #FF0000;
+        }
+        
+        .label-danger:hover {
+            background-color: #FF3030;
+        }
     </style>
 
     <div class="main-inner">
@@ -124,11 +132,11 @@
                                         <td><?php
                                             if(!is_numeric($row['score'])) {
                                                 if($row == 'NC')
-                                                    echo '<font size="2" color="#FF0000"><b>NC</b></font>';
+                                                    echo '<span class="label label-danger">NC</span>';
                                                 elseif($row == 'INC')
-                                                    echo '<font size="2" color="#FF9900"><b>INC</b></font>';
+                                                    echo '<span class="label label-important">INC</span>';
                                                 elseif($row == 'W')
-                                                    echo '<font size="2" color="#993300"><b>W</b></font>';
+                                                    echo '<span class="label label-warning">W</span>';
                                             }
                                             else
                                                 echo number_format($row['score'],1);
@@ -140,11 +148,11 @@
                                             <?php
                                             if(!is_numeric($row['score'][$x]['score'])) {
                                                 if($row['score'][$x]['score'] == 'NC')
-                                                    echo '<font size="2" color="#FF0000"><b>NC</b></font>';
+                                                    echo '<span class="label label-danger">NC</span>';
                                                 elseif($row['score'][$x]['score'] == 'INC')
-                                                    echo '<font size="2" color="#FF9900"><b>INC</b></font>';
+                                                    echo '<span class="label label-important">INC</span>';
                                                 elseif($row['score'][$x]['score'] == 'W')
-                                                    echo '<font size="2" color="#993300"><b>W</b></font>';
+                                                    echo '<span class="label label-warning">W</span>';
                                             }
                                             else 
                                                 echo number_format($row['score'][$x]['score'],1);
