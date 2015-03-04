@@ -1029,11 +1029,9 @@ class Admin extends CI_Controller {
                     $data['po_count'] = 3;
                 else {
                     $data['po_count'] = count($po_count);
-
-                    if($course == 'all') {
-                        foreach($result as $key => $row) 
-                            $result[$key]['score'] = $this->model_admin->get_studentPoGrade($row['studentID'], $row['classID']);                                                        
-                    }
+                    
+                    foreach($result as $key => $row) 
+                        $result[$key]['score'] = $this->model_admin->get_studentPoGrade($row['studentID'], $row['classID']);                                                        
                 }
 
                 $message = '<strong>Success!</strong>';

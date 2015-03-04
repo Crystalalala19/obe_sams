@@ -131,11 +131,11 @@
                                         <?php if($po_count == 3): ?>
                                         <td><?php
                                             if(!is_numeric($row['score'])) {
-                                                if($row == 'NC')
+                                                if($row['score'] == 'NC')
                                                     echo '<span class="label label-danger">NC</span>';
-                                                elseif($row == 'INC')
+                                                elseif($row['score'] == 'INC')
                                                     echo '<span class="label label-important">INC</span>';
-                                                elseif($row == 'W')
+                                                elseif($row['score'] == 'W')
                                                     echo '<span class="label label-warning">W</span>';
                                             }
                                             else
