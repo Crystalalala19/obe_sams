@@ -1037,7 +1037,9 @@ class Admin extends CI_Controller {
                 $message = '<strong>Success!</strong>';
                 $message = $this->model_admin->notify_message('alert-success', 'icon-ok', $message);
 
+                $data['effective_year'] = $effective_year;
                 $data['academic_year'] = $academic_year;
+                $data['semester'] = ucfirst($semester);
                 $data['result'] = $result;
                 $data['message'] = $message; 
             }

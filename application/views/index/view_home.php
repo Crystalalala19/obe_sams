@@ -316,7 +316,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12">
-                    &copy; 2015 OBE-SAMS | by <a href="http://www.binarytheme.com/" style="color:#F0BC1A;" target="_blank" >binarytheme.com</a>
+                    &copy; <?php echo date('Y');?> Department of Computer Science
                 </div>
             </div>
         </div>

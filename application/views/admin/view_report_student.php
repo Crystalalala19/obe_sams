@@ -104,8 +104,11 @@
                             <?php $export_name = $result[0]['programName'].' S.Y. '.$academic_year.' - '.($academic_year+1).' Report'; ?>
                             <h3 style="text-align: center;">
                                 <?php echo $result[0]['programFullName'];?><br>
-                                <?php echo '(Effective SY: '.$result[0]['effective_year'].' - '.($result[0]['effective_year']+1).')';?>                                
+                                <?php echo '( Effective SY: '.$result[0]['effective_year'].' - '.($result[0]['effective_year']+1).' )';?>                                
                             </h3>
+                            <h4 style="text-align: center;">
+                                <?php echo 'Academic Year: '.$academic_year.' - '.($academic_year+1).' | Semester: '.$semester; ?>
+                            </h4>
 
                             <table class="table table-striped table-bordered" cellspacing="0" width="100%" id="student_report">
                                 <thead>
