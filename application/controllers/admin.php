@@ -19,7 +19,7 @@ class Admin extends CI_Controller {
 
     // CALLBACK and/or FUNCTIONS
     function alpha_dash_space($str_in) {
-        if (! preg_match("/^([-a-z-9 ])+$/i", $str_in)) {
+        if (! preg_match("/^([-a-z-9 ,.])+$/i", $str_in)) {
             $this->form_validation->set_message('alpha_dash_space', 'The %s field may only contain alpha characters, spaces, and dashes.');
             return FALSE;
         } 
