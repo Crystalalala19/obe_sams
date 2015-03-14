@@ -61,7 +61,7 @@ class Model_admin extends CI_Model {
     }
 
     function get_maxPoCode() {
-        $query = $this->db->query("SELECT (SELECT digits(max(poCode))) AS max_po FROM po");
+        $query = $this->db->query("SELECT max(digits(poCode)) AS max_po FROM po");
 
         if ($query->num_rows() > 0){
             $row = $query->row_array();
